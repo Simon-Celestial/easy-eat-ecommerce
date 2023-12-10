@@ -4,7 +4,6 @@
   display: flex;
   width: 100%;
   flex-direction: column;
-  background: black;
   height: 107px;
   position: absolute;
   top: 0;
@@ -40,11 +39,13 @@
           display: flex;
           align-items: center;
           justify-content: center;
+
           &:hover {
             a:after {
               width: 100%;
             }
           }
+
           a {
             position: relative;
             padding: 16px;
@@ -68,6 +69,38 @@
           }
         }
       }
+    }
+
+    .headerRight {
+      display: flex;
+      gap: 14px;
+
+      .headerRightItem {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 5px;
+        cursor: pointer;
+        position: relative;
+
+        .basketCount {
+          position: absolute;
+          bottom: 5px;
+          right: 0;
+          border-radius: 50%;
+          background-color: $color-orange;
+          width: 16px;
+          height: 16px;
+          color: white;
+          text-align: center;
+          font-size: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+      }
+
     }
 
   }
