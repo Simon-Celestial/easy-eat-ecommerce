@@ -1,0 +1,15 @@
+@import "variables.module";
+
+.site-wrapper {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  background-color: $color-white;
+  position: relative;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+  font-family: $font-main;
+}
