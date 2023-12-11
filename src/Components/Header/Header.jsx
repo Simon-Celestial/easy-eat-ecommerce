@@ -1,9 +1,34 @@
 import styles from "./Header.module.scss";
 import {MagnifyingGlass, ShoppingBag} from "@phosphor-icons/react";
 import {NavMenuItems} from "./HeaderComponents/NavMenuItems.jsx";
+import {useCallback, useEffect, useRef, useState} from "react";
 
 
 export const Header = () => {
+    const [basketOpen, setBasketOpen] = useState(false);
+
+
+    const handleBasketOpen = useCallback((ev) => {
+            ev.stopPropagation();
+            setBasketOpen(true);
+        }, []);
+    const handleBasketClose = () => {
+        setBasketOpen(false);
+    };
+
+    useEffect(() => {
+        const action = () => {
+            handleBasketClose();
+        }
+        document.addEventListener("click", action);
+        return () => {
+            document.removeEventListener("click", action);
+        };
+    }, []);
+
+
+
+
     const menuItems = [
         {
             id: 1,
@@ -79,7 +104,90 @@ export const Header = () => {
                 <div className={styles.headerRight}>
                     <div className={styles.headerRightItem}>
                         <div className={styles.basketCount}>0</div>
-                        <ShoppingBag size={28}/>
+                        <div onClick={handleBasketOpen}>
+                            <ShoppingBag size={28}/>
+                        </div>
+
+                        <div
+                            className={[styles.basketDropdown, basketOpen && styles.basketActive].join(' ')}
+                            onClick={ev => ev.stopPropagation()}
+                        >
+                            {/*<div className={styles.emptyBasket}>*/}
+                            {/*    <ShoppingBag size={32} weight="bold" color="white" />*/}
+                            {/*    <h1>No products in the cart.</h1>*/}
+                            {/*</div>*/}
+                            <div className={styles.basketProducts}>
+                                <div className={styles.basketCard}>
+                                    <div className={styles.basketClose}>
+                                        <p>x</p>
+                                    </div>
+                                    <a href="" className={styles.imageBlock}>
+                                        <img
+                                            src="https://easyeat.ancorathemes.com/wp-content/uploads/2020/05/product-4-copyright-480x480.png"
+                                            alt="Product"/>
+                                    </a>
+                                    <div className={styles.basketCardTitle}>
+                                        <h2>Black Burger</h2>
+                                        <p>1 x $89.00</p>
+                                    </div>
+
+                                </div>
+                                <div className={styles.basketCard}>
+                                    <div className={styles.basketClose}>
+                                        <p>x</p>
+                                    </div>
+                                    <a href="" className={styles.imageBlock}>
+                                        <img
+                                            src="https://easyeat.ancorathemes.com/wp-content/uploads/2020/05/product-4-copyright-480x480.png"
+                                            alt="Product"/>
+                                    </a>
+                                    <div className={styles.basketCardTitle}>
+                                        <h2>Black Burger</h2>
+                                        <p>1 x $89.00</p>
+                                    </div>
+                                </div>
+                                <div className={styles.basketCard}>
+                                    <div className={styles.basketClose}>
+                                        <p>x</p>
+                                    </div>
+                                    <a href="" className={styles.imageBlock}>
+                                        <img
+                                            src="https://easyeat.ancorathemes.com/wp-content/uploads/2020/05/product-4-copyright-480x480.png"
+                                            alt="Product"/>
+                                    </a>
+                                    <div className={styles.basketCardTitle}>
+                                        <h2>Black Burger</h2>
+                                        <p>1 x $89.00</p>
+                                    </div>
+
+                                </div>
+                                <div className={styles.basketCard}>
+                                    <div className={styles.basketClose}>
+                                        <p>x</p>
+                                    </div>
+                                    <a href="" className={styles.imageBlock}>
+                                        <img
+                                            src="https://easyeat.ancorathemes.com/wp-content/uploads/2020/05/product-4-copyright-480x480.png"
+                                            alt="Product"/>
+                                    </a>
+                                    <div className={styles.basketCardTitle}>
+                                        <h2>Black Burger</h2>
+                                        <p>1 x $89.00</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className={styles.basketFooter}>
+                                <div className={styles.basketSubtotal}>
+                                    <p>SUBTOTAL: $254.00</p>
+                                </div>
+                                <div className={styles.basketButtons}>
+                                    <a href="/" className={styles.btn}>VIEW CART</a>
+                                    <a href="/" className={styles.btn}>CHECKOUT</a>
+                                </div>
+
+                            </div>
+
+                        </div>
                     </div>
                     <div className={styles.headerRightItem}>
                         <MagnifyingGlass size={28}/>
