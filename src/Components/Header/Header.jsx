@@ -1,12 +1,11 @@
 import styles from "./Header.module.scss";
-import {MagnifyingGlass, ShoppingBag} from "@phosphor-icons/react";
+import {MagnifyingGlass, ShoppingBag, X} from "@phosphor-icons/react";
 import {NavMenuItems} from "./HeaderComponents/NavMenuItems.jsx";
-import {useCallback, useEffect, useRef, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 
 
 export const Header = () => {
     const [basketOpen, setBasketOpen] = useState(false);
-
 
     const handleBasketOpen = useCallback((ev) => {
             ev.stopPropagation();
@@ -90,6 +89,20 @@ export const Header = () => {
     return (
         <header className={styles.siteHeader}>
             <section className={styles.headerContent}>
+
+                {/*HEADER SEARCH CONTAINER*/}
+                <div className={styles.headerSearchWrapper}>
+                    <div className={styles.headerSearchContent}>
+                        <div className={styles.searchTopBlock}>
+                            <img src="//easyeat.ancorathemes.com/wp-content/uploads/2023/01/logo-small-inverse.png" alt="EasyEat"/>
+                            <div className={styles.closeSearch}>
+                                <X />
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
                 <div className={styles.headerLeft}>
                     <a href="/" className={styles.headerLogo}>
                         <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/logo-inverse.png"
