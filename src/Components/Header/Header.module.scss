@@ -9,6 +9,7 @@
   top: 0;
   left: 0;
   z-index: 99;
+
   .headerContent {
     display: flex;
     padding: 10px 70px;
@@ -16,39 +17,46 @@
     justify-content: space-between;
     align-items: center;
     position: relative;
+
     .headerSearchWrapper {
       z-index: 100;
-      display: flex;
       height: 500px;
       width: 100%;
       position: fixed;
       padding: 70px;
       top: 0;
       left: 0;
+      display: none;
       background-color: $color-darkgray;
       transform-origin: top;
       transform: scaleY(1);
       transition: 0.5s ease;
+
       .headerSearchContent {
         display: flex;
         flex-direction: column;
         width: 100%;
         height: 100%;
+
         .searchTopBlock {
           display: flex;
           width: 100%;
           justify-content: space-between;
           align-items: center;
-          >img {
+
+          > img {
             width: 70px;
             height: 71px;
           }
+
           .closeSearch {
             padding: 5px;
             cursor: pointer;
+
             &:hover svg {
               transform: rotate(270deg);
             }
+
             svg {
               font-size: 40px;
               color: $color-white;
@@ -61,8 +69,6 @@
 
     }
 
-
-
     .headerLeft {
       display: flex;
       align-items: center;
@@ -71,6 +77,11 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        transition: 0.3s linear;
+
+        &:hover {
+          animation: logoRotate 1s ease-in;
+        }
 
         img {
           max-height: 88px;
@@ -88,17 +99,16 @@
           position: relative;
 
           &:hover {
+            animation: textGlow 1s ease;
             .pageLink:after {
               width: 100%;
             }
           }
-
           .pageLink {
             position: relative;
             padding: 16px;
             font-size: 18px;
             color: white;
-
             &:after {
               content: "";
               display: block;
@@ -125,15 +135,12 @@
           left: 0;
           padding-top: 15px;
           pointer-events: none;
-
-
           &.navDropdownActive {
             top: 50px !important;
             opacity: 1 !important;
             pointer-events: auto !important;
           }
         }
-
         .navDropdown {
           display: flex;
           flex-direction: column;
@@ -187,7 +194,7 @@
             position: absolute;
             left: 145px;
             padding-left: 40px;
-            opacity: 0;
+            opacity: 1;
             transition: 0.5s ease;
             pointer-events: none;
             top: 80px;
@@ -251,9 +258,10 @@
           display: flex;
           padding: 40px 25px 40px 25px;
           flex-direction: column;
+
           &.basketActive {
-            pointer-events: auto!important;
-            opacity: 1!important;
+            pointer-events: auto !important;
+            opacity: 1 !important;
           }
 
           .emptyBasket {
@@ -413,7 +421,44 @@
         }
       }
     }
+  }
+}
+
+@keyframes logoRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(-20deg);
 
   }
-
+  75% {
+    transform: rotate(10deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
+
+;
+@keyframes textGlow {
+  0% {
+    text-shadow: 0 0 0 $color-orange;
+  }
+  25% {
+    text-shadow: 0 0 5px $color-orange;
+  }
+  50% {
+    text-shadow: 0 0 25px $color-orange;
+
+  }
+  75% {
+    text-shadow: 0 0 5px $color-orange;
+  }
+  100% {
+    text-shadow: 0 0 0 $color-orange;
+  }
+};

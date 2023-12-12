@@ -1,16 +1,14 @@
 import styles from "./Header.module.scss";
-import {MagnifyingGlass, ShoppingBag, X} from "@phosphor-icons/react";
-import {NavMenuItems} from "./HeaderComponents/NavMenuItems.jsx";
-import {useCallback, useEffect, useState} from "react";
+import {CaretRight, MagnifyingGlass, ShoppingBag, X} from "@phosphor-icons/react";
+import React, {useCallback, useEffect, useState} from "react";
 
 
 export const Header = () => {
     const [basketOpen, setBasketOpen] = useState(false);
-
-    const handleBasketOpen = useCallback((ev) => {
-            ev.stopPropagation();
-            setBasketOpen(true);
-        }, []);
+    const handleBasketOpen = useCallback((event) => {
+        event.stopPropagation();
+        setBasketOpen(true);
+    }, []);
     const handleBasketClose = () => {
         setBasketOpen(false);
     };
@@ -24,68 +22,19 @@ export const Header = () => {
             document.removeEventListener("click", action);
         };
     }, []);
+    const [dropDownOpen, setDropdownOpen] = useState(false);
 
-
-
-
-    const menuItems = [
-        {
-            id: 1,
-            drop: true,
-            label: "Home",
-            link: "/",
-            item1: "Burger Shop",
-            item2: "Steakhouse & Grill",
-            item3: "Pizzeria",
-            item4: "Food Truck",
-            item5: "Indian Restaurant",
-            item6: "Thai Food",
-            item7: "Coffee Bar",
-        },
-        {
-            id: 2,
-            drop: true,
-            toolsDrop: true,
-            label: "Pages",
-            link: "/",
-            item1: "About US",
-            item2: "FAQs",
-            item3: "Menu",
-            item4: "Our Services",
-            item5: "Our Team",
-            item6: "Pricing",
-            item7: "Tools",
-        },
-        {
-            id: 3,
-            drop: true,
-            singlePost: true,
-            label: "Blog ",
-            link: "/",
-            item1: "Standard",
-            item2: "List",
-            item3: "Portfolio",
-            item4: "Grid",
-            item5: "Single Post",
-        },
-        {
-            id: 4,
-            drop: true,
-            label: "Shop",
-            link: "/",
-            item1: "Product List",
-            item2: "Product Single",
-            item3: "Cart",
-            item4: "Checkout",
-            item5: "Wishlist Page",
-        },
-        {
-            id: 5,
-            drop: false,
-            label: "Contacts",
-            link: "/",
-        },
-    ];
+    // const handleDropdownOpen = useCallback((event) => {
+    //     event.stopPropagation();
+    //     setDropdownOpen(true);
+    // }, []);
+    // const handleDropdownClose = () => {
+    //     setDropdownOpen(false);
+    // };
+    const handleDropdownToggle = useCallback((event) => {
+        event.stopPropagation();
+        setDropdownOpen((prev) => !prev);
+    }, []);
     return (
         <header className={styles.siteHeader}>
             <section className={styles.headerContent}>
@@ -94,24 +43,241 @@ export const Header = () => {
                 <div className={styles.headerSearchWrapper}>
                     <div className={styles.headerSearchContent}>
                         <div className={styles.searchTopBlock}>
-                            <img src="//easyeat.ancorathemes.com/wp-content/uploads/2023/01/logo-small-inverse.png" alt="EasyEat"/>
+                            <img src="//easyeat.ancorathemes.com/wp-content/uploads/2023/01/logo-small-inverse.png"
+                                 alt="EasyEat"/>
                             <div className={styles.closeSearch}>
-                                <X />
+                                <X/>
                             </div>
                         </div>
 
                     </div>
-
                 </div>
                 <div className={styles.headerLeft}>
                     <a href="/" className={styles.headerLogo}>
                         <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/logo-inverse.png"
                              alt="Header Logo"/>
                     </a>
+                    {/*HEADER NAVIGATION*/}
                     <div className={styles.headerNavigation}>
-                        {menuItems.map((items) => (
-                            <NavMenuItems key={items.id} items={items}/>
-                        ))}
+                        <div className={styles.navigationItems} onMouseEnter={handleDropdownToggle}
+                             onMouseLeave={handleDropdownToggle}>
+                            <a href="#" className={styles.pageLink}>Home</a>
+                            <div className={`${styles.navDropdownWrapper} ${dropDownOpen && styles.navDropdownActive}`}>
+                                <div className={styles.navDropdown}>
+                                    <div className={styles.navDropdownItem}
+                                    >
+                                        <a href="#">
+                                            <p>Burger Shop</p>
+                                        </a>
+                                    </div>
+                                    <div className={styles.navDropdownItem}
+                                    >
+                                        <a href="#">
+                                            <p>Steakhouse & Grill</p>
+                                        </a>
+                                    </div>
+                                    <div className={styles.navDropdownItem}
+                                    >
+                                        <a href="#">
+                                            <p>Pizzeria</p>
+                                        </a>
+                                    </div>
+                                    <div className={styles.navDropdownItem}
+                                    >
+                                        <a href="#">
+                                            <p>Food Truck</p>
+                                        </a>
+                                    </div>
+                                    <div
+                                        className={styles.navDropdownItem}
+                                    >
+                                        <a href="#">
+                                            <p>Indian Restaurant</p>
+                                        </a>
+                                    </div>
+                                    <div className={styles.navDropdownItem}>
+                                        <a href="#">
+                                            <p>Thai Food</p>
+                                        </a>
+                                    </div>
+                                    <div
+                                        className={styles.navDropdownItem}
+                                    >
+                                        <a href="#">
+                                            <p>Coffee Bar</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className={styles.navigationItems}>
+                            <a href="#" className={styles.pageLink} onMouseEnter={handleDropdownToggle}
+                               onMouseLeave={handleDropdownToggle}>Pages</a>
+                            <div className={`${styles.navDropdownWrapper} ${dropDownOpen && styles.navDropdownActive}`}>
+                                <div className={styles.navDropdown}>
+                                    <div className={styles.navDropdownItem}
+                                    >
+                                        <a href="#">
+                                            <p>About Us</p>
+                                        </a>
+                                    </div>
+                                    <div className={styles.navDropdownItem}
+                                    >
+                                        <a href="#">
+                                            <p>FAQs</p>
+                                        </a>
+                                    </div>
+                                    <div className={styles.navDropdownItem}
+                                    >
+                                        <a href="#">
+                                            <p>Menu</p>
+                                        </a>
+                                    </div>
+                                    <div className={styles.navDropdownItem}
+                                    >
+                                        <a href="#">
+                                            <p>Our Services</p>
+                                        </a>
+                                    </div>
+                                    <div
+                                        className={styles.navDropdownItem}
+                                    >
+                                        <a href="#">
+                                            <p>Our Team</p>
+                                        </a>
+                                    </div>
+                                    <div className={styles.navDropdownItem}>
+                                        <a href="#">
+                                            <p>Pricing</p>
+                                        </a>
+                                    </div>
+                                    <div className={styles.navDropdownItem}>
+                                        <a href="#">
+                                            <p>Tools</p>
+                                        </a>
+                                        <CaretRight size={14} color="gray" weight="bold"/>
+                                        <div className={`${styles.subMenuDropdown}`}>
+                                            <div className={styles.subMenuContent}>
+                                                <div className={styles.navDropdownItem}>
+                                                    <a href="#">
+                                                        Typography
+                                                    </a>
+                                                </div>
+                                                <div className={styles.navDropdownItem}>
+                                                    <a href="#">
+                                                        <p>404 Page</p>
+                                                    </a>
+                                                </div>
+                                                <div className={styles.navDropdownItem}>
+                                                    <a href="#">
+                                                        <p>Service Plus</p>
+                                                    </a>
+                                                </div>
+                                                <div className={styles.navDropdownItem}>
+                                                    <a href="#">
+                                                        <p>Newsletter Popups</p>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className={styles.navigationItems} onMouseEnter={handleDropdownToggle}
+                             onMouseLeave={handleDropdownToggle}>
+                            <a href="#" className={styles.pageLink}>Blog</a>
+                            <div className={`${styles.navDropdownWrapper} ${dropDownOpen && styles.navDropdownActive}`}>
+                                <div className={styles.navDropdown}>
+                                    <div className={styles.navDropdownItem}
+                                    >
+                                        <a href="#">
+                                            <p>Standard</p>
+                                        </a>
+                                    </div>
+                                    <div className={styles.navDropdownItem}
+                                    >
+                                        <a href="#">
+                                            <p>List</p>
+                                        </a>
+                                    </div>
+                                    <div className={styles.navDropdownItem}
+                                    >
+                                        <a href="#">
+                                            <p>Portfolio</p>
+                                        </a>
+                                    </div>
+                                    <div className={styles.navDropdownItem}
+                                    >
+                                        <a href="#">
+                                            <p>Grid</p>
+                                        </a>
+                                    </div>
+                                    <div className={styles.navDropdownItem}>
+                                        <a href="#">
+                                            <p>Single Post</p>
+                                        </a>
+                                        <CaretRight size={14} color="gray" weight="bold"/>
+                                        <div className={`${styles.subMenuDropdown}`}>
+                                            <div className={styles.subMenuContent}>
+                                                <div className={styles.navDropdownItem}>
+                                                    <a href="#">
+                                                        Standard
+                                                    </a>
+                                                </div>
+                                                <div className={styles.navDropdownItem}>
+                                                    <a href="#">
+                                                        With Sidebar
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className={styles.navigationItems}>
+                            <a href="#" className={styles.pageLink} onMouseEnter={handleDropdownToggle}
+                               onMouseLeave={handleDropdownToggle}>Shop</a>
+                            <div className={`${styles.navDropdownWrapper} ${dropDownOpen && styles.navDropdownActive}`}>
+                                <div className={styles.navDropdown}>
+                                    <div className={styles.navDropdownItem}
+                                    >
+                                        <a href="#">
+                                            <p>Product List</p>
+                                        </a>
+                                    </div>
+                                    <div className={styles.navDropdownItem}
+                                    >
+                                        <a href="#">
+                                            <p>Product Single</p>
+                                        </a>
+                                    </div>
+                                    <div className={styles.navDropdownItem}
+                                    >
+                                        <a href="#">
+                                            <p>Cart</p>
+                                        </a>
+                                    </div>
+                                    <div className={styles.navDropdownItem}
+                                    >
+                                        <a href="#">
+                                            <p>Checkout</p>
+                                        </a>
+                                    </div>
+                                    <div
+                                        className={styles.navDropdownItem}
+                                    >
+                                        <a href="#">
+                                            <p>Wishlist Page</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className={styles.navigationItems}>
+                            <a href="#" className={styles.pageLink}>Contacts</a>
+                        </div>
                     </div>
                 </div>
                 <div className={styles.headerRight}>
@@ -120,7 +286,6 @@ export const Header = () => {
                         <div onClick={handleBasketOpen}>
                             <ShoppingBag size={28}/>
                         </div>
-
                         <div
                             className={[styles.basketDropdown, basketOpen && styles.basketActive].join(' ')}
                             onClick={ev => ev.stopPropagation()}
@@ -197,9 +362,7 @@ export const Header = () => {
                                     <a href="/" className={styles.btn}>VIEW CART</a>
                                     <a href="/" className={styles.btn}>CHECKOUT</a>
                                 </div>
-
                             </div>
-
                         </div>
                     </div>
                     <div className={styles.headerRightItem}>
@@ -239,8 +402,11 @@ export const Header = () => {
                         </svg>
                     </div>
                 </div>
-
             </section>
         </header>
     );
 };
+
+
+
+
