@@ -1,5 +1,7 @@
 @import "../../variables.module";
 
+//HEADER STYLES
+
 .siteHeader {
   display: flex;
   width: 100%;
@@ -18,25 +20,41 @@
     align-items: center;
     position: relative;
 
+    //SEARCH CONTAINER STYLES
     .headerSearchWrapper {
       z-index: 100;
       height: 500px;
       width: 100%;
       position: fixed;
-      padding: 70px;
+      padding: 50px;
       top: 0;
       left: 0;
-      display: none;
+      display: flex;
       background-color: $color-darkgray;
       transform-origin: top;
-      transform: scaleY(1);
-      transition: 0.5s ease;
+      transform: scaleY(0);
+      transition: 0.6s ease;
+      pointer-events: none;
+
+      &.headerSearchActive {
+        transform: scaleY(1) !important;
+        pointer-events: auto;
+
+        .headerFormWrapper {
+          opacity: 1 !important;
+        }
+
+        .closeSearch {
+          opacity: 1 !important;
+        }
+      }
 
       .headerSearchContent {
         display: flex;
         flex-direction: column;
         width: 100%;
         height: 100%;
+        align-items: center;
 
         .searchTopBlock {
           display: flex;
@@ -47,11 +65,18 @@
           > img {
             width: 70px;
             height: 71px;
+
+            &:hover {
+              animation: logoRotate 1s ease;
+            }
           }
 
           .closeSearch {
             padding: 5px;
             cursor: pointer;
+            opacity: 0;
+            transition: 5s ease;
+            transition-delay: 0.3s;
 
             &:hover svg {
               transform: rotate(270deg);
@@ -65,10 +90,133 @@
             }
           }
         }
+
+        .headerFormWrapper {
+          display: flex;
+          width: 100%;
+          max-width: 1300px;
+          padding: 0 15px;
+          margin-top: 120px;
+          opacity: 0;
+          transition: 5s ease;
+          transition-delay: 0.3s;
+
+          > form {
+            display: flex;
+            width: 100%;
+            border-bottom: 1px solid $color-border;
+            padding-bottom: 15px;
+            position: relative;
+            transition: 0.3s ease;
+
+            &:hover {
+              border-bottom: 1px solid $color-orange;
+
+            }
+
+            .headerSearchInput {
+              width: 100%;
+              padding: 15px 60px 15px 0;
+              outline: 0;
+              border: 0;
+              background-color: transparent;
+              font-size: 32px;
+              color: $color-white;
+              font-family: $font-main;
+
+              &::placeholder {
+                color: $color-placeholder;
+              }
+            }
+
+            .searchSubmit {
+              position: absolute;
+              right: 10px;
+              bottom: 35px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              cursor: pointer;
+              outline: 0;
+              border: 0;
+              background-color: transparent;
+
+              &:hover svg {
+                transform: rotate(360deg);
+              }
+
+              svg {
+                color: $color-white;
+                transition: 0.5s ease;
+
+              }
+
+            }
+
+
+          }
+        }
       }
 
     }
 
+    //RIGHT MENU CONTAINER STYLES
+    .rightMenuWrapper {
+      position: fixed;
+      top: 0;
+      right: 0;
+      display: flex;
+      height: 100vh;
+      max-width: 388px;
+      width: 100%;
+      background-color: $color-darkgray;
+      z-index: 100000;
+      transition: 0.5s ease;
+      transform-origin: right;
+      transform: scaleX(0);
+      pointer-events: none;
+      padding: 55px 35px 40px;
+      &.rightMenuActive {
+        transform: scaleX(1)!important;
+        pointer-events: auto!important;
+      }
+      .rightMenuContent {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        .rightMenuRow {
+          display: flex;
+          width: 100%;
+          position: relative;
+          > img {
+            width: 70px;
+            height: 71px;
+            transition: 0.3s ease;
+            &:hover {
+              animation: logoRotate 1s ease;
+            }
+          }
+          .closeRightMenu {
+            display: flex;
+            position: absolute;
+            right: 0;
+            top: 0;
+            cursor: pointer;
+            &:hover svg {
+              transform: rotate(270deg);
+            }
+            svg {
+              font-size: 28px;
+              color: $color-white;
+              transition: 0.5s ease;
+
+            }
+          }
+        }
+      }
+    }
+
+    //HEADER NAVIGATION STYLES
     .headerLeft {
       display: flex;
       align-items: center;
@@ -100,15 +248,18 @@
 
           &:hover {
             animation: textGlow 1s ease;
+
             .pageLink:after {
               width: 100%;
             }
           }
+
           .pageLink {
             position: relative;
             padding: 16px;
             font-size: 18px;
             color: white;
+
             &:after {
               content: "";
               display: block;
@@ -135,12 +286,14 @@
           left: 0;
           padding-top: 15px;
           pointer-events: none;
+
           &.navDropdownActive {
             top: 50px !important;
             opacity: 1 !important;
             pointer-events: auto !important;
           }
         }
+
         .navDropdown {
           display: flex;
           flex-direction: column;
@@ -165,6 +318,7 @@
               position: relative;
               transition: 0.3s ease;
               cursor: pointer;
+              width: 100%;
 
               &:after {
                 content: "";
@@ -183,7 +337,7 @@
                 color: $color-white;
 
                 &:after {
-                  width: 100%;
+                  width: 50%;
                 }
               }
             }
@@ -461,4 +615,6 @@
   100% {
     text-shadow: 0 0 0 $color-orange;
   }
-};
+}
+
+;
