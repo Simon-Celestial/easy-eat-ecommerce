@@ -12,7 +12,6 @@ export const Header = () => {
     const handleBasketClose = () => {
         setBasketOpen(false);
     };
-
     useEffect(() => {
         const action = () => {
             handleBasketClose();
@@ -22,19 +21,19 @@ export const Header = () => {
             document.removeEventListener("click", action);
         };
     }, []);
-    const [dropDownOpen, setDropdownOpen] = useState(false);
 
-    // const handleDropdownOpen = useCallback((event) => {
-    //     event.stopPropagation();
-    //     setDropdownOpen(true);
-    // }, []);
-    // const handleDropdownClose = () => {
-    //     setDropdownOpen(false);
-    // };
-    const handleDropdownToggle = useCallback((event) => {
-        event.stopPropagation();
-        setDropdownOpen((prev) => !prev);
+    const [dropDownHomeOpen, setDropDownHomeOpen] = useState(false);
+    const [dropDownPagesOpen, setDropDownPagesOpen] = useState(false);
+    const [dropDownBlogOpen, setDropDownBlogOpen] = useState(false);
+    const [dropDownShopOpen, setDropDownShopOpen] = useState(false);
+    const [dropDownToolsOpen, setDropDownToolsOpen] = useState(false);
+    const [dropDownPostOpen, setDropDownPostOpen] = useState(false);
+
+    const dropDownOpenHandler = (setIsOpen) => useCallback(() => {
+        setIsOpen((prev) => !prev);
     }, []);
+
+
     return (
         <header className={styles.siteHeader}>
             <section className={styles.headerContent}>
@@ -59,10 +58,10 @@ export const Header = () => {
                     </a>
                     {/*HEADER NAVIGATION*/}
                     <div className={styles.headerNavigation}>
-                        <div className={styles.navigationItems} onMouseEnter={handleDropdownToggle}
-                             onMouseLeave={handleDropdownToggle}>
+                        {/*HEADER NAVIGATION ITEMS*/}
+                        <div className={styles.navigationItems} onMouseEnter={dropDownOpenHandler(setDropDownHomeOpen)} onMouseLeave={dropDownOpenHandler(setDropDownHomeOpen)}>
                             <a href="#" className={styles.pageLink}>Home</a>
-                            <div className={`${styles.navDropdownWrapper} ${dropDownOpen && styles.navDropdownActive}`}>
+                            <div className={`${styles.navDropdownWrapper} ${dropDownHomeOpen && styles.navDropdownActive}`}>
                                 <div className={styles.navDropdown}>
                                     <div className={styles.navDropdownItem}
                                     >
@@ -110,10 +109,9 @@ export const Header = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className={styles.navigationItems}>
-                            <a href="#" className={styles.pageLink} onMouseEnter={handleDropdownToggle}
-                               onMouseLeave={handleDropdownToggle}>Pages</a>
-                            <div className={`${styles.navDropdownWrapper} ${dropDownOpen && styles.navDropdownActive}`}>
+                        <div className={styles.navigationItems} onMouseEnter={dropDownOpenHandler(setDropDownPagesOpen)} onMouseLeave={dropDownOpenHandler(setDropDownPagesOpen)}>
+                            <a href="#" className={styles.pageLink}>Pages</a>
+                            <div className={`${styles.navDropdownWrapper} ${dropDownPagesOpen && styles.navDropdownActive}`}>
                                 <div className={styles.navDropdown}>
                                     <div className={styles.navDropdownItem}
                                     >
@@ -151,12 +149,12 @@ export const Header = () => {
                                             <p>Pricing</p>
                                         </a>
                                     </div>
-                                    <div className={styles.navDropdownItem}>
+                                    <div className={styles.navDropdownItem} onMouseEnter={dropDownOpenHandler(setDropDownToolsOpen)} onMouseLeave={dropDownOpenHandler(setDropDownToolsOpen)}>
                                         <a href="#">
                                             <p>Tools</p>
                                         </a>
                                         <CaretRight size={14} color="gray" weight="bold"/>
-                                        <div className={`${styles.subMenuDropdown}`}>
+                                        <div className={`${styles.subMenuDropdown} ${dropDownToolsOpen && styles.submenuActive}`}>
                                             <div className={styles.subMenuContent}>
                                                 <div className={styles.navDropdownItem}>
                                                     <a href="#">
@@ -184,10 +182,9 @@ export const Header = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className={styles.navigationItems} onMouseEnter={handleDropdownToggle}
-                             onMouseLeave={handleDropdownToggle}>
+                        <div className={styles.navigationItems} onMouseEnter={dropDownOpenHandler(setDropDownBlogOpen)} onMouseLeave={dropDownOpenHandler(setDropDownBlogOpen)}>
                             <a href="#" className={styles.pageLink}>Blog</a>
-                            <div className={`${styles.navDropdownWrapper} ${dropDownOpen && styles.navDropdownActive}`}>
+                            <div className={`${styles.navDropdownWrapper} ${dropDownBlogOpen && styles.navDropdownActive}`}>
                                 <div className={styles.navDropdown}>
                                     <div className={styles.navDropdownItem}
                                     >
@@ -213,12 +210,12 @@ export const Header = () => {
                                             <p>Grid</p>
                                         </a>
                                     </div>
-                                    <div className={styles.navDropdownItem}>
+                                    <div className={styles.navDropdownItem} onMouseEnter={dropDownOpenHandler(setDropDownPostOpen)} onMouseLeave={dropDownOpenHandler(setDropDownPostOpen)}>
                                         <a href="#">
                                             <p>Single Post</p>
                                         </a>
                                         <CaretRight size={14} color="gray" weight="bold"/>
-                                        <div className={`${styles.subMenuDropdown}`}>
+                                        <div className={`${styles.subMenuDropdown}  ${dropDownPostOpen && styles.submenuActive}`}>
                                             <div className={styles.subMenuContent}>
                                                 <div className={styles.navDropdownItem}>
                                                     <a href="#">
@@ -236,10 +233,9 @@ export const Header = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className={styles.navigationItems}>
-                            <a href="#" className={styles.pageLink} onMouseEnter={handleDropdownToggle}
-                               onMouseLeave={handleDropdownToggle}>Shop</a>
-                            <div className={`${styles.navDropdownWrapper} ${dropDownOpen && styles.navDropdownActive}`}>
+                        <div className={styles.navigationItems} onMouseEnter={dropDownOpenHandler(setDropDownShopOpen)} onMouseLeave={dropDownOpenHandler(setDropDownShopOpen)}>
+                            <a href="#" className={styles.pageLink}>Shop</a>
+                            <div className={`${styles.navDropdownWrapper} ${dropDownShopOpen && styles.navDropdownActive}`}>
                                 <div className={styles.navDropdown}>
                                     <div className={styles.navDropdownItem}
                                     >
