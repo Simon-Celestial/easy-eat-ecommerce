@@ -20,6 +20,14 @@
     align-items: center;
     position: relative;
 
+    //SCROLL TO HEADER BUTTON
+    .scrollToHeader {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      background-color: $color-orange;
+    }
+
     //SEARCH CONTAINER STYLES
     .headerSearchWrapper {
       z-index: 100;
@@ -40,11 +48,7 @@
         transform: scaleY(1) !important;
         pointer-events: auto;
 
-        .headerFormWrapper {
-          opacity: 1 !important;
-        }
-
-        .closeSearch {
+        .headerSearchContentActive {
           opacity: 1 !important;
         }
       }
@@ -55,6 +59,10 @@
         width: 100%;
         height: 100%;
         align-items: center;
+        transition: 2s ease;
+        transition-delay: 0.5s;
+        opacity: 0;
+
 
         .searchTopBlock {
           display: flex;
@@ -74,9 +82,6 @@
           .closeSearch {
             padding: 5px;
             cursor: pointer;
-            opacity: 0;
-            transition: 5s ease;
-            transition-delay: 0.3s;
 
             &:hover svg {
               transform: rotate(270deg);
@@ -97,9 +102,6 @@
           max-width: 1300px;
           padding: 0 15px;
           margin-top: 120px;
-          opacity: 0;
-          transition: 5s ease;
-          transition-delay: 0.3s;
 
           > form {
             display: flex;
@@ -107,7 +109,7 @@
             border-bottom: 1px solid $color-border;
             padding-bottom: 15px;
             position: relative;
-            transition: 0.3s ease;
+            transition: $transition-fast;
 
             &:hover {
               border-bottom: 1px solid $color-orange;
@@ -176,40 +178,100 @@
       transform: scaleX(0);
       pointer-events: none;
       padding: 55px 35px 40px;
+
       &.rightMenuActive {
-        transform: scaleX(1)!important;
-        pointer-events: auto!important;
+        transform: scaleX(1) !important;
+        pointer-events: auto !important;
       }
+
       .rightMenuContent {
         width: 100%;
         display: flex;
         flex-direction: column;
-        .rightMenuRow {
+        justify-content: space-between;
+        padding: 0 15px;
+
+        .rightMenuHeader {
           display: flex;
           width: 100%;
           position: relative;
-          > img {
-            width: 70px;
-            height: 71px;
-            transition: 0.3s ease;
-            &:hover {
-              animation: logoRotate 1s ease;
+
+          a {
+            > img {
+              width: 70px;
+              height: 71px;
+              transition: $transition-fast;
+
+              &:hover {
+                animation: logoRotate 1s ease;
+              }
             }
           }
+
           .closeRightMenu {
             display: flex;
             position: absolute;
             right: 0;
             top: 0;
             cursor: pointer;
+
             &:hover svg {
               transform: rotate(270deg);
             }
+
             svg {
               font-size: 28px;
               color: $color-white;
               transition: 0.5s ease;
 
+            }
+          }
+        }
+
+        .rightMenuSocial {
+          display: flex;
+          flex-direction: column;
+          gap: 35px;
+
+          > a {
+            display: inline-flex;
+            gap: 20px;
+            color: $color-white;
+            font-family: $font-alternative;
+            transition: $transition-fast;
+
+            &:hover {
+              color: #a9a7a7;
+            }
+
+            svg {
+              font-size: 20px;
+            }
+
+            p {
+              font-size: 16px;
+            }
+          }
+        }
+
+        .rightMenuFooter {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          gap: 12px;
+          color: $color-white;
+          border-top: 1px solid $color-border;
+          padding-top: 40px;
+
+          a {
+            letter-spacing: 0.58px;
+            font-size: 24px;
+            color: $color-white;
+
+            &:nth-child(2) {
+              color: $color-gray;
+              font-family: $font-alternative;
+              font-size: 16px;
             }
           }
         }
@@ -316,7 +378,7 @@
               font-size: 14px;
               padding: 10px;
               position: relative;
-              transition: 0.3s ease;
+              transition: $transition-fast;
               cursor: pointer;
               width: 100%;
 
@@ -327,7 +389,7 @@
                 bottom: -2px;
                 height: 1px;
                 background-color: $color-white;
-                transition: 0.3s ease;
+                transition: $transition-fast;
                 width: 0;
                 margin-left: 10px;
               }
@@ -477,7 +539,7 @@
                 color: $color-gray;
                 font-size: 20px;
                 cursor: pointer;
-                transition: 0.3s ease;
+                transition: $transition-fast;
                 padding: 5px;
 
                 &:hover {
@@ -543,7 +605,7 @@
                 cursor: pointer;
                 color: $color-white;
                 font-family: $font-main;
-                transition: 0.3s ease;
+                transition: $transition-fast;
                 outline: 0;
                 border: 0;
                 display: inline-flex;

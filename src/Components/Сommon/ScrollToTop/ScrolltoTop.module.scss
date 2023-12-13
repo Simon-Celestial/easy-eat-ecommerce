@@ -1,0 +1,42 @@
+@import "../../../variables.module.scss";
+
+.scrollToTop {
+  position: fixed;
+  bottom: 0;
+  right: 35px;
+  background-color: $color-orange;
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+  color: $color-white!important;
+  z-index: 999;
+  padding: 12px 13px;
+  transition: $transition-fast;
+  opacity: 0;
+  pointer-events: none;
+  &:hover {
+    background-color: #b93e0a;
+  }
+  &.scrollToTopActive {
+    opacity: 1!important;
+    pointer-events: auto!important;
+    bottom: 35px;
+  }
+  svg{
+    color: $color-white!important;
+  }
+}
+@media screen and (max-width: 1280px) {
+  .scrollToTop {
+    right: 25px;
+  }
+}
+@media screen and (max-width: 800px) {
+  .scrollToTop {
+    padding: 8px 10px;
+    &.scrollToTopActive {
+      bottom: 25px;
+    }
+  }
+
+}

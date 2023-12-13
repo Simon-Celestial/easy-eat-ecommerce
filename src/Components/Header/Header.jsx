@@ -1,6 +1,10 @@
 import styles from "./Header.module.scss";
 import {CaretRight, MagnifyingGlass, ShoppingBag, X} from "@phosphor-icons/react";
 import React, {useCallback, useEffect, useState} from "react";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faFacebookF, faInstagram, faTwitter} from "@fortawesome/free-brands-svg-icons";
+import {faBasketball} from "@fortawesome/free-solid-svg-icons";
+import ScrollToTop from "../Сommon/ScrollToTop/ScrollToTop.jsx";
 
 
 export const Header = () => {
@@ -12,8 +16,8 @@ export const Header = () => {
     const [dropDownToolsOpen, setDropDownToolsOpen] = useState(false);
     const [dropDownPostOpen, setDropDownPostOpen] = useState(false);
     const [basketOpen, setBasketOpen] = useState(false);
-    const [searchOpen,setSearchOpen] = useState(false);
-    const [rightMenuOpen,setRightMenuOpen] = useState(false);
+    const [searchOpen, setSearchOpen] = useState(false);
+    const [rightMenuOpen, setRightMenuOpen] = useState(false);
 
     // FUNCTION TO OPEN WIDGETS
     const handleWidgetOpen = (setIsOpen) => useCallback((event) => {
@@ -26,6 +30,7 @@ export const Header = () => {
         setIsOpen(false);
     }
 
+    // useEffect CLOSE WIDGETS WHEN CLICKING OUTSIDE THE WIDGET AREA
     useEffect(() => {
         const action = () => {
             handleWidgetClose(setBasketOpen);
@@ -41,34 +46,62 @@ export const Header = () => {
 
     // FUNCTION TO OPEN AND CLOSE WIDGETS
     const openHandler = (setIsOpen) => useCallback(() => {
-        setIsOpen(prev=> !prev);
+        setIsOpen(prev => !prev);
     }, []);
-
 
 
     return (
         // HEADER WRAPPER
         <header className={styles.siteHeader}>
             <section className={styles.headerContent}>
+                {/*SCROLL TO HEADER */}
+                <ScrollToTop />
                 {/*HEADER RIGHT MENU*/}
-                <div className={`${styles.rightMenuWrapper} ${rightMenuOpen && styles.rightMenuActive}`} onClick={ev => ev.stopPropagation()}>
+                <div className={`${styles.rightMenuWrapper} ${rightMenuOpen && styles.rightMenuActive}`}
+                     onClick={ev => ev.stopPropagation()}>
                     <div className={styles.rightMenuContent}>
-                        <div className={styles.rightMenuRow}>
-                            <img src="//easyeat.ancorathemes.com/wp-content/uploads/2023/01/logo-small-inverse.png" alt="Easy Eat"/>
+                        <div className={styles.rightMenuHeader}>
+                            <a href="/">
+                            <img src="//easyeat.ancorathemes.com/wp-content/uploads/2023/01/logo-small-inverse.png"
+                                 alt="Easy Eat"/>
+                            </a>
                             <div className={styles.closeRightMenu} onClick={openHandler(setRightMenuOpen)}>
                                 <X/>
                             </div>
+                        </div>
+                        <div className={styles.rightMenuSocial}>
+                            <a href="https://www.facebook.com/AncoraThemes" target={"_blank"}>
+                                <FontAwesomeIcon icon={faFacebookF}/>
+                                <p>Facebook</p>
+                            </a>
+                            <a href="https://twitter.com/themes_ancora" target={"_blank"}>
+                                <FontAwesomeIcon icon={faTwitter}/>
+                                <p>Twitter</p>
+                            </a>
+                            <a href="https://dribbble.com/AncoraThemes" target={"_blank"}>
+                                <FontAwesomeIcon icon={faBasketball}/>
+                                <p>Dribble</p>
+                            </a>
+                            <a href="https://www.instagram.com/ancora_themes" target={"_blank"}>
+                                <FontAwesomeIcon icon={faInstagram}/>
+                                <p>Instagram</p>
+                            </a>
+                        </div>
+                        <div className={styles.rightMenuFooter}>
+                            <a href="tel:18408412569">+1 840 841 25 69</a>
+                            <a href="mailto:info@email.com">info@email.com</a>
                         </div>
                     </div>
                 </div>
 
                 {/*HEADER SEARCH CONTAINER*/}
-                <div className={`${styles.headerSearchWrapper} ${searchOpen && styles.headerSearchActive}`} onClick={ev => ev.stopPropagation()}>
-                    <div className={styles.headerSearchContent}>
+                <div className={`${styles.headerSearchWrapper} ${searchOpen && styles.headerSearchActive}`}
+                     onClick={ev => ev.stopPropagation()}>
+                    <div className={`${styles.headerSearchContent} ${searchOpen && styles.headerSearchContentActive}`}>
                         <div className={styles.searchTopBlock}>
                             <img src="//easyeat.ancorathemes.com/wp-content/uploads/2023/01/logo-small-inverse.png"
                                  alt="EasyEat"/>
-                            <div className={styles.closeSearch} onClick={openHandler(setSearchOpen)}>
+                            <div onClick={openHandler(setSearchOpen)} className={styles.closeSearch}>
                                 <X/>
                             </div>
                         </div>
@@ -326,6 +359,7 @@ export const Header = () => {
                         </div>
                     </div>
                 </div>
+                {/*HEADER RIGHT CONTAINER*/}
                 <div className={styles.headerRight}>
                     <div className={styles.headerRightItem}>
                         <div className={styles.basketCount}>0</div>
