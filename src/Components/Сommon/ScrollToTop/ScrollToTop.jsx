@@ -10,9 +10,9 @@ const ScrollToTop = () => {
     };
 
     const handleScroll = useCallback(() => {
-        if (window.scrollY > 250 && !scrollToTopState) {
+        if (window.scrollY > 250) {
             setScrollToTopState(true);
-        } else if (window.scrollY <= 250 && scrollToTopState) {
+        } else if (window.scrollY <= 250) {
             setScrollToTopState(false);
         }
     }, [scrollToTopState]);

@@ -1,13 +1,34 @@
 import styles from "./Header.module.scss";
 import {CaretRight, MagnifyingGlass, ShoppingBag, X} from "@phosphor-icons/react";
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useCallback, useContext, useEffect, useState} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faFacebookF, faInstagram, faTwitter} from "@fortawesome/free-brands-svg-icons";
 import {faBasketball} from "@fortawesome/free-solid-svg-icons";
 import ScrollToTop from "../Сommon/ScrollToTop/ScrollToTop.jsx";
+import {LayoutContext} from "../../Context/LayoutContext/LayoutContext.jsx";
 
 
 export const Header = () => {
+    const {
+        headerTransform,
+        setHeaderTransform,
+    } = useContext(LayoutContext);
+
+    const handleHeaderTransform = useCallback(() => {
+        if (window.scrollY > 650) {
+            setHeaderTransform(true);
+        } else if (window.scrollY <= 650) {
+            setHeaderTransform(false);
+        }
+    }, [setHeaderTransform]);
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleHeaderTransform);
+        return () => {
+            window.removeEventListener('scroll',handleHeaderTransform);
+        };
+    }, [setHeaderTransform]);
+
     // STATES TO OPEN AND CLOSE WIDGETS
     const [dropDownHomeOpen, setDropDownHomeOpen] = useState(false);
     const [dropDownPagesOpen, setDropDownPagesOpen] = useState(false);
@@ -52,10 +73,9 @@ export const Header = () => {
 
     return (
         // HEADER WRAPPER
-        <header className={styles.siteHeader}>
+        <header className={`${styles.siteHeader} ${headerTransform && styles.headerTransformActive}`}>
+
             <section className={styles.headerContent}>
-                {/*SCROLL TO HEADER */}
-                <ScrollToTop />
                 {/*HEADER RIGHT MENU*/}
                 <div className={`${styles.rightMenuWrapper} ${rightMenuOpen && styles.rightMenuActive}`}
                      onClick={ev => ev.stopPropagation()}>
@@ -88,8 +108,8 @@ export const Header = () => {
                             </a>
                         </div>
                         <div className={styles.rightMenuFooter}>
-                            <a href="tel:18408412569">+1 840 841 25 69</a>
-                            <a href="mailto:info@email.com">info@email.com</a>
+                            <a href="tel:+18408412569" target="_blank">+1 840 841 25 69</a>
+                            <a href="mailto:info@email.com" target="_blank">info@email.com</a>
                         </div>
                     </div>
                 </div>
@@ -364,7 +384,7 @@ export const Header = () => {
                     <div className={styles.headerRightItem}>
                         <div className={styles.basketCount}>0</div>
                         <div onClick={handleWidgetOpen(setBasketOpen)}>
-                            <ShoppingBag size={28}/>
+                            <ShoppingBag size={28} classname={styles.shoppingBag}/>
                         </div>
                         <div
                             className={[styles.basketDropdown, basketOpen && styles.basketActive].join(' ')}
