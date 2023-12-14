@@ -5,6 +5,7 @@ import {Footer} from "./Components/Footer/Footer.jsx";
 import {LayoutContextProvider} from "./Context/LayoutContext/LayoutContext.jsx";
 import ScrollToTop from "./Components/Сommon/ScrollToTop/ScrollToTop.jsx";
 import React from "react";
+import {MobileMenu} from "./Components/MobileMenu/MobileMenu.jsx";
 
 const App = () => {
     return (
@@ -14,9 +15,11 @@ const App = () => {
                 <Header/>
                 <Main/>
                 <Footer/>
-                <Footer/>
                 {/*SCROLL TO HEADER */}
                 <ScrollToTop />
+                {/*MOBILE MENU*/}
+                <MobileMenu />
+
             </div>
         </LayoutContextProvider>
     )

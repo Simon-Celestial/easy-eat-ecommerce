@@ -4,20 +4,24 @@ import React, {useCallback, useContext, useEffect, useState} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faFacebookF, faInstagram, faTwitter} from "@fortawesome/free-brands-svg-icons";
 import {faBasketball} from "@fortawesome/free-solid-svg-icons";
-import ScrollToTop from "../Сommon/ScrollToTop/ScrollToTop.jsx";
 import {LayoutContext} from "../../Context/LayoutContext/LayoutContext.jsx";
 
 
 export const Header = () => {
     const {
+        mobileMenuOpen,
+        setMobileMenuOpen,
         headerTransform,
         setHeaderTransform,
+        handleWidgetOpen,
+        handleWidgetClose,
+        openHandler,
     } = useContext(LayoutContext);
 
     const handleHeaderTransform = useCallback(() => {
-        if (window.scrollY > 650) {
+        if (window.scrollY > 650 && window.innerWidth > 1200) {
             setHeaderTransform(true);
-        } else if (window.scrollY <= 650) {
+        } else if (window.scrollY <= 650 || window.innerWidth < 1200) {
             setHeaderTransform(false);
         }
     }, [setHeaderTransform]);
@@ -40,16 +44,7 @@ export const Header = () => {
     const [searchOpen, setSearchOpen] = useState(false);
     const [rightMenuOpen, setRightMenuOpen] = useState(false);
 
-    // FUNCTION TO OPEN WIDGETS
-    const handleWidgetOpen = (setIsOpen) => useCallback((event) => {
-        event.stopPropagation();
-        setIsOpen(true);
-    }, []);
 
-    // FUNCTION TO CLOSE WIDGETS
-    const handleWidgetClose = (setIsOpen) => {
-        setIsOpen(false);
-    }
 
     // useEffect CLOSE WIDGETS WHEN CLICKING OUTSIDE THE WIDGET AREA
     useEffect(() => {
@@ -62,12 +57,6 @@ export const Header = () => {
         return () => {
             document.removeEventListener("click", action);
         };
-    }, []);
-
-
-    // FUNCTION TO OPEN AND CLOSE WIDGETS
-    const openHandler = (setIsOpen) => useCallback(() => {
-        setIsOpen(prev => !prev);
     }, []);
 
 
@@ -384,8 +373,9 @@ export const Header = () => {
                     <div className={styles.headerRightItem}>
                         <div className={styles.basketCount}>0</div>
                         <div onClick={handleWidgetOpen(setBasketOpen)}>
-                            <ShoppingBag size={28} classname={styles.shoppingBag}/>
+                            <ShoppingBag size={28}/>
                         </div>
+                        {/*BASKET */}
                         <div
                             className={[styles.basketDropdown, basketOpen && styles.basketActive].join(' ')}
                             onClick={ev => ev.stopPropagation()}
@@ -501,6 +491,12 @@ export const Header = () => {
                             </g>
                         </svg>
                     </div>
+                    <div className={styles.mobileMenuBtn} onClick={openHandler(setMobileMenuOpen)}>
+                        <div className={styles.mobileBtnStick}></div>
+                        <div className={styles.mobileBtnStick}></div>
+                        <div className={styles.mobileBtnStick}></div>
+                    </div>
+
                 </div>
             </section>
         </header>

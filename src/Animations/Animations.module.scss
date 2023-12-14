@@ -1,0 +1,51 @@
+@import "../variables.module";
+//ANIMATIONS
+@keyframes logoRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(-20deg);
+
+  }
+  75% {
+    transform: rotate(10deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+;
+@keyframes textGlow {
+  0% {
+    text-shadow: 0 0 0 $color-orange;
+  }
+  25% {
+    text-shadow: 0 0 5px $color-orange;
+  }
+  50% {
+    text-shadow: 0 0 25px $color-orange;
+
+  }
+  75% {
+    text-shadow: 0 0 5px $color-orange;
+  }
+  100% {
+    text-shadow: 0 0 0 $color-orange;
+  }
+}
+
+;
+
+@keyframes headerTransform {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}

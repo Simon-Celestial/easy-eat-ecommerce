@@ -1,0 +1,359 @@
+@import "../../variables.module";
+@import "../../Animations/Animations.module";
+
+.mobileMenuSection {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background-color: $color-darkgray;
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  transform-origin: top;
+  transform: scaleY(0);
+  transition: transform $transition-medium, height $transition-medium !important;
+  pointer-events: none;
+  &.mobileMenuActive {
+    transform: scaleY(1)!important;
+    pointer-events: auto!important;
+    .mobileMenuContent {
+      opacity: 1!important;
+    }
+  }
+  .mobileMenuContent {
+    display: flex;
+    width: 100%;
+    position: relative;
+    transition: $transition-very-slow;
+    transition-delay: 0.5s;
+    opacity: 0;
+    .mobileMenuSide {
+      padding: 0 70px;
+      display: flex;
+      background-color: $color-black-light;
+      position: absolute;
+      right: 0;
+      top: 0;
+      height: 100vh;
+
+      .mobileMenuSideContent {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        padding-top: 200px;
+        gap: 50px;
+
+        .mobileMenuSideItems {
+          display: flex;
+          flex-direction: column;
+          font-family: $font-main;
+          color: $color-white;
+          gap: 10px;
+
+          &:nth-child(1) {
+            border-bottom: 1px solid $color-white;
+            padding-bottom: 5px;
+          }
+
+          p {
+            font-size: 17px;
+          }
+
+          a {
+            color: $color-white;
+            font-size: 24px;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+
+            svg {
+              color: $color-orange;
+              font-size: 20px;
+            }
+          }
+        }
+      }
+    }
+
+    .mobileMenuHeader {
+      width: 100%;
+      padding: 40px 45px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 3;
+
+      .mobileLogo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        :hover {
+          animation: logoRotate 1s ease;
+        }
+
+        img {
+          max-width: 87px;
+          width: 100%;
+        }
+      }
+
+      .closeMobileMenu {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+
+        &:hover p {
+          color: $color-white;
+          transform: scale(1.1);
+        }
+
+        &:hover svg {
+          transform: rotate(360deg);
+        }
+
+        svg {
+          font-size: 30px;
+          color: $color-white;
+          transition: 0.5s ease;
+        }
+
+        p {
+          color: $color-gray;
+          font-size: 17px;
+          font-family: $font-alternative;
+          transition: $transition-fast;
+        }
+      }
+    }
+
+    .mobileMenuMain {
+      display: flex;
+      width: 100%;
+      margin-right: 46%;
+      flex-direction: column;
+      padding-top: 200px;
+      padding-left: 45px;
+      justify-content: space-between;
+
+      .mobileMenuTitle {
+        flex-direction: column;
+        display: flex;
+        overflow-y: auto;
+
+        &::-webkit-scrollbar {
+          width: 0;
+        }
+
+        .mobileMenuItems {
+          display: flex;
+          flex-direction: column;
+
+          .mobileMenuItem {
+            display: flex;
+            flex-direction: column;
+            padding: 8px 0;
+
+            a {
+              display: inline-flex;
+              color: $color-gray;
+              font-family: $font-main;
+              font-size: 30px;
+              align-items: center;
+              gap: 35px;
+              transition: $transition-fast;
+
+              &:hover {
+                color: $color-white;
+              }
+
+              svg {
+                font-size: 25px;
+              }
+            }
+
+            .mobileMenuDropdown {
+              display: flex;
+              flex-direction: column;
+              transition: transform $transition-medium, opacity $transition-medium, height $transition-medium;
+              transform-origin: top;
+              transform: scaleY(0);
+              height: 0;
+              opacity: 0;
+              pointer-events: none;
+              &.mobileDropdownActive {
+                height: auto!important;
+                pointer-events: auto!important;
+                transform: scaleY(1)!important;
+                opacity: 1!important;
+                padding: 10px 0!important;
+
+
+              }
+              .mobileMenuDropdownItems {
+                display: flex;
+                flex-direction: column;
+                width: min-content;
+                a {
+                  font-family: $font-alternative;
+                  font-size: 19px;
+                  padding: 10px 10px 10px 20px;
+                  display: inline-flex;
+                  white-space: nowrap;
+                  gap: 20px;
+                  svg {
+                    font-size: 12px;
+                  }
+                }
+                .mobileMenuSubDropdown {
+                  display: flex;
+                  flex-direction: column;
+                  transition: transform $transition-medium, opacity $transition-medium, height $transition-medium;
+                  transform-origin: top;
+                  transform: scaleY(0);
+                  height: 0;
+                  opacity: 0;
+                  pointer-events: none;
+                  &.mobileSubDropdownActive {
+                    height: auto!important;
+                    opacity: 1!important;
+                    pointer-events: auto!important;
+                    transform: scaleY(1)!important;
+                  }
+                  .mobiMenuSubDropdownItems {
+                    display: flex;
+                    a {
+                      padding-left: 40px;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+
+
+      }
+
+      .mobileMenuFooter {
+        display: flex;
+        width: 100%;
+        border-top: 1px solid $color-border;
+
+        .footerContent {
+          padding: 20px 0;
+          display: flex;
+          width: 100%;
+
+          a {
+            color: $color-white !important;
+            padding: 15px;
+            cursor: pointer;
+
+            &:hover svg {
+              transform: rotate(360deg) scale(1.5);
+            }
+
+            &:hover:nth-child(1) svg {
+              color: blue;
+            }
+
+            &:hover:nth-child(2) svg {
+              color: #33eac7;
+            }
+
+            &:hover:nth-child(3) svg {
+              color: deeppink;
+            }
+
+            &:hover:nth-child(4) svg {
+              color: purple;
+            }
+
+            svg {
+              font-size: 18px;
+              transition: $transition-fast;
+            }
+          }
+
+        }
+      }
+
+    }
+
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .mobileMenuSection {
+    .mobileMenuContent {
+      .mobileMenuSide {
+        display: none;
+      }
+
+      .mobileMenuMain {
+        margin: 0;
+        padding: 180px 40px 50px 40px;
+
+        .mobileMenuTitle {
+          .mobileMenuItems {
+            gap: 10px;
+
+            .mobileMenuItem {
+              padding: 5px 0;
+              .mobileMenuDropdown {
+                .mobileMenuDropdownItems {
+                  a {
+                    font-size: 15px;
+                  }
+                  .mobileMenuSubDropdown {
+                    .mobiMenuSubDropdownItems {
+                      a {
+                        padding: 10px 10px 10px 40px;
+                      }
+                    }
+                  }
+                }
+              }
+
+              a {
+                font-size: 24px;
+
+                svg {
+                  font-size: 25px;
+                }
+              }
+            }
+          }
+        }
+      }
+      .mobileMenuHeader {
+        .mobileLogo {
+          img {
+            width: 70px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .mobileMenuSection {
+    .mobileMenuContent {
+      .mobileMenuHeader {
+        .closeMobileMenu {
+          p {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
