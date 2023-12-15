@@ -1,8 +1,207 @@
 @import "../../variables.module";
+@import "../../Animations/Animations.module";
+
 .footerWrapper {
   display: flex;
   width: 100%;
-  height: 500px;
-  background-color: black;
-  border: 2px solid red;
+  padding: 15px 0;
+  background-color: $color-darkgray;
+  background-image: url("https://easyeat.ancorathemes.com/wp-content/uploads/2023/01/decoration-bg-2.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  justify-content: center;
+
+  .footerContent {
+    max-width: 1320px;
+    width: 100%;
+    padding: 0 15px;
+    display: flex;
+    flex-direction: column;
+
+    .footerContentMain {
+      display: flex;
+      padding: 85px 0;
+
+      .footerMainTitleBlock {
+        display: flex;
+        width: 55%;
+
+        span {
+          font-size: 45px;
+          color: $color-white;
+          font-family: $font-main;
+          line-height: 45px;
+        }
+      }
+
+      .footerAddressBlock {
+        width: 25%;
+        display: flex;
+        flex-direction: column;
+
+        .footerAddressTitle {
+          display: flex;
+          flex-direction: column;
+
+          h2 {
+            font-size: 18px;
+            font-family: $font-main;
+            color: $color-white;
+            padding: 0 10px 0 0;
+            font-weight: 400;
+          }
+
+          p {
+            font-size: 16px;
+            font-family: $font-alternative;
+            color: $color-gray;
+            padding: 10px 0;
+            line-height: 25px;
+          }
+
+        }
+
+        .footerSocialIcons {
+          display: flex;
+          gap: 5px;
+          padding-top: 20px;
+
+          .footerSocialSpinners {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            width: 45px;
+            height: 45px;
+            border: 1px solid $color-border;
+
+            &:hover svg {
+              transform: scale(1.5) rotate(360deg);
+            }
+
+            &:nth-child(1) svg:hover {
+              color: #000080;
+            }
+
+            &:nth-child(2) svg:hover {
+              color: #01b090;
+            }
+
+            &:nth-child(3) svg:hover {
+              color: #961243;
+            }
+
+            &:nth-child(4) svg:hover {
+              color: #a528b9;
+            }
+
+            svg {
+              color: $color-white;
+              font-size: 18px;
+              transition: $transition-fast;
+            }
+          }
+        }
+      }
+
+      .footerContactBlock {
+        display: flex;
+        flex-direction: column;
+        width: auto;
+
+        h6 {
+          color: $color-white;
+          font-size: 19px;
+          font-family: $font-main;
+          font-weight: 400;
+          padding: 0 10px 0 0;
+
+          a {
+            color: $color-gray;
+          }
+        }
+
+        p {
+          font-size: 16px;
+          padding: 10px 0;
+
+          > a {
+            font-family: $font-alternative;
+            color: $color-gray;
+            padding-bottom: 5px;
+            border-bottom: 1px solid $color-gray;
+
+          }
+        }
+      }
+
+    }
+
+    .footerContentBottom {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      padding-top: 20px;
+      border-top: 1px solid $color-border;
+      align-items: center;
+
+      .footerNavBlock {
+        display: flex;
+        gap: 35px;
+
+        .footerNavItem {
+          display: flex;
+          position: relative;
+          cursor: pointer;
+
+          &:after {
+            content: "";
+            width: 0;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 2px;
+            background-color: $color-white;
+            transition: $transition-fast;
+          }
+
+          &:hover:after {
+            width: 100%;
+          }
+
+          &:hover a {
+            color: $color-white;
+          }
+
+          a {
+            font-size: 18px;
+            color: $color-gray;
+            padding: 8px 0;
+            transition: $transition-fast;
+          }
+        }
+      }
+      .footerCopyright {
+        display: flex;
+        .footerCopyrightTitle {
+          font-family: $font-alternative;
+          display: inline-flex;
+          color: $color-gray;
+          gap: 5px;
+          a {
+            color: $color-gray;
+            font-family: $font-alternative;
+            transition: $transition-fast;
+            &:hover {
+              color: $color-white;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 1300px) {
+
 }
