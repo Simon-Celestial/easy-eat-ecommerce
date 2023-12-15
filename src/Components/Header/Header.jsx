@@ -1,21 +1,20 @@
 import styles from "./Header.module.scss";
 import {CaretRight, MagnifyingGlass, ShoppingBag, X} from "@phosphor-icons/react";
 import React, {useCallback, useContext, useEffect, useState} from "react";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faFacebookF, faInstagram, faTwitter} from "@fortawesome/free-brands-svg-icons";
-import {faBasketball} from "@fortawesome/free-solid-svg-icons";
 import {LayoutContext} from "../../Context/LayoutContext/LayoutContext.jsx";
 
 
 export const Header = () => {
     const {
-        mobileMenuOpen,
         setMobileMenuOpen,
         headerTransform,
         setHeaderTransform,
         handleWidgetOpen,
-        handleWidgetClose,
         openHandler,
+        basketOpen,
+        setBasketOpen,
+        setSearchOpen,
+        setSideMenuOpen,
     } = useContext(LayoutContext);
 
     const handleHeaderTransform = useCallback(() => {
@@ -33,31 +32,13 @@ export const Header = () => {
         };
     }, [setHeaderTransform]);
 
-    // STATES TO OPEN AND CLOSE WIDGETS
+    // STATES TO OPEN AND LOSE WIDGETS
     const [dropDownHomeOpen, setDropDownHomeOpen] = useState(false);
     const [dropDownPagesOpen, setDropDownPagesOpen] = useState(false);
     const [dropDownBlogOpen, setDropDownBlogOpen] = useState(false);
     const [dropDownShopOpen, setDropDownShopOpen] = useState(false);
     const [dropDownToolsOpen, setDropDownToolsOpen] = useState(false);
     const [dropDownPostOpen, setDropDownPostOpen] = useState(false);
-    const [basketOpen, setBasketOpen] = useState(false);
-    const [searchOpen, setSearchOpen] = useState(false);
-    const [rightMenuOpen, setRightMenuOpen] = useState(false);
-
-
-
-    // useEffect CLOSE WIDGETS WHEN CLICKING OUTSIDE THE WIDGET AREA
-    useEffect(() => {
-        const action = () => {
-            handleWidgetClose(setBasketOpen);
-            handleWidgetClose(setSearchOpen);
-            handleWidgetClose(setRightMenuOpen);
-        }
-        document.addEventListener("click", action);
-        return () => {
-            document.removeEventListener("click", action);
-        };
-    }, []);
 
 
     return (
@@ -65,69 +46,6 @@ export const Header = () => {
         <header className={`${styles.siteHeader} ${headerTransform && styles.headerTransformActive}`}>
 
             <section className={styles.headerContent}>
-                {/*HEADER RIGHT MENU*/}
-                <div className={`${styles.rightMenuWrapper} ${rightMenuOpen && styles.rightMenuActive}`}
-                     onClick={ev => ev.stopPropagation()}>
-                    <div className={styles.rightMenuContent}>
-                        <div className={styles.rightMenuHeader}>
-                            <a href="/">
-                            <img src="//easyeat.ancorathemes.com/wp-content/uploads/2023/01/logo-small-inverse.png"
-                                 alt="Easy Eat"/>
-                            </a>
-                            <div className={styles.closeRightMenu} onClick={openHandler(setRightMenuOpen)}>
-                                <X/>
-                            </div>
-                        </div>
-                        <div className={styles.rightMenuSocial}>
-                            <a href="https://www.facebook.com/AncoraThemes" target={"_blank"}>
-                                <FontAwesomeIcon icon={faFacebookF}/>
-                                <p>Facebook</p>
-                            </a>
-                            <a href="https://twitter.com/themes_ancora" target={"_blank"}>
-                                <FontAwesomeIcon icon={faTwitter}/>
-                                <p>Twitter</p>
-                            </a>
-                            <a href="https://dribbble.com/AncoraThemes" target={"_blank"}>
-                                <FontAwesomeIcon icon={faBasketball}/>
-                                <p>Dribble</p>
-                            </a>
-                            <a href="https://www.instagram.com/ancora_themes" target={"_blank"}>
-                                <FontAwesomeIcon icon={faInstagram}/>
-                                <p>Instagram</p>
-                            </a>
-                        </div>
-                        <div className={styles.rightMenuFooter}>
-                            <a href="tel:+18408412569" target="_blank">+1 840 841 25 69</a>
-                            <a href="mailto:info@email.com" target="_blank">info@email.com</a>
-                        </div>
-                    </div>
-                </div>
-
-                {/*HEADER SEARCH CONTAINER*/}
-                <div className={`${styles.headerSearchWrapper} ${searchOpen && styles.headerSearchActive}`}
-                     onClick={ev => ev.stopPropagation()}>
-                    <div className={`${styles.headerSearchContent} ${searchOpen && styles.headerSearchContentActive}`}>
-                        <div className={styles.searchTopBlock}>
-                            <img src="//easyeat.ancorathemes.com/wp-content/uploads/2023/01/logo-small-inverse.png"
-                                 alt="EasyEat"/>
-                            <div onClick={openHandler(setSearchOpen)} className={styles.closeSearch}>
-                                <X/>
-                            </div>
-                        </div>
-                        <div className={styles.headerFormWrapper}>
-                            <form role="search" method="get" action="https://easyeat.ancorathemes.com/">
-                                <input type="text" className={styles.headerSearchInput}
-                                       placeholder="Type words and hit enter"/>
-                                <button type="submit" className={styles.searchSubmit}>
-                                    <MagnifyingGlass size={32}/>
-                                </button>
-                            </form>
-
-                        </div>
-
-                    </div>
-                </div>
-
                 {/*HEADER CONTENT*/}
                 <div className={styles.headerLeft}>
                     <a href="/" className={styles.headerLogo}>
@@ -378,87 +296,77 @@ export const Header = () => {
                         {/*BASKET */}
                         <div
                             className={[styles.basketDropdown, basketOpen && styles.basketActive].join(' ')}
-                            onClick={ev => ev.stopPropagation()}
-                        >
-                            {/*<div className={styles.emptyBasket}>*/}
-                            {/*    <ShoppingBag size={32} weight="bold" color="white" />*/}
-                            {/*    <h1>No products in the cart.</h1>*/}
+                            onClick={ev => ev.stopPropagation()}>
+                            <div className={styles.closeBasketBtn} onClick={openHandler(setBasketOpen)}>
+                                <X />
+                            </div>
+                            <div className={styles.emptyBasket}>
+                                <ShoppingBag size={32} weight="bold" color="white" />
+                                <h1>No products in the cart.</h1>
+                            </div>
+                            {/*<div className={styles.basketContent}>*/}
+                            {/*<div className={styles.basketProducts}>*/}
+                            {/*    <div className={styles.basketCard}>*/}
+                            {/*        <div className={styles.basketClose}>*/}
+                            {/*            <p>x</p>*/}
+                            {/*        </div>*/}
+                            {/*        <a href="" className={styles.imageBlock}>*/}
+                            {/*            <img*/}
+                            {/*                src="https://easyeat.ancorathemes.com/wp-content/uploads/2020/05/product-4-copyright-480x480.png"*/}
+                            {/*                alt="Product"/>*/}
+                            {/*        </a>*/}
+                            {/*        <div className={styles.basketCardTitle}>*/}
+                            {/*            <h2>Black Burger</h2>*/}
+                            {/*            <p>1 × $89.00</p>*/}
+                            {/*        </div>*/}
+
+                            {/*    </div>*/}
+                            {/*    <div className={styles.basketCard}>*/}
+                            {/*        <div className={styles.basketClose}>*/}
+                            {/*            <p>x</p>*/}
+                            {/*        </div>*/}
+                            {/*        <a href="" className={styles.imageBlock}>*/}
+                            {/*            <img*/}
+                            {/*                src="https://easyeat.ancorathemes.com/wp-content/uploads/2020/05/product-4-copyright-480x480.png"*/}
+                            {/*                alt="Product"/>*/}
+                            {/*        </a>*/}
+                            {/*        <div className={styles.basketCardTitle}>*/}
+                            {/*            <h2>Black Burger</h2>*/}
+                            {/*            <p>1 × $89.00</p>*/}
+                            {/*        </div>*/}
+                            {/*    </div>*/}
+                            {/*    <div className={styles.basketCard}>*/}
+                            {/*        <div className={styles.basketClose}>*/}
+                            {/*            <p>x</p>*/}
+                            {/*        </div>*/}
+                            {/*        <a href="" className={styles.imageBlock}>*/}
+                            {/*            <img*/}
+                            {/*                src="https://easyeat.ancorathemes.com/wp-content/uploads/2020/05/product-4-copyright-480x480.png"*/}
+                            {/*                alt="Product"/>*/}
+                            {/*        </a>*/}
+                            {/*        <div className={styles.basketCardTitle}>*/}
+                            {/*            <h2>Black Burger</h2>*/}
+                            {/*            <p>1 × $89.00</p>*/}
+                            {/*        </div>*/}
+
+                            {/*    </div>*/}
                             {/*</div>*/}
-                            <div className={styles.basketProducts}>
-                                <div className={styles.basketCard}>
-                                    <div className={styles.basketClose}>
-                                        <p>x</p>
-                                    </div>
-                                    <a href="" className={styles.imageBlock}>
-                                        <img
-                                            src="https://easyeat.ancorathemes.com/wp-content/uploads/2020/05/product-4-copyright-480x480.png"
-                                            alt="Product"/>
-                                    </a>
-                                    <div className={styles.basketCardTitle}>
-                                        <h2>Black Burger</h2>
-                                        <p>1 x $89.00</p>
-                                    </div>
-
-                                </div>
-                                <div className={styles.basketCard}>
-                                    <div className={styles.basketClose}>
-                                        <p>x</p>
-                                    </div>
-                                    <a href="" className={styles.imageBlock}>
-                                        <img
-                                            src="https://easyeat.ancorathemes.com/wp-content/uploads/2020/05/product-4-copyright-480x480.png"
-                                            alt="Product"/>
-                                    </a>
-                                    <div className={styles.basketCardTitle}>
-                                        <h2>Black Burger</h2>
-                                        <p>1 x $89.00</p>
-                                    </div>
-                                </div>
-                                <div className={styles.basketCard}>
-                                    <div className={styles.basketClose}>
-                                        <p>x</p>
-                                    </div>
-                                    <a href="" className={styles.imageBlock}>
-                                        <img
-                                            src="https://easyeat.ancorathemes.com/wp-content/uploads/2020/05/product-4-copyright-480x480.png"
-                                            alt="Product"/>
-                                    </a>
-                                    <div className={styles.basketCardTitle}>
-                                        <h2>Black Burger</h2>
-                                        <p>1 x $89.00</p>
-                                    </div>
-
-                                </div>
-                                <div className={styles.basketCard}>
-                                    <div className={styles.basketClose}>
-                                        <p>x</p>
-                                    </div>
-                                    <a href="" className={styles.imageBlock}>
-                                        <img
-                                            src="https://easyeat.ancorathemes.com/wp-content/uploads/2020/05/product-4-copyright-480x480.png"
-                                            alt="Product"/>
-                                    </a>
-                                    <div className={styles.basketCardTitle}>
-                                        <h2>Black Burger</h2>
-                                        <p>1 x $89.00</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className={styles.basketFooter}>
-                                <div className={styles.basketSubtotal}>
-                                    <p>SUBTOTAL: $254.00</p>
-                                </div>
-                                <div className={styles.basketButtons}>
-                                    <a href="/" className={styles.btn}>VIEW CART</a>
-                                    <a href="/" className={styles.btn}>CHECKOUT</a>
-                                </div>
-                            </div>
+                            {/*<div className={styles.basketFooter}>*/}
+                            {/*    <div className={styles.basketSubtotal}>*/}
+                            {/*        <p>SUBTOTAL: $254.00</p>*/}
+                            {/*    </div>*/}
+                            {/*    <div className={styles.basketButtons}>*/}
+                            {/*        <a href="/" className={styles.btn}>VIEW CART</a>*/}
+                            {/*        <a href="/" className={styles.btn}>CHECKOUT</a>*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
+                            {/*</div>*/}
                         </div>
                     </div>
                     <div className={styles.headerRightItem} onClick={handleWidgetOpen(setSearchOpen)}>
                         <MagnifyingGlass size={28}/>
                     </div>
-                    <div className={styles.headerRightItem} onClick={handleWidgetOpen(setRightMenuOpen)}>
+                    <div className={styles.headerRightItem} onClick={handleWidgetOpen(setSideMenuOpen)}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21">
                             <g transform="translate(-2124 -2665)">
                                 <path
@@ -496,7 +404,6 @@ export const Header = () => {
                         <div className={styles.mobileBtnStick}></div>
                         <div className={styles.mobileBtnStick}></div>
                     </div>
-
                 </div>
             </section>
         </header>

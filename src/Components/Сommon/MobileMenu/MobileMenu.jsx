@@ -1,10 +1,10 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import styles from "./MobileMenu.module.scss";
 import {ArrowRight, X} from "@phosphor-icons/react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faFacebookF, faInstagram, faTwitter} from "@fortawesome/free-brands-svg-icons";
 import {faArrowRightLong, faBasketball, faChevronDown, faChevronUp} from "@fortawesome/free-solid-svg-icons";
-import {LayoutContext} from "../../Context/LayoutContext/LayoutContext.jsx";
+import {LayoutContext} from "../../../Context/LayoutContext/LayoutContext.jsx";
 
 export const MobileMenu = () => {
 
@@ -14,6 +14,22 @@ export const MobileMenu = () => {
         mobileMenuOpen,
         setMobileMenuOpen,
     } = useContext(LayoutContext);
+
+    // FUNCTION TO CLOSE MOBILE MENU WHEN DISPLAY WIDTH > 1200
+    useEffect(() => {
+        const handleResize = () => {
+            const screenWidth = window.innerWidth;
+            if (screenWidth > 1200) {
+                setMobileMenuOpen(false);
+            }
+        };
+        handleResize();
+        window.addEventListener("resize", handleResize);
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
+
 
     // MOBILE DROPDOWN STATES
     const [mobileHomeDropdown,setMobileHomeDropdown] = useState(false);

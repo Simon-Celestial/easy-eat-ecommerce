@@ -1,0 +1,261 @@
+@import "../../../variables.module";
+@import "../../../Animations/Animations.module";
+
+//SEARCH CONTAINER STYLES
+.headerSearchWrapper {
+  z-index: 100;
+  height: 500px;
+  width: 100%;
+  position: fixed;
+  padding: 50px;
+  top: 0;
+  left: 0;
+  display: flex;
+  background-color: $color-darkgray;
+  transform-origin: top;
+  transform: scaleY(0);
+  transition: 0.6s ease;
+  pointer-events: none;
+
+  &.headerSearchActive {
+    transform: scaleY(1) !important;
+    pointer-events: auto;
+
+    .headerSearchContentActive {
+      opacity: 1 !important;
+    }
+  }
+
+  .headerSearchContent {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    transition: 2s ease;
+    transition-delay: 0.5s;
+    opacity: 0;
+
+    .searchTopBlock {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+
+      > img {
+        width: 70px;
+        height: 71px;
+
+        &:hover {
+          animation: logoRotate 1s ease;
+        }
+      }
+
+      .closeSearch {
+        padding: 5px;
+        cursor: pointer;
+
+        &:hover svg {
+          transform: rotate(270deg);
+        }
+
+        svg {
+          font-size: 40px;
+          color: $color-white;
+          font-weight: lighter;
+          transition: 0.6s ease;
+        }
+      }
+    }
+
+    .headerFormWrapper {
+      display: flex;
+      width: 100%;
+      max-width: 1300px;
+      padding: 0 15px;
+      margin-top: 120px;
+
+      > form {
+        display: flex;
+        width: 100%;
+        border-bottom: 1px solid $color-border;
+        padding-bottom: 15px;
+        position: relative;
+        transition: $transition-fast;
+
+        &:hover {
+          border-bottom: 1px solid $color-orange;
+        }
+
+        .headerSearchInput {
+          width: 100%;
+          padding: 15px 60px 15px 0;
+          outline: 0;
+          border: 0;
+          background-color: transparent;
+          font-size: 32px;
+          color: $color-white;
+          font-family: $font-main;
+
+          &::placeholder {
+            color: $color-placeholder;
+          }
+        }
+
+        .searchSubmit {
+          position: absolute;
+          right: 10px;
+          bottom: 35px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+          outline: 0;
+          border: 0;
+          background-color: transparent;
+
+          &:hover svg {
+            transform: rotate(360deg);
+          }
+
+          svg {
+            color: $color-white;
+            transition: 0.5s ease;
+            font-size: 32px;
+          }
+        }
+      }
+    }
+  }
+}
+
+//MEDIA STYLES FOR HEADER SEARCH
+
+@media screen and (max-width: 1650px) {
+  .headerSearchWrapper {
+    height: 480px;
+
+    .headerSearchContent {
+      .headerFormWrapper {
+        margin-top: 100px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1450px) {
+  .headerSearchWrapper {
+    height: 450px;
+    padding: 20px;
+
+    .headerSearchContent {
+      .searchTopBlock {
+        padding: 20px;
+      }
+    }
+
+
+  }
+}
+
+@media screen and (max-width: 1450px) {
+  .headerSearchWrapper {
+    height: 420px;
+
+    .headerSearchContent {
+      .headerFormWrapper {
+        margin-top: 70px;
+      }
+    }
+
+
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .headerSearchWrapper {
+    height: 400px;
+
+    .headerSearchContent {
+      .headerFormWrapper {
+        margin-top: 60px;
+      }
+    }
+
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .headerSearchWrapper {
+    height: 350px;
+
+    .headerSearchContent {
+      .headerFormWrapper {
+        margin-top: 40px;
+      }
+    }
+
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .headerSearchWrapper {
+    height: 320px;
+
+    .headerSearchContent {
+      .searchTopBlock {
+        padding: 10px 20px;
+      }
+
+      .headerFormWrapper {
+        margin-top: 20px;
+
+        > form {
+          .headerSearchInput {
+            font-size: 24px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .headerSearchWrapper {
+    height: 250px;
+    padding: 10px;
+
+    .headerSearchContent {
+      .searchTopBlock {
+        img {
+          width: 50px;
+          height: 51px;
+        }
+
+        .closeSearch {
+          svg {
+            font-size: 28px;
+          }
+        }
+
+      }
+
+      .headerFormWrapper {
+        margin-top: 20px;
+        > form {
+          .searchSubmit {
+            bottom: 25px;
+            svg {
+              font-size: 28px;
+            }
+          }
+          .headerSearchInput {
+            padding: 10px 50px 10px 0;
+          }
+        }
+      }
+    }
+
+  }
+}
+

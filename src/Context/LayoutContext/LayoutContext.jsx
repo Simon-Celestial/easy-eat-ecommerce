@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react'
+import React, {useCallback, useEffect, useState} from 'react'
 
 
 const defaults = {
@@ -9,6 +9,13 @@ const defaults = {
     openHandler: () => {},
     mobileMenuOpen: false,
     setMobileMenuOpen: () => {},
+    searchOpen: false,
+    setSearchOpen: () => {},
+    basketOpen: false,
+    setBasketOpen: () => {},
+    sideMenuOpen: false,
+    setSideMenuOpen: () => {},
+
 }
 export const LayoutContext = React.createContext(defaults);
 
@@ -19,11 +26,24 @@ export const LayoutContextProvider = ({
     // HEADER TRANSFORMATION STATE
     const [headerTransform, setHeaderTransform] = useState(false);
 
+    // HEADER SEARCH OPEN AND CLOSE STATE
+    const [searchOpen, setSearchOpen] = useState(false);
+
     // MOBILE MENU OPEN AND CLOSE STATE
     const [mobileMenuOpen,setMobileMenuOpen] = useState(false);
 
+    // HEADER BASKET OPEN AND CLOSE STATE
+    const [basketOpen, setBasketOpen] = useState(false);
+
+    // SIDE MENU OPEN AND CLOSE STATE
+    const [sideMenuOpen, setSideMenuOpen] = useState(false);
+
+
+
+
     // FUNCTION TO OPEN WIDGETS WITH CLICK
-    const handleWidgetOpen = (setIsOpen) => useCallback((event) => {
+
+    const handleWidgetOpen = useCallback((setIsOpen) => (event) => {
         event.stopPropagation();
         setIsOpen(true);
     }, []);
@@ -38,6 +58,19 @@ export const LayoutContextProvider = ({
         setIsOpen(prev => !prev);
     }, []);
 
+    // useEffect CLOSE WIDGETS WHEN CLICKING OUTSIDE THE WIDGET AREA
+    useEffect(() => {
+        const action = () => {
+            handleWidgetClose(setBasketOpen);
+            handleWidgetClose(setSearchOpen);
+            handleWidgetClose(setSideMenuOpen);
+        }
+        document.addEventListener("click", action);
+        return () => {
+            document.removeEventListener("click", action);
+        };
+    }, []);
+
 
 
     return <LayoutContext.Provider value={{
@@ -48,6 +81,12 @@ export const LayoutContextProvider = ({
         openHandler,
         mobileMenuOpen,
         setMobileMenuOpen,
+        searchOpen,
+        setSearchOpen,
+        basketOpen,
+        setBasketOpen,
+        sideMenuOpen,
+        setSideMenuOpen,
     }}>
         {children}
     </LayoutContext.Provider>

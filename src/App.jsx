@@ -5,7 +5,9 @@ import {Footer} from "./Components/Footer/Footer.jsx";
 import {LayoutContextProvider} from "./Context/LayoutContext/LayoutContext.jsx";
 import ScrollToTop from "./Components/Сommon/ScrollToTop/ScrollToTop.jsx";
 import React from "react";
-import {MobileMenu} from "./Components/MobileMenu/MobileMenu.jsx";
+import {MobileMenu} from "./Components/Сommon/MobileMenu/MobileMenu.jsx";
+import {HeaderSearch} from "./Components/Сommon/HeaderSearch/HeaderSearch.jsx";
+import {SideMenu} from "./Components/Сommon/SideMenu/SideMenu.jsx";
 
 const App = () => {
     return (
@@ -19,7 +21,10 @@ const App = () => {
                 <ScrollToTop />
                 {/*MOBILE MENU*/}
                 <MobileMenu />
-
+                {/*HEADER SEARCH */}
+                <HeaderSearch />
+                {/*SIDE MENU*/}
+                <SideMenu />
             </div>
         </LayoutContextProvider>
     )
