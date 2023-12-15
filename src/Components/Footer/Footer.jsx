@@ -62,7 +62,7 @@ export const Footer = () => {
                         </p>
                         <h6>
                             <a href="tel:+1%20840%20841%2025%2069">+1 840 841 25 69
-                        </a>
+                            </a>
                         </h6>
                     </div>
                 </div>
@@ -85,7 +85,6 @@ export const Footer = () => {
                         </div>
                     </div>
                 </div>
-
             </div>
         </footer>
     )

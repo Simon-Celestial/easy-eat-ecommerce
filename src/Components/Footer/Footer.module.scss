@@ -202,6 +202,82 @@
     }
   }
 }
-@media screen and (max-width: 1300px) {
 
+//FOOTER MEDIA STYLES
+@media screen and (max-width: 1440px) {
+  .footerWrapper {
+    padding: 15px 40px;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .footerWrapper {
+    .footerContent {
+      .footerContentMain {
+        justify-content: space-between;
+        .footerAddressBlock {
+          width: auto;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 800px) {
+  .footerWrapper {
+    padding: 15px;
+    .footerContent {
+      .footerContentMain {
+        padding: 40px 0 30px 0;
+        flex-direction: column;
+        gap: 15px;
+        .footerMainTitleBlock {
+          span {
+            font-size: 24px;
+            line-height: 27px;
+          }
+        }
+        .footerAddressBlock {
+          width: auto;
+          .footerSocialIcons {
+            padding-top: 10px;
+            .footerSocialSpinners {
+              width: 40px;
+              height: 40px;
+              a {
+                svg {
+                  font-size: 16px;
+                }
+              }
+            }
+          }
+        }
+      }
+      .footerContentBottom {
+        flex-direction: column;
+        align-items: start;
+        gap: 10px;
+        .footerNavBlock {
+          gap: 20px;
+        }
+        .footerCopyright {
+          .footerCopyrightTitle {
+            font-size: 15px;
+          }
+        }
+
+      }
+    }
+  }
+}
+@media screen and (max-width: 400px) {
+  .footerWrapper {
+    .footerContent {
+      .footerContentBottom {
+        .footerCopyright {
+          .footerCopyrightTitle {
+            flex-direction: column;
+          }
+        }
+      }
+    }
+  }
 }
