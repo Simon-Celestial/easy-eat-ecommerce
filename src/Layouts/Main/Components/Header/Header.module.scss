@@ -1,5 +1,5 @@
-@import "../../variables.module";
-@import "../../Animations/Animations.module";
+@import "../../../../Variables/variables.module";
+@import "../../../../Animations/Animations.module";
 
 //HEADER STYLES
 
@@ -24,8 +24,10 @@
     background-size: cover;
     animation: headerTransform $transition-fast;
     height: 88px;
+
     .headerContent {
       padding: 0 70px !important;
+
       .headerLeft {
         .headerLogo {
           img {
@@ -33,6 +35,7 @@
           }
         }
       }
+
       .headerRight {
         .headerRightItem {
           svg {
@@ -43,8 +46,9 @@
 
       }
     }
+
     .mobileBtnStick {
-      background-color: $color-white!important;
+      background-color: $color-white !important;
     }
   }
 
@@ -225,8 +229,44 @@
         cursor: pointer;
         position: relative;
 
+        &:nth-child(2) {
+          svg {
+            font-size: 22px;
+          }
+        }
+
         svg {
           color: $color-black;
+          font-size: 26px;
+        }
+
+        .accountDropdown {
+          display: flex;
+          position: absolute;
+          left: 0;
+          top: 66px;
+          background-color: $color-black;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          padding: 10px 0;
+          transform-origin: top;
+          transition: $transition-medium;
+          transform: scaleY(0);
+          pointer-events: none;
+          &.accountDropdownActive {
+            pointer-events: auto!important;
+            transform: scaleY(1)!important;
+          }
+
+          a {
+            padding: 2px 30px;
+            color: $color-gray;
+            transition: $transition-fast;
+            &:hover {
+              color: $color-white;
+            }
+          }
         }
 
         .basketCount {
@@ -260,21 +300,25 @@
           flex-direction: column;
           z-index: 1000;
           justify-content: center;
+
           .closeBasketBtn {
             display: none;
             position: absolute;
             top: 15px;
             right: 20px;
             cursor: pointer;
+
             svg {
               color: $color-white;
               font-size: 25px;
               transition: transform $transition-medium;
+
               &:hover {
                 transform: rotate(360deg);
               }
             }
           }
+
           &.basketActive {
             pointer-events: auto !important;
             opacity: 1 !important;
@@ -288,6 +332,7 @@
             align-items: center;
             justify-content: center;
             gap: 12px;
+
             svg {
               align-self: center;
             }
@@ -301,10 +346,12 @@
 
             }
           }
+
           .basketContent {
             display: flex;
             flex-direction: column;
             width: 100%;
+
             .basketProducts {
               display: flex;
               flex-direction: column;
@@ -440,6 +487,7 @@
           }
         }
       }
+
       .mobileMenuBtn {
         width: 30px;
         flex-direction: column;
@@ -448,9 +496,11 @@
         padding: 2px;
         cursor: pointer;
         display: none;
+
         &:hover .mobileBtnStick:nth-child(3) {
           width: 100%;
         }
+
         .mobileBtnStick {
           height: 2px;
           width: 100%;
@@ -477,8 +527,9 @@
         .headerNavigation {
           display: none;
         }
-        .headerLogo{
-          img{
+
+        .headerLogo {
+          img {
             width: 70px;
           }
         }
@@ -486,10 +537,15 @@
 
       .headerRight {
         .headerRightItem {
+          &:nth-child(2) {
+            display: none;
+          }
+
           &:nth-child(3) {
             display: none;
           }
         }
+
         .mobileMenuBtn {
           display: flex;
         }
@@ -498,6 +554,7 @@
     }
   }
 }
+
 //BASKET MEDIA STYLES
 @media screen and (max-width: 750px) {
   .siteHeader {
@@ -513,30 +570,37 @@
             padding: 35px 28px;
             min-height: auto;
             align-items: center;
+
             .closeBasketBtn {
               display: flex;
             }
-            .basketContent{
+
+            .basketContent {
               padding: 0 20px;
               max-height: 90%;
               width: 90%;
+
               .basketProducts {
                 max-height: none;
                 height: auto;
                 gap: 0;
                 padding-bottom: 20px;
+
                 .basketCard {
                   padding: 10px 0;
+
                   .basketCardTitle {
                     h2 {
                       font-size: 18px;
                     }
+
                     p {
                       font-size: 18px;
                     }
                   }
                 }
               }
+
               .basketFooter {
               }
             }
@@ -546,6 +610,7 @@
     }
   }
 }
+
 @media screen and (max-width: 550px) {
   .siteHeader {
     .headerContent {
@@ -553,10 +618,12 @@
         .headerRightItem {
           .basketDropdown {
             padding: 20px 0;
+
             .basketDropdown {
               .basketProducts {
                 padding-top: 40px;
               }
+
               .basketFooter {
                 padding: 45px 20px;
               }
@@ -575,14 +642,17 @@
       .headerLeft {
         .headerNavigation {
         }
-        .headerLogo{
-          img{
+
+        .headerLogo {
+          img {
             width: 60px;
           }
         }
       }
+
       .headerRight {
         gap: 10px;
+
         .headerRightItem {
         }
       }

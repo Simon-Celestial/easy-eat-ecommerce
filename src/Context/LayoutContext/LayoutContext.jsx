@@ -15,6 +15,9 @@ const defaults = {
     setBasketOpen: () => {},
     sideMenuOpen: false,
     setSideMenuOpen: () => {},
+    dropDownAccountOpen: false,
+    setDropDownAccountOpen: () => {},
+
 
 }
 export const LayoutContext = React.createContext(defaults);
@@ -38,7 +41,8 @@ export const LayoutContextProvider = ({
     // SIDE MENU OPEN AND CLOSE STATE
     const [sideMenuOpen, setSideMenuOpen] = useState(false);
 
-
+    // ACCOUNT ICON DROPDOWN STATE, TO ENTER LOGIN OR REGISTER PAGE
+    const [dropDownAccountOpen, setDropDownAccountOpen] = useState(false);
 
 
     // FUNCTION TO OPEN WIDGETS WITH CLICK
@@ -64,6 +68,8 @@ export const LayoutContextProvider = ({
             handleWidgetClose(setBasketOpen);
             handleWidgetClose(setSearchOpen);
             handleWidgetClose(setSideMenuOpen);
+            handleWidgetClose(setDropDownAccountOpen);
+
         }
         document.addEventListener("click", action);
         return () => {
@@ -87,6 +93,8 @@ export const LayoutContextProvider = ({
         setBasketOpen,
         sideMenuOpen,
         setSideMenuOpen,
+        dropDownAccountOpen,
+        setDropDownAccountOpen,
     }}>
         {children}
     </LayoutContext.Provider>

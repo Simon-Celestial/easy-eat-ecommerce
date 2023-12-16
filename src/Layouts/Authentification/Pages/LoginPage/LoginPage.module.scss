@@ -1,0 +1,11 @@
+@import "../../../../Variables/variables.module";
+@import "../../../../Animations/Animations.module";
+
+.loginPageWrapper {
+  width: 100%;
+  flex-direction: column;
+  .loginPageMain {
+    width: 100%;
+    flex-direction: column;
+  }
+}

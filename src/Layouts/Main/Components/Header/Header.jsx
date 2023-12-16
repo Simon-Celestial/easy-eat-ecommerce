@@ -1,7 +1,9 @@
 import styles from "./Header.module.scss";
 import {CaretRight, MagnifyingGlass, ShoppingBag, X} from "@phosphor-icons/react";
 import React, {useCallback, useContext, useEffect, useState} from "react";
-import {LayoutContext} from "../../Context/LayoutContext/LayoutContext.jsx";
+import {LayoutContext} from "../../../../Context/LayoutContext/LayoutContext.jsx";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCircleUser} from "@fortawesome/free-solid-svg-icons";
 
 
 export const Header = () => {
@@ -15,6 +17,8 @@ export const Header = () => {
         setBasketOpen,
         setSearchOpen,
         setSideMenuOpen,
+        dropDownAccountOpen,
+        setDropDownAccountOpen,
     } = useContext(LayoutContext);
 
     const handleHeaderTransform = useCallback(() => {
@@ -39,7 +43,6 @@ export const Header = () => {
     const [dropDownShopOpen, setDropDownShopOpen] = useState(false);
     const [dropDownToolsOpen, setDropDownToolsOpen] = useState(false);
     const [dropDownPostOpen, setDropDownPostOpen] = useState(false);
-
 
     return (
         // HEADER WRAPPER
@@ -291,12 +294,10 @@ export const Header = () => {
                     <div className={styles.headerRightItem}>
                         <div className={styles.basketCount}>0</div>
                         <div onClick={handleWidgetOpen(setBasketOpen)}>
-                            <ShoppingBag size={28}/>
+                            <ShoppingBag />
                         </div>
                         {/*BASKET */}
-                        <div
-                            className={[styles.basketDropdown, basketOpen && styles.basketActive].join(' ')}
-                            onClick={ev => ev.stopPropagation()}>
+                        <div className={[styles.basketDropdown, basketOpen && styles.basketActive].join(' ')} onClick={ev => ev.stopPropagation()}>
                             <div className={styles.closeBasketBtn} onClick={openHandler(setBasketOpen)}>
                                 <X />
                             </div>
@@ -363,8 +364,16 @@ export const Header = () => {
                             {/*</div>*/}
                         </div>
                     </div>
+                    <div className={styles.headerRightItem} onClick={handleWidgetOpen(setDropDownAccountOpen)}>
+                        <FontAwesomeIcon icon={faCircleUser} />
+                        <div className={`${styles.accountDropdown} ${dropDownAccountOpen && styles.accountDropdownActive}`} onClick={ev => ev.stopPropagation()}>
+                            <a href="../../../Authentification/Pages/LoginPage/LoginPage.jsx">LOGIN</a>
+                            <a href="/register">REGISTER</a>
+                        </div>
+                    </div>
+
                     <div className={styles.headerRightItem} onClick={handleWidgetOpen(setSearchOpen)}>
-                        <MagnifyingGlass size={28}/>
+                        <MagnifyingGlass />
                     </div>
                     <div className={styles.headerRightItem} onClick={handleWidgetOpen(setSideMenuOpen)}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21">

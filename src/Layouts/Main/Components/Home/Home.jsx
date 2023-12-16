@@ -1,7 +1,7 @@
 import React from 'react'
-import styles from "./Main.module.scss";
+import styles from "./Home.module.scss";
 
-export const Main = () => {
+export const Home = () => {
     return (
         <main className={styles.mainWrapper}>
             {/*ABOUT US SECTION*/}

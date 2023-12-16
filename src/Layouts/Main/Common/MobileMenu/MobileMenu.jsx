@@ -4,7 +4,7 @@ import {ArrowRight, X} from "@phosphor-icons/react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faFacebookF, faInstagram, faTwitter} from "@fortawesome/free-brands-svg-icons";
 import {faArrowRightLong, faBasketball, faChevronDown, faChevronUp} from "@fortawesome/free-solid-svg-icons";
-import {LayoutContext} from "../../../Context/LayoutContext/LayoutContext.jsx";
+import {LayoutContext} from "../../../../Context/LayoutContext/LayoutContext.jsx";
 
 export const MobileMenu = () => {
 

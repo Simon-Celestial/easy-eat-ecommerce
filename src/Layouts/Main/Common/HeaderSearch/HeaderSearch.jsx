@@ -1,6 +1,6 @@
 import React, {useContext} from 'react'
 import {MagnifyingGlass, X} from "@phosphor-icons/react";
-import {LayoutContext} from "../../../Context/LayoutContext/LayoutContext.jsx";
+import {LayoutContext} from "../../../../Context/LayoutContext/LayoutContext.jsx";
 import styles from "./HeaderSearch.module.scss";
 
 export const HeaderSearch = () => {
