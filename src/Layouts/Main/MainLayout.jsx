@@ -7,7 +7,6 @@ import {SideMenu} from "./Common/SideMenu/SideMenu.jsx";
 import {Header} from "./Components/Header/Header.jsx";
 import {Home} from "./Components/Home/Home.jsx";
 import {Footer} from "./Components/Footer/Footer.jsx";
-import {Outlet} from "react-router-dom";
 import styles from "./MainLayout.module.scss";
 
 export const MainLayout = () => {
@@ -15,7 +14,7 @@ export const MainLayout = () => {
         <div className={styles.siteWrapper}>
             {/*SITE MAIN COMPONENTS*/}
             <Header/>
-            {/*<Outlet/>*/}
+            <Home />
             <Footer/>
             {/*SCROLL TO HEADER */}
             <ScrollToTop/>
