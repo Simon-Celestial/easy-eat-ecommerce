@@ -199,7 +199,7 @@ export const MobileMenu = () => {
                         </div>
                     </div>
                     <div className={styles.mobileMenuFooter}>
-                        <div className={styles.footerContent}>
+                        <div className={styles.mobileFooterContent}>
                             <a href="https://www.facebook.com/AncoraThemes/" target="_blank">
                                 <FontAwesomeIcon icon={faFacebookF}/>
                             </a>

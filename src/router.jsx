@@ -1,9 +1,10 @@
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import {AuthLayout} from "./Layouts/Authentification/AuthLayout.jsx";
-import {LoginPage} from "./Layouts/Authentification/Pages/LoginPage/LoginPage.jsx";
-import {RegisterPage} from "./Layouts/Authentification/Pages/RegisterPage/RegisterPage.jsx";
+import {LoginPage} from "./Layouts/Authentification/Pages/LoginAndRegister/LoginPage/LoginPage.jsx";
+import {RegisterPage} from "./Layouts/Authentification/Pages/LoginAndRegister/RegisterPage/RegisterPage.jsx";
 import {MainLayout} from "./Layouts/Main/MainLayout.jsx";
 import {Home} from "./Layouts/Main/Pages/Home/Home.jsx";
+import {ProductSingle} from "./Layouts/Main/Pages/ProductSinglePage/ProductSingle.jsx";
 
 const router = createBrowserRouter([
     {
@@ -19,10 +20,10 @@ const router = createBrowserRouter([
                 path: 'home',
                 element: <Home />,
             },
-            // {
-            //     path: 'home/:id',
-            //     element: <AuthRoute><Detail/></AuthRoute>,
-            // },
+            {
+                path: 'home/:id',
+                element: <ProductSingle/>,
+            },
             {
                 path: '*',
                 element: <h1>Page not found</h1>

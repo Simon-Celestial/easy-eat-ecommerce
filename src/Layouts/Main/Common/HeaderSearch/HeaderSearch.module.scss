@@ -16,6 +16,7 @@
   transform: scaleY(0);
   transition: 0.6s ease;
   pointer-events: none;
+  border-bottom: 1px solid $color-border;
 
   &.headerSearchActive {
     transform: scaleY(1) !important;

@@ -30,9 +30,9 @@ export const Header = () => {
     },[]);
 
     const handleHeaderTransform = useCallback(() => {
-        if (window.scrollY > 650 && window.innerWidth > 1200) {
+        if (window.scrollY > 550 && window.innerWidth > 1200) {
             setHeaderTransform(true);
-        } else if (window.scrollY <= 650 || window.innerWidth < 1200) {
+        } else if (window.scrollY <= 550 || window.innerWidth < 1200) {
             setHeaderTransform(false);
         }
     }, [setHeaderTransform]);
@@ -59,16 +59,16 @@ export const Header = () => {
             <section className={styles.headerContent}>
                 {/*HEADER CONTENT*/}
                 <div className={styles.headerLeft}>
-                    <a href="/" className={styles.headerLogo}>
+                    <Link to="/home" className={styles.headerLogo}>
                         <img src={`${headerColorChange && !headerTransform? "//easyeat.ancorathemes.com/wp-content/uploads/2023/05/logo.png" : "//easyeat.ancorathemes.com/wp-content/uploads/2023/05/logo-inverse.png"}`}
                              alt="Header Logo"/>
-                    </a>
+                    </Link>
                     {/*HEADER NAVIGATION*/}
                     <div className={styles.headerNavigation}>
                         {/*HEADER NAVIGATION ITEMS*/}
                         <div className={styles.navigationItems} onMouseEnter={openHandler(setDropDownHomeOpen)}
                              onMouseLeave={openHandler(setDropDownHomeOpen)}>
-                            <a href="#" className={`${styles.pageLink} ${headerColorChange && styles.blackColorActive}`}>Home</a>
+                            <Link to="/home" className={`${styles.pageLink} ${headerColorChange && styles.blackColorActive}`}>Home</Link>
                             <div
                                 className={`${styles.navDropdownWrapper} ${dropDownHomeOpen && styles.navDropdownActive}`}>
                                 <div className={styles.navDropdown}>

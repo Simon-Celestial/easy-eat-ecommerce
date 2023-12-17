@@ -5,6 +5,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faFacebookF, faInstagram, faTwitter} from "@fortawesome/free-brands-svg-icons";
 import {faBasketball} from "@fortawesome/free-solid-svg-icons";
 import {LayoutContext} from "../../../../Context/LayoutContext/LayoutContext.jsx";
+import {Link} from "react-router-dom";
 
 export const SideMenu = () => {
     const {
@@ -20,10 +21,10 @@ export const SideMenu = () => {
                  onClick={ev => ev.stopPropagation()}>
                 <div className={styles.rightMenuContent}>
                     <div className={styles.rightMenuHeader}>
-                        <a href="/">
+                        <Link to="/home">
                             <img src="//easyeat.ancorathemes.com/wp-content/uploads/2023/01/logo-small-inverse.png"
                                  alt="Easy Eat"/>
-                        </a>
+                        </Link>
                         <div className={styles.closeRightMenu} onClick={openHandler(setSideMenuOpen)}>
                             <X/>
                         </div>

@@ -1,0 +1,49 @@
+@import "../../../../Variables/variables.module";
+@import "../../../../Animations/Animations.module";
+
+//SECTION  STYLES
+.pageNameSection {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  background-color: $color-yellow;
+  align-items: center;
+  padding: 220px 15px 90px 15px;
+
+  .pageNameContent {
+    display: flex;
+    max-width: 1300px;
+    width: 100%;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+
+    h1 {
+      font-size: 55px;
+      color: $color-darkgray;
+      font-family: $font-main;
+      font-weight: 400;
+    }
+
+    svg {
+      font-size: 25px;
+      color: $color-black;
+    }
+
+  }
+}
+//SECTION MEDIA STYLES
+@media screen and (max-width: 1200px) {
+    .pageSection {
+      padding: 140px 15px 50px 15px;
+      .pageContent {
+        gap: 10px;
+        h1 {
+          font-size: 35px;
+        }
+        svg {
+          font-size: 15px;
+        }
+      }
+    }
+}
