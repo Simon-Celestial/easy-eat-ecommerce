@@ -1,0 +1,82 @@
+@import "../../../../Variables/variables.module";
+@import "../../../../Animations/Animations.module";
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+  font-family: $font-main;
+}
+
+.HomeWrapper {
+  display: flex;
+  width: 100vw;
+  flex-direction: column;
+  background-color: $color-white;
+  position: relative;
+
+  .mainWrapper {
+    display: flex;
+    width: 100vw;
+    background-color: $color-yellow;
+
+    .aboutUsSection {
+      display: flex;
+      width: 100%;
+      height: 1000px;
+
+      .aboutUsContent {
+        display: flex;
+        width: 100%;
+        height: 100%;
+
+        .aboutUsLeft {
+          display: flex;
+          width: 55%;
+          height: 100%;
+          background-image: url(https://easyeat.ancorathemes.com/wp-content/uploads/2023/01/decoration-bg-1.png);
+          background-position: center right;
+          background-repeat: no-repeat;
+          background-size: cover;
+          z-index: 3;
+
+        }
+
+        .aboutUsRight {
+          display: flex;
+          width: 50%;
+          height: 1000px;
+          position: relative;
+
+          .spinningCircle {
+            display: flex;
+            position: absolute;
+            top: -110px;
+            left: -110px;
+            animation: rotateAnimation 10s linear infinite;
+          }
+
+          .floatingBurger {
+            img {
+              width: 615px;
+              height: 510px;
+            }
+
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes rotateAnimation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

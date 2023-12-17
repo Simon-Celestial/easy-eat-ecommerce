@@ -4,6 +4,8 @@ import React, {useCallback, useContext, useEffect, useState} from "react";
 import {LayoutContext} from "../../../../Context/LayoutContext/LayoutContext.jsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircleUser} from "@fortawesome/free-solid-svg-icons";
+import {Link} from "react-router-dom";
+
 
 
 export const Header = () => {
@@ -367,8 +369,8 @@ export const Header = () => {
                     <div className={styles.headerRightItem} onClick={handleWidgetOpen(setDropDownAccountOpen)}>
                         <FontAwesomeIcon icon={faCircleUser} />
                         <div className={`${styles.accountDropdown} ${dropDownAccountOpen && styles.accountDropdownActive}`} onClick={ev => ev.stopPropagation()}>
-                            <a href="../../../Authentification/Pages/LoginPage/LoginPage.jsx">LOGIN</a>
-                            <a href="/register">REGISTER</a>
+                            <Link to="auth/login">LOGIN</Link>
+                            <Link to="auth/register">REGISTER</Link>
                         </div>
                     </div>
 

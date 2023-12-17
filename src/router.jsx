@@ -3,6 +3,7 @@ import {AuthLayout} from "./Layouts/Authentification/AuthLayout.jsx";
 import {LoginPage} from "./Layouts/Authentification/Pages/LoginPage/LoginPage.jsx";
 import {RegisterPage} from "./Layouts/Authentification/Pages/RegisterPage/RegisterPage.jsx";
 import {MainLayout} from "./Layouts/Main/MainLayout.jsx";
+import {Home} from "./Layouts/Main/Pages/Home/Home.jsx";
 
 const router = createBrowserRouter([
     {
@@ -11,12 +12,12 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <MainLayout />,
+                element: <Home />,
             },
 
             {
                 path: 'home',
-                element: <MainLayout />,
+                element: <Home />,
             },
             // {
             //     path: 'home/:id',
