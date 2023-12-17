@@ -29,9 +29,7 @@ export const HeaderSearch = () => {
                                 <MagnifyingGlass />
                             </button>
                         </form>
-
                     </div>
-
                 </div>
             </div>
         </>

@@ -34,13 +34,21 @@
             max-height: 70px !important;
           }
         }
+
+      }
+      .headerNavigation {
+        .navigationItems {
+          .pageLink {
+            color: white!important;
+          }
+        }
       }
 
       .headerRight {
         .headerRightItem {
           svg {
             color: $color-white !important;
-            fill: $color-white;
+            fill: $color-white!important;
           }
         }
 
@@ -98,12 +106,17 @@
               width: 100%;
             }
           }
-
           .pageLink {
             position: relative;
             padding: 25px 16px;
             font-size: 18px;
-            color: white;
+            color: $color-white;
+            &.blackColorActive {
+              color: $color-black;
+              &:after {
+                background-color: $color-black;
+              }
+            }
 
             &:after {
               content: "";
@@ -258,12 +271,22 @@
             pointer-events: auto!important;
             transform: scaleY(1)!important;
           }
-
           a {
+            display: inline-flex;
+            gap: 10px;
             padding: 2px 30px;
             color: $color-gray;
             transition: $transition-fast;
+            align-items: center;
+            svg {
+              color: $color-gray;
+              font-size: 12px;
+              transition: $transition-fast;
+            }
             &:hover {
+              color: $color-white;
+            }
+            &:hover svg {
               color: $color-white;
             }
           }

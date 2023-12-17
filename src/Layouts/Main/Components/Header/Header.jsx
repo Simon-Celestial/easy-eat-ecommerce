@@ -3,9 +3,8 @@ import {CaretRight, MagnifyingGlass, ShoppingBag, X} from "@phosphor-icons/react
 import React, {useCallback, useContext, useEffect, useState} from "react";
 import {LayoutContext} from "../../../../Context/LayoutContext/LayoutContext.jsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCircleUser} from "@fortawesome/free-solid-svg-icons";
+import {faCircleUser, faKey, faUsers} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
-
 
 
 export const Header = () => {
@@ -21,7 +20,14 @@ export const Header = () => {
         setSideMenuOpen,
         dropDownAccountOpen,
         setDropDownAccountOpen,
+        setHeaderColorChange,
+        headerColorChange,
     } = useContext(LayoutContext);
+
+    // HEADER COLOR STATE CHANGE
+    useEffect(()=> {
+        setHeaderColorChange(false);
+    },[]);
 
     const handleHeaderTransform = useCallback(() => {
         if (window.scrollY > 650 && window.innerWidth > 1200) {
@@ -34,7 +40,7 @@ export const Header = () => {
     useEffect(() => {
         window.addEventListener('scroll', handleHeaderTransform);
         return () => {
-            window.removeEventListener('scroll',handleHeaderTransform);
+            window.removeEventListener('scroll', handleHeaderTransform);
         };
     }, [setHeaderTransform]);
 
@@ -54,7 +60,7 @@ export const Header = () => {
                 {/*HEADER CONTENT*/}
                 <div className={styles.headerLeft}>
                     <a href="/" className={styles.headerLogo}>
-                        <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/logo-inverse.png"
+                        <img src={`${headerColorChange && !headerTransform? "//easyeat.ancorathemes.com/wp-content/uploads/2023/05/logo.png" : "//easyeat.ancorathemes.com/wp-content/uploads/2023/05/logo-inverse.png"}`}
                              alt="Header Logo"/>
                     </a>
                     {/*HEADER NAVIGATION*/}
@@ -62,7 +68,7 @@ export const Header = () => {
                         {/*HEADER NAVIGATION ITEMS*/}
                         <div className={styles.navigationItems} onMouseEnter={openHandler(setDropDownHomeOpen)}
                              onMouseLeave={openHandler(setDropDownHomeOpen)}>
-                            <a href="#" className={styles.pageLink}>Home</a>
+                            <a href="#" className={`${styles.pageLink} ${headerColorChange && styles.blackColorActive}`}>Home</a>
                             <div
                                 className={`${styles.navDropdownWrapper} ${dropDownHomeOpen && styles.navDropdownActive}`}>
                                 <div className={styles.navDropdown}>
@@ -114,7 +120,7 @@ export const Header = () => {
                         </div>
                         <div className={styles.navigationItems} onMouseEnter={openHandler(setDropDownPagesOpen)}
                              onMouseLeave={openHandler(setDropDownPagesOpen)}>
-                            <a href="#" className={styles.pageLink}>Pages</a>
+                            <a href="#" className={`${styles.pageLink} ${headerColorChange && styles.blackColorActive}`}>Pages</a>
                             <div
                                 className={`${styles.navDropdownWrapper} ${dropDownPagesOpen && styles.navDropdownActive}`}>
                                 <div className={styles.navDropdown}>
@@ -192,7 +198,7 @@ export const Header = () => {
                         </div>
                         <div className={styles.navigationItems} onMouseEnter={openHandler(setDropDownBlogOpen)}
                              onMouseLeave={openHandler(setDropDownBlogOpen)}>
-                            <a href="#" className={styles.pageLink}>Blog</a>
+                            <a href="#" className={`${styles.pageLink} ${headerColorChange && styles.blackColorActive}`}>Blog</a>
                             <div
                                 className={`${styles.navDropdownWrapper} ${dropDownBlogOpen && styles.navDropdownActive}`}>
                                 <div className={styles.navDropdown}>
@@ -248,7 +254,7 @@ export const Header = () => {
                         </div>
                         <div className={styles.navigationItems} onMouseEnter={openHandler(setDropDownShopOpen)}
                              onMouseLeave={openHandler(setDropDownShopOpen)}>
-                            <a href="#" className={styles.pageLink}>Shop</a>
+                            <a href="#" className={`${styles.pageLink} ${headerColorChange && styles.blackColorActive}`}>Shop</a>
                             <div
                                 className={`${styles.navDropdownWrapper} ${dropDownShopOpen && styles.navDropdownActive}`}>
                                 <div className={styles.navDropdown}>
@@ -287,7 +293,7 @@ export const Header = () => {
                             </div>
                         </div>
                         <div className={styles.navigationItems}>
-                            <a href="#" className={styles.pageLink}>Contacts</a>
+                            <a href="#" className={`${styles.pageLink} ${headerColorChange && styles.blackColorActive}`}>Contacts</a>
                         </div>
                     </div>
                 </div>
@@ -296,15 +302,16 @@ export const Header = () => {
                     <div className={styles.headerRightItem}>
                         <div className={styles.basketCount}>0</div>
                         <div onClick={handleWidgetOpen(setBasketOpen)}>
-                            <ShoppingBag />
+                            <ShoppingBag/>
                         </div>
                         {/*BASKET */}
-                        <div className={[styles.basketDropdown, basketOpen && styles.basketActive].join(' ')} onClick={ev => ev.stopPropagation()}>
+                        <div className={[styles.basketDropdown, basketOpen && styles.basketActive].join(' ')}
+                             onClick={ev => ev.stopPropagation()}>
                             <div className={styles.closeBasketBtn} onClick={openHandler(setBasketOpen)}>
-                                <X />
+                                <X/>
                             </div>
                             <div className={styles.emptyBasket}>
-                                <ShoppingBag size={32} weight="bold" color="white" />
+                                <ShoppingBag size={32} weight="bold" color="white"/>
                                 <h1>No products in the cart.</h1>
                             </div>
                             {/*<div className={styles.basketContent}>*/}
@@ -367,15 +374,23 @@ export const Header = () => {
                         </div>
                     </div>
                     <div className={styles.headerRightItem} onClick={handleWidgetOpen(setDropDownAccountOpen)}>
-                        <FontAwesomeIcon icon={faCircleUser} />
-                        <div className={`${styles.accountDropdown} ${dropDownAccountOpen && styles.accountDropdownActive}`} onClick={ev => ev.stopPropagation()}>
-                            <Link to="auth/login">LOGIN</Link>
-                            <Link to="auth/register">REGISTER</Link>
+                        <FontAwesomeIcon icon={faCircleUser}/>
+                        <div
+                            className={`${styles.accountDropdown} ${dropDownAccountOpen && styles.accountDropdownActive}`}
+                            onClick={ev => ev.stopPropagation()}>
+                            <Link to="/auth/login">
+                                <FontAwesomeIcon icon={faKey}/>
+                                LOGIN
+                            </Link>
+                            <Link to="/auth/register">
+                                <FontAwesomeIcon icon={faUsers} />
+                                REGISTER
+                            </Link>
                         </div>
                     </div>
 
                     <div className={styles.headerRightItem} onClick={handleWidgetOpen(setSearchOpen)}>
-                        <MagnifyingGlass />
+                        <MagnifyingGlass/>
                     </div>
                     <div className={styles.headerRightItem} onClick={handleWidgetOpen(setSideMenuOpen)}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21">

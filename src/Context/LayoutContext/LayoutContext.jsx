@@ -3,20 +3,32 @@ import React, {useCallback, useEffect, useState} from 'react'
 
 const defaults = {
     headerTransform: false,
-    setHeaderTransform: () => {},
-    handleWidgetOpen: () => {},
-    handleWidgetClose: () => {},
-    openHandler: () => {},
+    setHeaderTransform: () => {
+    },
+    handleWidgetOpen: () => {
+    },
+    handleWidgetClose: () => {
+    },
+    openHandler: () => {
+    },
     mobileMenuOpen: false,
-    setMobileMenuOpen: () => {},
+    setMobileMenuOpen: () => {
+    },
     searchOpen: false,
-    setSearchOpen: () => {},
+    setSearchOpen: () => {
+    },
     basketOpen: false,
-    setBasketOpen: () => {},
+    setBasketOpen: () => {
+    },
     sideMenuOpen: false,
-    setSideMenuOpen: () => {},
+    setSideMenuOpen: () => {
+    },
     dropDownAccountOpen: false,
-    setDropDownAccountOpen: () => {},
+    setDropDownAccountOpen: () => {
+    },
+    headerColorChange: false,
+    setHeaderColorChange: () => {
+    },
 
 
 }
@@ -24,16 +36,19 @@ export const LayoutContext = React.createContext(defaults);
 
 
 export const LayoutContextProvider = ({
-    children
-                               }) => {
+                                          children
+                                      }) => {
     // HEADER TRANSFORMATION STATE
     const [headerTransform, setHeaderTransform] = useState(false);
+
+    // HEADER STATE FOR HEADER CONTENT COLOR ON DIFFERENT PAGES
+    const [headerColorChange, setHeaderColorChange] = useState(false);
 
     // HEADER SEARCH OPEN AND CLOSE STATE
     const [searchOpen, setSearchOpen] = useState(false);
 
     // MOBILE MENU OPEN AND CLOSE STATE
-    const [mobileMenuOpen,setMobileMenuOpen] = useState(false);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     // HEADER BASKET OPEN AND CLOSE STATE
     const [basketOpen, setBasketOpen] = useState(false);
@@ -78,7 +93,6 @@ export const LayoutContextProvider = ({
     }, []);
 
 
-
     return <LayoutContext.Provider value={{
         headerTransform,
         setHeaderTransform,
@@ -95,6 +109,8 @@ export const LayoutContextProvider = ({
         setSideMenuOpen,
         dropDownAccountOpen,
         setDropDownAccountOpen,
+        headerColorChange,
+        setHeaderColorChange,
     }}>
         {children}
     </LayoutContext.Provider>

@@ -1,11 +1,8 @@
 import React from 'react'
 import styles from "./Home.module.scss";
 import {Footer} from "../../Components/Footer/Footer.jsx";
-import ScrollToTop from "../../Common/ScrollToTop/ScrollToTop.jsx";
-import {MobileMenu} from "../../Common/MobileMenu/MobileMenu.jsx";
 import {Header} from "../../Components/Header/Header.jsx";
-import {SideMenu} from "../../Common/SideMenu/SideMenu.jsx";
-import {HeaderSearch} from "../../Common/HeaderSearch/HeaderSearch.jsx";
+import {UiControl} from "../../Common/UiControl/UiControl.jsx";
 
 export const Home = () => {
     return (
@@ -36,14 +33,8 @@ export const Home = () => {
                 </section>
             </main>
             <Footer/>
-            {/*SCROLL TO HEADER */}
-            <ScrollToTop/>
-            {/*MOBILE MENU*/}
-            <MobileMenu/>
-            {/*HEADER SEARCH */}
-            <HeaderSearch/>
-            {/*SIDE MENU*/}
-            <SideMenu/>
+            {/*COMMON COMPONENTS FOR UI */}
+            <UiControl />
         </div>
     )
 }

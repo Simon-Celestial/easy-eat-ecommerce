@@ -242,10 +242,11 @@
         display: flex;
         width: 100%;
         border-top: 1px solid $color-border;
+        justify-content: space-between;
+        align-items: center;
         .footerContent {
           padding: 20px 0;
           display: flex;
-          width: 100%;
 
           a {
             color: $color-white !important;
@@ -271,13 +272,23 @@
             &:hover:nth-child(4) svg {
               color: purple;
             }
-
             svg {
               font-size: 18px;
               transition: $transition-fast;
             }
           }
 
+        }
+        .footerUserLogin {
+         padding: 15px;
+          svg {
+            font-size: 18px;
+            color: $color-white;
+            transition: $transition-fast;
+          }
+          &:hover svg {
+            color: $color-gray;
+          }
         }
       }
 

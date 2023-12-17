@@ -3,8 +3,9 @@ import styles from "./MobileMenu.module.scss";
 import {ArrowRight, X} from "@phosphor-icons/react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faFacebookF, faInstagram, faTwitter} from "@fortawesome/free-brands-svg-icons";
-import {faArrowRightLong, faBasketball, faChevronDown, faChevronUp} from "@fortawesome/free-solid-svg-icons";
+import {faArrowRightLong, faBasketball, faChevronDown, faCircleUser} from "@fortawesome/free-solid-svg-icons";
 import {LayoutContext} from "../../../../Context/LayoutContext/LayoutContext.jsx";
+import {Link} from "react-router-dom";
 
 export const MobileMenu = () => {
 
@@ -45,10 +46,10 @@ export const MobileMenu = () => {
         <section className={`${styles.mobileMenuSection} ${mobileMenuOpen && styles.mobileMenuActive}`}>
             <div className={styles.mobileMenuContent}>
                 <div className={styles.mobileMenuHeader}>
-                    <a href="/" className={styles.mobileLogo}>
+                    <Link to="/home" className={styles.mobileLogo}>
                         <img src="//easyeat.ancorathemes.com/wp-content/uploads/2023/05/logo-inverse.png"
                              alt="Easy Eat"/>
-                    </a>
+                    </Link>
                     <div className={styles.closeMobileMenu} onClick={openHandler(setMobileMenuOpen)}>
                         <p>Close</p>
                         <X/>
@@ -211,6 +212,11 @@ export const MobileMenu = () => {
                             <a href="https://www.instagram.com/ancora_themes/" target="_blank">
                                 <FontAwesomeIcon icon={faInstagram}/>
                             </a>
+                        </div>
+                        <div className={styles.footerUserLogin}>
+                            <Link to="/auth/login">
+                                <FontAwesomeIcon icon={faCircleUser} />
+                            </Link>
                         </div>
                     </div>
                 </div>
