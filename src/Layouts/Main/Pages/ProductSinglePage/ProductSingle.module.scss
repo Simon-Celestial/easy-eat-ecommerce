@@ -16,12 +16,80 @@
     .productDetailsContent {
       width: 1300px;
       display: flex;
-
+      //LEFT
       .productDetailsLeft {
         display: flex;
         width: 56%;
         height: 500px;
-        border: 1px solid black;
+
+        .productTabMenu {
+          display: flex;
+          width: 100%;
+          gap: 50px;
+
+          .productTabMenuColumn {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            .columnItem {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              width: 100px;
+              height: 100px;
+              cursor: pointer;
+              opacity: 0.5;
+              transition: opacity $transition-fast;
+              &.itemActive {
+                opacity: 1!important;
+              }
+              &:hover {
+                opacity: 1;
+              }
+
+              img {
+                width: 100%;
+                height: 100%;
+              }
+            }
+          }
+
+          .productTabMenuImage {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+
+            .tabMenuImage {
+              display: flex;
+              height: 100%;
+              position: relative;
+
+              .magnifyingImage {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 11px;
+                background-color: $color-white;
+                position: absolute;
+                right: 20px;
+                top: 20px;
+                cursor: pointer;
+                svg {
+                  font-size: 25px;
+                  color: $color-black;
+                }
+              }
+
+              img {
+                width: 572px;
+
+              }
+            }
+          }
+        }
       }
 
       //RIGHT
@@ -111,26 +179,31 @@
           gap: 10px;
           width: 100%;
           margin-bottom: 40px;
+
           .productCounter {
             display: flex;
             border: 1px solid $color-black;
-            padding: 5px 0 5px 30px ;
+            padding: 5px 0 5px 30px;
             justify-content: space-between;
             gap: 25px;
             align-items: center;
+
             p {
               font-family: $font-alternative;
               font-size: 16px;
               white-space: nowrap;
               width: 30px;
             }
+
             .counterArrows {
               display: flex;
               flex-direction: column;
+
               .arrowBlock {
                 display: flex;
                 padding: 5px 25px 5px 5px;
                 cursor: pointer;
+
                 svg {
                   font-size: 12px;
                 }
@@ -139,6 +212,7 @@
             }
 
           }
+
           .productBuyButton {
             display: inline-flex;
             align-items: center;
@@ -152,14 +226,17 @@
             transition: $transition-fast;
             cursor: pointer;
             gap: 8px;
+
             svg {
               color: $color-white;
               font-size: 20px;
             }
+
             &:hover {
               background-color: #b02f0a;
             }
           }
+
           .productWishList {
             display: flex;
             align-items: center;
@@ -167,9 +244,11 @@
             padding: 12px 16px;
             background-color: $color-white;
             cursor: pointer;
+
             &:hover svg {
               color: $color-orange;
             }
+
             svg {
               color: $color-black;
               font-size: 22px;
@@ -177,24 +256,29 @@
             }
           }
         }
+
         .productMetaData {
           display: flex;
           flex-direction: column;
           gap: 15px;
           margin-bottom: 20px;
+
           .metaDataRow {
             font-size: 16px;
             font-family: $font-alternative;
+
             b {
               font-family: $font-main;
               font-weight: 400;
               font-size: 17px;
             }
+
             a {
               font-size: 16px;
               font-family: $font-alternative;
               color: $color-black;
               transition: $transition-fast;
+
               &:hover {
                 color: $color-orange;
               }

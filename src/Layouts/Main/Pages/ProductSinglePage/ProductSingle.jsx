@@ -4,11 +4,13 @@ import {Header} from "../../Components/Header/Header.jsx";
 import {UiControl} from "../../Common/UiControl/UiControl.jsx";
 import {PageNameSection} from "../../Common/PageNameSection/PageNameSection.jsx";
 import {Footer} from "../../Components/Footer/Footer.jsx";
-import {CaretDown, CaretUp, Heart, ShoppingCart, Star} from "@phosphor-icons/react";
+import {CaretDown, CaretUp, Heart, MagnifyingGlass, ShoppingCart, Star} from "@phosphor-icons/react";
 import {LayoutContext} from "../../../../Context/LayoutContext/LayoutContext.jsx";
 
 export const ProductSingle = () => {
     const [productCount, setProductCount] = useState(0);
+
+    // PRODUCT COUNTER STATE
     const handleProductCount = (number) => {
         setProductCount(prevCount => prevCount + number);
     }
@@ -16,10 +18,42 @@ export const ProductSingle = () => {
     const {
         setHeaderColorChange,
     } = useContext(LayoutContext);
+
+
     // useEffect TO CHANGE HEADER COLOR
     useEffect(() => {
         setHeaderColorChange(true);
     }, []);
+
+    // TAB MENU
+    const tabMainImages = [
+        {
+            big:'https://easyeat.ancorathemes.com/wp-content/uploads/2020/05/product-4-copyright.png',
+            small:'https://easyeat.ancorathemes.com/wp-content/uploads/2020/05/product-4-copyright-150x150.png',
+        },
+        {
+            big: 'https://easyeat.ancorathemes.com/wp-content/uploads/2020/05/product-3-copyright.png',
+            small: 'https://easyeat.ancorathemes.com/wp-content/uploads/2020/05/product-3-copyright-150x150.png',
+        },
+        {
+            big:'https://easyeat.ancorathemes.com/wp-content/uploads/2020/05/product-2-copyright.png',
+            small:'https://easyeat.ancorathemes.com/wp-content/uploads/2020/05/product-2-copyright-150x150.png',
+        },
+        {
+            big:'https://easyeat.ancorathemes.com/wp-content/uploads/2020/05/product-1-copyright.png',
+            small:'https://easyeat.ancorathemes.com/wp-content/uploads/2020/05/product-1-copyright-150x150.png',
+        },
+    ];
+
+    const [activeTab, setActiveTab] = useState(0);
+    const [mainImage, setMainImage] = useState(tabMainImages[0]);
+
+    const handleTabClick = (index) => {
+        setActiveTab(index);
+        setMainImage(tabMainImages[index]);
+    };
+
+
     return (
         <div className={styles.productSingleWrapper}>
             {/*PAGE HEADER*/}
@@ -28,7 +62,31 @@ export const ProductSingle = () => {
             <PageNameSection title="Shop"/>
             <section className={styles.productDetailsSection}>
                 <div className={styles.productDetailsContent}>
-                    <div className={styles.productDetailsLeft}></div>
+                    {/*PRODUCTS LEFT CONTAINER*/}
+                    <div className={styles.productDetailsLeft}>
+                        <div className={styles.productTabMenu}>
+                            <div className={styles.productTabMenuColumn}>
+                                {tabMainImages.map((image, index) => (
+                                    <div
+                                        key={index}
+                                        className={`${styles.columnItem} ${index === activeTab ? styles.itemActive : ""}`}
+                                        onClick={() => handleTabClick(index)}
+                                    >
+                                        <img src={image.small} alt={`Burger ${index + 1}`} />
+                                    </div>
+                                ))}
+                            </div>
+                            <div className={styles.productTabMenuImage}>
+                                <div className={styles.tabMenuImage}>
+                                    <div className={styles.magnifyingImage}>
+                                        <MagnifyingGlass weight="light"/>
+                                    </div>
+                                    <img src={mainImage.big} alt="Main Burger Image"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {/*PRODUCTS RIGHT CONTAINER*/}
                     <div className={styles.productDetailsRight}>
                         <div className={styles.productSale}>
                             -10%
@@ -51,12 +109,14 @@ export const ProductSingle = () => {
                         </div>
                         <div className={styles.productDescription}>
                             <p>
-                                Dicta sunt explicabo. Nemo enim ipsam voluptatem voluptas sit odit aut fugit, sed quia
+                                Dicta sunt explicabo. Nemo enim ipsam voluptatem voluptas sit odit aut fugit, sed
+                                quia
                                 consequuntur. Lorem ipsum dolor. Aquia sit amet, elitr, sed diam nonum eirmod tempor
                                 invidunt labore et dolore.
                             </p>
                             <p>
-                                At vero accusam et justo duo dolores et ea rebum. Stet clitain vidunt ut labore eirmod
+                                At vero accusam et justo duo dolores et ea rebum. Stet clitain vidunt ut labore
+                                eirmod
                                 tempor invidunt magna aliquyam.
                             </p>
                         </div>
@@ -83,8 +143,10 @@ export const ProductSingle = () => {
 
                         </div>
                         <div className={styles.productMetaData}>
-                            <div className={styles.metaDataRow}><b>Category:</b> <a href="">Burgers & Panini</a></div>
-                            <div className={styles.metaDataRow}><b>Tags:</b> <a href="">Sale</a><b>,</b><a href="">Special</a></div>
+                            <div className={styles.metaDataRow}><b>Category:</b> <a href="">Burgers & Panini</a>
+                            </div>
+                            <div className={styles.metaDataRow}><b>Tags:</b> <a href="">Sale</a><b>,</b><a
+                                href="">Special</a></div>
                             <div className={styles.metaDataRow}><b>Product ID:</b> 2381</div>
                         </div>
                     </div>
