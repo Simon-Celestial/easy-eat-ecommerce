@@ -221,10 +221,11 @@ export const ProductDetails = () => {
                                 ))}
                             </div>
                             <div className={styles.productTabMenuImage}>
+                                <div className={styles.magnifyingImage} onClick={openHandler(setMagnifiedOpen)}>
+                                    <MagnifyingGlass weight="light"/>
+                                </div>
+
                                 <div className={styles.tabMenuImage}>
-                                    <div className={styles.magnifyingImage} onClick={openHandler(setMagnifiedOpen)}>
-                                        <MagnifyingGlass weight="light"/>
-                                    </div>
                                     <div
                                         ref={magnificationContainerRef}
                                         onMouseMove={handleMouseMoveOnMagnifiedContainer}
