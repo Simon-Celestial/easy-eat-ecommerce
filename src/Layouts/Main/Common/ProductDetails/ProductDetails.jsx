@@ -1,17 +1,28 @@
-import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react'
+import React, {useCallback, useContext, useEffect, useMemo, useRef, useState} from 'react'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faExpand, faMagnifyingGlassPlus, faXmark} from "@fortawesome/free-solid-svg-icons";
 import {Splide, SplideSlide} from "@splidejs/react-splide";
 import {CaretDown, CaretUp, Heart, MagnifyingGlass, ShoppingCart, Star} from "@phosphor-icons/react";
 import styles from "../../Common/ProductDetails/ProductDetails.module.scss";
+import {LayoutContext} from "../../../../Context/LayoutContext/LayoutContext.jsx";
+
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
 
 export const ProductDetails = () => {
+    const {
+        openHandler,
+        magnifiedOpen,
+        setMagnifiedOpen,
+    } = useContext(LayoutContext);
+
+
     const [productCount, setProductCount] = useState(0);
 
     // PRODUCT COUNTER STATE
     const handleProductCount = (number) => {
         setProductCount(prevCount => prevCount + number);
     }
+
     // TAB MENU
     const tabMainImages = [
         {
@@ -54,6 +65,16 @@ export const ProductDetails = () => {
             window.removeEventListener('scroll', onScrollEvent);
         }
     }, []);
+    useEffect(() => {
+        if (magnifiedOpen) {
+            document.body.style.overflowY = 'auto';
+        }
+
+        return () => {
+            document.body.style.overflowY = 'hidden';
+        };
+    }, [magnifiedOpen]);
+
     const {
         magX,
         magY,
@@ -84,34 +105,63 @@ export const ProductDetails = () => {
         setOffsetMousePos([mouseX, mouseY]);
     }, [magX, magY, magWidth, magHeight, scroll])
 
+    const handle = useFullScreenHandle();
+
+    const handleToggleFullScreen = useCallback(() => {
+        handle.active?  handle.exit() : handle.enter();
+    }, [handle]);
+
+    const handleCloseAllClick = useCallback(() => {
+         setMagnifiedOpen(true);
+        if(handle.active) handle.exit();
+    }, [handle]);
+
+    useEffect(() => {
+        const handleKeyPress = (event) => {
+            if (event.key === 'Escape') {
+                setMagnifiedOpen(true);
+            }
+        };
+        window.addEventListener('keydown', handleKeyPress);
+        return () => {
+            window.removeEventListener('keydown', handleKeyPress);
+        };
+    }, []);
+
+    const [expandImage,setExpandImage] = useState(false);
+
+
+
+
+
     return (
         <>
             {/*MAGNIFIED IMAGE*/}
-            <div className={styles.magnifiedImageWrapper}>
+            <FullScreen handle={handle}>
+            <div className={`${styles.magnifiedImageWrapper} ${magnifiedOpen && styles.magnifiedDisabled}`}>
                 <div className={styles.magnifiedImageHeader}>
                     <div className={styles.magnifiedLocation}>
                         <p>4 / 4</p>
                     </div>
                     <div className={styles.magnifiedManipulation}>
                         <div className={styles.manipulationItem}>
-                            <FontAwesomeIcon icon={faMagnifyingGlassPlus}/>
+                            <FontAwesomeIcon icon={faMagnifyingGlassPlus} onClick={openHandler(setExpandImage)}/>
                         </div>
-                        <div className={styles.manipulationItem}>
+                        <div className={styles.manipulationItem} onClick={handleToggleFullScreen}>
                             <FontAwesomeIcon icon={faExpand}/>
                         </div>
-                        <div className={styles.manipulationItem}>
+                        <div className={styles.manipulationItem} onClick={handleCloseAllClick}>
                             <FontAwesomeIcon icon={faXmark}/>
                         </div>
                     </div>
                 </div>
                 <div className={styles.magnifiedImageSliderWrapper}>
-
                     <Splide
                         options={{}}
                         aria-label="My Favorite Images">
                         <SplideSlide>
                             <div className={styles.slideWrapper}>
-                                <div className={styles.magnifyImgBlock}>
+                                <div className={`${styles.magnifyImgBlock} ${expandImage && styles.imageExpanded}`}>
                                     <img className={styles.magnifySliderImg}
                                          src="https://easyeat.ancorathemes.com/wp-content/uploads/2020/05/product-1-copyright.png"
                                          alt="Image 1"/>
@@ -120,7 +170,7 @@ export const ProductDetails = () => {
                         </SplideSlide>
                         <SplideSlide>
                             <div className={styles.slideWrapper}>
-                                <div className={styles.magnifyImgBlock}>
+                                <div className={`${styles.magnifyImgBlock} ${expandImage && styles.imageExpanded}`}>
                                     <img className={styles.magnifySliderImg}
                                          src="https://easyeat.ancorathemes.com/wp-content/uploads/2020/05/product-2-copyright.png"
                                          alt="Image 2"/>
@@ -129,7 +179,7 @@ export const ProductDetails = () => {
                         </SplideSlide>
                         <SplideSlide>
                             <div className={styles.slideWrapper}>
-                                <div className={styles.magnifyImgBlock}>
+                                <div className={`${styles.magnifyImgBlock} ${expandImage && styles.imageExpanded}`}>
                                     <img className={styles.magnifySliderImg}
                                          src="https://easyeat.ancorathemes.com/wp-content/uploads/2020/05/product-3-copyright.png"
                                          alt="Image 3"/>
@@ -138,7 +188,7 @@ export const ProductDetails = () => {
                         </SplideSlide>
                         <SplideSlide>
                             <div className={styles.slideWrapper}>
-                                <div className={styles.magnifyImgBlock}>
+                                <div className={`${styles.magnifyImgBlock} ${expandImage && styles.imageExpanded}`}>
                                     <img className={styles.magnifySliderImg}
                                          src="https://easyeat.ancorathemes.com/wp-content/uploads/2020/05/product-4-copyright.png"
                                          alt="Image 4"/>
@@ -148,11 +198,12 @@ export const ProductDetails = () => {
                     </Splide>
 
                 </div>
-                {/*<div className={styles.magnifiedImageFooter}>*/}
-                {/*    <p>Tasty Dished</p>*/}
-                {/*</div>*/}
+                <div className={styles.magnifiedImageFooter}>
+                    <p>Tasty Dished</p>
+                </div>
 
             </div>
+            </FullScreen>
             <section className={styles.productDetailsSection}>
                 <div className={styles.productDetailsContent}>
                     {/*PRODUCTS LEFT CONTAINER*/}
@@ -171,7 +222,7 @@ export const ProductDetails = () => {
                             </div>
                             <div className={styles.productTabMenuImage}>
                                 <div className={styles.tabMenuImage}>
-                                    <div className={styles.magnifyingImage}>
+                                    <div className={styles.magnifyingImage} onClick={openHandler(setMagnifiedOpen)}>
                                         <MagnifyingGlass weight="light"/>
                                     </div>
                                     <div
@@ -198,6 +249,7 @@ export const ProductDetails = () => {
                             </div>
                         </div>
                     </div>
+
                     {/*PRODUCTS RIGHT CONTAINER*/}
                     <div className={styles.productDetailsRight}>
                         <div className={styles.productSale}>
@@ -262,7 +314,6 @@ export const ProductDetails = () => {
                             <div className={styles.metaDataRow}><b>Product ID:</b> 2381</div>
                         </div>
                     </div>
-
                 </div>
             </section>
         </>

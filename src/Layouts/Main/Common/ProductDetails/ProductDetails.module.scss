@@ -12,6 +12,9 @@
   z-index: 999;
   flex-direction: column;
   padding: 5px 15px;
+  &.magnifiedDisabled {
+    display: none!important;
+  }
   .slideWrapper {
     display: flex;
     width: 100%;
@@ -20,11 +23,12 @@
     align-items: center;
     .magnifyImgBlock {
       display: flex;
-      width: 500px;
+      width: 25%;
       align-items: center;
       justify-content: center;
-      &.imageScale {
-        width: 1000px;
+      transition: width $transition-medium;
+      &.imageExpanded {
+        width: 50% !important;
       }
       .magnifySliderImg {
         width: 100%;
@@ -96,7 +100,8 @@
   justify-content: center;
 
   .productDetailsContent {
-    width: 1300px;
+    max-width: 1300px;
+    width: 100%;
     display: flex;
     //LEFT
     .productDetailsLeft {

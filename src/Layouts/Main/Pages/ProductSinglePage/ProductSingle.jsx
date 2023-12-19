@@ -7,6 +7,7 @@ import {Footer} from "../../Components/Footer/Footer.jsx";
 import {LayoutContext} from "../../../../Context/LayoutContext/LayoutContext.jsx";
 import '@splidejs/react-splide/css';
 import {ProductDetails} from "../../Common/ProductDetails/ProductDetails.jsx";
+import {Star} from "@phosphor-icons/react";
 
 
 export const ProductSingle = () => {
@@ -29,7 +30,115 @@ export const ProductSingle = () => {
             {/*PAGE CONTENT*/}
             <PageNameSection title="Shop"/>
             {/*PRODUCT DETAILS SECTION*/}
-            <ProductDetails />
+            <ProductDetails/>
+            {/*REVIEW SECTION*/}
+            <section className={styles.reviewSection}>
+                <div className={styles.reviewSectionContent}>
+                    <div className={styles.reviewHeader}>
+                        <div className={`${styles.reviewHeaderBtn} ${styles.descriptionBtn}`}>
+                            <p>DESCRIPTION</p>
+                        </div>
+                        <div className={`${styles.reviewHeaderBtn} ${styles.reviewBtn}`}>
+                            <p>REVIEWS (1)</p>
+                        </div>
+                    </div>
+                    <div className={styles.reviewContentMain}>
+                        <div className={styles.reviewContentLeft}>
+                            <div className={styles.reviewLeftHeading}>
+                                <p>1 REVIEW FOR PRODUCTS</p>
+                            </div>
+                            <div className={styles.reviewLeftReviewBlock}>
+                                <div className={styles.reviewerCard}>
+                                    <div className={styles.reviewerImg}>
+                                        <img
+                                            src="https://secure.gravatar.com/avatar/d04d6ce6de65011a75f5b2edb0f0e982?s=60&d=mm&r=g"
+                                            alt="Reviewer"/>
+                                    </div>
+                                    <div className={styles.reviewerTittle}>
+                                        <span>Ashton Porter  <p>– May 26, 2020</p></span>
+                                        <p>Excellent product! I will be shopping again soon</p>
+                                        <div className={styles.reviewerProductRating}>
+                                            <Star size={14} weight="fill"/>
+                                            <Star size={14} weight="fill"/>
+                                            <Star size={14} weight="fill"/>
+                                            <Star size={14} weight="fill"/>
+                                            <Star size={14} weight="fill"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className={styles.reviewerCard}>
+                                    <div className={styles.reviewerImg}>
+                                        <img
+                                            src="https://secure.gravatar.com/avatar/d04d6ce6de65011a75f5b2edb0f0e982?s=60&d=mm&r=g"
+                                            alt="Reviewer"/>
+                                    </div>
+                                    <div className={styles.reviewerTittle}>
+                                        <span>Santa Clause<p>- May 26, 2020</p></span>
+                                        <p>Nice product! I hope you all will love it!</p>
+                                        <div className={styles.reviewerProductRating}>
+                                            <Star size={14} weight="fill"/>
+                                            <Star size={14} weight="fill"/>
+                                            <Star size={14} weight="fill"/>
+                                            <Star size={14} weight="fill"/>
+                                            <Star size={14} weight="fill"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div className={styles.reviewContentRight}>
+                            <div className={styles.reviewRightHeading}>
+                                <b>Add a review</b>
+                                <p>Your email address will not be published. Required fields are marked *</p>
+                            </div>
+                            <div className={styles.reviewPostingFormWrapper}>
+                                <form action="#">
+                                    <label htmlFor="reviewName">
+                                        NAME *
+                                        <input type="text" name="name" id="name" className={styles.borderInput} required/>
+                                    </label>
+                                    <label htmlFor="reviewName" >
+                                        EMAIL *
+                                        <input type="email" name="name" id="name" className={styles.borderInput} required/>
+                                    </label>
+                                    <label htmlFor="rating">
+                                        Your Rating *
+                                        <div className={styles.productRating} id="rating">
+                                            <Star size={16}/>
+                                            <Star size={16}/>
+                                            <Star size={16}/>
+                                            <Star size={16}/>
+                                            <Star size={16}/>
+                                        </div>
+                                    </label>
+                                    <label htmlFor="reviewTextArea">
+                                        Your review *
+                                        <textarea name="reviewTextArea" id="reviewTextArea" required></textarea>
+                                    </label>
+                                    <label htmlFor="reviewAgreement">
+                                        <div className={styles.reviewAgreement}>
+                                            <input type="checkbox" id="reviewAgreement" required/>
+                                            <p>I agree that my submitted data is being <a href="https://easyeat.ancorathemes.com/privacy-policy/" target="_blank">collected and stored</a>. *</p>
+                                        </div>
+                                    </label>
+                                    <label htmlFor="reviewSendBtn">
+                                        <div>
+                                        <button id="reviewSendBtn" type="submit" className={styles.reviewSendBtn}>SUBMIT</button>
+                                        </div>
+                                    </label>
+
+
+
+                                </form>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </section>
             {/*PAGE FOOTER*/}
             <Footer/>
             {/*PAGE COMPONENTS*/}

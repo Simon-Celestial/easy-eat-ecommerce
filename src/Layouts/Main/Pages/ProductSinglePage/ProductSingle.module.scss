@@ -6,4 +6,240 @@
   width: 100vw;
   flex-direction: column;
 
+  .reviewSection {
+    display: flex;
+    width: 100%;
+    background-color: $color-yellow;
+    padding: 0 15px;
+    justify-content: center;
+
+    .reviewSectionContent {
+      display: flex;
+      max-width: 1300px;
+      width: 100%;
+      flex-direction: column;
+
+      .reviewHeader {
+        width: 100%;
+        display: flex;
+        gap: 5px;
+        margin-bottom: 55px;
+
+        .reviewHeaderBtn {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          height: 62px;
+          width: 278px;
+
+          p {
+
+            font-family: $font-main;
+            font-size: 16px;
+          }
+
+          &.descriptionBtn {
+            border-top: 2px solid $color-black;
+          }
+
+          &.reviewBtn {
+            background-color: $color-white;
+            transition: background-color $transition-fast;
+            border-top: 2px solid transparent;
+
+            &:hover {
+              background-color: transparent;
+              border-top: 2px solid $color-black;
+            }
+          }
+
+        }
+      }
+
+      .reviewContentMain {
+        display: flex;
+        width: 100%;
+        padding-bottom: 50px;
+
+        .reviewContentLeft {
+          display: flex;
+          width: 50%;
+          flex-direction: column;
+
+          .reviewLeftHeading {
+            display: flex;
+            margin-bottom: 25px;
+
+            p {
+              font-family: $font-main;
+              font-size: 25px;
+            }
+          }
+
+          .reviewLeftReviewBlock {
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+
+            .reviewerCard {
+              display: flex;
+              gap: 20px;
+              padding: 10px 0;
+
+              .reviewerImg {
+                img {
+                  width: 60px;
+                }
+              }
+
+              .reviewerTittle {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+
+                span {
+                  display: inline-flex;
+                  font-family: $font-main;
+                  font-size: 19px;
+                  align-items: center;
+                  gap: 5px;
+
+                  p {
+                    font-family: $font-alternative;
+                    font-size: 13px;
+
+                  }
+                }
+
+                p {
+                  font-size: 17px;
+                  font-family: $font-alternative;
+                }
+
+                .reviewerProductRating {
+                  display: inline-flex;
+                  align-items: center;
+                  gap: 4px;
+
+                  svg {
+                    color: $color-orange;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        .reviewContentRight {
+          display: flex;
+          width: 50%;
+          flex-direction: column;
+
+          .reviewRightHeading {
+            display: flex;
+            margin-bottom: 40px;
+            flex-direction: column;
+            gap: 20px;
+
+            b {
+              font-family: $font-main;
+              font-size: 25px;
+              font-weight: 400;
+            }
+
+            p {
+              font-family: $font-alternative;
+              font-size: 17px;
+            }
+          }
+
+          .reviewPostingFormWrapper {
+            display: flex;
+            width: 100%;
+            form{
+              display: flex;
+              flex-direction: column;
+              gap: 30px;
+              width: 100%;
+              label {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                width: 100%;
+                font-family: $font-main;
+                font-size: 17px;
+                .borderInput {
+                  width: 100%;
+                  font-size: 14px;
+                  font-family: $font-alternative;
+                  outline: 0;
+                  border: 0;
+                  border-bottom: 1px solid $color-black;
+                  background-color: transparent;
+                  padding-bottom: 10px;
+                }
+                .productRating {
+                  display: flex;
+                  gap: 5px;
+                  svg {
+                    color: $color-orange;
+                  }
+                }
+                textarea {
+                  height: 80px;
+                  background-color: transparent;
+                  border: 0;
+                  border-bottom: 1px solid $color-black;
+                  resize: unset;
+                  outline: 0;
+                  font-size: 14px;
+                  font-family: $font-alternative;
+                }
+                .reviewAgreement {
+                  display: inline-flex;
+                  align-items: center;
+                  gap: 5px;
+                  input {
+                    margin-bottom: 3px;
+                    cursor: pointer;
+
+                  }
+                  p {
+                    font-family: $font-alternative;
+                    font-size: 14px;
+                    a {
+                      font-family: $font-alternative;
+                      font-size: 14px;
+                      color: $color-black;
+                      text-decoration: underline;
+
+                    }
+                  }
+                }
+                .reviewSendBtn {
+                  background-color: $color-orange;
+                  font-family: $font-main;
+                  font-size: 18px;
+                  color: $color-white;
+                  width: 156px;
+                  height: 56px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  cursor: pointer;
+                  outline: 0;
+                  border: 0;
+                  transition: $transition-fast;
+                  &:hover  {
+                    background-color: #9d2800;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

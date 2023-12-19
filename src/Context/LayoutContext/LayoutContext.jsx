@@ -29,6 +29,9 @@ const defaults = {
     headerColorChange: false,
     setHeaderColorChange: () => {
     },
+    magnifiedOpen: false,
+    setMagnifiedOpen: () => {
+    },
 
 
 }
@@ -38,6 +41,9 @@ export const LayoutContext = React.createContext(defaults);
 export const LayoutContextProvider = ({
                                           children
                                       }) => {
+    // STATE FOR PRODUCT SINGLE PAGE,TO OPEN PRODUCT IMAGE FULLSCREEN
+    const [magnifiedOpen,setMagnifiedOpen] = useState(true);
+
     // HEADER TRANSFORMATION STATE
     const [headerTransform, setHeaderTransform] = useState(false);
 
@@ -111,6 +117,8 @@ export const LayoutContextProvider = ({
         setDropDownAccountOpen,
         headerColorChange,
         setHeaderColorChange,
+        magnifiedOpen,
+        setMagnifiedOpen,
     }}>
         {children}
     </LayoutContext.Provider>
