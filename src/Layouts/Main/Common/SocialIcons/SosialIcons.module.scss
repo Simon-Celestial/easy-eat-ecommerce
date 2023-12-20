@@ -1,0 +1,56 @@
+@import "../../../../Variables/variables.module";
+@import "../../../../Animations/Animations.module";
+
+.socialIcons {
+  display: flex;
+  gap: 5px;
+  .socialSpinners {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: 45px;
+    height: 45px;
+    border: 1px solid $color-border;
+
+    &:hover svg {
+      transform: scale(1.5) rotate(360deg);
+    }
+
+    &:nth-child(1):hover svg {
+      color: #0000ff;
+    }
+
+    &:nth-child(2):hover svg {
+      color: #01b090;
+    }
+
+    &:nth-child(3):hover svg {
+      color: #961243;
+    }
+
+    &:nth-child(4):hover svg {
+      color: #a528b9;
+    }
+
+    svg {
+      color: $color-white;
+      font-size: 18px;
+      transition: $transition-fast;
+    }
+  }
+}
+@media screen and (max-width: 800px) {
+  .socialIcons {
+    .socialSpinners {
+      width: 40px;
+      height: 40px;
+      a {
+        svg {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+
+}

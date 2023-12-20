@@ -16,7 +16,7 @@ export const ProductDetails = () => {
     } = useContext(LayoutContext);
 
 
-    const [productCount, setProductCount] = useState(0);
+    const [productCount, setProductCount] = useState(1);
 
     // PRODUCT COUNTER STATE
     const handleProductCount = (number) => {
@@ -68,11 +68,9 @@ export const ProductDetails = () => {
     useEffect(() => {
         if (magnifiedOpen) {
             document.body.style.overflowY = 'auto';
-        }
-
-        return () => {
+        } else {
             document.body.style.overflowY = 'hidden';
-        };
+        }
     }, [magnifiedOpen]);
 
     const {

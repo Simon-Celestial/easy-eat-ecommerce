@@ -1,8 +1,6 @@
 import React from 'react'
 import styles from "./Footer.module.scss";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faFacebookF, faInstagram, faTwitter} from "@fortawesome/free-brands-svg-icons";
-import {faBasketball} from "@fortawesome/free-solid-svg-icons";
+import {SocialIcons} from "../../Common/SocialIcons/SocialIcons.jsx";
 
 export const Footer = () => {
     return (
@@ -27,33 +25,8 @@ export const Footer = () => {
                                 Berlin, De 81566
                             </p>
                         </div>
-                        <div className={styles.footerSocialIcons}>
-
-                            <div className={styles.footerSocialSpinners}>
-                                <a href="https://www.facebook.com/AncoraThemes/" target="_blank">
-                                    <FontAwesomeIcon icon={faFacebookF}/>
-                                </a>
-                            </div>
-                            <div className={styles.footerSocialSpinners}>
-                                <a href="https://twitter.com/themes_ancora" target="_blank">
-                                    <FontAwesomeIcon icon={faTwitter}/>
-                                </a>
-                            </div>
-                            <div className={styles.footerSocialSpinners}>
-                                <a href="https://dribbble.com/AncoraThemes" target="_blank">
-                                    <FontAwesomeIcon icon={faBasketball}/>
-                                </a>
-                            </div>
-                            <div className={styles.footerSocialSpinners}>
-
-                                <a href="https://www.instagram.com/ancora_themes/" target="_blank">
-                                    <FontAwesomeIcon icon={faInstagram}/>
-                                </a>
-                            </div>
-
-
-                        </div>
-
+                        {/*SOCIAL ICONS*/}
+                        <SocialIcons/>
                     </div>
                     <div className={styles.footerContactBlock}>
                         <h6>Say Hello</h6>

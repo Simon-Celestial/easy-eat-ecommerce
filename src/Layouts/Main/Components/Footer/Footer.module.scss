@@ -56,52 +56,10 @@
             font-size: 16px;
             font-family: $font-alternative;
             color: $color-gray;
-            padding: 10px 0;
+            padding: 10px 0 25px 0;
             line-height: 25px;
           }
 
-        }
-
-        .footerSocialIcons {
-          display: flex;
-          gap: 5px;
-          padding-top: 20px;
-
-          .footerSocialSpinners {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            width: 45px;
-            height: 45px;
-            border: 1px solid $color-border;
-
-            &:hover svg {
-              transform: scale(1.5) rotate(360deg);
-            }
-
-            &:nth-child(1) svg:hover {
-              color: #000080;
-            }
-
-            &:nth-child(2) svg:hover {
-              color: #01b090;
-            }
-
-            &:nth-child(3) svg:hover {
-              color: #961243;
-            }
-
-            &:nth-child(4) svg:hover {
-              color: #a528b9;
-            }
-
-            svg {
-              color: $color-white;
-              font-size: 18px;
-              transition: $transition-fast;
-            }
-          }
         }
       }
 
@@ -237,16 +195,9 @@
         }
         .footerAddressBlock {
           width: auto;
-          .footerSocialIcons {
-            padding-top: 10px;
-            .footerSocialSpinners {
-              width: 40px;
-              height: 40px;
-              a {
-                svg {
-                  font-size: 16px;
-                }
-              }
+          .footerAddressTitle {
+            p {
+              padding: 10px 0 ;
             }
           }
         }

@@ -14,11 +14,13 @@ a {
   background-color: $color-white;
   position: relative;
 
+
   .mainWrapper {
     display: flex;
+    flex-direction: column;
     width: 100vw;
     background-color: $color-yellow;
-
+    //ABOUT US SECTION
     .aboutUsSection {
       display: flex;
       width: 100%;
@@ -69,14 +71,128 @@ a {
         }
       }
     }
+
+    //SUBSCRIBE SECTION
+    .subscribeSection {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding: 100px 15px;
+      background-color: $color-yellow;
+      position: relative;
+      overflow: hidden;
+      .decoration {
+        position: absolute;
+        &.subscribeSolidCircleLeft {
+          left: -10%;
+          top: -40%;
+        }
+        &.subscribeRotateCircleLeft {
+          left: -5%;
+          bottom: -18%;
+          z-index: 2;
+          img {
+            animation: rotateAnimation 10s linear infinite;
+
+          }
+        }
+      }
+
+      .subscribeSectionContent {
+        display: flex;
+        width: 1290px;
+        justify-content: space-between;
+
+        .subscribeTittle {
+          display: flex;
+          flex-direction: column;
+
+          h2 {
+            font-family: $font-main;
+            font-size: 47px;
+            font-weight: 400;
+            line-height: 48px;
+          }
+        }
+
+        .subscribeFormWrapper {
+          display: flex;
+          max-width: 750px;
+          width: 100%;
+
+          form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: 15px;
+
+            .subscribeFormTop {
+              width: 100%;
+              display: flex;
+              gap: 10px;
+
+              label {
+                input {
+                  width: 540px;
+                  padding: 18px 25px;
+                  font-size: 15px;
+                  font-family: $font-alternative;
+                  border: 0;
+                  outline: 0;
+                }
+              }
+
+              button {
+                width: 190px;
+                padding: 5px 0;
+                display: inline-flex;
+                align-items: center;
+                gap: 10px;
+                justify-content: center;
+                font-size: 18px;
+                font-family: $font-main;
+                color: $color-white;
+                background-color: $color-orange;
+                outline: 0;
+                border: 0;
+                cursor: pointer;
+                transition: background-color $transition-fast;
+
+                &:hover {
+                  background-color: #bb3300;
+                }
+
+                svg {
+                  font-size: 21px;
+                }
+              }
+            }
+
+            .subscribeFormBottom {
+              display: flex;
+              width: 100%;
+
+              label {
+                display: inline-flex;
+                font-family: $font-alternative;
+                gap: 5px;
+                font-size: 14px;
+                align-items: center;
+                color: $color-white;
+                a {
+                  font-family: $font-alternative;
+                  text-decoration: underline;
+                  font-size: 14px;
+                  color: $color-white;
+                }
+              }
+            }
+
+          }
+        }
+      }
+    }
   }
 }
 
-@keyframes rotateAnimation {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
+

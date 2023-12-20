@@ -3,11 +3,11 @@ import styles from "./ProductSingle.module.scss";
 import {Header} from "../../Components/Header/Header.jsx";
 import {UiControl} from "../../Common/UiControl/UiControl.jsx";
 import {PageNameSection} from "../../Common/PageNameSection/PageNameSection.jsx";
-import {Footer} from "../../Components/Footer/Footer.jsx";
 import {LayoutContext} from "../../../../Context/LayoutContext/LayoutContext.jsx";
 import '@splidejs/react-splide/css';
 import {ProductDetails} from "../../Common/ProductDetails/ProductDetails.jsx";
 import {ArrowRight, Heart, ShoppingCart, Star} from "@phosphor-icons/react";
+import {ChangedFooter} from "../../Components/ChangedFooter/ChangedFooter.jsx";
 
 
 export const ProductSingle = () => {
@@ -269,14 +269,12 @@ export const ProductSingle = () => {
                             </div>
                         </div>
                     </div>
-
                 </div>
             </section>
             {/*PAGE FOOTER*/}
-            <Footer/>
+            <ChangedFooter />
             {/*PAGE COMPONENTS*/}
             <UiControl/>
-
         </div>
     )
 }

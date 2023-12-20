@@ -25,9 +25,9 @@ export const Header = () => {
     } = useContext(LayoutContext);
 
     // HEADER COLOR STATE CHANGE
-    useEffect(()=> {
+    useEffect(() => {
         setHeaderColorChange(false);
-    },[]);
+    }, []);
 
     const handleHeaderTransform = useCallback(() => {
         if (window.scrollY > 550 && window.innerWidth > 1200) {
@@ -54,21 +54,23 @@ export const Header = () => {
 
     return (
         // HEADER WRAPPER
-        <header className={`${styles.siteHeader} ${headerTransform && styles.headerTransformActive}`}>
-
+        <header
+            className={`${styles.siteHeader} ${headerTransform && styles.headerTransformActive} ${!headerColorChange && headerTransform ? "" : styles.headerSemiTransparent}`}>
             <section className={styles.headerContent}>
                 {/*HEADER CONTENT*/}
                 <div className={styles.headerLeft}>
                     <Link to="/home" className={styles.headerLogo}>
-                        <img src={`${headerColorChange && !headerTransform? "//easyeat.ancorathemes.com/wp-content/uploads/2023/05/logo.png" : "//easyeat.ancorathemes.com/wp-content/uploads/2023/05/logo-inverse.png"}`}
-                             alt="Header Logo"/>
+                        <img
+                            src={`${headerColorChange && !headerTransform ? "//easyeat.ancorathemes.com/wp-content/uploads/2023/05/logo.png" : "//easyeat.ancorathemes.com/wp-content/uploads/2023/05/logo-inverse.png"}`}
+                            alt="Header Logo"/>
                     </Link>
                     {/*HEADER NAVIGATION*/}
                     <div className={styles.headerNavigation}>
                         {/*HEADER NAVIGATION ITEMS*/}
                         <div className={styles.navigationItems} onMouseEnter={openHandler(setDropDownHomeOpen)}
                              onMouseLeave={openHandler(setDropDownHomeOpen)}>
-                            <Link to="/home" className={`${styles.pageLink} ${headerColorChange && styles.blackColorActive}`}>Home</Link>
+                            <Link to="/home"
+                                  className={`${styles.pageLink} ${headerColorChange && styles.blackColorActive}`}>Home</Link>
                             <div
                                 className={`${styles.navDropdownWrapper} ${dropDownHomeOpen && styles.navDropdownActive}`}>
                                 <div className={styles.navDropdown}>
@@ -120,7 +122,8 @@ export const Header = () => {
                         </div>
                         <div className={styles.navigationItems} onMouseEnter={openHandler(setDropDownPagesOpen)}
                              onMouseLeave={openHandler(setDropDownPagesOpen)}>
-                            <a href="#" className={`${styles.pageLink} ${headerColorChange && styles.blackColorActive}`}>Pages</a>
+                            <a href="#"
+                               className={`${styles.pageLink} ${headerColorChange && styles.blackColorActive}`}>Pages</a>
                             <div
                                 className={`${styles.navDropdownWrapper} ${dropDownPagesOpen && styles.navDropdownActive}`}>
                                 <div className={styles.navDropdown}>
@@ -198,7 +201,8 @@ export const Header = () => {
                         </div>
                         <div className={styles.navigationItems} onMouseEnter={openHandler(setDropDownBlogOpen)}
                              onMouseLeave={openHandler(setDropDownBlogOpen)}>
-                            <a href="#" className={`${styles.pageLink} ${headerColorChange && styles.blackColorActive}`}>Blog</a>
+                            <a href="#"
+                               className={`${styles.pageLink} ${headerColorChange && styles.blackColorActive}`}>Blog</a>
                             <div
                                 className={`${styles.navDropdownWrapper} ${dropDownBlogOpen && styles.navDropdownActive}`}>
                                 <div className={styles.navDropdown}>
@@ -254,7 +258,8 @@ export const Header = () => {
                         </div>
                         <div className={styles.navigationItems} onMouseEnter={openHandler(setDropDownShopOpen)}
                              onMouseLeave={openHandler(setDropDownShopOpen)}>
-                            <a href="#" className={`${styles.pageLink} ${headerColorChange && styles.blackColorActive}`}>Shop</a>
+                            <a href="#"
+                               className={`${styles.pageLink} ${headerColorChange && styles.blackColorActive}`}>Shop</a>
                             <div
                                 className={`${styles.navDropdownWrapper} ${dropDownShopOpen && styles.navDropdownActive}`}>
                                 <div className={styles.navDropdown}>
@@ -293,7 +298,8 @@ export const Header = () => {
                             </div>
                         </div>
                         <div className={styles.navigationItems}>
-                            <a href="#" className={`${styles.pageLink} ${headerColorChange && styles.blackColorActive}`}>Contacts</a>
+                            <a href="#"
+                               className={`${styles.pageLink} ${headerColorChange && styles.blackColorActive}`}>Contacts</a>
                         </div>
                     </div>
                 </div>
@@ -383,7 +389,7 @@ export const Header = () => {
                                 LOGIN
                             </Link>
                             <Link to="/auth/register">
-                                <FontAwesomeIcon icon={faUsers} />
+                                <FontAwesomeIcon icon={faUsers}/>
                                 REGISTER
                             </Link>
                         </div>

@@ -2,10 +2,10 @@ import React, {useContext, useEffect, useState} from 'react'
 import styles from "./MobileMenu.module.scss";
 import {ArrowRight, X} from "@phosphor-icons/react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faFacebookF, faInstagram, faTwitter} from "@fortawesome/free-brands-svg-icons";
-import {faArrowRightLong, faBasketball, faChevronDown, faCircleUser} from "@fortawesome/free-solid-svg-icons";
+import {faArrowRightLong,faChevronDown, faCircleUser} from "@fortawesome/free-solid-svg-icons";
 import {LayoutContext} from "../../../../Context/LayoutContext/LayoutContext.jsx";
 import {Link} from "react-router-dom";
+import {SocialIcons} from "../SocialIcons/SocialIcons.jsx";
 
 export const MobileMenu = () => {
 
@@ -199,20 +199,21 @@ export const MobileMenu = () => {
                         </div>
                     </div>
                     <div className={styles.mobileMenuFooter}>
-                        <div className={styles.mobileFooterContent}>
-                            <a href="https://www.facebook.com/AncoraThemes/" target="_blank">
-                                <FontAwesomeIcon icon={faFacebookF}/>
-                            </a>
-                            <a href="https://twitter.com/themes_ancora" target="_blank">
-                                <FontAwesomeIcon icon={faTwitter}/>
-                            </a>
-                            <a href="https://dribbble.com/AncoraThemes" target="_blank">
-                                <FontAwesomeIcon icon={faBasketball}/>
-                            </a>
-                            <a href="https://www.instagram.com/ancora_themes/" target="_blank">
-                                <FontAwesomeIcon icon={faInstagram}/>
-                            </a>
-                        </div>
+                        <SocialIcons />
+                        {/*<div className={styles.mobileFooterContent}>*/}
+                        {/*    <a href="https://www.facebook.com/AncoraThemes/" target="_blank">*/}
+                        {/*        <FontAwesomeIcon icon={faFacebookF}/>*/}
+                        {/*    </a>*/}
+                        {/*    <a href="https://twitter.com/themes_ancora" target="_blank">*/}
+                        {/*        <FontAwesomeIcon icon={faTwitter}/>*/}
+                        {/*    </a>*/}
+                        {/*    <a href="https://dribbble.com/AncoraThemes" target="_blank">*/}
+                        {/*        <FontAwesomeIcon icon={faBasketball}/>*/}
+                        {/*    </a>*/}
+                        {/*    <a href="https://www.instagram.com/ancora_themes/" target="_blank">*/}
+                        {/*        <FontAwesomeIcon icon={faInstagram}/>*/}
+                        {/*    </a>*/}
+                        {/*</div>*/}
                         <div className={styles.footerUserLogin}>
                             <Link to="/auth/login">
                                 <FontAwesomeIcon icon={faCircleUser} />

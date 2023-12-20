@@ -244,46 +244,15 @@
         border-top: 1px solid $color-border;
         justify-content: space-between;
         align-items: center;
-        .mobileFooterContent {
-          padding: 20px 0;
-          display: flex;
-
-          a {
-            color: $color-white !important;
-            padding: 15px;
-            cursor: pointer;
-
-            &:hover svg {
-              transform: rotate(360deg) scale(1.5);
-            }
-
-            &:hover:nth-child(1) svg {
-              color: blue;
-            }
-
-            &:hover:nth-child(2) svg {
-              color: #33eac7;
-            }
-
-            &:hover:nth-child(3) svg {
-              color: deeppink;
-            }
-
-            &:hover:nth-child(4) svg {
-              color: purple;
-            }
-            svg {
-              font-size: 18px;
-              transition: $transition-fast;
-            }
-          }
-
-        }
+        padding-top: 20px;
         .footerUserLogin {
           display: flex;
           align-items: center;
           justify-content: center;
-         padding: 15px;
+          border: 1px solid $color-border;
+          width: 45px;
+          height: 45px;
+
           svg {
             font-size: 18px;
             color: $color-white;
@@ -380,7 +349,7 @@
           }
         }
         .mobileMenuFooter {
-          padding: 10px 0 20px 0;
+          padding: 15px 0 20px 0;
         }
       }
 

@@ -1,0 +1,221 @@
+@import "../../../../Variables/variables.module";
+@import "../../../../Animations/Animations.module";
+
+//FOOTER STYLES
+.changedFooter {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  background-color: $color-darkgray;
+  padding: 100px 15px 0 15px;
+
+  .changedFooterContent {
+    display: flex;
+    width: 1300px;
+    flex-direction: column;
+
+    .changedFooterMain {
+      width: 100%;
+      display: flex;
+      padding-bottom: 25px;
+      .footerMainBlocks {
+        display: flex;
+        width: 25%;
+        color: $color-white;
+        padding: 0 15px;
+        flex-direction: column;
+
+        h2 {
+          font-size: 18px;
+          font-family: $font-main;
+          font-weight: 400;
+          padding-bottom: 15px;
+        }
+
+        p {
+          font-family: $font-alternative;
+          font-size: 16px;
+          color: $color-gray;
+          padding: 10px 0;
+
+          &:hover {
+            a {
+              color: $color-white;
+
+              &:after {
+                width: 100%;
+              }
+            }
+          }
+
+          a {
+            font-family: $font-alternative;
+            font-size: 16px;
+            color: $color-gray;
+            position: relative;
+            transition: $transition-fast;
+
+            &:after {
+              content: "";
+              position: absolute;
+              width: 0;
+              bottom: -4px;
+              left: 0;
+              height: 1px;
+              background-color: $color-gray;
+              transition: width $transition-fast;
+            }
+
+          }
+        }
+
+        &:nth-child(4) {
+          h2 {
+            padding-bottom: 30px;
+          }
+        }
+
+        &:nth-child(2) {
+          p:nth-child(2) {
+            padding: 5px 0;
+          }
+
+          p:nth-child(3) {
+            padding: 5px 0;
+          }
+
+          p:nth-child(4) {
+            padding: 5px 0;
+          }
+
+          p:nth-child(5) {
+            padding: 25px 0;
+
+            a {
+              &:hover:after {
+                width: 0;
+              }
+
+              &:after {
+                width: 100%;
+              }
+
+            }
+          }
+
+          p:nth-child(6) {
+            padding: 8px 0;
+
+            a {
+              color: $color-gray;
+              font-size: 22px;
+              font-family: $font-main;
+
+              &:hover {
+                color: $color-white;
+              }
+
+              &:after {
+                background-color: transparent;
+              }
+            }
+
+          }
+        }
+      }
+    }
+    .footerBottomContainer {
+      display: flex;
+      width: 100%;
+      gap: 5px;
+      padding: 25px 0;
+      font-family: $font-alternative;
+      border-top: 1px solid $color-border;
+      color: $color-gray;
+      font-size: 16px;
+      a {
+        font-size: 16px;
+        color: $color-gray;
+        font-family: $font-alternative;
+        transition: $transition-fast;
+        &:hover {
+          color: $color-white;
+        }
+      }
+    }
+
+  }
+
+}
+
+//FOOTER MEDIA STYLES
+@media screen and (max-width:1440px ){
+.changedFooter {
+  padding: 80px 50px 0 50px;
+
+}
+}
+@media screen and (max-width:1000px ){
+  .changedFooter {
+    padding: 70px 10px 0 10px;
+
+  }
+}
+@media screen and (max-width:800px ){
+  .changedFooter {
+    padding: 50px 10px 0 10px;
+
+    .changedFooterContent {
+      .changedFooterMain {
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+        .footerMainBlocks {
+          width: 33.33%;
+          h2 {
+            font-size: 25px;
+          }
+          p {
+            padding: 5px 0;
+          }
+        }
+      }
+    }
+
+
+  }
+}
+@media screen and (max-width:600px ){
+  .changedFooter {
+    padding: 25px 10px 0 10px;
+
+    .changedFooterContent {
+      .changedFooterMain {
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+        .footerMainBlocks {
+          width: 100%;
+          align-items: center;
+          h2 {
+            font-size: 20px;
+            padding-bottom: 10px;
+          }
+          p {
+            padding: 3px 0;
+          }
+        }
+      }
+      .footerBottomContainer {
+        justify-content: center;
+        font-size: 14px;
+        padding: 10px 0;
+        a {
+          font-size: 14px;
+        }
+      }
+    }
+
+
+  }
+}

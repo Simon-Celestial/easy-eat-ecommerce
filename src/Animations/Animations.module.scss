@@ -37,9 +37,7 @@
   100% {
     text-shadow: 0 0 0 $color-orange;
   }
-}
-
-;
+}  ;
 
 @keyframes headerTransform {
   from {
@@ -47,5 +45,14 @@
   }
   to {
     transform: scaleY(1);
+  }
+};
+
+@keyframes rotateAnimation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
