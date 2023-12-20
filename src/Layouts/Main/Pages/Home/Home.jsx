@@ -33,17 +33,46 @@ export const Home = () => {
                 </section>
                 {/*SUBSCRIBE SECTION*/}
                 <section className={styles.subscribeSection}>
-                    <div className={`${styles.subscribeRotateCircleLeft} ${styles.decoration}`}>
-                        <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/circle-dotted-2.svg" alt="decoration"/>
-                    </div>
-                    <div className={`${styles.subscribeSolidCircleLeft} ${styles.decoration}`}>
-                        <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/circle-fill.svg" alt="decoration"/>
-                    </div>
-
-
-
                     <div className={styles.subscribeSectionContent}>
-                    <div className={styles.subscribeTittle}>
+                        <div className={`${styles.subscribeRotateCircleRight} ${styles.decoration}`}>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/circle-dotted-2.svg" alt="decoration"/>
+                        </div>
+                        <div className={`${styles.subscribeSolidCircleRight} ${styles.decoration}`}>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/circle-fill.svg" alt="decoration"/>
+                        </div>
+                        <div className={`${styles.subscribeRotateCircleLeft} ${styles.decoration}`}>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/circle-dotted-2.svg" alt="decoration"/>
+                        </div>
+                        <div className={`${styles.subscribeSolidCircleLeft} ${styles.decoration}`}>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/circle-fill.svg" alt="decoration"/>
+                        </div>
+                        <div className={`${styles.subscribeRedLineRight} ${styles.decoration}`}>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-lines-6.svg" alt="decoration"/>
+                        </div>
+                        <div className={`${styles.subscribeRedDotRight} ${styles.decoration}`}>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-circle-2.svg" alt="decoration"/>
+                        </div>
+                        <div className={`${styles.subscribeRedCrownRight} ${styles.decoration}`}>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/crown-2.svg" alt="decoration"/>
+                        </div>
+                        <div className={`${styles.subscribeRedDotTop} ${styles.decoration}`}>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-circle-2.svg" alt="decoration"/>
+                        </div>
+                        <div className={`${styles.subscribeRedLineTop} ${styles.decoration}`}>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-lines-5.svg" alt="decoration"/>
+                        </div>
+                        <div className={`${styles.subscribeRedLineBottom} ${styles.decoration}`}>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-lines-4.svg" alt="decoration"/>
+                        </div>
+                        <div className={`${styles.subscribeRedDotBottom} ${styles.decoration}`}>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-circle-2.svg" alt="decoration"/>
+                        </div>
+
+
+
+
+                        <div className={styles.subscribeTittle}>
+
                         <h2>Subscribe for exclusive</h2>
                         <h2>updates and hot offers!</h2>
                     </div>

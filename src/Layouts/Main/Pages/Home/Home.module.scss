@@ -81,31 +81,76 @@ a {
       background-color: $color-yellow;
       position: relative;
       overflow: hidden;
-      .decoration {
-        position: absolute;
-        &.subscribeSolidCircleLeft {
-          left: -10%;
-          top: -40%;
-        }
-        &.subscribeRotateCircleLeft {
-          left: -5%;
-          bottom: -18%;
-          z-index: 2;
-          img {
-            animation: rotateAnimation 10s linear infinite;
-
-          }
-        }
-      }
-
       .subscribeSectionContent {
         display: flex;
         width: 1290px;
         justify-content: space-between;
+        .decoration {
+          position: absolute;
+          transition: $transition-fast;
+          &.subscribeSolidCircleLeft {
+            left: -37%;
+            top: -225%;
+          }
+          &.subscribeRotateCircleLeft {
+            left: -28%;
+            bottom: -200%;
+            z-index: 2;
+            img {
+              animation: rotateAnimation 10s linear infinite;
+
+            }
+          }
+          &.subscribeRotateCircleRight {
+            right: -29%;
+            top: -67%;
+            z-index: 3;
+            img {
+              animation: rotateAnimation 10s linear infinite;
+            }
+          }
+          &.subscribeSolidCircleRight {
+            right: -33%;
+            top: -4%;
+          }
+          &.subscribeRedLineRight {
+            right: -6%;
+            top: 95%;
+          }
+          &.subscribeRedDotRight {
+            right: -10%;
+            top: -55%;
+          }
+          &.subscribeRedCrownRight {
+            left: -7%;
+            top: -70%;
+          }
+          &.subscribeRedDotTop {
+            left: 25%;
+            top: -70%;
+          }
+          &.subscribeRedLineTop {
+            left: 31%;
+            top: -53%;
+          }
+          &.subscribeRedLineBottom {
+            left: 14%;
+            top: 74%;
+          }
+          &.subscribeRedDotBottom {
+            left: -9%;
+            top: 114%;
+          }
+
+
+        }
+        position: relative;
+
 
         .subscribeTittle {
           display: flex;
           flex-direction: column;
+          z-index: 5;
 
           h2 {
             font-family: $font-main;
@@ -187,7 +232,6 @@ a {
                 }
               }
             }
-
           }
         }
       }
@@ -195,4 +239,7 @@ a {
   }
 }
 
+//HOME PAGE MEDIA STYLES
+@media screen and (max-width: 1300px){
 
+}
