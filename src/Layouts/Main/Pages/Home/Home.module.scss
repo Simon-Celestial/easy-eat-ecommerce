@@ -245,6 +245,169 @@ a {
       }
     }
 
+    //OUR BURGERS SECTION
+    .ourBurgersSection {
+      width: 100%;
+      padding: 120px 15px;
+      justify-content: center;
+      background-color: $color-white;
+      display: flex;
+
+
+      .ourBurgersContent {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 1290px;
+        align-items: center;
+        font-family: $font-main;
+        color: $color-black;
+
+        .ourBurgersHeading {
+          display: flex;
+          flex-direction: column;
+          width: 645px;
+          align-items: center;
+
+          span {
+            font-size: 19px;
+          }
+
+          h2 {
+            font-size: 57px;
+            text-align: center;
+            margin-top: 24px;
+            line-height: 57px;
+          }
+
+        }
+
+        .ourBurgersProducts {
+          display: flex;
+          width: 100%;
+          justify-content: center;
+          margin-top: 25px;
+
+          .ourBurgersCardWrapper {
+            display: flex;
+            width: 25%;
+            padding: 0 30px 30px 0;
+            position: relative;
+
+            &:hover .burgerCard {
+              box-shadow: 0 0 15px rgba(128, 128, 128, 0.1);
+            }
+
+            .burgerCard {
+              width: 100%;
+              display: flex;
+              height: 100%;
+              flex-direction: column;
+              transition: $transition-medium;
+              padding: 0 0 50px 0;
+
+              &:hover .addToCart {
+                bottom: 78px;
+                opacity: 1;
+                pointer-events: auto;
+              }
+
+              &:hover .ourBurgerPrice {
+                opacity: 0;
+              }
+
+              &:hover .ourBurgerTitle {
+                color: $color-gray;
+              }
+
+              a {
+                .ourBurgersImg {
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  width: 100%;
+                  position: relative;
+
+                  img {
+                    width: 100%;
+                  }
+                }
+              }
+              a {
+                color: $color-black;
+                .ourBurgerTitle {
+                  display: flex;
+                  width: 100%;
+                  justify-content: center;
+                  transition: $transition-fast;
+                  cursor: pointer;
+
+                  &:hover {
+                    color: $color-black !important;
+                  }
+
+                  span {
+                    font-family: $font-main;
+                    font-size: 19px;
+                    display: inline-flex;
+                    align-items: center;
+                  }
+                }
+              }
+
+              .ourBurgerPrice {
+                display: flex;
+                width: 100%;
+                cursor: pointer;
+                margin-top: 10px;
+                justify-content: center;
+                transition: $transition-medium;
+
+                span {
+                  font-family: $font-main;
+                  font-size: 18px;
+                  display: inline-flex;
+                  align-items: center;
+                  gap: 5px;
+                  position: relative;
+
+                  p {
+                    text-decoration: line-through;
+                    color: $color-gray;
+                  }
+                }
+              }
+
+              .addToCart {
+                width: 100%;
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                height: 27px;
+                transition: $transition-fast;
+                position: absolute;
+                bottom: 50px;
+                background-color: $color-white;
+                opacity: 0;
+                pointer-events: none;
+                left: 0;
+
+                a {
+                  font-size: 17px;
+                  display: inline-flex;
+                  justify-content: center;
+                  color: $color-black;
+                  z-index: 3;
+                  padding: 0 30px;
+                  margin-right: 30px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
     //LATEST NEWS SECTION
     .latestNewsSection {
       display: flex;
@@ -760,9 +923,11 @@ a {
 
         }
       }
+
       .aboutUsSection {
         .aboutUsContent {
           flex-direction: column;
+
           .aboutUsLeft {
             order: 2;
             width: 100%;
@@ -775,13 +940,16 @@ a {
                 font-size: 10vw;
                 line-height: 10vw;
               }
+
               .aboutUsServices {
                 margin-top: 25px;
                 flex-wrap: wrap;
+
                 .servicesCard {
                   width: 45%;
                   gap: 25px;
                   min-width: 290px;
+
                   .serviceCardTittle {
                     font-size: 15px;
                   }
@@ -796,40 +964,51 @@ a {
               }
             }
           }
+
           .aboutUsRight {
             width: 100%;
             height: 300px;
+
             .floatingBurger {
               width: 100%;
               max-width: 40%;
               min-width: 250px;
             }
+
             .solidCircleTop {
               width: 300px;
               left: 66%;
+
               img {
                 width: 100%;
               }
             }
+
             .solidCircleBottom {
               width: 300px;
               left: -8%;
+
               img {
                 width: 100%;
               }
             }
+
             .redLineBurger {
               display: none;
             }
+
             .redCrownTop {
               display: none;
             }
+
             .redBottomLineBurger {
               display: none;
             }
+
             .redSmallLineBurger {
               display: none;
             }
+
             .redLineRightBurger {
               display: none;
             }

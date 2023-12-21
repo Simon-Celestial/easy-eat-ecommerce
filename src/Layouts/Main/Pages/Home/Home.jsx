@@ -5,6 +5,7 @@ import {Footer} from "../../Components/Footer/Footer.jsx";
 import {ArrowRight, TelegramLogo} from "@phosphor-icons/react";
 import {SubscribeModal} from "../../Common/subscribeModal/SubscribeModal.jsx";
 import {useState, useEffect, useRef} from "react";
+import {Link} from "react-router-dom";
 
 
 export const Home = () => {
@@ -12,14 +13,17 @@ export const Home = () => {
     const sectionRef = useRef();
     useEffect(() => {
         const handleMouseMove = (e) => {
-            setPosition({x: e.clientX, y: e.clientY});
+            setPosition({ x: e.clientX, y: e.clientY });
         };
-        sectionRef.current.addEventListener('mousemove', handleMouseMove);
+        if (sectionRef.current) {
+            sectionRef.current.addEventListener("mousemove", handleMouseMove);
+        }
         return () => {
-            sectionRef.current.removeEventListener('mousemove', handleMouseMove);
+            if (sectionRef.current) {
+                sectionRef.current.removeEventListener("mousemove", handleMouseMove);
+            }
         };
     }, [sectionRef]);
-
     const parallaxStyle = {
         transform: `translate(-${position.x / 50}px, -${position.y / 40}px)`,
     };
@@ -80,7 +84,7 @@ export const Home = () => {
                                 />
 
                             </div>
-                            <div className={styles.floatingBurger} >
+                            <div className={styles.floatingBurger}>
                                 <img
                                     src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/parallax-img-5-copyright.png"
                                     alt=""
@@ -149,9 +153,10 @@ export const Home = () => {
                                 />
                             </div>
                             <div className={styles.redTinyBallBurger}>
-                                <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-circle-2.svg"
-                                     alt="Decoration"
-                                     style={parallaxStyle}
+                                <img
+                                    src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-circle-2.svg"
+                                    alt="Decoration"
+                                    style={parallaxStyle}
                                 />
                             </div>
                             <div className={styles.redSmallBallTop}>
@@ -162,21 +167,60 @@ export const Home = () => {
                                 />
                             </div>
                             <div className={styles.redTinyBallRight}>
-                                <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-circle-2.svg"
-                                     alt="Decoration"
-                                     style={parallaxStyle}
+                                <img
+                                    src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-circle-2.svg"
+                                    alt="Decoration"
+                                    style={parallaxStyle}
                                 />
                             </div>
                             <div className={styles.redLineRightBurger}>
-                                <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-lines-10.svg"
-                                     alt="Decoration"
-                                     style={parallaxStyle}
+                                <img
+                                    src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-lines-10.svg"
+                                    alt="Decoration"
+                                    style={parallaxStyle}
                                 />
                             </div>
                         </div>
                     </div>
                 </section>
 
+                {/*OUR BURGERS SECTION*/}
+                <section className={styles.ourBurgersSection}>
+                    <div className={styles.ourBurgersContent}>
+                        <div className={styles.ourBurgersHeading}>
+                            <span>Our Burgers</span>
+                            <h2>Unleash Your Burger Cravings with Our Menu</h2>
+
+                        </div>
+                        <div className={styles.ourBurgersProducts}>
+                            {/*FOR LINE THROUGH ON SALE PRICE (WRITE PRICE IN SPAN <p>sale price<p/>)*/}
+                            <div className={styles.ourBurgersCardWrapper}>
+                                <div className={styles.burgerCard}>
+                                    <Link to="/home/:id">
+                                        <div className={styles.ourBurgersImg}>
+                                            <img
+                                                src="https://easyeat.ancorathemes.com/wp-content/uploads/2020/05/product-3-copyright-480x480.png"
+                                                alt="Burger"/>
+                                        </div>
+                                    </Link>
+                                    <Link to="/home/details">
+                                    <div className={styles.ourBurgerTitle}>
+                                        <span>CHICKEN LINKED</span>
+                                    </div>
+                                    </Link>
+                                    <div className={styles.ourBurgerPrice}>
+                                        <span>$89.00</span>
+                                    </div>
+                                    <div className={styles.addToCart}>
+                                        <a href="#" >Buy Now</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
                 {/*LATEST NEWS SECTION WITH SLIDER*/}
                 <section className={styles.latestNewsSection}>
 
