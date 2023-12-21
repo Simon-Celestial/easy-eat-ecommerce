@@ -90,7 +90,6 @@ export const LayoutContextProvider = ({
             handleWidgetClose(setSearchOpen);
             handleWidgetClose(setSideMenuOpen);
             handleWidgetClose(setDropDownAccountOpen);
-
         }
         document.addEventListener("click", action);
         return () => {

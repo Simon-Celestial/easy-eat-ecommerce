@@ -1,0 +1,239 @@
+@import "../../../../Variables/variables.module";
+@import "../../../../Animations/Animations.module";
+
+.subscribeModalSection {
+  display: flex;
+  max-width: 1050px;
+  width: 100%;
+  height: 580px;
+  background-color: $color-white;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 50;
+  opacity: 1;
+  transition: $transition-medium;
+  pointer-events: auto;
+
+  &.modalDisabled {
+    pointer-events: none!important;
+    opacity: 0!important;
+  }
+  .modalContent {
+    display: flex;
+    width: 100%;
+    .modalLeft {
+      width: 50%;
+      overflow: hidden;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top;
+      }
+    }
+    .modalRight {
+      padding: 57px 62px 40px 62px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      width: 50%;
+      justify-content: center;
+      .closeModal {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        cursor: pointer;
+        &:hover svg {
+          transform: rotate(360deg);
+        }
+        svg {
+          font-size: 32px;
+          color: $color-darkgray;
+          transition: transform $transition-medium;
+        }
+      }
+      h2 {
+        font-size: 60px;
+        font-family: $font-main;
+        line-height: 60px;
+      }
+      .formWrapper {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        .mailInputWrapper {
+          width: 100%;
+          display: inline-flex;
+          padding-bottom: 10px;
+          border-bottom: 1px solid $color-black;
+          align-items: center;
+          margin-top: 40px;
+          svg {
+            font-size: 28px;
+            color: $color-gray;
+          }
+          input {
+            padding: 5px 10px;
+            font-size: 16px;
+            font-family: $font-alternative;
+            width: 100%;
+            border: 0;
+            outline: 0;
+          }
+        }
+        .agreementWrapper {
+          display: inline-flex;
+          margin-top: 20px;
+          align-items: center;
+          width: 100%;
+          gap: 5px;
+          color: $color-lightgray;
+          font-size: 14px;
+          font-family: $font-alternative;
+          a {
+            transition: $transition-fast;
+            color: $color-lightgray;
+            font-family: $font-alternative;
+            text-decoration: underline;
+            &:hover {
+              color: $color-red;
+            }
+          }
+        }
+        button {
+          width: 100%;
+          outline: 0;
+          border: 0;
+          background-color: $color-orange;
+          font-family: $font-main;
+          font-size: 19px;
+          color: $color-white;
+          transition: $transition-fast;
+          cursor: pointer;
+          padding: 15px 0;
+          margin-top: 30px;
+          &:hover {
+            background-color: #cb2f00;
+          }
+        }
+      }
+    }
+  }
+}
+
+//MODAL MEDIA STYLES 
+@media screen and (max-width: 1440px) {
+  .subscribeModalSection {
+    max-width: 800px;
+    height: auto;
+    .modalContent {
+      .modalRight {
+        h2 {
+          font-size: 45px;
+          line-height: 45px;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 1024px) {
+  .subscribeModalSection {
+    max-width: 600px;
+    .modalContent {
+      .modalRight {
+        padding: 15px;
+        h2 {
+          font-size: 32px;
+          line-height: 32px;
+        }
+        .formWrapper {
+          .mailInputWrapper {
+            margin-top: 20px;
+            input {
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .subscribeModalSection {
+    max-width: 500px;
+    .modalContent {
+      .modalRight {
+        h2 {
+          font-size: 32px;
+          line-height: 32px;
+        }
+        .formWrapper {
+          .mailInputWrapper {
+            margin-top: 20px;
+            input {
+              font-size: 14px;
+            }
+          }
+          button {
+            padding: 5px 0;
+            margin-top: 15px;
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 550px) {
+  .subscribeModalSection {
+    max-width: 300px;
+    .modalContent {
+      .modalLeft {
+        width: 40%;
+      }
+      .modalRight {
+        width: 60%;
+        padding: 45px 5px;
+        .closeModal {
+          svg {
+            font-size: 20px;
+          }
+        }
+        h2 {
+          font-size: 22px;
+          line-height: 22px;
+        }
+        .formWrapper {
+          align-items: center;
+          .mailInputWrapper {
+            margin-top: 5px;
+            svg {
+              font-size: 12px;
+            }
+            input {
+              font-size: 12px;
+              padding: 5px;
+            }
+          }
+          button {
+            padding: 5px 0;
+            margin-top: 15px;
+            font-size: 12px;
+            width: 50%;
+          }
+          .agreementWrapper {
+            font-size: 11px;
+            gap: 5px;
+            a {
+              font-size: 11px;
+
+            }
+          }
+
+        }
+      }
+    }
+  }
+}

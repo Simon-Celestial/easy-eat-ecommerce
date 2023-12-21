@@ -1,13 +1,19 @@
 @import "../../../../Variables/variables.module";
 @import "../../../../Animations/Animations.module";
 
+// 3 CUSTOM ICONS ON HOME PAGE
+@font-face {
+  font-family: "restaurant";
+  src: url("../../../../../public/fonts/restaurant.woff") format('woff');
+}
+
 a {
   text-decoration: none;
   cursor: pointer;
   font-family: $font-main;
 }
 
-.HomeWrapper {
+.homeWrapper {
   display: flex;
   width: 100vw;
   flex-direction: column;
@@ -24,30 +30,105 @@ a {
     .aboutUsSection {
       display: flex;
       width: 100%;
-      height: 1000px;
+      overflow: hidden;
 
       .aboutUsContent {
         display: flex;
         width: 100%;
-        height: 100%;
 
         .aboutUsLeft {
           display: flex;
           width: 55%;
-          height: 100%;
           background-image: url(https://easyeat.ancorathemes.com/wp-content/uploads/2023/01/decoration-bg-1.png);
           background-position: center right;
           background-repeat: no-repeat;
           background-size: cover;
           z-index: 3;
+          padding: 220px 30px 240px 70px;
 
+          .aboutUsLeftTittle {
+            display: flex;
+            flex-direction: column;
+            color: $color-white;
+            font-family: $font-main;
+
+            p {
+              font-size: 19px;
+              margin-bottom: 20px;
+            }
+
+            h1 {
+              font-size: 78px;
+              line-height: 78px;
+            }
+
+            .aboutUsServices {
+              display: flex;
+              width: 100%;
+              margin-top: 45px;
+              gap: 25px;
+
+              .servicesCard {
+                width: 25%;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+
+                .iconBox {
+                  color: $color-yellow;
+                  font-family: "restaurant", sans-serif;
+                  font-size: 70px;
+                  transition: $transition-fast;
+                  font-style: normal;
+
+                  &:hover {
+                    color: $color-white;
+                  }
+
+
+                }
+
+                .serviceCardTittle {
+                  font-family: $font-alternative;
+                  color: $color-gray;
+                  font-size: 16px;
+
+                }
+              }
+            }
+
+            a {
+              button {
+                font-size: 18px;
+                color: $color-white;
+                font-family: $font-main;
+                background-color: $color-orange;
+                display: inline-flex;
+                gap: 15px;
+                align-items: center;
+                justify-content: center;
+                width: 150px;
+                outline: 0;
+                border: 0;
+                margin-top: 45px;
+                padding: 16px;
+                cursor: pointer;
+
+                svg {
+                  font-size: 20px;
+                  padding-bottom: 3px;
+                }
+              }
+
+            }
+          }
         }
 
         .aboutUsRight {
           display: flex;
           width: 50%;
-          height: 1000px;
           position: relative;
+          background-color: $color-yellow;
 
           .spinningCircle {
             display: flex;
@@ -58,9 +139,12 @@ a {
           }
 
           .floatingBurger {
+            z-index: 4;
+            max-width: 615px;
+            width: 615px;
+
             img {
-              width: 615px;
-              height: 510px;
+              width: 100%;
             }
 
             position: absolute;
@@ -68,8 +152,105 @@ a {
             top: 50%;
             transform: translate(-50%, -50%);
           }
+
+          .solidCircleTop {
+            position: absolute;
+            top: -21%;
+            right: -26%;
+          }
+
+          .solidCircleBottom {
+            position: absolute;
+            bottom: -21%;
+            left: -26%;
+          }
+
+          .redCrownTop {
+            position: absolute;
+            right: 25%;
+            top: 17%;
+          }
+
+          .redBallTop {
+            position: absolute;
+            left: 25%;
+            top: 10%;
+          }
+
+          .redLineBurger {
+            position: absolute;
+            left: 19%;
+            top: 27%;
+          }
+
+          .redSmallLineBurger {
+            position: absolute;
+            left: 8%;
+            bottom: 49%;
+          }
+
+          .redBottomLineBurger {
+            position: absolute;
+            right: 17%;
+            bottom: 23%;
+
+          }
+
+          .spinningCircleBottom {
+            position: absolute;
+            right: -11%;
+            bottom: -5%;
+            animation: rotateAnimation 8s linear infinite;
+          }
+
+          .redBigBallBottom {
+            position: absolute;
+            left: 10%;
+            bottom: 15%;
+
+          }
+
+          .redSmallBallBottom {
+            position: absolute;
+            left: 2%;
+            bottom: 32%;
+
+          }
+
+          .redTinyBallBurger {
+            position: absolute;
+            left: 6%;
+            bottom: 66%;
+          }
+
+          .redSmallBallTop {
+            position: absolute;
+            right: 10%;
+            top: 25%;
+          }
+
+          .redTinyBallRight {
+            position: absolute;
+            right: 6%;
+            top: 55%;
+          }
+
+          .redLineRightBurger {
+            position: absolute;
+            right: 9%;
+            top: 45%;
+          }
+
         }
       }
+    }
+
+    //LATEST NEWS SECTION
+    .latestNewsSection {
+      display: flex;
+      width: 100%;
+      padding: 100px 0;
+      background-color: $color-white;
     }
 
     //SUBSCRIBE SECTION
@@ -81,62 +262,79 @@ a {
       background-color: $color-yellow;
       position: relative;
       overflow: hidden;
+
       .subscribeSectionContent {
         display: flex;
         width: 1290px;
         justify-content: space-between;
+        gap: 50px;
+        padding: 0 15px;
+
         .decoration {
           position: absolute;
           transition: $transition-fast;
+
           &.subscribeSolidCircleLeft {
             left: -37%;
             top: -225%;
           }
+
           &.subscribeRotateCircleLeft {
             left: -28%;
             bottom: -200%;
             z-index: 2;
+
             img {
               animation: rotateAnimation 10s linear infinite;
 
             }
           }
+
           &.subscribeRotateCircleRight {
             right: -29%;
             top: -67%;
             z-index: 3;
+
             img {
               animation: rotateAnimation 10s linear infinite;
             }
           }
+
           &.subscribeSolidCircleRight {
             right: -33%;
             top: -4%;
           }
+
           &.subscribeRedLineRight {
             right: -6%;
             top: 95%;
           }
+
           &.subscribeRedDotRight {
             right: -10%;
             top: -55%;
           }
-          &.subscribeRedCrownRight {
+
+          &.subscribeRedCrownLeft {
             left: -7%;
             top: -70%;
           }
+
           &.subscribeRedDotTop {
             left: 25%;
             top: -70%;
           }
+
           &.subscribeRedLineTop {
             left: 31%;
             top: -53%;
           }
+
           &.subscribeRedLineBottom {
             left: 14%;
             top: 74%;
           }
+
           &.subscribeRedDotBottom {
             left: -9%;
             top: 114%;
@@ -144,6 +342,7 @@ a {
 
 
         }
+
         position: relative;
 
 
@@ -157,6 +356,7 @@ a {
             font-size: 47px;
             font-weight: 400;
             line-height: 48px;
+            white-space: nowrap;
           }
         }
 
@@ -164,6 +364,7 @@ a {
           display: flex;
           max-width: 750px;
           width: 100%;
+          z-index: 3;
 
           form {
             display: flex;
@@ -177,13 +378,17 @@ a {
               gap: 10px;
 
               label {
+                display: flex;
+                width: 100%;
+
                 input {
-                  width: 540px;
+                  max-width: 590px;
                   padding: 18px 25px;
                   font-size: 15px;
                   font-family: $font-alternative;
                   border: 0;
                   outline: 0;
+                  width: 100%;
                 }
               }
 
@@ -224,6 +429,7 @@ a {
                 font-size: 14px;
                 align-items: center;
                 color: $color-white;
+
                 a {
                   font-family: $font-alternative;
                   text-decoration: underline;
@@ -240,6 +446,436 @@ a {
 }
 
 //HOME PAGE MEDIA STYLES
-@media screen and (max-width: 1300px){
+@media screen and (max-width: 1550px) {
+  .homeWrapper {
+    .mainWrapper {
+      .aboutUsSection {
+        .aboutUsContent {
+          .aboutUsLeft {
+            .aboutUsLeftTittle {
+              h1 {
+                font-size: 64px;
+              }
 
+              .aboutUsServices {
+                gap: 20px;
+
+                .servicesCard {
+                  .serviceCardTittle {
+                    font-size: 15px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  .homeWrapper {
+    .mainWrapper {
+      .subscribeSection {
+        .subscribeSectionContent {
+          .decoration {
+            &.subscribeRotateCircleRight {
+              right: -10%;
+              top: -168%;
+            }
+
+            &.subscribeSolidCircleRight {
+              right: -18%;
+              top: -5%;
+            }
+
+            &.subscribeRedDotRight {
+              right: 8%;
+              top: -50%;
+            }
+
+            &.subscribeRedLineRight {
+              right: 8%;
+              top: 90%;
+            }
+
+            &.subscribeRedLineTop {
+              left: 30%;
+              top: -50%;
+            }
+
+            &.subscribeRedLineBottom {
+              left: 15%;
+              top: 73%;
+            }
+
+            &.subscribeRedCrownLeft {
+              left: -2%;
+              top: -79%;
+            }
+
+            &.subscribeRedDotTop {
+              right: 8%;
+              top: -25%;
+            }
+
+            &.subscribeRotateCircleLeft {
+              left: -11%;
+              bottom: -190%;
+            }
+
+            &.subscribeSolidCircleLeft {
+              left: -19%;
+              top: -272%;
+            }
+
+            &.subscribeRedDotBottom {
+              left: 36%;
+              top: 114%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1368px) {
+  .homeWrapper {
+    .mainWrapper {
+      .subscribeSection {
+        .subscribeSectionContent {
+          .subscribeTittle {
+            h2 {
+              font-size: 35px;
+            }
+          }
+
+          .subscribeFormWrapper {
+            padding-top: 8px;
+          }
+        }
+      }
+
+      .aboutUsSection {
+        .aboutUsContent {
+          .aboutUsLeft {
+            .aboutUsLeftTittle {
+              h1 {
+                font-size: 54px;
+                line-height: 54px;
+              }
+
+              .aboutUsServices {
+                gap: 30px;
+
+                .servicesCard {
+                  width: 20%;
+                }
+              }
+            }
+          }
+
+          .aboutUsRight {
+            .floatingBurger {
+              width: 480px;
+            }
+
+            .solidCircleTop {
+              width: 380px;
+              top: -35%;
+            }
+
+            .solidCircleBottom {
+              width: 380px;
+              bottom: -35%;
+              left: -55%;
+
+            }
+          }
+        }
+      }
+
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .homeWrapper {
+    .mainWrapper {
+      .aboutUsSection {
+        .aboutUsContent {
+          .aboutUsLeft {
+            padding: 150px 0 150px 30px;
+
+            .aboutUsLeftTittle {
+              h1 {
+                font-size: 40px;
+                line-height: 40px;
+              }
+
+              .aboutUsServices {
+                gap: 15px;
+
+                .servicesCard {
+                  width: 25%;
+
+                  .serviceCardTittle {
+                    font-size: 12px;
+                  }
+
+                  .iconBox {
+                    font-size: 60px;
+                  }
+                }
+              }
+
+              a {
+                button {
+                  margin-top: 25px;
+                  width: auto;
+                  gap: 10px;
+                  padding: 8px 10px;
+                }
+              }
+            }
+          }
+
+          .aboutUsRight {
+            .floatingBurger {
+              width: 350px;
+            }
+
+            .solidCircleTop {
+              width: 340px;
+              top: -45%;
+            }
+
+            .solidCircleBottom {
+              width: 340px;
+              bottom: -65%;
+              left: -55%;
+
+            }
+
+          }
+        }
+      }
+
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .homeWrapper {
+    .mainWrapper {
+      .subscribeSection {
+        padding: 25px 10px;
+
+        .subscribeSectionContent {
+          flex-direction: column;
+          gap: 25px;
+
+          .subscribeTittle {
+            flex-direction: row;
+            gap: 5px;
+
+            h2 {
+              font-size: 35px;
+            }
+          }
+
+          .subscribeFormWrapper {
+            form {
+              .subscribeFormTop {
+                label {
+                  input {
+                    font-size: 12px;
+                    padding: 0 15px;
+                  }
+                }
+              }
+            }
+
+          }
+
+          .decoration {
+            &.subscribeRotateCircleRight {
+              right: -10%;
+              top: -91%;
+            }
+
+            &.subscribeSolidCircleRight {
+              right: -25%;
+              top: -5%;
+            }
+
+            &.subscribeRedDotRight {
+              right: 8%;
+              top: -50%;
+            }
+
+            &.subscribeRedLineRight {
+              right: 8%;
+              top: 90%;
+            }
+
+            &.subscribeRedLineRight {
+              right: 13%;
+              top: 9%;
+            }
+
+            &.subscribeRedLineTop {
+              display: none;
+            }
+
+            &.subscribeRedLineBottom {
+              left: 73%;
+              top: 65%;
+            }
+
+            &.subscribeRedCrownLeft {
+              left: -2%;
+              top: -79%;
+            }
+
+            &.subscribeRedDotTop {
+              left: 32%;
+              top: 33%;
+            }
+
+            &.subscribeRotateCircleLeft {
+              display: none;
+            }
+
+            &.subscribeSolidCircleLeft {
+              display: none;
+            }
+
+            &.subscribeRedDotBottom {
+              display: none;
+            }
+          }
+
+        }
+      }
+      .aboutUsSection {
+        .aboutUsContent {
+          flex-direction: column;
+          .aboutUsLeft {
+            order: 2;
+            width: 100%;
+            background-position: center center;
+            padding: 50px 15px 15px 20px;
+            background-image: url("https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decoration-bg-3.png");
+
+            .aboutUsLeftTittle {
+              h1 {
+                font-size: 10vw;
+                line-height: 10vw;
+              }
+              .aboutUsServices {
+                margin-top: 25px;
+                flex-wrap: wrap;
+                .servicesCard {
+                  width: 45%;
+                  gap: 25px;
+                  min-width: 290px;
+                  .serviceCardTittle {
+                    font-size: 15px;
+                  }
+                }
+              }
+
+              a {
+                button {
+                  font-size: 18px;
+                  padding: 12px 25px;
+                }
+              }
+            }
+          }
+          .aboutUsRight {
+            width: 100%;
+            height: 300px;
+            .floatingBurger {
+              width: 100%;
+              max-width: 40%;
+              min-width: 250px;
+            }
+            .solidCircleTop {
+              width: 300px;
+              left: 66%;
+              img {
+                width: 100%;
+              }
+            }
+            .solidCircleBottom {
+              width: 300px;
+              left: -8%;
+              img {
+                width: 100%;
+              }
+            }
+            .redLineBurger {
+              display: none;
+            }
+            .redCrownTop {
+              display: none;
+            }
+            .redBottomLineBurger {
+              display: none;
+            }
+            .redSmallLineBurger {
+              display: none;
+            }
+            .redLineRightBurger {
+              display: none;
+            }
+
+          }
+        }
+      }
+
+    }
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .homeWrapper {
+    .mainWrapper {
+      .subscribeSection {
+        .subscribeSectionContent {
+          gap: 0;
+
+          .subscribeTittle {
+            flex-direction: column;
+
+            h2 {
+              font-size: 35px;
+            }
+          }
+
+          .subscribeFormWrapper {
+            form {
+
+              .subscribeFormTop {
+                flex-direction: column;
+
+                label {
+                  input {
+                    font-size: 12px;
+                    padding: 15px 15px;
+                  }
+                }
+              }
+            }
+
+          }
+
+        }
+      }
+    }
+  }
 }

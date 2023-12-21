@@ -83,12 +83,26 @@
         p {
           font-size: 16px;
           padding: 10px 0;
+          margin-bottom: 10px;
 
           > a {
             font-family: $font-alternative;
             color: $color-gray;
             padding-bottom: 5px;
-            border-bottom: 1px solid $color-gray;
+            position: relative;
+            &:after {
+              content: "";
+              position: absolute;
+              left: 0;
+              bottom: -1px;
+              height: 1px;
+              background-color: $color-gray;
+              width: 0;
+              transition: $transition-fast;
+            }
+            &:hover:after {
+              width: 100%;
+            }
 
           }
         }

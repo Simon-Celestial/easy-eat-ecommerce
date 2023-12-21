@@ -2,80 +2,236 @@ import styles from "./Home.module.scss";
 import {Header} from "../../Components/Header/Header.jsx";
 import {UiControl} from "../../Common/UiControl/UiControl.jsx";
 import {Footer} from "../../Components/Footer/Footer.jsx";
-import {TelegramLogo} from "@phosphor-icons/react";
+import {ArrowRight, TelegramLogo} from "@phosphor-icons/react";
+import {SubscribeModal} from "../../Common/subscribeModal/SubscribeModal.jsx";
+import {useState, useEffect, useRef} from "react";
+
 
 export const Home = () => {
+    const [position, setPosition] = useState({x: 0, y: 0});
+    const sectionRef = useRef();
+    useEffect(() => {
+        const handleMouseMove = (e) => {
+            setPosition({x: e.clientX, y: e.clientY});
+        };
+        sectionRef.current.addEventListener('mousemove', handleMouseMove);
+        return () => {
+            sectionRef.current.removeEventListener('mousemove', handleMouseMove);
+        };
+    }, [sectionRef]);
+
+    const parallaxStyle = {
+        transform: `translate(-${position.x / 50}px, -${position.y / 40}px)`,
+    };
+    const parallaxStyleFast = {
+        transform: `translate(-${position.x / 40}px, -${position.y / 100}px)`,
+    };
     return (
-        <div className={styles.HomeWrapper}>
+        <div className={styles.homeWrapper}>
+            {/*HOME PAGE MODAL*/}
+            <SubscribeModal/>
             {/*/!*SITE MAIN COMPONENTS*!/*/}
             <Header/>
             {/*HOME PAGE MAIN CONTENT*/}
             <main className={styles.mainWrapper}>
                 {/*ABOUT US SECTION*/}
-                <section className={styles.aboutUsSection}>
+                <section className={styles.aboutUsSection} ref={sectionRef}>
                     <div className={styles.aboutUsContent}>
                         <div className={styles.aboutUsLeft}>
+                            <div className={styles.aboutUsLeftTittle}>
+                                <p>About Us</p>
+                                <h1>UNFORGETTABLE BURGERS,</h1>
+                                <h1>UNFORGETTABLE MEMORIES</h1>
+                                <div className={styles.aboutUsServices}>
+                                    <a href="#" className={styles.servicesCard}>
+                                        <div className={styles.iconBox}>
+                                            <i/>&#xe800;
+                                        </div>
+                                        <span className={styles.serviceCardTittle}>Lorem ipsum dolor sit amet adipiscing elit</span>
+
+                                    </a>
+                                    <a href="#" className={styles.servicesCard}>
+                                        <div className={styles.iconBox}>
+                                            <i/>&#xe801;
+                                        </div>
+                                        <span className={styles.serviceCardTittle}>Lorem ipsum dolor sit amet adipiscing elit</span>
+                                    </a>
+                                    <a href="#" className={styles.servicesCard}>
+                                        <div className={styles.iconBox}>
+                                            <i/>&#xe802;
+                                        </div>
+                                        <span className={styles.serviceCardTittle}>Lorem ipsum dolor sit amet adipiscing elit</span>
+                                    </a>
+                                </div>
+                                <a href="#">
+                                    <button>
+                                        About Us
+                                        <ArrowRight/>
+                                    </button>
+                                </a>
+
+                            </div>
                         </div>
                         <div className={styles.aboutUsRight}>
                             <div className={styles.spinningCircle}>
                                 <img
                                     src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/circle-dotted-3.svg"
-                                    alt=""/>
-                            </div>
-                            {/*<div className={styles.floatingBurger}>*/}
-                            {/*    <img*/}
-                            {/*        src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/parallax-img-5-copyright.png"*/}
-                            {/*        alt=""/>*/}
+                                    alt=""
+                                />
 
-                            {/*</div>*/}
+                            </div>
+                            <div className={styles.floatingBurger} >
+                                <img
+                                    src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/parallax-img-5-copyright.png"
+                                    alt=""
+                                    style={parallaxStyleFast}
+                                />
+                            </div>
+                            <div className={styles.solidCircleTop}>
+                                <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/circle-fill-2.svg"
+                                     alt="decoration"/>
+                            </div>
+                            <div className={styles.solidCircleBottom}>
+                                <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/circle-fill-2.svg"
+                                     alt="decoration"/>
+                            </div>
+                            <div className={styles.redCrownTop}>
+                                <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/crown-3.svg"
+                                     alt="Decoration"
+                                     style={parallaxStyle}
+                                />
+
+                            </div>
+                            <div className={styles.redBallTop}>
+                                <img
+                                    src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-circle-3.svg"
+                                    alt="Decoration"
+                                    style={parallaxStyle}
+                                />
+                            </div>
+                            <div className={styles.redLineBurger}>
+                                <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-lines-7.svg"
+                                     alt="Decoration"
+                                     style={parallaxStyle}
+                                />
+                            </div>
+                            <div className={styles.redSmallLineBurger}>
+                                <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-lines-9.svg"
+                                     alt="Decoration"
+                                     style={parallaxStyleFast}
+                                />
+                            </div>
+                            <div className={styles.redBottomLineBurger}>
+                                <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-lines-8.svg"
+                                     alt="Decoration"
+                                     style={parallaxStyle}
+                                />
+                            </div>
+                            <div className={styles.spinningCircleBottom}>
+                                <img
+                                    src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/circle-dotted-3.svg"
+                                    alt=""
+                                />
+
+                            </div>
+                            <div className={styles.redBigBallBottom}>
+                                <img
+                                    src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-circle-3.svg"
+                                    alt="Decoration"
+                                    style={parallaxStyle}
+                                />
+                            </div>
+                            <div className={styles.redSmallBallBottom}>
+                                <img
+                                    src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-circle-4.svg"
+                                    alt="Decoration"
+                                    style={parallaxStyle}
+                                />
+                            </div>
+                            <div className={styles.redTinyBallBurger}>
+                                <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-circle-2.svg"
+                                     alt="Decoration"
+                                     style={parallaxStyle}
+                                />
+                            </div>
+                            <div className={styles.redSmallBallTop}>
+                                <img
+                                    src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-circle-4.svg"
+                                    alt="Decoration"
+                                    style={parallaxStyle}
+                                />
+                            </div>
+                            <div className={styles.redTinyBallRight}>
+                                <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-circle-2.svg"
+                                     alt="Decoration"
+                                     style={parallaxStyle}
+                                />
+                            </div>
+                            <div className={styles.redLineRightBurger}>
+                                <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-lines-10.svg"
+                                     alt="Decoration"
+                                     style={parallaxStyle}
+                                />
+                            </div>
                         </div>
                     </div>
+                </section>
+
+                {/*LATEST NEWS SECTION WITH SLIDER*/}
+                <section className={styles.latestNewsSection}>
+
                 </section>
                 {/*SUBSCRIBE SECTION*/}
                 <section className={styles.subscribeSection}>
                     <div className={styles.subscribeSectionContent}>
                         <div className={`${styles.subscribeRotateCircleRight} ${styles.decoration}`}>
-                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/circle-dotted-2.svg" alt="decoration"/>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/circle-dotted-2.svg"
+                                 alt="decoration"/>
                         </div>
                         <div className={`${styles.subscribeSolidCircleRight} ${styles.decoration}`}>
-                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/circle-fill.svg" alt="decoration"/>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/circle-fill.svg"
+                                 alt="decoration"/>
                         </div>
                         <div className={`${styles.subscribeRotateCircleLeft} ${styles.decoration}`}>
-                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/circle-dotted-2.svg" alt="decoration"/>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/circle-dotted-2.svg"
+                                 alt="decoration"/>
                         </div>
                         <div className={`${styles.subscribeSolidCircleLeft} ${styles.decoration}`}>
-                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/circle-fill.svg" alt="decoration"/>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/circle-fill.svg"
+                                 alt="decoration"/>
                         </div>
                         <div className={`${styles.subscribeRedLineRight} ${styles.decoration}`}>
-                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-lines-6.svg" alt="decoration"/>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-lines-6.svg"
+                                 alt="decoration"/>
                         </div>
                         <div className={`${styles.subscribeRedDotRight} ${styles.decoration}`}>
-                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-circle-2.svg" alt="decoration"/>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-circle-2.svg"
+                                 alt="decoration"/>
                         </div>
-                        <div className={`${styles.subscribeRedCrownRight} ${styles.decoration}`}>
-                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/crown-2.svg" alt="decoration"/>
+                        <div className={`${styles.subscribeRedCrownLeft} ${styles.decoration}`}>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/crown-2.svg"
+                                 alt="decoration"/>
                         </div>
                         <div className={`${styles.subscribeRedDotTop} ${styles.decoration}`}>
-                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-circle-2.svg" alt="decoration"/>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-circle-2.svg"
+                                 alt="decoration"/>
                         </div>
                         <div className={`${styles.subscribeRedLineTop} ${styles.decoration}`}>
-                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-lines-5.svg" alt="decoration"/>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-lines-5.svg"
+                                 alt="decoration"/>
                         </div>
                         <div className={`${styles.subscribeRedLineBottom} ${styles.decoration}`}>
-                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-lines-4.svg" alt="decoration"/>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-lines-4.svg"
+                                 alt="decoration"/>
                         </div>
                         <div className={`${styles.subscribeRedDotBottom} ${styles.decoration}`}>
-                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-circle-2.svg" alt="decoration"/>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-circle-2.svg"
+                                 alt="decoration"/>
                         </div>
-
-
-
-
                         <div className={styles.subscribeTittle}>
-
-                        <h2>Subscribe for exclusive</h2>
-                        <h2>updates and hot offers!</h2>
-                    </div>
+                            <h2>Subscribe for exclusive</h2>
+                            <h2>updates and hot offers!</h2>
+                        </div>
                         <div className={styles.subscribeFormWrapper}>
                             <form action="#">
                                 <div className={styles.subscribeFormTop}>
@@ -83,7 +239,7 @@ export const Home = () => {
                                         <input type="main" placeholder="Enter Your Email Address" required/>
                                     </label>
                                     <button type="submit">
-                                        <TelegramLogo  />
+                                        <TelegramLogo/>
                                         SUBSCRIBE
                                     </button>
                                 </div>
@@ -91,7 +247,8 @@ export const Home = () => {
                                     <label htmlFor="subscribeAgreement">
                                         <input type="checkbox"/>
                                         I agree to the
-                                        <a href="https://easyeat.ancorathemes.com/privacy-policy/" target="_blank">Privacy Policy</a>
+                                        <a href="https://easyeat.ancorathemes.com/privacy-policy/" target="_blank">Privacy
+                                            Policy</a>
                                     </label>
                                 </div>
                             </form>
@@ -100,9 +257,9 @@ export const Home = () => {
                 </section>
             </main>
             {/*FOOTER*/}
-            <Footer />
+            <Footer/>
             {/*COMMON COMPONENTS FOR UI */}
-            <UiControl />
+            <UiControl/>
         </div>
     )
 }
