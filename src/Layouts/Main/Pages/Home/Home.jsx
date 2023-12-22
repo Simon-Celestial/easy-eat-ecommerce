@@ -2,10 +2,11 @@ import styles from "./Home.module.scss";
 import {Header} from "../../Components/Header/Header.jsx";
 import {UiControl} from "../../Common/UiControl/UiControl.jsx";
 import {Footer} from "../../Components/Footer/Footer.jsx";
-import {ArrowRight, TelegramLogo} from "@phosphor-icons/react";
+import {ArrowRight, Heart, TelegramLogo} from "@phosphor-icons/react";
 import {SubscribeModal} from "../../Common/subscribeModal/SubscribeModal.jsx";
 import {useState, useEffect, useRef} from "react";
 import {Link} from "react-router-dom";
+import {CollageProductItems} from "../../Common/CollageProductItems/CollageProductItems.jsx";
 
 
 export const Home = () => {
@@ -13,7 +14,7 @@ export const Home = () => {
     const sectionRef = useRef();
     useEffect(() => {
         const handleMouseMove = (e) => {
-            setPosition({ x: e.clientX, y: e.clientY });
+            setPosition({x: e.clientX, y: e.clientY});
         };
         if (sectionRef.current) {
             sectionRef.current.addEventListener("mousemove", handleMouseMove);
@@ -190,11 +191,19 @@ export const Home = () => {
                         <div className={styles.ourBurgersHeading}>
                             <span>Our Burgers</span>
                             <h2>Unleash Your Burger Cravings with Our Menu</h2>
-
                         </div>
                         <div className={styles.ourBurgersProducts}>
+                            {/*FOR SALE ON PRODUCT ADD .cardSale styles, in .ourBurgersCardWrapper*/}
                             {/*FOR LINE THROUGH ON SALE PRICE (WRITE PRICE IN SPAN <p>sale price<p/>)*/}
                             <div className={styles.ourBurgersCardWrapper}>
+                                <div className={styles.burgerCardManipulation}>
+                                    <div className={styles.manipulationItem}>
+                                        <Heart weight="light"/>
+                                    </div>
+                                    <a href="#" className={styles.manipulationItem}>
+                                        <ArrowRight weight="light"/>
+                                    </a>
+                                </div>
                                 <div className={styles.burgerCard}>
                                     <Link to="/home/:id">
                                         <div className={styles.ourBurgersImg}>
@@ -204,23 +213,186 @@ export const Home = () => {
                                         </div>
                                     </Link>
                                     <Link to="/home/details">
-                                    <div className={styles.ourBurgerTitle}>
-                                        <span>CHICKEN LINKED</span>
-                                    </div>
+                                        <div className={styles.ourBurgerTitle}>
+                                            <span>CHICKEN BURGER</span>
+                                        </div>
                                     </Link>
                                     <div className={styles.ourBurgerPrice}>
-                                        <span>$89.00</span>
+                                        <span>$165.00</span>
                                     </div>
                                     <div className={styles.addToCart}>
-                                        <a href="#" >Buy Now</a>
+                                        <a href="#">Buy Now</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div className={styles.ourBurgersCardWrapper}>
+                                <div className={styles.cardSale}>
+                                    -10%
+                                </div>
+                                <div className={styles.burgerCardManipulation}>
+                                    <div className={styles.manipulationItem}>
+                                        <Heart weight="light"/>
+                                    </div>
+                                    <a href="#" className={styles.manipulationItem}>
+                                        <ArrowRight weight="light"/>
+                                    </a>
+                                </div>
+                                <div className={styles.burgerCard}>
+                                    <Link to="/home/:id">
+                                        <div className={styles.ourBurgersImg}>
+                                            <img
+                                                src="https://easyeat.ancorathemes.com/wp-content/uploads/2020/05/product-4-copyright-480x480.png"
+                                                alt="Burger"/>
+                                        </div>
+                                    </Link>
+                                    <Link to="/home/details">
+                                        <div className={styles.ourBurgerTitle}>
+                                            <span>BLACK BURGER</span>
+                                        </div>
+                                    </Link>
+                                    <div className={styles.ourBurgerPrice}>
+                                        <span><p>$99.00</p>$89.00</span>
+                                    </div>
+                                    <div className={styles.addToCart}>
+                                        <a href="#">Buy Now</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div className={styles.ourBurgersCardWrapper}>
+                                <div className={styles.burgerCardManipulation}>
+                                    <div className={styles.manipulationItem}>
+                                        <Heart weight="light"/>
+                                    </div>
+                                    <a href="#" className={styles.manipulationItem}>
+                                        <ArrowRight weight="light"/>
+                                    </a>
+                                </div>
+                                <div className={styles.burgerCard}>
+                                    <Link to="/home/:id">
+                                        <div className={styles.ourBurgersImg}>
+                                            <img
+                                                src="https://easyeat.ancorathemes.com/wp-content/uploads/2020/05/product-1-copyright-1024x1024.png"
+                                                alt="Burger"/>
+                                        </div>
+                                    </Link>
+                                    <Link to="/home/details">
+                                        <div className={styles.ourBurgerTitle}>
+                                            <span>FISH BURGER</span>
+                                        </div>
+                                    </Link>
+                                    <div className={styles.ourBurgerPrice}>
+                                        <span>$49.00</span>
+                                    </div>
+                                    <div className={styles.addToCart}>
+                                        <a href="#">Buy Now</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div className={styles.ourBurgersCardWrapper}>
+                                <div className={styles.burgerCardManipulation}>
+                                    <div className={styles.manipulationItem}>
+                                        <Heart weight="light"/>
+                                    </div>
+                                    <a href="#" className={styles.manipulationItem}>
+                                        <ArrowRight weight="light"/>
+                                    </a>
+                                </div>
+                                <div className={styles.burgerCard}>
+                                    <Link to="/home/:id">
+                                        <div className={styles.ourBurgersImg}>
+                                            <img
+                                                src="https://easyeat.ancorathemes.com/wp-content/uploads/2020/05/product-2-copyright-480x480.png"
+                                                alt="Burger"/>
+                                        </div>
+                                    </Link>
+                                    <Link to="/home/details">
+                                        <div className={styles.ourBurgerTitle}>
+                                            <span>DOUBLE BURGER</span>
+                                        </div>
+                                    </Link>
+                                    <div className={styles.ourBurgerPrice}>
+                                        <span>$125.00 - $165.00</span>
+                                    </div>
+                                    <div className={styles.addToCart}>
+                                        <a href="#">Buy Now</a>
                                     </div>
 
                                 </div>
                             </div>
                         </div>
+                        <div className={styles.ourBurgersViewMore}>
+                            <Link to="/home">
+                                <button>
+                                    View More
+                                    <ArrowRight/>
+                                </button>
+                            </Link>
+                        </div>
 
                     </div>
                 </section>
+
+                {/*INGREDIENTS SECTION*/}
+                <section className={styles.ingredientsSection}>
+                    <div className={styles.ingredientsContent}>
+                        <div className={styles.ingredientsLeft}>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/img-5-copyright.jpg"
+                                 alt="Cook"/>
+                        </div>
+                        <div className={styles.ingredientsRight}>
+                            <span>GOURMET BURGERS</span>
+                            <h1>DELICIOUS BURGERS MADE FROM THE FRESHEST INGREDIENTS</h1>
+                            <p>Nibh venenatis cras sed felis eget velit aliquet sagittis. Faucibus purus in massa tempor nec feugiat nisl pretium fusce.</p>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/img-4-copyright.jpg" alt="Burger"/>
+                        </div>
+                    </div>
+                </section>
+
+                {/*PARTNERSHIP SECTION*/}
+                <section className={styles.partnershipSection}>
+                    <div className={styles.partnershipContent}>
+                        <div className={styles.partnershipItem}>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/client-1-copyright.png" alt="Partners"/>
+                        </div>
+                        <div className={styles.partnershipItem}>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/client-2-copyright.png" alt="Partners"/>
+                        </div>
+                        <div className={styles.partnershipItem}>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/client-3-copyright.png" alt="Partners"/>
+                        </div>
+                        <div className={styles.partnershipItem}>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/client-4-copyright.png" alt="Partners"/>
+                        </div>
+                        <div className={styles.partnershipItem}>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/client-5-copyright.png" alt="Partners"/>
+                        </div>
+                        <div className={styles.partnershipItem}>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/client-6-copyright.png" alt="Partners"/>
+                        </div>
+
+                    </div>
+                </section>
+
+                {/*COLLAGE IMAGES SECTION*/}
+                <div className={styles.collageImagesSection}>
+                    <div className={styles.imageColumn}>
+                        <CollageProductItems productName="Chef's Chicken Burger" category="Burgers" imageUrl="https://easyeat.ancorathemes.com/wp-content/uploads/2017/05/img-6-copyright.jpg" />
+                    </div>
+                    <div className={styles.imageColumn}>
+                        <CollageProductItems productName="Double Set Burger" category="Burgers" imageUrl="https://easyeat.ancorathemes.com/wp-content/uploads/2017/05/img-10-copyright-890x664.jpg" />
+                        <CollageProductItems productName="Craft Light Beer" category="Burgers" imageUrl="https://easyeat.ancorathemes.com/wp-content/uploads/2017/05/img-12-copyright-890x664.jpg" />
+                    </div>
+                    <div className={styles.imageColumn}>
+                        <CollageProductItems productName="Spicy Tomato Sauce" category="Burgers" imageUrl="https://easyeat.ancorathemes.com/wp-content/uploads/2017/05/img-11-copyright-890x664.jpg" />
+                        <CollageProductItems productName="Hot French Fries" category="Burgers" imageUrl="https://easyeat.ancorathemes.com/wp-content/uploads/2017/05/img-13-copyright-890x664.jpg" />
+                    </div>
+                </div>
+
+
+
                 {/*LATEST NEWS SECTION WITH SLIDER*/}
                 <section className={styles.latestNewsSection}>
 
