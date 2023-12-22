@@ -2,7 +2,7 @@ import styles from "./Home.module.scss";
 import {Header} from "../../Components/Header/Header.jsx";
 import {UiControl} from "../../Common/UiControl/UiControl.jsx";
 import {Footer} from "../../Components/Footer/Footer.jsx";
-import {ArrowRight, Heart, TelegramLogo} from "@phosphor-icons/react";
+import {ArrowRight, CaretDoubleDown, Heart, TelegramLogo} from "@phosphor-icons/react";
 import {SubscribeModal} from "../../Common/subscribeModal/SubscribeModal.jsx";
 import {useState, useEffect, useRef} from "react";
 import {Link} from "react-router-dom";
@@ -345,8 +345,10 @@ export const Home = () => {
                         <div className={styles.ingredientsRight}>
                             <span>GOURMET BURGERS</span>
                             <h1>DELICIOUS BURGERS MADE FROM THE FRESHEST INGREDIENTS</h1>
-                            <p>Nibh venenatis cras sed felis eget velit aliquet sagittis. Faucibus purus in massa tempor nec feugiat nisl pretium fusce.</p>
-                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/img-4-copyright.jpg" alt="Burger"/>
+                            <p>Nibh venenatis cras sed felis eget velit aliquet sagittis. Faucibus purus in massa tempor
+                                nec feugiat nisl pretium fusce.</p>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/img-4-copyright.jpg"
+                                 alt="Burger"/>
                         </div>
                     </div>
                 </section>
@@ -355,22 +357,34 @@ export const Home = () => {
                 <section className={styles.partnershipSection}>
                     <div className={styles.partnershipContent}>
                         <div className={styles.partnershipItem}>
-                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/client-1-copyright.png" alt="Partners"/>
+                            <img
+                                src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/client-1-copyright.png"
+                                alt="Partners"/>
                         </div>
                         <div className={styles.partnershipItem}>
-                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/client-2-copyright.png" alt="Partners"/>
+                            <img
+                                src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/client-2-copyright.png"
+                                alt="Partners"/>
                         </div>
                         <div className={styles.partnershipItem}>
-                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/client-3-copyright.png" alt="Partners"/>
+                            <img
+                                src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/client-3-copyright.png"
+                                alt="Partners"/>
                         </div>
                         <div className={styles.partnershipItem}>
-                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/client-4-copyright.png" alt="Partners"/>
+                            <img
+                                src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/client-4-copyright.png"
+                                alt="Partners"/>
                         </div>
                         <div className={styles.partnershipItem}>
-                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/client-5-copyright.png" alt="Partners"/>
+                            <img
+                                src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/client-5-copyright.png"
+                                alt="Partners"/>
                         </div>
                         <div className={styles.partnershipItem}>
-                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/client-6-copyright.png" alt="Partners"/>
+                            <img
+                                src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/client-6-copyright.png"
+                                alt="Partners"/>
                         </div>
 
                     </div>
@@ -379,19 +393,231 @@ export const Home = () => {
                 {/*COLLAGE IMAGES SECTION*/}
                 <div className={styles.collageImagesSection}>
                     <div className={styles.imageColumn}>
-                        <CollageProductItems productName="Chef's Chicken Burger" category="Burgers" imageUrl="https://easyeat.ancorathemes.com/wp-content/uploads/2017/05/img-6-copyright.jpg" />
+                        <CollageProductItems productName="Chef's Chicken Burger" category="Burgers"
+                                             imageUrl="https://easyeat.ancorathemes.com/wp-content/uploads/2017/05/img-6-copyright.jpg"/>
                     </div>
                     <div className={styles.imageColumn}>
-                        <CollageProductItems productName="Double Set Burger" category="Burgers" imageUrl="https://easyeat.ancorathemes.com/wp-content/uploads/2017/05/img-10-copyright-890x664.jpg" />
-                        <CollageProductItems productName="Craft Light Beer" category="Burgers" imageUrl="https://easyeat.ancorathemes.com/wp-content/uploads/2017/05/img-12-copyright-890x664.jpg" />
+                        <CollageProductItems productName="Double Set Burger" category="Burgers"
+                                             imageUrl="https://easyeat.ancorathemes.com/wp-content/uploads/2017/05/img-10-copyright-890x664.jpg"/>
+                        <CollageProductItems productName="Craft Light Beer" category="Burgers"
+                                             imageUrl="https://easyeat.ancorathemes.com/wp-content/uploads/2017/05/img-12-copyright-890x664.jpg"/>
                     </div>
                     <div className={styles.imageColumn}>
-                        <CollageProductItems productName="Spicy Tomato Sauce" category="Burgers" imageUrl="https://easyeat.ancorathemes.com/wp-content/uploads/2017/05/img-11-copyright-890x664.jpg" />
-                        <CollageProductItems productName="Hot French Fries" category="Burgers" imageUrl="https://easyeat.ancorathemes.com/wp-content/uploads/2017/05/img-13-copyright-890x664.jpg" />
+                        <CollageProductItems productName="Spicy Tomato Sauce" category="Burgers"
+                                             imageUrl="https://easyeat.ancorathemes.com/wp-content/uploads/2017/05/img-11-copyright-890x664.jpg"/>
+                        <CollageProductItems productName="Hot French Fries" category="Burgers"
+                                             imageUrl="https://easyeat.ancorathemes.com/wp-content/uploads/2017/05/img-13-copyright-890x664.jpg"/>
                     </div>
                 </div>
 
+                {/*OUR MENU SECTION*/}
+                <section className={styles.ourMenuSection}>
+                    <div className={styles.ourMenuContent}>
+                        <div className={styles.ourMenuHeading}>
+                            <p>Our Menu</p>
+                            <span>YOUR ONE-STOP BURGER SHOP</span>
+                            <CaretDoubleDown/>
+                        </div>
+                        <div className={styles.ourMenuContainer}>
+                            <div className={styles.ourMenuColumn}>
+                                <div className={styles.ourMenuColumnItem}>
+                                    <div className={styles.ourMenuRow}>
+                                        <a href="#" className={styles.ourMenuDetails}>
+                                            CLASSIC JUICY CHEESEBURGER
+                                        </a>
+                                        <div className={styles.ourMenuItemDots}>
+                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                            . . . . . . . . . . . . . . . . . . . . .
+                                        </div>
+                                        <div className={styles.ourMenuDetails}>
+                                            $12.00
+                                        </div>
+                                    </div>
+                                    <div className={styles.ourMenuItemDescription}>
+                                        Duis aute irure dolor in reprehenderit in voluptate velit esse.
+                                    </div>
+                                </div>
+                                <div className={styles.ourMenuColumnItem}>
+                                    <div className={styles.ourMenuRow}>
+                                        <a href="#" className={styles.ourMenuDetails}>
+                                            MUSHROOM SWISS BURGER
 
+                                        </a>
+                                        <div className={styles.ourMenuItemDots}>
+                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                            . . . . . . . . . . . . . . . . . . . . .
+                                        </div>
+                                        <div className={styles.ourMenuDetails}>
+                                            $10.00
+                                        </div>
+                                    </div>
+                                    <div className={styles.ourMenuItemDescription}>
+                                        Duis aute irure dolor in reprehenderit in voluptate velit esse.
+                                    </div>
+                                </div>
+                                <div className={styles.ourMenuColumnItem}>
+                                    <div className={styles.ourMenuRow}>
+                                        <a href="#" className={styles.ourMenuDetails}>
+                                            BUFFALO CHICKEN BURGER
+                                        </a>
+                                        <div className={styles.ourMenuItemDots}>
+                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                            . . . . . . . . . . . . . . . . . . . . .
+                                        </div>
+                                        <div className={styles.ourMenuDetails}>
+                                            $14.00
+                                        </div>
+                                    </div>
+                                    <div className={styles.ourMenuItemDescription}>
+                                        Duis aute irure dolor in reprehenderit in voluptate velit esse.
+                                    </div>
+                                </div>
+                                <div className={styles.ourMenuColumnItem}>
+                                    <div className={styles.ourMenuRow}>
+                                        <a href="#" className={styles.ourMenuDetails}>
+                                            SOUTHWEST CHICKEN BURGER
+                                        </a>
+                                        <div className={styles.ourMenuItemDots}>
+                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                            . . . . . . . . . . . . . . . . . . . . .
+                                        </div>
+                                        <div className={styles.ourMenuDetails}>
+                                            $10.00
+                                        </div>
+                                    </div>
+                                    <div className={styles.ourMenuItemDescription}>
+                                        Duis aute irure dolor in reprehenderit in voluptate velit esse.
+                                    </div>
+                                </div>
+                                <div className={styles.ourMenuColumnItem}>
+                                    <div className={styles.ourMenuRow}>
+                                        <a href="#" className={styles.ourMenuDetails}>
+                                            PHILLY CHEESESTEAK BURGER
+                                        </a>
+                                        <div className={styles.ourMenuItemDots}>
+                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                            . . . . . . . . . . . . . . . . . . . . .
+                                        </div>
+                                        <div className={styles.ourMenuDetails}>
+                                            $12.00
+                                        </div>
+                                    </div>
+                                    <div className={styles.ourMenuItemDescription}>
+                                        Duis aute irure dolor in reprehenderit in voluptate velit esse.
+                                    </div>
+                                </div>
+                            </div>
+                            <div className={styles.ourMenuColumn}>
+                                <div className={styles.ourMenuColumnItem}>
+                                    <div className={styles.ourMenuRow}>
+                                        <a href="#" className={styles.ourMenuDetails}>
+                                            LOADED GUACAMOLE BURGER
+                                        </a>
+                                        <div className={styles.ourMenuItemDots}>
+                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                            . . . . . . . . . . . . . . . . . . . . .
+                                        </div>
+                                        <div className={styles.ourMenuDetails}>
+                                            $16.00
+                                        </div>
+                                    </div>
+                                    <div className={styles.ourMenuItemDescription}>
+                                        Duis aute irure dolor in reprehenderit in voluptate velit esse.
+                                    </div>
+                                </div>
+                                <div className={styles.ourMenuColumnItem}>
+                                    <div className={styles.ourMenuRow}>
+                                        <a href="#" className={styles.ourMenuDetails}>
+                                            TERIYAKI PINEAPPLE BURGER
+                                        </a>
+                                        <div className={styles.ourMenuItemDots}>
+                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                            . . . . . . . . . . . . . . . . . . . . .
+                                        </div>
+                                        <div className={styles.ourMenuDetails}>
+                                            $12.00
+                                        </div>
+                                    </div>
+                                    <div className={styles.ourMenuItemDescription}>
+                                        Duis aute irure dolor in reprehenderit in voluptate velit esse.
+                                    </div>
+                                </div>
+                                <div className={styles.ourMenuColumnItem}>
+                                    <div className={styles.ourMenuRow}>
+                                        <a href="#" className={styles.ourMenuDetails}>
+                                            DOUBLE BACON CHEESEBURGER
+                                        </a>
+                                        <div className={styles.ourMenuItemDots}>
+                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                            . . . . . . . . . . . . . . . . . . . . .
+                                        </div>
+                                        <div className={styles.ourMenuDetails}>
+                                            $16.00
+                                        </div>
+                                    </div>
+                                    <div className={styles.ourMenuItemDescription}>
+                                        Duis aute irure dolor in reprehenderit in voluptate velit esse.
+                                    </div>
+                                </div>
+                                <div className={styles.ourMenuColumnItem}>
+                                    <div className={styles.ourMenuRow}>
+                                        <a href="#" className={styles.ourMenuDetails}>
+                                            DOUBLE CHEESEBURGER MELT
+                                        </a>
+                                        <div className={styles.ourMenuItemDots}>
+                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                            . . . . . . . . . . . . . . . . . . . . .
+                                        </div>
+                                        <div className={styles.ourMenuDetails}>
+                                            $14.00
+                                        </div>
+                                    </div>
+                                    <div className={styles.ourMenuItemDescription}>
+                                        Duis aute irure dolor in reprehenderit in voluptate velit esse.
+                                    </div>
+                                </div>
+                                <div className={styles.ourMenuColumnItem}>
+                                    <div className={styles.ourMenuRow}>
+                                        <a href="#" className={styles.ourMenuDetails}>
+                                            BLACKENED CHICKEN BURGER
+                                        </a>
+                                        <div className={styles.ourMenuItemDots}>
+                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                            . . . . . . . . . . . . . . . . . . . . .
+                                        </div>
+                                        <div className={styles.ourMenuDetails}>
+                                            $12.00
+                                        </div>
+                                    </div>
+                                    <div className={styles.ourMenuItemDescription}>
+                                        Duis aute irure dolor in reprehenderit in voluptate velit esse.
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
 
                 {/*LATEST NEWS SECTION WITH SLIDER*/}
                 <section className={styles.latestNewsSection}>
