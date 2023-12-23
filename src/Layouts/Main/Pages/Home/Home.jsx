@@ -7,6 +7,7 @@ import {SubscribeModal} from "../../Common/subscribeModal/SubscribeModal.jsx";
 import {useState, useEffect, useRef} from "react";
 import {Link} from "react-router-dom";
 import {CollageProductItems} from "../../Common/CollageProductItems/CollageProductItems.jsx";
+import {FadeImageSlider} from "../../Common/FadeImageSlider/FadeImageSlider.jsx";
 
 
 export const Home = () => {
@@ -599,46 +600,57 @@ export const Home = () => {
                 {/*OUR DINER SECTION*/}
                 <section className={styles.ourDinerSection} ref={sectionRef}>
                     <div className={styles.solidCircleOurDinner}>
-                        <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/circle-fill-3.svg" alt="Decoration"/>
+                        <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/circle-fill-3.svg"
+                             alt="Decoration"/>
                     </div>
                     <div className={styles.spinningCircleOurDinner}>
-                        <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/circle-dotted-4.svg" alt="Decoration"/>
+                        <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/circle-dotted-4.svg"
+                             alt="Decoration"/>
                     </div>
                     <div className={styles.solidCircleLeftOurDinner}>
-                        <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/circle-fill-4.svg" alt="Decoration"/>
+                        <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/circle-fill-4.svg"
+                             alt="Decoration"/>
                     </div>
                     <div className={styles.spinningCircleLeftOurDinner}>
-                        <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/circle-dotted-5.svg" alt="Decoration"/>
+                        <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/circle-dotted-5.svg"
+                             alt="Decoration"/>
                     </div>
-
 
 
                     <div className={styles.ourDinerLeft}>
                         <div className={styles.ourDinnerBigImg} style={parallaxStyleSlow}>
-                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/parallax-img-11-copyright.png" alt="Decoration"/>
+                            <img
+                                src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/parallax-img-11-copyright.png"
+                                alt="Decoration"/>
                         </div>
                         <div className={styles.ourDinnerCrown} style={parallaxStyle}>
-                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/crown-4.svg" alt="Decoration"/>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/crown-4.svg"
+                                 alt="Decoration"/>
                         </div>
                         <div className={styles.ourDinnerRedLineLeft} style={parallaxStyle}>
-                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-lines-11.svg" alt="Decoration"/>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-lines-11.svg"
+                                 alt="Decoration"/>
                         </div>
                         <div className={styles.ourDinnerRedLineRight} style={parallaxStyle}>
-                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-lines-13.svg" alt="Decoration"/>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-lines-13.svg"
+                                 alt="Decoration"/>
                         </div>
-                        <div className={styles.ourDinnerRedLineTop}  style={parallaxStyle}>
-                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-lines-12.svg" alt="Decoration"/>
+                        <div className={styles.ourDinnerRedLineTop} style={parallaxStyle}>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-lines-12.svg"
+                                 alt="Decoration"/>
                         </div>
                         <div className={styles.ourDinnerDotRight} style={parallaxStyle}>
-                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-circle-2.svg" alt="Decoration"/>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-circle-2.svg"
+                                 alt="Decoration"/>
                         </div>
                         <div className={styles.ourDinnerDotTop} style={parallaxStyle}>
-                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-circle-2.svg" alt="Decoration"/>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-circle-2.svg"
+                                 alt="Decoration"/>
                         </div>
                         <div className={styles.ourDinnerDotLeft} style={parallaxStyle}>
-                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-circle-2.svg" alt="Decoration"/>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-circle-2.svg"
+                                 alt="Decoration"/>
                         </div>
-
 
 
                     </div>
@@ -650,14 +662,17 @@ export const Home = () => {
                         <p>Veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem
                             quia voluptas.</p>
                         <a href="#">
-                        <button>
-                            Learn More
-                            <ArrowRight/>
-                        </button>
+                            <button>
+                                Learn More
+                                <ArrowRight/>
+                            </button>
                         </a>
 
                     </div>
                 </section>
+
+                {/*FADE IMAGE SLIDER SECTION*/}
+                <FadeImageSlider/>
                 {/*LATEST NEWS SECTION WITH SLIDER*/}
                 <section className={styles.latestNewsSection}>
 
