@@ -28,9 +28,11 @@ export const Home = () => {
     const parallaxStyle = {
         transform: `translate(-${position.x / 50}px, -${position.y / 40}px)`,
     };
-    const parallaxStyleFast = {
-        transform: `translate(-${position.x / 40}px, -${position.y / 100}px)`,
+
+    const parallaxStyleSlow = {
+        transform: `translate(-${position.x / 200}px, -${position.y / 200}px)`,
     };
+
     return (
         <div className={styles.homeWrapper}>
             {/*HOME PAGE MODAL*/}
@@ -89,7 +91,7 @@ export const Home = () => {
                                 <img
                                     src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/parallax-img-5-copyright.png"
                                     alt=""
-                                    style={parallaxStyleFast}
+                                    style={parallaxStyle}
                                 />
                             </div>
                             <div className={styles.solidCircleTop}>
@@ -103,7 +105,7 @@ export const Home = () => {
                             <div className={styles.redCrownTop}>
                                 <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/crown-3.svg"
                                      alt="Decoration"
-                                     style={parallaxStyle}
+                                     style={parallaxStyleSlow}
                                 />
 
                             </div>
@@ -111,25 +113,25 @@ export const Home = () => {
                                 <img
                                     src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-circle-3.svg"
                                     alt="Decoration"
-                                    style={parallaxStyle}
+                                    style={parallaxStyleSlow}
                                 />
                             </div>
                             <div className={styles.redLineBurger}>
                                 <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-lines-7.svg"
                                      alt="Decoration"
-                                     style={parallaxStyle}
+                                     style={parallaxStyleSlow}
                                 />
                             </div>
                             <div className={styles.redSmallLineBurger}>
                                 <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-lines-9.svg"
                                      alt="Decoration"
-                                     style={parallaxStyleFast}
+                                     style={parallaxStyleSlow}
                                 />
                             </div>
                             <div className={styles.redBottomLineBurger}>
                                 <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-lines-8.svg"
                                      alt="Decoration"
-                                     style={parallaxStyle}
+                                     style={parallaxStyleSlow}
                                 />
                             </div>
                             <div className={styles.spinningCircleBottom}>
@@ -143,42 +145,42 @@ export const Home = () => {
                                 <img
                                     src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-circle-3.svg"
                                     alt="Decoration"
-                                    style={parallaxStyle}
+                                    style={parallaxStyleSlow}
                                 />
                             </div>
                             <div className={styles.redSmallBallBottom}>
                                 <img
                                     src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-circle-4.svg"
                                     alt="Decoration"
-                                    style={parallaxStyle}
+                                    style={parallaxStyleSlow}
                                 />
                             </div>
                             <div className={styles.redTinyBallBurger}>
                                 <img
                                     src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-circle-2.svg"
                                     alt="Decoration"
-                                    style={parallaxStyle}
+                                    style={parallaxStyleSlow}
                                 />
                             </div>
                             <div className={styles.redSmallBallTop}>
                                 <img
                                     src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-circle-4.svg"
                                     alt="Decoration"
-                                    style={parallaxStyle}
+                                    style={parallaxStyleSlow}
                                 />
                             </div>
                             <div className={styles.redTinyBallRight}>
                                 <img
                                     src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-circle-2.svg"
                                     alt="Decoration"
-                                    style={parallaxStyle}
+                                    style={parallaxStyleSlow}
                                 />
                             </div>
                             <div className={styles.redLineRightBurger}>
                                 <img
                                     src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-lines-10.svg"
                                     alt="Decoration"
-                                    style={parallaxStyle}
+                                    style={parallaxStyleSlow}
                                 />
                             </div>
                         </div>
@@ -411,7 +413,34 @@ export const Home = () => {
                 </div>
 
                 {/*OUR MENU SECTION*/}
-                <section className={styles.ourMenuSection}>
+                <section className={styles.ourMenuSection} ref={sectionRef}>
+                    <div className={styles.decorationTomato} style={parallaxStyleSlow}>
+                        <img
+                            src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/parallax-img-8-copyright.png"
+                            alt="Decoration"/>
+                    </div>
+                    <div className={styles.decorationBurger} style={parallaxStyleSlow}>
+                        <img
+                            src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/parallax-img-7-copyright.png"
+                            alt="Decoration"/>
+                    </div>
+                    <div className={styles.decorationCheese} style={parallaxStyleSlow}>
+                        <img
+                            src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/parallax-img-6-copyright.png"
+                            alt="Decoration"/>
+
+                    </div>
+                    <div className={styles.decorationFries} style={parallaxStyleSlow}>
+                        <img
+                            src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/parallax-img-10-copyright.png"
+                            alt="Decoration"/>
+                    </div>
+                    <div className={styles.decorationSalad} style={parallaxStyleSlow}>
+                        <img
+                            src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/parallax-img-9-copyright.png"
+                            alt="Decoration"/>
+
+                    </div>
                     <div className={styles.ourMenuContent}>
                         <div className={styles.ourMenuHeading}>
                             <p>Our Menu</p>
@@ -425,12 +454,7 @@ export const Home = () => {
                                         <a href="#" className={styles.ourMenuDetails}>
                                             CLASSIC JUICY CHEESEBURGER
                                         </a>
-                                        <div className={styles.ourMenuItemDots}>
-                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-                                            . . . . . . . . . . . . . . . . . . . . .
-                                        </div>
+                                        <div className={styles.ourMenuItemDots}></div>
                                         <div className={styles.ourMenuDetails}>
                                             $12.00
                                         </div>
@@ -443,14 +467,8 @@ export const Home = () => {
                                     <div className={styles.ourMenuRow}>
                                         <a href="#" className={styles.ourMenuDetails}>
                                             MUSHROOM SWISS BURGER
-
                                         </a>
-                                        <div className={styles.ourMenuItemDots}>
-                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-                                            . . . . . . . . . . . . . . . . . . . . .
-                                        </div>
+                                        <div className={styles.ourMenuItemDots}></div>
                                         <div className={styles.ourMenuDetails}>
                                             $10.00
                                         </div>
@@ -464,12 +482,7 @@ export const Home = () => {
                                         <a href="#" className={styles.ourMenuDetails}>
                                             BUFFALO CHICKEN BURGER
                                         </a>
-                                        <div className={styles.ourMenuItemDots}>
-                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-                                            . . . . . . . . . . . . . . . . . . . . .
-                                        </div>
+                                        <div className={styles.ourMenuItemDots}></div>
                                         <div className={styles.ourMenuDetails}>
                                             $14.00
                                         </div>
@@ -483,12 +496,7 @@ export const Home = () => {
                                         <a href="#" className={styles.ourMenuDetails}>
                                             SOUTHWEST CHICKEN BURGER
                                         </a>
-                                        <div className={styles.ourMenuItemDots}>
-                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-                                            . . . . . . . . . . . . . . . . . . . . .
-                                        </div>
+                                        <div className={styles.ourMenuItemDots}></div>
                                         <div className={styles.ourMenuDetails}>
                                             $10.00
                                         </div>
@@ -502,12 +510,7 @@ export const Home = () => {
                                         <a href="#" className={styles.ourMenuDetails}>
                                             PHILLY CHEESESTEAK BURGER
                                         </a>
-                                        <div className={styles.ourMenuItemDots}>
-                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-                                            . . . . . . . . . . . . . . . . . . . . .
-                                        </div>
+                                        <div className={styles.ourMenuItemDots}></div>
                                         <div className={styles.ourMenuDetails}>
                                             $12.00
                                         </div>
@@ -523,12 +526,7 @@ export const Home = () => {
                                         <a href="#" className={styles.ourMenuDetails}>
                                             LOADED GUACAMOLE BURGER
                                         </a>
-                                        <div className={styles.ourMenuItemDots}>
-                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-                                            . . . . . . . . . . . . . . . . . . . . .
-                                        </div>
+                                        <div className={styles.ourMenuItemDots}></div>
                                         <div className={styles.ourMenuDetails}>
                                             $16.00
                                         </div>
@@ -542,12 +540,7 @@ export const Home = () => {
                                         <a href="#" className={styles.ourMenuDetails}>
                                             TERIYAKI PINEAPPLE BURGER
                                         </a>
-                                        <div className={styles.ourMenuItemDots}>
-                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-                                            . . . . . . . . . . . . . . . . . . . . .
-                                        </div>
+                                        <div className={styles.ourMenuItemDots}></div>
                                         <div className={styles.ourMenuDetails}>
                                             $12.00
                                         </div>
@@ -561,12 +554,7 @@ export const Home = () => {
                                         <a href="#" className={styles.ourMenuDetails}>
                                             DOUBLE BACON CHEESEBURGER
                                         </a>
-                                        <div className={styles.ourMenuItemDots}>
-                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-                                            . . . . . . . . . . . . . . . . . . . . .
-                                        </div>
+                                        <div className={styles.ourMenuItemDots}></div>
                                         <div className={styles.ourMenuDetails}>
                                             $16.00
                                         </div>
@@ -580,12 +568,7 @@ export const Home = () => {
                                         <a href="#" className={styles.ourMenuDetails}>
                                             DOUBLE CHEESEBURGER MELT
                                         </a>
-                                        <div className={styles.ourMenuItemDots}>
-                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-                                            . . . . . . . . . . . . . . . . . . . . .
-                                        </div>
+                                        <div className={styles.ourMenuItemDots}></div>
                                         <div className={styles.ourMenuDetails}>
                                             $14.00
                                         </div>
@@ -599,12 +582,7 @@ export const Home = () => {
                                         <a href="#" className={styles.ourMenuDetails}>
                                             BLACKENED CHICKEN BURGER
                                         </a>
-                                        <div className={styles.ourMenuItemDots}>
-                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-                                            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-                                            . . . . . . . . . . . . . . . . . . . . .
-                                        </div>
+                                        <div className={styles.ourMenuItemDots}></div>
                                         <div className={styles.ourMenuDetails}>
                                             $12.00
                                         </div>
@@ -614,11 +592,72 @@ export const Home = () => {
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </section>
 
+                {/*OUR DINER SECTION*/}
+                <section className={styles.ourDinerSection} ref={sectionRef}>
+                    <div className={styles.solidCircleOurDinner}>
+                        <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/circle-fill-3.svg" alt="Decoration"/>
+                    </div>
+                    <div className={styles.spinningCircleOurDinner}>
+                        <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/circle-dotted-4.svg" alt="Decoration"/>
+                    </div>
+                    <div className={styles.solidCircleLeftOurDinner}>
+                        <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/circle-fill-4.svg" alt="Decoration"/>
+                    </div>
+                    <div className={styles.spinningCircleLeftOurDinner}>
+                        <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/circle-dotted-5.svg" alt="Decoration"/>
+                    </div>
+
+
+
+                    <div className={styles.ourDinerLeft}>
+                        <div className={styles.ourDinnerBigImg} style={parallaxStyleSlow}>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/parallax-img-11-copyright.png" alt="Decoration"/>
+                        </div>
+                        <div className={styles.ourDinnerCrown} style={parallaxStyle}>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/crown-4.svg" alt="Decoration"/>
+                        </div>
+                        <div className={styles.ourDinnerRedLineLeft} style={parallaxStyle}>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-lines-11.svg" alt="Decoration"/>
+                        </div>
+                        <div className={styles.ourDinnerRedLineRight} style={parallaxStyle}>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-lines-13.svg" alt="Decoration"/>
+                        </div>
+                        <div className={styles.ourDinnerRedLineTop}  style={parallaxStyle}>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-lines-12.svg" alt="Decoration"/>
+                        </div>
+                        <div className={styles.ourDinnerDotRight} style={parallaxStyle}>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-circle-2.svg" alt="Decoration"/>
+                        </div>
+                        <div className={styles.ourDinnerDotTop} style={parallaxStyle}>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-circle-2.svg" alt="Decoration"/>
+                        </div>
+                        <div className={styles.ourDinnerDotLeft} style={parallaxStyle}>
+                            <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-circle-2.svg" alt="Decoration"/>
+                        </div>
+
+
+
+                    </div>
+                    <div className={styles.ourDinerRight}>
+                        <h2>OUR DINER</h2>
+                        <span>We make the best burgers in town</span>
+                        <p>Adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                            ad minim veniam.natus error sit voluptatem accusantium doloremque laudantium.</p>
+                        <p>Veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem
+                            quia voluptas.</p>
+                        <a href="#">
+                        <button>
+                            Learn More
+                            <ArrowRight/>
+                        </button>
+                        </a>
+
+                    </div>
+                </section>
                 {/*LATEST NEWS SECTION WITH SLIDER*/}
                 <section className={styles.latestNewsSection}>
 

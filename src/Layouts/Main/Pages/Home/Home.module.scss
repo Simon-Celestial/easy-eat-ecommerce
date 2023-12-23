@@ -727,6 +727,63 @@ a {
       width: 100%;
       justify-content: center;
       padding: 120px 15px;
+      position: relative;
+
+      .decorationTomato {
+        position: absolute;
+        bottom: 12vh;
+        left: 5vw;
+        width: 10vw;
+
+        img {
+          width: 100%;
+        }
+      }
+
+      .decorationFries {
+        position: absolute;
+        top: 12vh;
+        left: 4vw;
+        width: 15vw;
+
+        img {
+          width: 100%;
+        }
+      }
+
+      .decorationBurger {
+        position: absolute;
+        top: 3vh;
+        right: 4vw;
+        width: 17vw;
+
+        img {
+          width: 100%;
+        }
+      }
+
+      .decorationCheese {
+        position: absolute;
+        bottom: 23vh;
+        right: 4vw;
+        width: 12vw;
+
+        img {
+          width: 100%;
+        }
+      }
+
+      .decorationSalad {
+        position: absolute;
+        bottom: 15%;
+        left: 50%;
+        transform: translateY(-50%);
+        width: 7vw;
+
+        img {
+          width: 100%;
+        }
+      }
 
       .ourMenuContent {
         max-width: 1290px;
@@ -734,54 +791,61 @@ a {
         width: 100%;
         color: $color-white;
         font-family: $font-main;
-        padding-bottom: 120px;
+        padding-bottom: 200px;
         flex-direction: column;
+
         .ourMenuHeading {
           display: flex;
           width: 100%;
           flex-direction: column;
           align-items: center;
+
           p {
             font-size: 19px;
             margin-bottom: 24px;
           }
+
           span {
             font-size: 57px;
             line-height: 57px;
             margin-bottom: 34px;
           }
+
           svg {
             font-size: 22px;
           }
         }
+
         .ourMenuContainer {
           display: flex;
           width: 100%;
           margin-top: 45px;
+
           .ourMenuColumn {
             width: 50%;
             display: flex;
             flex-direction: column;
+
             .ourMenuColumnItem {
               display: flex;
               width: 100%;
               flex-direction: column;
               padding: 0 50px 35px 0;
               gap: 12px;
-              .ourMenuRow{
+
+              .ourMenuRow {
                 display: flex;
                 width: 100%;
                 justify-content: space-between;
+
                 .ourMenuDetails {
                   font-size: 24px;
                   white-space: nowrap;
                   color: $color-white;
 
                 }
+
                 .ourMenuItemDots {
-                  font-size: 20px;
-                  color: #AEAEAE;
-                  opacity: 0.4;
                   line-height: 1;
                   white-space: nowrap;
                   min-width: 20px;
@@ -790,11 +854,17 @@ a {
                   margin: 0 10px;
                   padding-top: 6px;
 
-
-
+                  &:after {
+                    content: '. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .';
+                    font-size: 20px;
+                    color: #AEAEAE;
+                    opacity: 0.4;
+                    display: block;
+                  }
 
                 }
               }
+
               .ourMenuItemDescription {
                 font-family: $font-alternative;
                 color: $color-gray;
@@ -805,6 +875,211 @@ a {
         }
 
 
+      }
+    }
+
+    //OUR DINER SECTION
+    .ourDinerSection {
+      display: flex;
+      width: 100%;
+      position: relative;
+      padding: 0 15px 0 15px;
+      background-color: $color-yellow;
+      overflow: hidden;
+
+      .solidCircleOurDinner {
+        position: absolute;
+        max-width: 37vw;
+        top: 0;
+        right: -10vw;
+
+        img {
+          width: 100%;
+        }
+      }
+
+      .spinningCircleOurDinner {
+        position: absolute;
+        max-width: 33vw;
+        bottom: -9vw;
+        right: -5vw;
+
+        img {
+          width: 100%;
+          animation: rotateAnimation 8s linear infinite;
+
+        }
+      }
+
+      .solidCircleLeftOurDinner {
+        position: absolute;
+        max-width: 42vw;
+        bottom: -25vh;
+        left: -12vw;
+
+        img {
+          width: 100%;
+        }
+      }
+
+      .spinningCircleLeftOurDinner {
+        position: absolute;
+        max-width: 15vw;
+        bottom: 5vh;
+        left: -5vw;
+
+        img {
+          width: 100%;
+          animation: rotateAnimation 10s linear infinite;
+
+        }
+      }
+
+      .ourDinerLeft {
+        display: flex;
+        width: 55%;
+        z-index: 3;
+        position: relative;
+
+        .ourDinnerBigImg {
+          position: absolute;
+          max-width: 100%;
+          width: 90%;
+          left: 5%;
+          top: 0;
+          z-index: 4;
+
+          img {
+            width: 100%;
+          }
+        }
+
+        .ourDinnerCrown {
+          position: absolute;
+          top: 16vh;
+          left: 20%;
+
+          img {
+            width: 100%;
+          }
+        }
+
+        .ourDinnerRedLineLeft {
+          position: absolute;
+          top: 28vh;
+          left: 12%;
+
+          img {
+            width: 100%;
+          }
+        }
+
+        .ourDinnerDotTop {
+          position: absolute;
+          top: 18vh;
+          left: 38%;
+
+          img {
+            width: 100%;
+          }
+        }
+
+        .ourDinnerRedLineTop {
+          position: absolute;
+          top: 14vh;
+          left: 73%;
+
+          img {
+            width: 100%;
+          }
+        }
+
+        .ourDinnerRedLineRight {
+          position: absolute;
+          top: 38vh;
+          left: 76%;
+
+          img {
+            width: 100%;
+          }
+        }
+
+        .ourDinnerDotRight {
+          position: absolute;
+          top: 30vh;
+          left: 72%;
+
+          img {
+            width: 100%;
+          }
+        }
+
+        .ourDinnerDotLeft {
+          position: absolute;
+          top: 45vh;
+          left: 5%;
+
+          img {
+            width: 100%;
+          }
+        }
+
+
+      }
+
+      .ourDinerRight {
+        display: flex;
+        z-index: 3;
+        width: 30%;
+        flex-direction: column;
+        padding: 150px 50px 200px 15px;
+        color: $color-white;
+        font-family: $font-main;
+
+        h2 {
+          font-weight: 400;
+          font-size: 19px;
+          margin-bottom: 25px;
+        }
+
+        span {
+          font-size: 57px;
+          line-height: 57px;
+          margin-bottom: 20px;
+        }
+
+        p {
+          font-size: 17px;
+          line-height: 28px;
+          margin-bottom: 30px;
+          font-family: $font-alternative;
+        }
+
+        a {
+          button {
+            font-family: $font-main;
+            font-size: 18px;
+            color: $color-white;
+            text-transform: uppercase;
+            outline: 0;
+            border: 0;
+            background-color: $color-orange;
+            width: 168px;
+            padding: 15px 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            cursor: pointer;
+            margin-top: 20px;
+
+            svg {
+              font-size: 22px;
+              margin-bottom: 3px;
+            }
+          }
+
+        }
       }
     }
 
@@ -1025,6 +1300,13 @@ a {
           }
         }
       }
+
+      .ourDinerSection {
+        .ourDinerRight {
+          padding: 120px 30px 130px 15px;
+
+        }
+      }
     }
   }
 }
@@ -1108,6 +1390,44 @@ a {
           }
         }
       }
+
+      .ourMenuSection {
+        padding: 100px 15px;
+
+        .ourMenuContent {
+          max-width: 1100px;
+
+          .ourMenuHeading {
+            span {
+              font-size: 45px;
+              line-height: 45px;
+            }
+          }
+
+        }
+      }
+
+      .ourDinerSection {
+        .ourDinerLeft {
+          .ourDinnerCrown {
+            top: 11vh;
+          }
+
+          .ourDinnerRedLineLeft {
+            left: 5%;
+          }
+
+          .ourDinnerRedLineRight {
+            left: 80%;
+          }
+        }
+
+        .ourDinerRight {
+          padding: 100px 0 120px 15px;
+          width: 35%;
+        }
+      }
+
     }
   }
 }
@@ -1317,6 +1637,70 @@ a {
 
         }
       }
+
+      .ourMenuSection {
+        padding: 90px 15px;
+
+        .decorationFries {
+          top: 5vh;
+        }
+
+        .ourMenuContent {
+          max-width: 100%;
+          padding-bottom: 100px;
+
+          .ourMenuHeading {
+            span {
+              font-size: 35px;
+              line-height: 35px;
+            }
+          }
+
+          .ourMenuContainer {
+            .ourMenuColumn {
+              .ourMenuColumnItem {
+                padding: 0 25px 15px 0;
+
+                .ourMenuRow {
+                  .ourMenuDetails {
+                    font-size: 21px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .ourDinerSection {
+        .ourDinerLeft {
+          .ourDinnerCrown {
+            top: 11vh;
+          }
+
+          .ourDinnerRedLineLeft {
+            left: 5%;
+          }
+
+          .ourDinnerRedLineRight {
+            left: 80%;
+          }
+        }
+
+        .ourDinerRight {
+          padding: 60px 0 100px 15px;
+          width: 40%;
+
+          span {
+            font-size: 48px;
+            line-height: 48px;
+          }
+
+          p {
+            margin-bottom: 15px;
+          }
+        }
+      }
     }
   }
 }
@@ -1345,6 +1729,22 @@ a {
         }
       }
 
+      .ourDinerSection {
+        .ourDinerLeft {
+          .ourDinnerBigImg {
+            top: 20%;
+          }
+        }
+
+        .ourDinerRight {
+          width: 45%;
+
+          span {
+            font-size: 42px;
+            line-height: 42px;
+          }
+        }
+      }
     }
   }
 }
@@ -1629,6 +2029,95 @@ a {
         }
       }
 
+      .ourMenuSection {
+        background-image: url("https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decoration-bg-5.png");
+        padding: 50px 15px 50px 15px;
+
+        .decorationFries {
+          display: none;
+        }
+
+        .decorationTomato {
+          display: none;
+        }
+
+        .decorationSalad {
+          display: none;
+        }
+
+        .decorationBurger {
+          display: none;
+        }
+
+        .decorationCheese {
+          display: none;
+        }
+
+        .ourMenuContent {
+          padding-bottom: 0;
+
+          .ourMenuHeading {
+            span {
+              font-size: 30px;
+              line-height: 30px;
+            }
+          }
+
+          .ourMenuContainer {
+            flex-direction: column;
+            align-items: center;
+
+            .ourMenuColumn {
+              width: 100%;
+
+              .ourMenuColumnItem {
+                padding: 0 0 15px 0;
+                gap: 8px;
+
+                .ourMenuRow {
+                  .ourMenuDetails {
+                    font-size: 20px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .ourDinerSection {
+        flex-direction: column;
+        .spinningCircleOurDinner {
+          bottom: unset;
+          top: -100px;
+          right: -100px;
+        }
+
+        .ourDinerLeft {
+          height: 500px;
+          width: 100%;
+          padding: 0 15px;
+          .ourDinnerBigImg {
+            top: 0;
+            width: 80%;
+            left: 10%;
+          }
+
+        }
+
+        .ourDinerRight {
+          width: 100%;
+          span {
+            font-size: 48px;
+            line-height: 48px;
+          }
+
+          p {
+            margin-bottom: 15px;
+          }
+        }
+      }
+
     }
   }
 }
@@ -1672,6 +2161,57 @@ a {
         padding: 25px 10px;
       }
 
+      .ourMenuSection {
+        padding: 25px 15px;
+
+        .ourMenuContent {
+          .ourMenuContainer {
+            margin-top: 25px;
+          }
+        }
+      }
+
+      .ourDinerSection {
+        .solidCircleLeftOurDinner {
+          top: 0;
+        }
+        .spinningCircleLeftOurDinner{
+          right: 50px;
+          left: unset;
+        }
+        .ourDinerLeft {
+          height: 300px;
+          width: 100%;
+          .ourDinnerCrown{
+            top: 50px;
+          }
+          .ourDinnerRedLineLeft {
+            top: 200px;
+          }
+          .ourDinnerBigImg {
+            top: 50px;
+            left: 20%;
+            max-width: 100%;
+            width: 300px;
+          }
+          .ourDinnerRedLineRight {
+            top: 243px;
+            left: 73%;
+            img {
+              transform: rotate(90deg);
+
+            }
+          }
+        }
+        .ourDinerRight {
+          padding: 80px 15px 35px 15px;
+          span {
+            font-size: 30px;
+            line-height: 30px;
+          }
+        }
+      }
+
     }
   }
 }
@@ -1705,7 +2245,6 @@ a {
           }
         }
       }
-
       .collageImagesSection {
         flex-direction: column;
 
@@ -1738,6 +2277,38 @@ a {
               bottom: 10px !important;
             }
           }
+        }
+      }
+      .ourDinerSection {
+        .ourDinerRight {
+          padding: 50px 0 25px 0;
+          span {
+            font-size: 25px;
+            line-height: 25px;
+          }
+          a {
+            button {
+              width: 120px;
+              gap: 5px;
+            }
+
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 440px) {
+  .homeWrapper {
+    .mainWrapper {
+      .ourDinerSection {
+        .ourDinerLeft {
+          .ourDinnerBigImg {
+            left: 50%;
+            transform: translateX(-50%)!important;
+          }
+
         }
       }
     }
