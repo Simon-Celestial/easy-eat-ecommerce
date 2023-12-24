@@ -3,7 +3,7 @@ import styles from "./SubscribeModal.module.scss";
 import {Envelope, X} from "@phosphor-icons/react";
 import {LayoutContext} from "../../../../Context/LayoutContext/LayoutContext.jsx";
 export const SubscribeModal = () => {
-    const [subscribeModalOpen,setSubscribeModalOpen] = useState(true);
+    const [subscribeModalOpen,setSubscribeModalOpen] = useState(false);
     const {
         handleWidgetClose,
     } = useContext(LayoutContext);
@@ -17,6 +17,12 @@ export const SubscribeModal = () => {
             document.removeEventListener("click", action);
         };
     }, []);
+    useEffect(() => {
+        setTimeout(()=> {
+            setSubscribeModalOpen(true)
+        },3000)
+    }, []);
+
     return (
         <section className={`${styles.subscribeModalSection} ${!subscribeModalOpen && styles.modalDisabled}`} onClick={ev=>{ev.stopPropagation()}}>
             <div className={styles.modalContent}>

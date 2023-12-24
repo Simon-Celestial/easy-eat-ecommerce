@@ -8,6 +8,53 @@
   display: flex;
   position: relative;
   overflow: hidden;
+
+  .fadeImgSliderVideo {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.65);
+    z-index: 999;
+    transition: opacity $transition-fast;
+    opacity: 0;
+    pointer-events: none;
+
+    .videoContainer {
+      width: 1100px;
+      height: 500px;
+      position: relative;
+
+      .closeVideo {
+        position: absolute;
+        top: -40px;
+        right: 60px;
+        cursor: pointer;
+
+        svg {
+          font-size: 40px;
+          color: gray;
+        }
+      }
+
+      iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+    }
+
+    &.videoOpened {
+      opacity: 1 !important;
+      pointer-events: auto !important;
+    }
+
+  }
+
   .playButtonContainer {
     display: flex;
     position: absolute;
@@ -15,11 +62,12 @@
     top: 50%;
     width: 350px;
     height: 350px;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     z-index: 2;
     cursor: pointer;
 
   }
+
   .playButton {
     position: absolute;
     display: flex;
@@ -29,7 +77,7 @@
     border: 2px solid $color-white;
     left: 50%;
     top: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     cursor: pointer;
     width: 90px;
     height: 90px;
@@ -39,15 +87,101 @@
     pointer-events: none;
     transition: 0.1s linear;
   }
+
   .imageWrapper {
     width: 100%;
     display: flex;
     overflow: hidden;
     user-select: none;
+
     img {
       width: 100%;
       object-fit: cover;
       object-position: top;
     }
+  }
+}
+
+@media screen and (max-width: 1440px) {
+.fadeImgSliderSection {
+  height: 700px;
+  .fadeImgSliderVideo {
+    .videoContainer {
+      width: 800px;
+      height: 600px;
+      .closeVideo {
+        top: 30px;
+        right: -50px;
+      }
+    }
+  }
+}
+}
+@media screen and (max-width: 1200px) {
+  .fadeImgSliderSection {
+    height: 600px;
+    .playButton {
+      width: 80px;
+      height: 80px;
+    }
+    .playButtonContainer {
+      width: 300px;
+      height: 300px;
+    }
+    .fadeImgSliderVideo {
+      .videoContainer {
+        width: 600px;
+        height: 400px;
+        .closeVideo {
+          top: -50px;
+          right: -10px;
+        }
+
+      }
+    }
+
+  }
+}
+@media screen and (max-width: 1000px) {
+  .fadeImgSliderSection {
+    height: 500px;
+  }
+}
+@media screen and (max-width: 800px) {
+  .fadeImgSliderSection {
+    height: 400px;
+    .playButton {
+      width: 60px;
+      height: 60px;
+    }
+    .playButtonContainer {
+      width: 250px;
+      height: 250px;
+    }
+    .fadeImgSliderVideo {
+      .videoContainer {
+        width: 475px;
+        height: 275px;
+      }
+    }
+
+
+  }
+}
+@media screen and (max-width: 550px) {
+  .fadeImgSliderSection {
+    height: 350px;
+    .fadeImgSliderVideo {
+      .videoContainer {
+        width: 300px;
+        height: 200px;
+        .closeVideo {
+          top: -30px;
+          right: -10px;
+        }
+
+      }
+    }
+
   }
 }

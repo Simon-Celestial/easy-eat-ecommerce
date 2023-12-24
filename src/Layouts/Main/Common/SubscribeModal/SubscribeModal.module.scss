@@ -15,6 +15,7 @@
   opacity: 1;
   transition: $transition-medium;
   pointer-events: auto;
+  box-shadow: 0 0 15px $color-black;
 
   &.modalDisabled {
     pointer-events: none!important;

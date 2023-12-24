@@ -614,14 +614,6 @@ a {
       }
     }
 
-    //LATEST NEWS SECTION
-    .latestNewsSection {
-      display: flex;
-      width: 100%;
-      padding: 100px 0;
-      background-color: $color-white;
-    }
-
     //COLLAGE IMAGES SECTION
     .collageImagesSection {
       display: flex;
@@ -1732,7 +1724,7 @@ a {
       .ourDinerSection {
         .ourDinerLeft {
           .ourDinnerBigImg {
-            top: 20%;
+            top: 5%;
           }
         }
 

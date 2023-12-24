@@ -3,36 +3,45 @@ import {Header} from "../../Components/Header/Header.jsx";
 import {UiControl} from "../../Common/UiControl/UiControl.jsx";
 import {Footer} from "../../Components/Footer/Footer.jsx";
 import {ArrowRight, CaretDoubleDown, Heart, TelegramLogo} from "@phosphor-icons/react";
-import {SubscribeModal} from "../../Common/subscribeModal/SubscribeModal.jsx";
-import {useState, useEffect, useRef} from "react";
+import {SubscribeModal} from "../../Common/SubscribeModal/SubscribeModal.jsx";
+import {useState, useCallback} from "react";
 import {Link} from "react-router-dom";
 import {CollageProductItems} from "../../Common/CollageProductItems/CollageProductItems.jsx";
 import {FadeImageSlider} from "../../Common/FadeImageSlider/FadeImageSlider.jsx";
+import {LatestNewsSectionSlider} from "../../Common/LatestNewsSectionSlider/LatestNewsSectionSlider.jsx";
 
 
 export const Home = () => {
     const [position, setPosition] = useState({x: 0, y: 0});
-    const sectionRef = useRef();
-    useEffect(() => {
-        const handleMouseMove = (e) => {
+    const [parallaxEnabled, setParallaxEnabled] = useState(false);
+
+    const handleMouseMove = useCallback((e) => {
+        if (parallaxEnabled) {
             setPosition({x: e.clientX, y: e.clientY});
-        };
-        if (sectionRef.current) {
-            sectionRef.current.addEventListener("mousemove", handleMouseMove);
+        } else {
+
         }
-        return () => {
-            if (sectionRef.current) {
-                sectionRef.current.removeEventListener("mousemove", handleMouseMove);
-            }
-        };
-    }, [sectionRef]);
-    const parallaxStyle = {
+    }, [parallaxEnabled]);
+
+    const handleMouseEnter = useCallback(() => {
+        setParallaxEnabled(true);
+    }, []);
+    const handleMouseLeave = useCallback(() => {
+        setParallaxEnabled(false);
+        setPosition({x: 0, y: 0})
+    }, []);
+
+
+    const parallaxStyleUpper = {
         transform: `translate(-${position.x / 50}px, -${position.y / 40}px)`,
+        transition: parallaxEnabled ? '0ms' : '200ms'
     };
 
-    const parallaxStyleSlow = {
+    const parallaxStyleLower = {
         transform: `translate(-${position.x / 200}px, -${position.y / 200}px)`,
+        transition: parallaxEnabled ? '0ms' : '200ms'
     };
+
 
     return (
         <div className={styles.homeWrapper}>
@@ -43,7 +52,12 @@ export const Home = () => {
             {/*HOME PAGE MAIN CONTENT*/}
             <main className={styles.mainWrapper}>
                 {/*ABOUT US SECTION*/}
-                <section className={styles.aboutUsSection} ref={sectionRef}>
+                <section
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                    onMouseMove={handleMouseMove}
+                    className={styles.aboutUsSection}
+                >
                     <div className={styles.aboutUsContent}>
                         <div className={styles.aboutUsLeft}>
                             <div className={styles.aboutUsLeftTittle}>
@@ -92,7 +106,7 @@ export const Home = () => {
                                 <img
                                     src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/parallax-img-5-copyright.png"
                                     alt=""
-                                    style={parallaxStyle}
+                                    style={parallaxStyleUpper}
                                 />
                             </div>
                             <div className={styles.solidCircleTop}>
@@ -106,7 +120,7 @@ export const Home = () => {
                             <div className={styles.redCrownTop}>
                                 <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/crown-3.svg"
                                      alt="Decoration"
-                                     style={parallaxStyleSlow}
+                                     style={parallaxStyleLower}
                                 />
 
                             </div>
@@ -114,25 +128,25 @@ export const Home = () => {
                                 <img
                                     src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-circle-3.svg"
                                     alt="Decoration"
-                                    style={parallaxStyleSlow}
+                                    style={parallaxStyleLower}
                                 />
                             </div>
                             <div className={styles.redLineBurger}>
                                 <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-lines-7.svg"
                                      alt="Decoration"
-                                     style={parallaxStyleSlow}
+                                     style={parallaxStyleLower}
                                 />
                             </div>
                             <div className={styles.redSmallLineBurger}>
                                 <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-lines-9.svg"
                                      alt="Decoration"
-                                     style={parallaxStyleSlow}
+                                     style={parallaxStyleLower}
                                 />
                             </div>
                             <div className={styles.redBottomLineBurger}>
                                 <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-lines-8.svg"
                                      alt="Decoration"
-                                     style={parallaxStyleSlow}
+                                     style={parallaxStyleLower}
                                 />
                             </div>
                             <div className={styles.spinningCircleBottom}>
@@ -146,42 +160,42 @@ export const Home = () => {
                                 <img
                                     src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-circle-3.svg"
                                     alt="Decoration"
-                                    style={parallaxStyleSlow}
+                                    style={parallaxStyleLower}
                                 />
                             </div>
                             <div className={styles.redSmallBallBottom}>
                                 <img
                                     src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-circle-4.svg"
                                     alt="Decoration"
-                                    style={parallaxStyleSlow}
+                                    style={parallaxStyleLower}
                                 />
                             </div>
                             <div className={styles.redTinyBallBurger}>
                                 <img
                                     src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-circle-2.svg"
                                     alt="Decoration"
-                                    style={parallaxStyleSlow}
+                                    style={parallaxStyleLower}
                                 />
                             </div>
                             <div className={styles.redSmallBallTop}>
                                 <img
                                     src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-circle-4.svg"
                                     alt="Decoration"
-                                    style={parallaxStyleSlow}
+                                    style={parallaxStyleLower}
                                 />
                             </div>
                             <div className={styles.redTinyBallRight}>
                                 <img
                                     src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-circle-2.svg"
                                     alt="Decoration"
-                                    style={parallaxStyleSlow}
+                                    style={parallaxStyleLower}
                                 />
                             </div>
                             <div className={styles.redLineRightBurger}>
                                 <img
                                     src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-lines-10.svg"
                                     alt="Decoration"
-                                    style={parallaxStyleSlow}
+                                    style={parallaxStyleLower}
                                 />
                             </div>
                         </div>
@@ -189,7 +203,9 @@ export const Home = () => {
                 </section>
 
                 {/*OUR BURGERS SECTION*/}
-                <section className={styles.ourBurgersSection}>
+                <section
+                    className={styles.ourBurgersSection}
+                >
                     <div className={styles.ourBurgersContent}>
                         <div className={styles.ourBurgersHeading}>
                             <span>Our Burgers</span>
@@ -414,29 +430,35 @@ export const Home = () => {
                 </div>
 
                 {/*OUR MENU SECTION*/}
-                <section className={styles.ourMenuSection} ref={sectionRef}>
-                    <div className={styles.decorationTomato} style={parallaxStyleSlow}>
+
+                <section
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                    onMouseMove={handleMouseMove}
+                    className={styles.ourMenuSection}
+                >
+                    <div className={styles.decorationTomato} style={parallaxStyleLower}>
                         <img
                             src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/parallax-img-8-copyright.png"
                             alt="Decoration"/>
                     </div>
-                    <div className={styles.decorationBurger} style={parallaxStyleSlow}>
+                    <div className={styles.decorationBurger} style={parallaxStyleLower}>
                         <img
                             src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/parallax-img-7-copyright.png"
                             alt="Decoration"/>
                     </div>
-                    <div className={styles.decorationCheese} style={parallaxStyleSlow}>
+                    <div className={styles.decorationCheese} style={parallaxStyleLower}>
                         <img
                             src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/parallax-img-6-copyright.png"
                             alt="Decoration"/>
 
                     </div>
-                    <div className={styles.decorationFries} style={parallaxStyleSlow}>
+                    <div className={styles.decorationFries} style={parallaxStyleLower}>
                         <img
                             src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/parallax-img-10-copyright.png"
                             alt="Decoration"/>
                     </div>
-                    <div className={styles.decorationSalad} style={parallaxStyleSlow}>
+                    <div className={styles.decorationSalad} style={parallaxStyleLower}>
                         <img
                             src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/parallax-img-9-copyright.png"
                             alt="Decoration"/>
@@ -598,7 +620,11 @@ export const Home = () => {
                 </section>
 
                 {/*OUR DINER SECTION*/}
-                <section className={styles.ourDinerSection} ref={sectionRef}>
+                <section
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                    onMouseMove={handleMouseMove}
+                    className={styles.ourDinerSection}>
                     <div className={styles.solidCircleOurDinner}>
                         <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/circle-fill-3.svg"
                              alt="Decoration"/>
@@ -618,36 +644,36 @@ export const Home = () => {
 
 
                     <div className={styles.ourDinerLeft}>
-                        <div className={styles.ourDinnerBigImg} style={parallaxStyleSlow}>
+                        <div className={styles.ourDinnerBigImg} style={parallaxStyleLower}>
                             <img
                                 src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/parallax-img-11-copyright.png"
                                 alt="Decoration"/>
                         </div>
-                        <div className={styles.ourDinnerCrown} style={parallaxStyle}>
+                        <div className={styles.ourDinnerCrown} style={parallaxStyleUpper}>
                             <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/crown-4.svg"
                                  alt="Decoration"/>
                         </div>
-                        <div className={styles.ourDinnerRedLineLeft} style={parallaxStyle}>
+                        <div className={styles.ourDinnerRedLineLeft} style={parallaxStyleUpper}>
                             <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-lines-11.svg"
                                  alt="Decoration"/>
                         </div>
-                        <div className={styles.ourDinnerRedLineRight} style={parallaxStyle}>
+                        <div className={styles.ourDinnerRedLineRight} style={parallaxStyleUpper}>
                             <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-lines-13.svg"
                                  alt="Decoration"/>
                         </div>
-                        <div className={styles.ourDinnerRedLineTop} style={parallaxStyle}>
+                        <div className={styles.ourDinnerRedLineTop} style={parallaxStyleUpper}>
                             <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-lines-12.svg"
                                  alt="Decoration"/>
                         </div>
-                        <div className={styles.ourDinnerDotRight} style={parallaxStyle}>
+                        <div className={styles.ourDinnerDotRight} style={parallaxStyleUpper}>
                             <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-circle-2.svg"
                                  alt="Decoration"/>
                         </div>
-                        <div className={styles.ourDinnerDotTop} style={parallaxStyle}>
+                        <div className={styles.ourDinnerDotTop} style={parallaxStyleUpper}>
                             <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-circle-2.svg"
                                  alt="Decoration"/>
                         </div>
-                        <div className={styles.ourDinnerDotLeft} style={parallaxStyle}>
+                        <div className={styles.ourDinnerDotLeft} style={parallaxStyleUpper}>
                             <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/decor-circle-2.svg"
                                  alt="Decoration"/>
                         </div>
@@ -673,10 +699,10 @@ export const Home = () => {
 
                 {/*FADE IMAGE SLIDER SECTION*/}
                 <FadeImageSlider/>
-                {/*LATEST NEWS SECTION WITH SLIDER*/}
-                <section className={styles.latestNewsSection}>
 
-                </section>
+                {/*LATEST NEWS SECTION WITH SLIDER*/}
+                <LatestNewsSectionSlider/>
+
                 {/*SUBSCRIBE SECTION*/}
                 <section className={styles.subscribeSection}>
                     <div className={styles.subscribeSectionContent}>

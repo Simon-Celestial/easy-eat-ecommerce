@@ -266,14 +266,16 @@
           flex-direction: column;
           align-items: center;
           justify-content: center;
-          padding: 10px 0;
+          height: 0;
+          overflow: hidden;
           transform-origin: top;
           transition: $transition-medium;
-          transform: scaleY(0);
           pointer-events: none;
+          padding: 0;
           &.accountDropdownActive {
-            pointer-events: auto!important;
-            transform: scaleY(1)!important;
+            pointer-events: auto;
+            height: 70px;
+            padding: 10px 0;
           }
           a {
             display: inline-flex;
