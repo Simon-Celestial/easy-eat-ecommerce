@@ -302,7 +302,7 @@ export const ProductList = () => {
 
                         </div>
                         <div className={styles.rightBlockFilter}>
-                            <div className={styles.rightBasketContainer}>
+                            <div className={styles.rightBlockContainer}>
                                 <div className={styles.containerHeading}>
                                     <p>Cart</p>
                                 </div>
@@ -315,13 +315,15 @@ export const ProductList = () => {
                                         <div className={styles.productsCards}>
                                             <div className={styles.productCard}>
                                                 <div className={styles.deleteProduct}>
-                                                    <X />
+                                                    <X/>
                                                 </div>
-                                             <div className={styles.productImage}>
-                                                 <a href="#">
-                                                 <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/02/product-18-copyright-480x480.png" alt="Product"/>
-                                                 </a>
-                                             </div>
+                                                <div className={styles.productImage}>
+                                                    <a href="#">
+                                                        <img
+                                                            src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/02/product-18-copyright-480x480.png"
+                                                            alt="Product"/>
+                                                    </a>
+                                                </div>
                                                 <div className={styles.productTitle}>
                                                     <a href="#">Veggie Pizza</a>
                                                     <p>2 × $13.00</p>
@@ -331,11 +333,13 @@ export const ProductList = () => {
                                             </div>
                                             <div className={styles.productCard}>
                                                 <div className={styles.deleteProduct}>
-                                                    <X />
+                                                    <X/>
                                                 </div>
                                                 <div className={styles.productImage}>
                                                     <a href="#">
-                                                        <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/02/product-18-copyright-480x480.png" alt="Product"/>
+                                                        <img
+                                                            src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/02/product-18-copyright-480x480.png"
+                                                            alt="Product"/>
                                                     </a>
                                                 </div>
                                                 <div className={styles.productTitle}>
@@ -357,7 +361,7 @@ export const ProductList = () => {
 
                                 </div>
                             </div>
-                            <div className={styles.rightSearchContainer}>
+                            <div className={styles.rightBlockContainer}>
                                 <div className={styles.containerHeading}>
                                     <p>Search</p>
                                 </div>
@@ -369,70 +373,90 @@ export const ProductList = () => {
 
 
                             </div>
-                            <div className={styles.rightCategoriesContainer}>
+                            <div className={styles.rightBlockContainer}>
+                                <div className={styles.containerHeading}>
+                                    <p>Availability</p>
+                                </div>
+                                <div className={styles.availabilityContent}>
+                                    <div className={styles.availabilityItem}>
+                                        <input type="checkbox"/>
+                                        In Stock
+                                        <span>(23)</span>
+
+                                    </div>
+                                    <div className={styles.availabilityItem}>
+                                        <input type="checkbox"/>
+                                        Out of Stock
+                                        <span>(11)</span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div className={styles.rightBlockContainer}>
                                 <div className={styles.containerHeading}>
                                     <p>Categories</p>
                                 </div>
                                 <div className={styles.rightCategoriesContent}>
                                     <div className={styles.rightCategoriesItem}>
                                         <a href="#">
-                                            <DotOutline weight="fill" />
+                                            <DotOutline weight="fill"/>
                                             Burgers & Panini
                                         </a>
                                         <span>(4)</span>
                                     </div>
                                     <div className={styles.rightCategoriesItem}>
                                         <a href="#">
-                                            <DotOutline weight="fill" />
+                                            <DotOutline weight="fill"/>
                                             Hot Dogs & Snacks
                                         </a>
                                         <span>(4)</span>
                                     </div>
                                     <div className={styles.rightCategoriesItem}>
                                         <a href="#">
-                                            <DotOutline weight="fill" />
+                                            <DotOutline weight="fill"/>
                                             Meat & Fish
                                         </a>
                                         <span>(3)</span>
                                     </div>
                                     <div className={styles.rightCategoriesItem}>
                                         <a href="#">
-                                            <DotOutline weight="fill" />
+                                            <DotOutline weight="fill"/>
                                             Pizzas & Pastas
                                         </a>
                                         <span>(4)</span>
                                     </div>
                                     <div className={styles.rightCategoriesItem}>
                                         <a href="#">
-                                            <DotOutline weight="fill" />
+                                            <DotOutline weight="fill"/>
                                             Popular Dishes
                                         </a>
                                         <span>(6)</span>
                                     </div>
                                     <div className={styles.rightCategoriesItem}>
                                         <a href="#">
-                                            <DotOutline weight="fill" />
+                                            <DotOutline weight="fill"/>
                                             The Dishes
                                         </a>
                                         <span>(4)</span>
                                     </div>
                                     <div className={styles.rightCategoriesItem}>
                                         <a href="#">
-                                            <DotOutline weight="fill" />
+                                            <DotOutline weight="fill"/>
                                             Uncategorized
                                         </a>
                                         <span>(0)</span>
                                     </div>
                                     <div className={styles.rightCategoriesItem}>
                                         <a href="#">
-                                            <DotOutline weight="fill" />
+                                            <DotOutline weight="fill"/>
                                             Vietnamese Coffee
                                         </a>
                                         <span>(5)</span>
                                     </div>
                                     <div className={styles.rightCategoriesItem}>
                                         <a href="#">
-                                            <DotOutline weight="fill" />
+                                            <DotOutline weight="fill"/>
                                             Vindaloo
                                         </a>
                                         <span>(3)</span>
@@ -440,15 +464,56 @@ export const ProductList = () => {
                                 </div>
 
 
-
                             </div>
-                            <div className={styles.rightFilterContainer}>
+                            <div className={styles.rightBlockContainer}>
                                 <div className={styles.containerHeading}>
                                     <p>Filter</p>
                                 </div>
-                             <form className={styles.rightFilterContent}>
+                                <form className={styles.rightFilterContent}>
+                                    <h1>FILTER WILL BE HERE</h1>
+                                </form>
+                            </div>
+                            <div className={styles.rightBlockContainer}>
+                                <div className={styles.containerHeading}>
+                                    <p>Tags</p>
+                                </div>
+                                <div className={styles.rightTagsContent}>
+                                    <div className={styles.tagItem}>
+                                        <a href="#">
+                                            Item
+                                        </a>
+                                    </div>
+                                    <div className={styles.tagItem}>
+                                        <a href="#">
+                                            Sale
+                                        </a>
+                                    </div>
+                                    <div className={styles.tagItem}>
+                                        <a href="#">
+                                            Simple
+                                        </a>
+                                    </div>
+                                    <div className={styles.tagItem}>
+                                        <a href="#">
+                                            Special
+                                        </a>
+                                    </div>
+                                    <div className={styles.tagItem}>
+                                        <a href="#">
+                                            Stock
+                                        </a>
+                                    </div>
+                                    <div className={styles.tagItem}>
+                                        <a href="#">
+                                            Variable
+                                        </a>
+                                    </div>
 
-                             </form>
+
+
+
+
+                                </div>
                             </div>
 
                         </div>

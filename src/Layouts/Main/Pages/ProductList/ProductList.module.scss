@@ -87,6 +87,7 @@
                 padding: 3px 15px;
 
               }
+
               .outOfStock {
                 position: absolute;
                 left: 10px;
@@ -261,24 +262,24 @@
           background-color: $color-white;
           flex-direction: column;
           height: min-content;
-          padding: 70px 40px;
+          padding: 70px 40px 25px 40px;
 
-          .containerHeading {
-            display: flex;
-            margin-bottom: 25px;
-
-            p {
-              font-size: 19px;
-              color: $color-black;
-              font-family: $font-main;
-            }
-          }
-
-          .rightBasketContainer {
+          .rightBlockContainer {
             display: flex;
             width: 100%;
             flex-direction: column;
             margin-bottom: 40px;
+
+            .containerHeading {
+              display: flex;
+              margin-bottom: 25px;
+
+              p {
+                font-size: 19px;
+                color: $color-black;
+                font-family: $font-main;
+              }
+            }
 
             .rightBasketContent {
               display: flex;
@@ -433,13 +434,7 @@
                 }
               }
             }
-          }
 
-          .rightSearchContainer {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            margin-top: 40px;
             .rightSearchContent {
               display: flex;
               width: 100%;
@@ -465,22 +460,33 @@
                 font-size: 15px;
               }
             }
-          }
 
-          .rightCategoriesContainer {
-            display: flex;
-            width: 100%;
-            flex-direction: column;
-            margin-top: 40px;
+            .availabilityContent {
+              display: flex;
+              width: 100%;
+              flex-direction: column;
+
+              .availabilityItem {
+                display: inline-flex;
+                gap: 8px;
+                font-size: 17px;
+                font-family: $font-alternative;
+                align-items: center;
+                padding: 3px 0;
+              }
+            }
+
             .rightCategoriesContent {
               display: flex;
               width: 100%;
               flex-direction: column;
+
               .rightCategoriesItem {
                 display: inline-flex;
                 align-items: center;
                 padding: 7px 0;
                 gap: 5px;
+
                 a {
                   gap: 5px;
                   font-family: $font-alternative;
@@ -489,18 +495,22 @@
                   color: $color-black;
                   font-size: 17px;
                   transition: color $transition-fast;
+
                   &:hover {
                     color: $color-orange;
+
                     svg {
                       color: $color-orange;
                     }
                   }
+
                   svg {
                     font-size: 25px;
                     transition: color $transition-fast;
                   }
 
                 }
+
                 span {
                   font-family: $font-alternative;
                   font-size: 17px;
@@ -510,21 +520,40 @@
 
             }
 
-          }
-
-          .rightFilterContainer {
-            display: flex;
-            width: 100%;
-            flex-direction: column;
-            margin-top: 40px;
-
             .rightFilterContent {
               display: flex;
               width: 100%;
               flex-direction: column;
             }
-          }
 
+            .rightTagsContent {
+              display: flex;
+              width: 100%;
+              flex-wrap: wrap;
+              .tagItem {
+                display: flex;
+                border: 1px solid lightgray;
+                margin: 0 5px 5px 0;
+                cursor: pointer;
+                &:hover {
+                  a {
+                    color: $color-orange;
+                  }
+                }
+                a {
+                  letter-spacing: 0.6px;
+                  font-family: $font-main;
+                  font-size: 14px;
+                  line-height: 16px;
+                  padding: 7px 18px 5px;
+                  color: $color-black;
+                  transition: $transition-fast;
+
+
+                }
+              }
+            }
+          }
         }
       }
     }
