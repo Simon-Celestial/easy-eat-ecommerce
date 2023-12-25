@@ -14,7 +14,6 @@ export const ProductSingle = () => {
 
     const {
         setHeaderColorChange,
-        openHandler,
     } = useContext(LayoutContext);
 
 

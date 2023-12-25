@@ -47,8 +47,10 @@ export const Home = () => {
         <div className={styles.homeWrapper}>
             {/*HOME PAGE MODAL*/}
             <SubscribeModal/>
-            {/*/!*SITE MAIN COMPONENTS*!/*/}
+
+            {/*HEADER*/}
             <Header/>
+
             {/*HOME PAGE MAIN CONTENT*/}
             <main className={styles.mainWrapper}>
                 {/*ABOUT US SECTION*/}

@@ -265,13 +265,13 @@ export const Header = () => {
                                 <div className={styles.navDropdown}>
                                     <div className={styles.navDropdownItem}
                                     >
-                                        <a href="#">
+                                        <Link to="/home/shop">
                                             <p>Product List</p>
-                                        </a>
+                                        </Link>
                                     </div>
                                     <div className={styles.navDropdownItem}
                                     >
-                                        <Link to="/home/details">
+                                        <Link to="/home/product">
                                             <p>Product Single</p>
                                         </Link>
                                     </div>

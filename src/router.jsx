@@ -5,6 +5,7 @@ import {RegisterPage} from "./Layouts/Authentification/Pages/LoginAndRegister/Re
 import {MainLayout} from "./Layouts/Main/MainLayout.jsx";
 import {Home} from "./Layouts/Main/Pages/Home/Home.jsx";
 import {ProductSingle} from "./Layouts/Main/Pages/ProductSinglePage/ProductSingle.jsx";
+import {ProductList} from "./Layouts/Main/Pages/ProductList/ProductList.jsx";
 
 const router = createBrowserRouter([
     {
@@ -21,13 +22,14 @@ const router = createBrowserRouter([
                 element: <Home />,
             },
             {
-                path: '/home/:id',
-                element: <ProductSingle/>,
-            },
-            {
-                path: 'home/details',
+                path: 'home/product',
                 element: <ProductSingle />
             },
+            {
+                path: 'home/shop',
+                element: <ProductList />
+            },
+
             {
                 path: '*',
                 element: <h1>Page not found</h1>
