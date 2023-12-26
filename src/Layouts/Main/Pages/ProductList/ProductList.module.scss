@@ -18,7 +18,7 @@
       display: flex;
       width: 100%;
       justify-content: center;
-      padding: 25px 15px;
+      padding: 25px 15px 120px 15px;
 
       .allProductsContent {
         max-width: 1290px;
@@ -524,6 +524,7 @@
               display: flex;
               width: 100%;
               flex-direction: column;
+
               .filterPrice {
                 display: inline-flex;
                 gap: 5px;
@@ -534,6 +535,7 @@
 
 
               }
+
               button {
                 color: $color-white;
                 background-color: $color-orange;
@@ -550,9 +552,11 @@
                 margin-top: 25px;
                 cursor: pointer;
                 transition: $transition-fast;
+
                 &:hover {
                   background-color: #d33600;
                 }
+
                 svg {
                   font-size: 20px;
                   color: $color-white;
@@ -567,16 +571,19 @@
               display: flex;
               width: 100%;
               flex-wrap: wrap;
+
               .tagItem {
                 display: flex;
                 border: 1px solid lightgray;
                 margin: 0 5px 5px 0;
                 cursor: pointer;
+
                 &:hover {
                   a {
                     color: $color-orange;
                   }
                 }
+
                 a {
                   letter-spacing: 0.6px;
                   font-family: $font-main;
@@ -587,6 +594,224 @@
                   transition: $transition-fast;
 
 
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+//MEDIA STYLES
+
+@media screen and (max-width: 1440px) {
+
+  .productListWrapper {
+    .productListMain {
+      .allProductsSection {
+        .allProductsContent {
+          justify-content: center;
+          gap: 35px;
+
+          .rightBlockFilter {
+            padding: 40px 30px 25px 30px;
+            max-width: 350px;
+
+            .rightBlockContainer {
+              .rightBasketContent {
+                .rightBasketProducts {
+                  .cartOperations {
+                    a {
+                      width: 140px;
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          .leftBlockProducts {
+            max-width: 715px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1220px) {
+
+  .productListWrapper {
+    .productListMain {
+      .allProductsSection {
+        padding: 25px 35px 80px 35px;
+
+        .allProductsContent {
+          gap: 25px;
+
+          .leftBlockProducts {
+            .leftAllProducts {
+              .productCard {
+                padding: 0 20px 50px 0;
+
+              }
+            }
+          }
+
+          .rightBlockFilter {
+            .rightBlockContainer {
+              margin-bottom: 25px;
+
+              .containerHeading {
+                margin-bottom: 15px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+
+  .productListWrapper {
+    .productListMain {
+      .allProductsSection {
+        padding: 25px 25px 50px 25px;
+
+        .allProductsContent {
+          flex-direction: column;
+
+          .leftBlockProducts {
+            max-width: unset;
+
+            .leftBlockSorting {
+              p {
+                font-size: 16px;
+              }
+
+              .selectionBlock {
+                select {
+                  font-size: 16px;
+                  padding-right: 0;
+                }
+              }
+            }
+
+            .leftAllProductsPagination {
+              .paginationItem {
+                width: 42px;
+                height: 42px;
+              }
+            }
+
+            .leftAllProducts {
+              .productCard {
+                padding: 0 20px 30px 0;
+              }
+            }
+          }
+
+          .rightBlockFilter {
+            max-width: unset;
+
+            .rightBlockContainer {
+              .rightBasketContent {
+                .rightBasketProducts {
+                  .cartOperations {
+                    justify-content: start;
+                    gap: 10px;
+
+                    a {
+                      width: 130px;
+                      padding: 10px 0;
+                    }
+                  }
+
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+
+  .productListWrapper {
+    .productListMain {
+      .allProductsSection {
+        padding: 0 15px 25px 15px;
+
+        .allProductsContent {
+          .leftBlockProducts {
+            .leftAllProductsPagination {
+              margin-top: 25px;
+            }
+            .leftBlockSorting {
+              flex-direction: column;
+              align-items: start;
+              gap: 12px;
+              p {
+                padding-left: 4px;
+              }
+              .selectionBlock {
+                width: 100%;
+                select {
+                  display: inline-flex;
+                  width: 100%;
+                  font-size: 18px;
+                }
+              }
+            }
+            .leftAllProducts {
+              flex-wrap: unset;
+              flex-direction: column;
+              align-items: center;
+
+              .productCard {
+                padding: 20px 0 0 0;
+                max-width: unset;
+                width: 100%;
+              }
+            }
+          }
+          .rightBlockFilter {
+            .rightBlockContainer {
+              .rightCategoriesContent {
+                .rightCategoriesItem {
+                  padding: 3px 0;
+                  a {
+                    font-size: 15px;
+                  }
+                }
+              }
+              .rightBasketContent {
+                .rightBasketProducts {
+                  .productsCards {
+                    .productCard {
+                      gap: 10px;
+                      .productImage {
+                        width: 65px;
+                        height: 65px;
+                      }
+                      .productTitle {
+                        gap: 5px;
+                        a {
+                          font-size: 17px;
+                        }
+                        p {
+                          font-size: 17px;
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
