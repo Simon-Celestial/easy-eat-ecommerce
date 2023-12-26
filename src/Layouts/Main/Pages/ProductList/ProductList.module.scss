@@ -524,6 +524,43 @@
               display: flex;
               width: 100%;
               flex-direction: column;
+              .filterPrice {
+                display: inline-flex;
+                gap: 5px;
+                align-items: center;
+                margin-top: 10px;
+                font-family: $font-alternative;
+                font-size: 16px;
+
+
+              }
+              button {
+                color: $color-white;
+                background-color: $color-orange;
+                font-size: 16px;
+                font-family: $font-main;
+                display: inline-flex;
+                gap: 25px;
+                width: 136px;
+                outline: 0;
+                border: 0;
+                align-items: center;
+                justify-content: center;
+                height: 49px;
+                margin-top: 25px;
+                cursor: pointer;
+                transition: $transition-fast;
+                &:hover {
+                  background-color: #d33600;
+                }
+                svg {
+                  font-size: 20px;
+                  color: $color-white;
+                  padding-bottom: 2px;
+                }
+
+              }
+
             }
 
             .rightTagsContent {

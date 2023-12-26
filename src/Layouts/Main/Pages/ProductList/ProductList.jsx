@@ -1,11 +1,12 @@
 import styles from "./ProductList.module.scss";
-import React, {useContext, useEffect} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import {Footer} from "../../Components/Footer/Footer.jsx";
 import {UiControl} from "../../Common/UiControl/UiControl.jsx";
 import {Header} from "../../Components/Header/Header.jsx";
 import {LayoutContext} from "../../../../Context/LayoutContext/LayoutContext.jsx";
 import {PageNameSection} from "../../Common/PageNameSection/PageNameSection.jsx";
 import {ArrowRight, DotOutline, Heart, MagnifyingGlass, ShoppingCart, Star, X} from "@phosphor-icons/react";
+import RangeSlider from "../../Common/RangeSlider/RangeSlider.jsx";
 
 export const ProductList = () => {
     const {
@@ -16,6 +17,8 @@ export const ProductList = () => {
     useEffect(() => {
         setHeaderColorChange(true);
     }, []);
+
+    const [bounds, setBounds] = useState([0, 260]);
 
     return (
         <div className={styles.productListWrapper}>
@@ -470,7 +473,22 @@ export const ProductList = () => {
                                     <p>Filter</p>
                                 </div>
                                 <form className={styles.rightFilterContent}>
-                                    <h1>FILTER WILL BE HERE</h1>
+                                    <RangeSlider
+                                        min={0}
+                                        max={260}
+                                        bounds={bounds}
+                                        setBounds={setBounds}
+                                    />
+                                    <div className={styles.filterPrice}>
+                                        Price:
+                                        <p>${bounds[0]}</p>
+                                        <p>-</p>
+                                        <p>${bounds[1]}</p>
+                                    </div>
+                                    <button type="submit">
+                                        Filter
+                                    <ArrowRight />
+                                    </button>
                                 </form>
                             </div>
                             <div className={styles.rightBlockContainer}>
@@ -508,11 +526,6 @@ export const ProductList = () => {
                                             Variable
                                         </a>
                                     </div>
-
-
-
-
-
                                 </div>
                             </div>
 
