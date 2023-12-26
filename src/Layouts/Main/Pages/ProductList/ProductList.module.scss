@@ -783,7 +783,16 @@
             }
           }
           .rightBlockFilter {
+            padding: 25px;
             .rightBlockContainer {
+              .rightFilterContent {
+                button {
+                  width: 120px;
+                  height: 40px;
+                  margin-top: 15px;
+
+                }
+              }
               .rightCategoriesContent {
                 .rightCategoriesItem {
                   padding: 3px 0;

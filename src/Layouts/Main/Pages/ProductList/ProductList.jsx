@@ -331,8 +331,6 @@ export const ProductList = () => {
                                                     <a href="#">Veggie Pizza</a>
                                                     <p>2 × $13.00</p>
                                                 </div>
-
-
                                             </div>
                                             <div className={styles.productCard}>
                                                 <div className={styles.deleteProduct}>
@@ -349,7 +347,6 @@ export const ProductList = () => {
                                                     <a href="#">Veggie Pizza</a>
                                                     <p>2 × $13.00</p>
                                                 </div>
-
                                             </div>
                                         </div>
                                         <div className={styles.productSubtotal}>
