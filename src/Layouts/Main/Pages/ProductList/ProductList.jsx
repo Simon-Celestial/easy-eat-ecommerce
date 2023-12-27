@@ -525,7 +525,6 @@ export const ProductList = () => {
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
 

@@ -6,6 +6,7 @@ import {MainLayout} from "./Layouts/Main/MainLayout.jsx";
 import {Home} from "./Layouts/Main/Pages/Home/Home.jsx";
 import {ProductSingle} from "./Layouts/Main/Pages/ProductSinglePage/ProductSingle.jsx";
 import {ProductList} from "./Layouts/Main/Pages/ProductList/ProductList.jsx";
+import {CartPage} from "./Layouts/Main/Pages/CartPage/CartPage.jsx";
 
 const router = createBrowserRouter([
     {
@@ -16,7 +17,6 @@ const router = createBrowserRouter([
                 path: '/',
                 element: <Home />,
             },
-
             {
                 path: 'home',
                 element: <Home />,
@@ -29,12 +29,14 @@ const router = createBrowserRouter([
                 path: 'home/shop',
                 element: <ProductList />
             },
-
+            {
+                path: 'home/cart',
+                element: <CartPage />
+            },
             {
                 path: '*',
                 element: <h1>Page not found</h1>
             },
-
         ],
     },
     {
