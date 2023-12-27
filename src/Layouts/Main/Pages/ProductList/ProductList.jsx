@@ -11,11 +11,17 @@ import RangeSlider from "../../Common/RangeSlider/RangeSlider.jsx";
 export const ProductList = () => {
     const {
         setHeaderColorChange,
+        setBasketVisible,
     } = useContext(LayoutContext);
 
     // useEffect TO CHANGE HEADER COLOR
     useEffect(() => {
         setHeaderColorChange(true);
+    }, []);
+
+    // useEffect to TURN BASKET BUTTON ON
+    useEffect(() => {
+        setBasketVisible(true);
     }, []);
 
     const [bounds, setBounds] = useState([0, 260]);

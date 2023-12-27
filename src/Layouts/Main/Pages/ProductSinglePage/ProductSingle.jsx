@@ -13,6 +13,7 @@ import {ChangedFooter} from "../../Components/ChangedFooter/ChangedFooter.jsx";
 export const ProductSingle = () => {
 
     const {
+        setBasketVisible,
         setHeaderColorChange,
     } = useContext(LayoutContext);
 
@@ -36,6 +37,12 @@ export const ProductSingle = () => {
             setReviewBlockOpen(true);
         }
     }
+
+    // useEffect to TURN BASKET BUTTON ON
+    useEffect(() => {
+        setBasketVisible(true);
+    }, []);
+
 
 
     return (

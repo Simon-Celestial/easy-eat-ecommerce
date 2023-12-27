@@ -22,6 +22,7 @@ export const Header = () => {
         setDropDownAccountOpen,
         setHeaderColorChange,
         headerColorChange,
+        basketVisible,
     } = useContext(LayoutContext);
 
     // HEADER COLOR STATE CHANGE
@@ -305,7 +306,7 @@ export const Header = () => {
                 </div>
                 {/*HEADER RIGHT CONTAINER*/}
                 <div className={styles.headerRight}>
-                    <div className={styles.headerRightItem}>
+                    <div className={styles.headerRightItem} style={{ display: basketVisible ? "flex" : "none" }}>
                         <div className={styles.basketCount}>0</div>
                         <div onClick={handleWidgetOpen(setBasketOpen)}>
                             <ShoppingBag/>

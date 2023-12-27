@@ -473,8 +473,6 @@
     }
   }
 }
-
-
 @media screen and (max-width: 1440px) {
   .cartPageWrapper {
     .cartSection {
@@ -499,16 +497,20 @@
             margin-bottom: 70px;
 
           }
+          .cartTotal {
+            .cartTotalContent {
+              padding-top: 70px;
+            }
+          }
         }
       }
     }
   }
 }
-
 @media screen and (max-width: 1220px) {
   .cartPageWrapper {
     .cartSection {
-      padding: 5px 30px 0 30px;
+      padding: 5px 30px 80px 30px;
 
       .cartContent {
         .cartBasket {
@@ -548,6 +550,7 @@
 @media screen and (max-width: 1000px) {
   .cartPageWrapper {
     .cartSection {
+      padding: 5px 30px 60px 30px;
       .cartContent {
         .cartBasket {
           .cartBottom {
@@ -632,3 +635,125 @@
     }
   }
 }
+@media screen and (max-width: 800px) {
+  .cartPageWrapper {
+    .cartSection {
+      padding: 0 15px 50px 15px;
+      .cartContent {
+        .cartBasket {
+          .cartHeading {
+            flex-direction: column;
+            gap: 10px;
+            .cartHeadingItem {
+              p {
+                font-size: 17px;
+                svg {
+                  display: none;
+                }
+              }
+            }
+          }
+          .cartBottom {
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 25px;
+            .couponBlock {
+              max-width: 100%;
+              height: 50px;
+              span {
+                display: inline-flex;
+                width: 100%;
+                input {
+                  width: 100%;
+                  max-width: unset;
+                  display: flex;
+                }
+              }
+            }
+            .buttonBlock {
+              justify-content: end;
+              a {
+                padding: 0 20px;
+                height: 45px;
+              }
+              button {
+                padding: 0 20px;
+                height: 45px;
+
+              }
+            }
+          }
+          .cartTotal {
+            justify-content: unset;
+            .cartTotalContent {
+              width: 100%;
+              .cartTotalBody{
+                .cartTotalRow {
+                  .cartTotalTitle {
+                    padding: 10px;
+                    font-size: 17px;
+                  }
+                  .cartTotalPrice {
+                    padding: 10px;
+                    font-size: 17px;
+                  }
+                }
+              }
+              .cartTotalButton {
+                margin-top: 25px;
+                a {
+                  padding: 13px 40px;
+
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 500px) {
+  .cartPageWrapper {
+    .cartSection {
+      .cartContent {
+        .cartBasket {
+          .cartHeading {
+            margin-bottom: 25px;
+
+          }
+          .cartBottom {
+            .couponBlock {
+              height: 45px;
+              padding-left: 15px;
+              button {
+                font-size: 16px;
+              }
+              span {
+                input {
+                  font-size: 15px;
+                }
+              }
+            }
+            .buttonBlock {
+              flex-direction: column;
+              gap: 10px;
+              a {
+                width: 100%;
+              }
+              button {
+                width: 100%;
+              }
+            }
+          }
+          .cartTotal {
+            .cartTotalContent {
+              padding-top: 25px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

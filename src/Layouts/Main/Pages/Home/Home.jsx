@@ -4,14 +4,19 @@ import {UiControl} from "../../Common/UiControl/UiControl.jsx";
 import {Footer} from "../../Components/Footer/Footer.jsx";
 import {ArrowRight, CaretDoubleDown, Heart, TelegramLogo} from "@phosphor-icons/react";
 import {SubscribeModal} from "../../Common/SubscribeModal/SubscribeModal.jsx";
-import {useState, useCallback} from "react";
+import {useState, useCallback, useEffect, useContext} from "react";
 import {Link} from "react-router-dom";
 import {CollageProductItems} from "../../Common/CollageProductItems/CollageProductItems.jsx";
 import {FadeImageSlider} from "../../Common/FadeImageSlider/FadeImageSlider.jsx";
 import {LatestNewsSectionSlider} from "../../Common/LatestNewsSectionSlider/LatestNewsSectionSlider.jsx";
+import {LayoutContext} from "../../../../Context/LayoutContext/LayoutContext.jsx";
 
 
 export const Home = () => {
+    const {
+        setBasketVisible,
+    } = useContext(LayoutContext);
+
     const [position, setPosition] = useState({x: 0, y: 0});
     const [parallaxEnabled, setParallaxEnabled] = useState(false);
 
@@ -41,6 +46,12 @@ export const Home = () => {
         transform: `translate(-${position.x / 200}px, -${position.y / 200}px)`,
         transition: parallaxEnabled ? '0ms' : '200ms'
     };
+
+    // useEffect to TURN BASKET BUTTON ON
+    useEffect(() => {
+        setBasketVisible(true);
+    }, []);
+
 
 
     return (

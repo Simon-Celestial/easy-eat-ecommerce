@@ -32,8 +32,9 @@ const defaults = {
     magnifiedOpen: false,
     setMagnifiedOpen: () => {
     },
-
-
+    basketVisible: true,
+    setBasketVisible: () => {
+    },
 }
 export const LayoutContext = React.createContext(defaults);
 
@@ -42,7 +43,7 @@ export const LayoutContextProvider = ({
                                           children
                                       }) => {
     // STATE FOR PRODUCT SINGLE PAGE,TO OPEN PRODUCT IMAGE FULLSCREEN
-    const [magnifiedOpen,setMagnifiedOpen] = useState(true);
+    const [magnifiedOpen, setMagnifiedOpen] = useState(true);
 
     // HEADER TRANSFORMATION STATE
     const [headerTransform, setHeaderTransform] = useState(false);
@@ -97,6 +98,9 @@ export const LayoutContextProvider = ({
         };
     }, []);
 
+    // useEffect to TURN BASKET BUTTON ON OR OFF
+    const [basketVisible, setBasketVisible] = useState(true);
+
 
     return <LayoutContext.Provider value={{
         headerTransform,
@@ -118,6 +122,8 @@ export const LayoutContextProvider = ({
         setHeaderColorChange,
         magnifiedOpen,
         setMagnifiedOpen,
+        setBasketVisible,
+        basketVisible,
     }}>
         {children}
     </LayoutContext.Provider>

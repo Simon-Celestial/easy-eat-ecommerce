@@ -8,6 +8,11 @@ import {ChangedFooter} from "../../Components/ChangedFooter/ChangedFooter.jsx";
 import {ArrowRight, CaretDown, CaretUp, Ticket, X} from "@phosphor-icons/react";
 
 export const CartPage = () => {
+    const {
+        setBasketVisible,
+    } = useContext(LayoutContext);
+
+
     const [cartCounter, setCartCounter] = useState(1);
 
     const handleCounter = (count) => {
@@ -20,6 +25,11 @@ export const CartPage = () => {
     // useEffect TO CHANGE HEADER COLOR
     useEffect(() => {
         setHeaderColorChange(true);
+    }, []);
+
+    // useEffect to TURN BASKET BUTTON OFF
+    useEffect(() => {
+        setBasketVisible(false);
     }, []);
 
     return (
