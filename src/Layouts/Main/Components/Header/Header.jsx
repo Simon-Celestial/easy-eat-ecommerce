@@ -284,9 +284,9 @@ export const Header = () => {
                                     </div>
                                     <div className={styles.navDropdownItem}
                                     >
-                                        <a href="#">
+                                        <Link to="/home/checkout">
                                             <p>Checkout</p>
-                                        </a>
+                                        </Link>
                                     </div>
                                     <div
                                         className={styles.navDropdownItem}

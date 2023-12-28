@@ -1,0 +1,30 @@
+@import "../../../../Variables/variables.module";
+@import "../../../../Animations/Animations.module";
+
+.cartIsEmpty {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+
+  p {
+    margin-bottom: 48px;
+    font-size: 17px;
+    font-family: $font-main;
+  }
+
+  a {
+    font-family: $font-main;
+    font-size: 18px;
+    line-height: 22px;
+    background-color: $color-orange;
+    color: $color-white;
+    padding: 18px 57px 16px;
+    transition: $transition-fast;
+
+    &:hover {
+      background-color: #d03400;
+    }
+  }
+
+}

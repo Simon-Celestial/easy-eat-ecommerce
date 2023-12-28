@@ -1,0 +1,184 @@
+@import "../../../../Variables/variables.module";
+@import "../../../../Animations/Animations.module";
+
+
+.checkoutPageWrapper {
+  display: flex;
+  width: 100vw;
+  flex-direction: column;
+
+  .checkoutSection {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    background-color: $color-yellow;
+    padding: 30px 15px 120px 15px;
+
+    .checkoutContent {
+      display: flex;
+      width: 100%;
+      max-width: 1290px;
+      flex-direction: column;
+
+      .emptyCart {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+        gap: 50px;
+
+        p {
+          font-size: 17px;
+          font-family: $font-main;
+        }
+      }
+
+      .checkoutMain {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+
+        .checkoutForm {
+          display: flex;
+          width: 100%;
+          justify-content: space-between;
+
+          .checkoutLeft {
+            display: flex;
+            width: 100%;
+            max-width: 634px;
+
+            h3 {
+              font-size: 47px;
+              color: $color-dark-theme;
+              font-family: $font-main;
+              font-weight: 400;
+            }
+          }
+
+          .checkoutRight {
+            display: flex;
+            width: 100%;
+            max-width: 516px;
+            flex-direction: column;
+
+            h3 {
+              font-size: 35px;
+              color: $color-dark-theme;
+              font-family: $font-main;
+              font-weight: 400;
+              padding-bottom: 35px;
+
+              &.payment {
+                padding-top: 35px;
+              }
+            }
+
+            .orderContainer {
+              display: flex;
+              width: 100%;
+              flex-direction: column;
+              background-color: $color-white;
+              padding: 18px 50px;
+
+              .orderRow {
+                display: flex;
+                width: 100%;
+                justify-content: space-between;
+                font-family: $font-main;
+                font-size: 18px;
+                border-bottom: 1px solid $color-light-border;
+                padding: 25px 0;
+
+                p {
+                  display: inline-flex;
+                  gap: 5px;
+                }
+              }
+            }
+
+            .paymentContainer {
+              display: flex;
+              width: 100%;
+              flex-direction: column;
+              background-color: $color-white;
+              padding: 18px 50px;
+
+              .paymentTypeRow {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                gap: 10px;
+                padding: 23px 0;
+                border-bottom: 1px solid $color-light-border;
+
+                .paymentTypeItem {
+                  display: inline-flex;
+                  align-items: center;
+                  font-size: 17px;
+                  color: $color-black;
+                  font-family: $font-main;
+                  gap: 10px;
+
+                  input {
+                    margin-bottom: 2px;
+                  }
+                }
+
+                p {
+                  font-size: 17px;
+                  color: $color-black;
+                  font-family: $font-alternative;
+                }
+
+
+              }
+              .paymentPrivacyPolicy {
+                display: flex;
+                width: 100%;
+                flex-direction: column;
+                padding: 23px 0;
+
+                p {
+                  font-size: 14px;
+                  font-family: $font-alternative;
+                  margin-bottom: 25px;
+                  line-height: 24px;
+                  a {
+                    font-family: $font-alternative;
+                    color: $color-orange;
+                    position: relative;
+                    &:after {
+                      content: "";
+                      position: absolute;
+                      height: 1px;
+                      width: 100%;
+                      background-color: $color-orange;
+                      bottom: -2px ;
+                      left: 0;
+                    }
+                  }
+
+                }
+                button {
+                  text-align: center;
+                  font-size: 18px;
+                  font-family: $font-main;
+                  color: $color-white;
+                  background-color: $color-orange;
+                  border: 0;
+                  outline: 0;
+                  cursor: pointer;
+                  width: 186px;
+                  height: 56px;
+                }
+              }
+            }
+
+          }
+
+        }
+      }
+    }
+  }
+}

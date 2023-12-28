@@ -7,6 +7,7 @@ import {Home} from "./Layouts/Main/Pages/Home/Home.jsx";
 import {ProductSingle} from "./Layouts/Main/Pages/ProductSinglePage/ProductSingle.jsx";
 import {ProductList} from "./Layouts/Main/Pages/ProductList/ProductList.jsx";
 import {CartPage} from "./Layouts/Main/Pages/CartPage/CartPage.jsx";
+import {CheckoutPage} from "./Layouts/Main/Pages/CheckoutPage/CheckoutPage.jsx";
 
 const router = createBrowserRouter([
     {
@@ -33,6 +34,11 @@ const router = createBrowserRouter([
                 path: 'home/cart',
                 element: <CartPage />
             },
+            {
+                path: 'home/checkout',
+                element: <CheckoutPage />
+            },
+
             {
                 path: '*',
                 element: <h1>Page not found</h1>

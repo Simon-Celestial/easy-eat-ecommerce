@@ -6,6 +6,8 @@ import {UiControl} from "../../Common/UiControl/UiControl.jsx";
 import {PageNameSection} from "../../Common/PageNameSection/PageNameSection.jsx";
 import {ChangedFooter} from "../../Components/ChangedFooter/ChangedFooter.jsx";
 import {ArrowRight, CaretDown, CaretUp, Ticket, X} from "@phosphor-icons/react";
+import {StatusBar} from "../../Common/StatusBar/StatusBar.jsx";
+import {EmptyCartInfo} from "../../Common/EmpyCartInfo/EmptyCartInfo.jsx";
 
 export const CartPage = () => {
     const {
@@ -38,53 +40,36 @@ export const CartPage = () => {
             <PageNameSection title="Cart"/>
             <section className={styles.cartSection}>
                 <div className={styles.cartContent}>
-                    {/*<div className={styles.cartIsEmpty}>*/}
-                    {/*    <p>Your cart is currently empty.</p>*/}
-                    {/*    <a href="#">Return to shop</a>*/}
-                    {/*</div>*/}
-                    <form action="https://easyeat.ancorathemes.com/cart/" method="post" className={styles.cartBasket}>
-                        <div className={styles.cartHeading}>
-                            <div className={styles.cartHeadingItem}>
-                                <span className={styles.activeBox}>1</span>
-                                <p>Shopping Cart
-                                    <ArrowRight/>
-                                </p>
 
-                            </div>
-                            <div className={styles.cartHeadingItem}>
-                                <span>2</span>
-                                <p>Payment & Delivery Options
-                                    <ArrowRight/>
-                                </p>
+                    {/*IF CART IS EMPTY TURN THIS BLOCK ON*/}
+                    {/*<EmptyCartInfo/>*/}
 
-                            </div>
-                            <div className={styles.cartHeadingItem}>
-                                <span>3</span>
-                                <p>Order Received
-                                </p>
-
-                            </div>
-                        </div>
-                        <div className={styles.cartBody}>
-                            <div className={styles.cartRow} style={{background: 'white',borderColor: "transparent"}}>
-                                <div className={styles.productName}>
-                                    Product
+                    {/*IF CART IS EMPTY TURN THIS BLOCK OFF*/}
+                    <div className={styles.cartContainer}>
+                        <StatusBar first="#EC3D08" second="black" third="black"/>
+                        <form action="https://easyeat.ancorathemes.com/cart/" method="post"
+                              className={styles.cartBasket}>
+                            <div className={styles.cartBody}>
+                                <div className={styles.cartRow}
+                                     style={{background: 'white', borderColor: "transparent"}}>
+                                    <div className={styles.productName}>
+                                        Product
+                                    </div>
+                                    <div className={styles.productPrice}>
+                                        Price
+                                    </div>
+                                    <div className={styles.productQuantity}>
+                                        Quantity
+                                    </div>
+                                    <div className={styles.productSubtotal}>
+                                        Subtotal
+                                    </div>
+                                    <div className={styles.productRemove}>
+                                        Remove
+                                    </div>
                                 </div>
-                                <div className={styles.productPrice}>
-                                    Price
-                                </div>
-                                <div className={styles.productQuantity}>
-                                    Quantity
-                                </div>
-                                <div className={styles.productSubtotal}>
-                                    Subtotal
-                                </div>
-                                <div className={styles.productRemove}>
-                                    Remove
-                                </div>
-                            </div>
-                            <div className={styles.cartRow}>
-                                <div className={styles.productName}>
+                                <div className={styles.cartRow}>
+                                    <div className={styles.productName}>
                                     <span className={styles.productNameInner}>
                                         <a href="#">
                                             <img
@@ -93,34 +78,34 @@ export const CartPage = () => {
                                         </a>
                                         <a href="#">Black Burger</a>
                                     </span>
-                                </div>
-                                <div className={styles.productPrice}>
-                                    <span>$89.00</span>
-                                </div>
-                                <div className={styles.productQuantity}>
-                                    <div className={styles.productCount}>
-                                        <p>{cartCounter}</p>
-                                        <div className={styles.counterControl}>
+                                    </div>
+                                    <div className={styles.productPrice}>
+                                        <span>$89.00</span>
+                                    </div>
+                                    <div className={styles.productQuantity}>
+                                        <div className={styles.productCount}>
+                                            <p>{cartCounter}</p>
+                                            <div className={styles.counterControl}>
                                             <span onClick={() => handleCounter(+1)}>
                                                 <CaretUp/>
                                             </span>
-                                            <span onClick={cartCounter > 0 ? () => handleCounter(-1) : null}>
+                                                <span onClick={cartCounter > 0 ? () => handleCounter(-1) : null}>
                                                 <CaretDown/>
                                             </span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div className={styles.productSubtotal}>
-                                    <span>$178.00</span>
-                                </div>
-                                <div className={styles.productRemove}>
+                                    <div className={styles.productSubtotal}>
+                                        <span>$178.00</span>
+                                    </div>
+                                    <div className={styles.productRemove}>
                                     <span>
                                         <X weight="thin"/>
                                     </span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className={styles.cartRow}>
-                                <div className={styles.productName}>
+                                <div className={styles.cartRow}>
+                                    <div className={styles.productName}>
                                     <span className={styles.productNameInner}>
                                         <a href="#">
                                             <img
@@ -129,165 +114,166 @@ export const CartPage = () => {
                                         </a>
                                         <a href="#">Pink Burger</a>
                                     </span>
-                                </div>
-                                <div className={styles.productPrice}>
-                                    <span>$22.00</span>
-                                </div>
-                                <div className={styles.productQuantity}>
-                                    <div className={styles.productCount}>
-                                        <p>{cartCounter}</p>
-                                        <div className={styles.counterControl}>
+                                    </div>
+                                    <div className={styles.productPrice}>
+                                        <span>$22.00</span>
+                                    </div>
+                                    <div className={styles.productQuantity}>
+                                        <div className={styles.productCount}>
+                                            <p>{cartCounter}</p>
+                                            <div className={styles.counterControl}>
                                             <span onClick={() => handleCounter(+1)}>
                                                 <CaretUp/>
                                             </span>
-                                            <span onClick={cartCounter > 0 ? () => handleCounter(-1) : null}>
+                                                <span onClick={cartCounter > 0 ? () => handleCounter(-1) : null}>
                                                 <CaretDown/>
                                             </span>
 
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div className={styles.productSubtotal}>
-                                    <span>$44.00</span>
-                                </div>
-                                <div className={styles.productRemove}>
+                                    <div className={styles.productSubtotal}>
+                                        <span>$44.00</span>
+                                    </div>
+                                    <div className={styles.productRemove}>
                                     <span>
                                         <X weight="thin"/>
                                     </span>
-                                </div>
-                            </div>
-                            <div className={styles.mobileProductCard}>
-                                <div className={styles.mobileProductName}>
-                                    <p>Product:</p>
-                                    <div className={styles.deleteMobileProduct}>
-                                        <X />
                                     </div>
                                 </div>
-                                <div className={styles.mobileProductNameInner}>
-                                    <div className={styles.mobileImgBlock}>
-                                        <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/02/product-17-copyright-1024x1024.png" alt="Product"/>
+                                <div className={styles.mobileProductCard}>
+                                    <div className={styles.mobileProductName}>
+                                        <p>Product:</p>
+                                        <div className={styles.deleteMobileProduct}>
+                                            <X/>
+                                        </div>
                                     </div>
-                                    <p>Margherita Pizza</p>
-                                </div>
-                                <div className={styles.mobileProductPrice}>
-                                    <p>Price:</p>
-                                    <p>$14.00</p>
-                                </div>
-                                <div className={styles.mobileProductQuantity}>
-                                    <p>Quantity:</p>
-                                    <div className={styles.mobileProductCount}>
-                                        <p>{cartCounter}</p>
-                                        <div className={styles.counterControl}>
+                                    <div className={styles.mobileProductNameInner}>
+                                        <div className={styles.mobileImgBlock}>
+                                            <img
+                                                src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/02/product-17-copyright-1024x1024.png"
+                                                alt="Product"/>
+                                        </div>
+                                        <p>Margherita Pizza</p>
+                                    </div>
+                                    <div className={styles.mobileProductPrice}>
+                                        <p>Price:</p>
+                                        <p>$14.00</p>
+                                    </div>
+                                    <div className={styles.mobileProductQuantity}>
+                                        <p>Quantity:</p>
+                                        <div className={styles.mobileProductCount}>
+                                            <p>{cartCounter}</p>
+                                            <div className={styles.counterControl}>
                                             <span onClick={() => handleCounter(+1)}>
                                                 <CaretUp/>
                                             </span>
-                                            <span onClick={cartCounter > 0 ? () => handleCounter(-1) : null}>
+                                                <span onClick={cartCounter > 0 ? () => handleCounter(-1) : null}>
                                                 <CaretDown/>
                                             </span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div className={styles.mobileProductSubtotal}>
-                                    <p>Subtotal:</p>
-                                    <p>$14.00</p>
-                                </div>
-
-
-
-                            </div>
-                            <div className={styles.mobileProductCard}>
-                                <div className={styles.mobileProductName}>
-                                    <p>Product:</p>
-                                    <div className={styles.deleteMobileProduct}>
-                                        <X />
+                                    <div className={styles.mobileProductSubtotal}>
+                                        <p>Subtotal:</p>
+                                        <p>$14.00</p>
                                     </div>
+
+
                                 </div>
-                                <div className={styles.mobileProductNameInner}>
-                                    <div className={styles.mobileImgBlock}>
-                                        <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/02/product-17-copyright-1024x1024.png" alt="Product"/>
+                                <div className={styles.mobileProductCard}>
+                                    <div className={styles.mobileProductName}>
+                                        <p>Product:</p>
+                                        <div className={styles.deleteMobileProduct}>
+                                            <X/>
+                                        </div>
                                     </div>
-                                    <p>Margherita Pizza</p>
-                                </div>
-                                <div className={styles.mobileProductPrice}>
-                                    <p>Price:</p>
-                                    <p>$14.00</p>
-                                </div>
-                                <div className={styles.mobileProductQuantity}>
-                                    <p>Quantity:</p>
-                                    <div className={styles.mobileProductCount}>
-                                        <p>{cartCounter}</p>
-                                        <div className={styles.counterControl}>
+                                    <div className={styles.mobileProductNameInner}>
+                                        <div className={styles.mobileImgBlock}>
+                                            <img
+                                                src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/02/product-17-copyright-1024x1024.png"
+                                                alt="Product"/>
+                                        </div>
+                                        <p>Margherita Pizza</p>
+                                    </div>
+                                    <div className={styles.mobileProductPrice}>
+                                        <p>Price:</p>
+                                        <p>$14.00</p>
+                                    </div>
+                                    <div className={styles.mobileProductQuantity}>
+                                        <p>Quantity:</p>
+                                        <div className={styles.mobileProductCount}>
+                                            <p>{cartCounter}</p>
+                                            <div className={styles.counterControl}>
                                             <span onClick={() => handleCounter(+1)}>
                                                 <CaretUp/>
                                             </span>
-                                            <span onClick={cartCounter > 0 ? () => handleCounter(-1) : null}>
+                                                <span onClick={cartCounter > 0 ? () => handleCounter(-1) : null}>
                                                 <CaretDown/>
                                             </span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div className={styles.mobileProductSubtotal}>
-                                    <p>Subtotal:</p>
-                                    <p>$14.00</p>
-                                </div>
+                                    <div className={styles.mobileProductSubtotal}>
+                                        <p>Subtotal:</p>
+                                        <p>$14.00</p>
+                                    </div>
 
 
+                                </div>
 
                             </div>
-
-                        </div>
-                        <div className={styles.cartBottom}>
-                            <div className={styles.couponBlock}>
+                            <div className={styles.cartBottom}>
+                                <div className={styles.couponBlock}>
                                 <span>
                                     <Ticket weight="thin" style={{transform: "rotate(-45deg)"}}/>
                                     <input type="text" placeholder="Coupon Code"/>
                                 </span>
-                                <button type="submit">Apply Coupon</button>
-                            </div>
-                            <div className={styles.buttonBlock}>
-                                <a href="#">
-                                    Continue Shopping
-                                </a>
-                                <button type="submit">Update Cart</button>
-                            </div>
-                        </div>
-                        <div className={styles.cartTotal}>
-                            <div className={styles.cartTotalContent}>
-                                <div className={styles.cartTotalHeading}>
-                                    <p>Cart Totals</p>
+                                    <button type="submit">Apply Coupon</button>
                                 </div>
-                                <div className={styles.cartTotalBody}>
-                                    <div className={styles.cartTotalRow}>
-                                        <div className={styles.cartTotalTitle}>
-                                            Subtotal
+                                <div className={styles.buttonBlock}>
+                                    <a href="#">
+                                        Continue Shopping
+                                    </a>
+                                    <button type="submit">Update Cart</button>
+                                </div>
+                            </div>
+                            <div className={styles.cartTotal}>
+                                <div className={styles.cartTotalContent}>
+                                    <div className={styles.cartTotalHeading}>
+                                        <p>Cart Totals</p>
+                                    </div>
+                                    <div className={styles.cartTotalBody}>
+                                        <div className={styles.cartTotalRow}>
+                                            <div className={styles.cartTotalTitle}>
+                                                Subtotal
+                                            </div>
+                                            <div className={styles.cartTotalPrice}>
+                                                $24.00
+                                            </div>
                                         </div>
-                                        <div className={styles.cartTotalPrice}>
-                                            $24.00
+                                        <div className={styles.cartTotalRow}>
+                                            <div className={styles.cartTotalTitle}>
+                                                Total
+                                            </div>
+                                            <div className={styles.cartTotalPrice}>
+                                                $24.00
+                                            </div>
                                         </div>
                                     </div>
-                                    <div className={styles.cartTotalRow}>
-                                        <div className={styles.cartTotalTitle}>
-                                            Total
-                                        </div>
-                                        <div className={styles.cartTotalPrice}>
-                                            $24.00
-                                        </div>
+                                    <div className={styles.cartTotalButton}>
+                                        <a href="#">Proceed to checkout</a>
                                     </div>
                                 </div>
-                                <div className={styles.cartTotalButton}>
-                                    <a href="#">Proceed to checkout</a>
-                                </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </section>
-
             {/*FOOTER*/}
             <ChangedFooter/>
             {/*COMMON COMPONENTS FOR UI */}
             <UiControl/>
-
         </div>
     )
 }

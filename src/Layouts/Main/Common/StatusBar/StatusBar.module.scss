@@ -1,0 +1,86 @@
+@import "../../../../Variables/variables.module";
+@import "../../../../Animations/Animations.module";
+
+.statusBar {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 100px;
+
+  .statusBarItem {
+    display: inline-flex;
+    padding: 0 35px;
+    align-items: center;
+    font-family: $font-main;
+    gap: 15px;
+
+    span {
+      width: 34px;
+      height: 34px;
+      line-height: 35px;
+      font-size: 16px;
+      text-align: center;
+      display: inline-block;
+      background-color: $color-black;
+      color: $color-white;
+    }
+
+    p {
+      display: inline-flex;
+      font-size: 19px;
+      color: $color-black;
+      gap: 50px;
+      align-items: center;
+
+      svg {
+        font-size: 20px;
+        color: rgba(12, 15, 38, 0.4);
+      }
+
+    }
+
+  }
+
+}
+
+
+@media screen and (max-width: 1440px) {
+
+  .statusBar {
+    margin-bottom: 70px;
+  }
+}
+
+@media screen and (max-width: 1220px) {
+  .statusBar {
+    margin-bottom: 50px;
+    .statusBarItem {
+      padding: 0 10px;
+      p {
+        gap: 25px;
+        font-size: 18px;
+      }
+    }
+  }
+}
+@media screen and (max-width: 1000px) {
+  .statusBar {
+    margin-bottom: 40px;
+  }
+}
+@media screen and (max-width: 800px) {
+  .statusBar {
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 0;
+    .statusBarItem {
+      padding: 0;
+      p {
+        font-size: 17px;
+        svg {
+          display: none;
+        }
+      }
+    }
+  }
+}
