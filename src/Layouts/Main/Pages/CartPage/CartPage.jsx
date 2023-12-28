@@ -107,7 +107,6 @@ export const CartPage = () => {
                                             <span onClick={cartCounter > 0 ? () => handleCounter(-1) : null}>
                                                 <CaretDown/>
                                             </span>
-
                                         </div>
                                     </div>
                                 </div>
@@ -157,6 +156,85 @@ export const CartPage = () => {
                                     </span>
                                 </div>
                             </div>
+                            <div className={styles.mobileProductCard}>
+                                <div className={styles.mobileProductName}>
+                                    <p>Product:</p>
+                                    <div className={styles.deleteMobileProduct}>
+                                        <X />
+                                    </div>
+                                </div>
+                                <div className={styles.mobileProductNameInner}>
+                                    <div className={styles.mobileImgBlock}>
+                                        <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/02/product-17-copyright-1024x1024.png" alt="Product"/>
+                                    </div>
+                                    <p>Margherita Pizza</p>
+                                </div>
+                                <div className={styles.mobileProductPrice}>
+                                    <p>Price:</p>
+                                    <p>$14.00</p>
+                                </div>
+                                <div className={styles.mobileProductQuantity}>
+                                    <p>Quantity:</p>
+                                    <div className={styles.mobileProductCount}>
+                                        <p>{cartCounter}</p>
+                                        <div className={styles.counterControl}>
+                                            <span onClick={() => handleCounter(+1)}>
+                                                <CaretUp/>
+                                            </span>
+                                            <span onClick={cartCounter > 0 ? () => handleCounter(-1) : null}>
+                                                <CaretDown/>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className={styles.mobileProductSubtotal}>
+                                    <p>Subtotal:</p>
+                                    <p>$14.00</p>
+                                </div>
+
+
+
+                            </div>
+                            <div className={styles.mobileProductCard}>
+                                <div className={styles.mobileProductName}>
+                                    <p>Product:</p>
+                                    <div className={styles.deleteMobileProduct}>
+                                        <X />
+                                    </div>
+                                </div>
+                                <div className={styles.mobileProductNameInner}>
+                                    <div className={styles.mobileImgBlock}>
+                                        <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/02/product-17-copyright-1024x1024.png" alt="Product"/>
+                                    </div>
+                                    <p>Margherita Pizza</p>
+                                </div>
+                                <div className={styles.mobileProductPrice}>
+                                    <p>Price:</p>
+                                    <p>$14.00</p>
+                                </div>
+                                <div className={styles.mobileProductQuantity}>
+                                    <p>Quantity:</p>
+                                    <div className={styles.mobileProductCount}>
+                                        <p>{cartCounter}</p>
+                                        <div className={styles.counterControl}>
+                                            <span onClick={() => handleCounter(+1)}>
+                                                <CaretUp/>
+                                            </span>
+                                            <span onClick={cartCounter > 0 ? () => handleCounter(-1) : null}>
+                                                <CaretDown/>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className={styles.mobileProductSubtotal}>
+                                    <p>Subtotal:</p>
+                                    <p>$14.00</p>
+                                </div>
+
+
+
+                            </div>
+
                         </div>
                         <div className={styles.cartBottom}>
                             <div className={styles.couponBlock}>

@@ -1064,6 +1064,10 @@ a {
             gap: 25px;
             cursor: pointer;
             margin-top: 20px;
+            transition: $transition-fast;
+            &:hover {
+              background-color: #c23000;
+            }
 
             svg {
               font-size: 22px;

@@ -1,15 +1,12 @@
 import React, {useState, useEffect, useMemo} from 'react';
 import styles from "./LatestNewsSectionSlider.module.scss";
 import {Swiper, SwiperSlide} from 'swiper/react';
-import 'swiper/css';
+import 'swiper/scss';
 import "./pagination.scss";
 import {Pagination} from "swiper/modules";
 import {CaretLeft, CaretRight, Dot} from "@phosphor-icons/react";
 
 export const LatestNewsSectionSlider = () => {
-
-
-
     const [slidesPerView, setSlidesPerView] = useState(3);
 
     const handleResize = () => {

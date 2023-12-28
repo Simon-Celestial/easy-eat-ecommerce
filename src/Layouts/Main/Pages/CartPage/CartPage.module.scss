@@ -101,7 +101,6 @@
           display: flex;
           flex-direction: column;
           width: 100%;
-
           .cartRow {
             display: flex;
             width: 100%;
@@ -250,7 +249,115 @@
             }
 
           }
+          .mobileProductCard {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            border-bottom: 1px solid #323641;
+            padding: 18px 0;
+            .mobileProductName {
+              width: 100%;
+              display: inline-flex;
+              align-items: center;
+              justify-content: space-between;
+              font-family: $font-main;
+              p {
+                font-size: 17px;
+                color: $color-black;
+              }
+              .deleteMobileProduct {
+                padding: 5px;
+                svg {
+                  font-size: 25px;
+                  cursor: pointer;
+                }
+              }
 
+            }
+            .mobileProductNameInner {
+              display: inline-flex;
+              width: 100%;
+              padding: 5px 0;
+              align-items: center;
+              justify-content: space-between;
+              .mobileImgBlock {
+                display: flex;
+                width: 60px;
+                height: 60px;
+                img {
+                  width: 100%;
+                }
+              }
+              p {
+                font-size: 17px;
+                font-family: $font-main;
+              }
+            }
+            .mobileProductPrice {
+              display: inline-flex;
+              align-items: center;
+              justify-content: space-between;
+              font-size: 17px;
+              font-family: $font-main;
+              color: $color-black;
+              padding: 6px 0;
+            }
+            .mobileProductQuantity {
+              display: flex;
+              width: 100%;
+              font-family: $font-main;
+              color: $color-black;
+              font-size: 17px;
+              justify-content: space-between;
+              align-items: center;
+              padding: 6px 0;
+              .mobileProductCount {
+                width: 120px;
+                height: 45px;
+                border: 1px solid $color-border;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 5px 0 0 20px;
+
+                p {
+                  font-family: $font-alternative;
+                  font-size: 17px;
+                  padding-bottom: 5px;
+                }
+
+                .counterControl {
+                  display: flex;
+                  flex-direction: column;
+
+                  span {
+                    width: 38px;
+                    height: 20px;
+                    display: flex;
+                    cursor: pointer;
+
+                    svg {
+                      font-size: 14px;
+                    }
+                  }
+
+                }
+              }
+
+
+            }
+            .mobileProductSubtotal {
+              display: inline-flex;
+              align-items: center;
+              justify-content: space-between;
+              font-size: 17px;
+              font-family: $font-main;
+              color: $color-black;
+              padding: 6px 0;
+            }
+
+
+          }
         }
 
         .cartBottom {
@@ -638,13 +745,15 @@
 @media screen and (max-width: 800px) {
   .cartPageWrapper {
     .cartSection {
-      padding: 0 15px 50px 15px;
+      padding: 0 25px 50px 25px;
       .cartContent {
         .cartBasket {
           .cartHeading {
             flex-direction: column;
             gap: 10px;
+            margin-bottom: 0;
             .cartHeadingItem {
+              padding: 0;
               p {
                 font-size: 17px;
                 svg {
@@ -708,6 +817,14 @@
               }
             }
           }
+          .cartBody {
+            .mobileProductCard {
+              display: flex;
+            }
+            .cartRow {
+              display: none;
+            }
+          }
         }
       }
     }
@@ -718,10 +835,6 @@
     .cartSection {
       .cartContent {
         .cartBasket {
-          .cartHeading {
-            margin-bottom: 25px;
-
-          }
           .cartBottom {
             .couponBlock {
               height: 45px;
