@@ -40,11 +40,89 @@ export const CheckoutPage = () => {
                     {/*</div>*/}
 
                     <div className={styles.checkoutMain}>
+                        <div className={styles.headingDropdown}>
+                        <div className={styles.titleBlock}>
+                            <p>Returning customer? <span>Click here to login</span></p>
+                            <div className={styles.dropDownContainer}></div>
+                        </div>
+                        <div className={styles.titleBlock}>
+                            <p>Have a coupon?  <span>Click here to enter your code</span></p>
+                            <div className={styles.dropDownContainer}></div>
+                        </div>
+                        </div>
                         <StatusBar first="#EC3D08" second="#EC3D08" third="black"/>
                         <form action="#" method="post" className={styles.checkoutForm}>
                             {/*LEFT*/}
                             <div className={styles.checkoutLeft}>
                                 <h3>Billing Details</h3>
+                                <div className={styles.formRow}>
+                                    <div className={styles.formShortBlock}>
+                                        <p>First Name<span>*</span></p>
+                                        <input type="text" required/>
+                                    </div>
+                                    <div className={styles.formShortBlock}>
+                                        <p>Last Name<span>*</span></p>
+                                        <input type="text" required/>
+                                    </div>
+                                </div>
+                                <div className={styles.formRow}>
+                                    <div className={styles.formLongBlock}>
+                                        <p>Company name (Optional)</p>
+                                        <input type="text"/>
+                                    </div>
+                                </div>
+                                <div className={styles.formRow}>
+                                    <div className={styles.formLongBlock}>
+                                        <p>District / Area<span>*</span></p>
+                                        <select name="area">
+                                            <option value="Binagadi">Binagadi</option>
+                                            <option value="Yasamal">Yasamal</option>
+                                            <option value="Khatai">Khatai</option>
+                                            <option value="Nasimi">Nasimi</option>
+                                            <option value="Narimanov">Narimanov</option>
+                                            <option value="Nizami">Nizami</option>
+                                            <option value="Khazar">Khazar</option>
+                                            <option value="Sabayel">Sabayel</option>
+                                            <option value="Sabunchu">Sabunchu</option>
+                                            <option value="Surakhny">Surakhny</option>
+                                            <option value="Garadagh ">Garadagh </option>
+                                            <option value="Pirallahi">Pirallahi</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div className={styles.formRow}>
+                                    <div className={styles.formLongBlock}>
+                                        <p>Street Address<span>*</span></p>
+                                        <input type="text" required placeholder="Example (Dilara Aliyeva str.237 app.26)"/>
+                                    </div>
+                                </div>
+                                <div className={styles.formRow}>
+                                    <div className={styles.formLongBlock}>
+                                        <p>Post Code (Optional)</p>
+                                        <input type="text" required />
+                                    </div>
+                                </div>
+                                <div className={styles.formRow}>
+                                    <div className={styles.formLongBlock}>
+                                        <p>Phone<span>*</span></p>
+                                        <input type="tel" required placeholder="+994"/>
+                                    </div>
+                                </div>
+                                <div className={styles.formRow}>
+                                    <div className={styles.formLongBlock}>
+                                        <p>Email Address<span>*</span></p>
+                                        <input type="email" required/>
+                                    </div>
+                                </div>
+                                <div className={styles.additionalInfo}>
+                                    <h3>Additional information</h3>
+                                    <label htmlFor="info">
+                                        Order Notes (Optional)
+                                        <textarea name="info" id="info" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+                                    </label>
+
+                                </div>
+
 
                             </div>
                             {/*RIGHT*/}
