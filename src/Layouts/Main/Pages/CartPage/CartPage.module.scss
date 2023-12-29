@@ -295,74 +295,13 @@
             margin-top: 80px;
             justify-content: space-between;
 
-            .couponBlock {
-              height: 55px;
-              display: flex;
-              align-items: center;
-              max-width: 516px;
-              width: 100%;
-              border: 1px solid $color-black;
-              padding-left: 25px;
-              justify-content: space-between;
-
-              span {
-                display: inline-flex;
-                align-items: center;
-
-                svg {
-                  font-size: 20px;
-                }
-
-                input {
-                  padding: 13px 10px;
-                  font-size: 15px;
-                  font-family: $font-alternative;
-                  color: $color-black;
-                  background-color: transparent;
-                  outline: 0;
-                  border: 0;
-                  flex: 1 auto;
-                  width: 312px;
-
-                  &::placeholder {
-                    color: $color-black;
-                  }
-                }
-              }
-
-              button {
-                max-width: 155px;
-                width: 100%;
-                background: transparent;
-                outline: 0;
-                border: 0;
-                cursor: pointer;
-                font-family: $font-main;
-                font-size: 19px;
-                position: relative;
-                transition: color $transition-fast;
-
-                &:hover {
-                  color: $color-orange;
-                }
-
-                &::after {
-                  content: "";
-                  position: absolute;
-                  height: 23px;
-                  width: 1px;
-                  background-color: $color-black;
-                  left: -2px;
-                  top: 50%;
-                  transform: translateY(-50%);
-                }
-              }
-            }
 
             .buttonBlock {
               display: flex;
               align-items: center;
               gap: 15px;
+              width: 100%;
+              justify-content: end;
 
               a {
                 height: 55px;
@@ -520,17 +459,6 @@
           .cartBasket {
             .cartBottom {
               margin-top: 60px;
-              .couponBlock {
-                max-width: 425px;
-                span {
-                  input {
-                    width: 220px;
-                  }
-                }
-                button {
-                  font-size: 18px;
-                }
-              }
             }
             .cartTotal {
               .cartTotalContent {
@@ -582,14 +510,6 @@
         .cartContainer {
           .cartBasket {
             .cartBottom {
-              .couponBlock {
-                max-width: 330px;
-                span {
-                  input {
-                    width: 178px;
-                  }
-                }
-              }
               .buttonBlock {
                 a {
                   padding: 1px 25px 0;
@@ -673,19 +593,6 @@
               flex-direction: column;
               gap: 10px;
               margin-top: 25px;
-              .couponBlock {
-                max-width: 100%;
-                height: 50px;
-                span {
-                  display: inline-flex;
-                  width: 100%;
-                  input {
-                    width: 100%;
-                    max-width: unset;
-                    display: flex;
-                  }
-                }
-              }
               .buttonBlock {
                 justify-content: end;
                 a {
@@ -746,18 +653,6 @@
         .cartContainer {
           .cartBasket {
             .cartBottom {
-              .couponBlock {
-                height: 45px;
-                padding-left: 15px;
-                button {
-                  font-size: 16px;
-                }
-                span {
-                  input {
-                    font-size: 15px;
-                  }
-                }
-              }
               .buttonBlock {
                 flex-direction: column;
                 gap: 10px;

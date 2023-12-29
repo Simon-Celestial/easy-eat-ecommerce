@@ -37,13 +37,17 @@
         display: flex;
         width: 100%;
         flex-direction: column;
+        align-items: center;
 
         .headingDropdown {
           display: flex;
           width: 100%;
+          max-width: 980px;
           justify-content: center;
           flex-direction: column;
           padding-bottom: 50px;
+          align-items: center;
+
           .titleBlock {
             width: 100%;
             display: flex;
@@ -66,6 +70,148 @@
               }
             }
 
+            .dropDownCoupon {
+              display: flex;
+              width: 100%;
+              flex-direction: column;
+              align-items: center;
+              height: 0;
+              transition: $transition-medium;
+              overflow: hidden;
+              border: 0;
+
+              p {
+                padding-top: 23px;
+                font-size: 17px;
+                font-family: $font-alternative;
+                color: $color-black;
+                text-align: center;
+              }
+
+              &.dropDownActive {
+                margin: 48px auto 0 auto;
+                height: auto;
+
+              }
+            }
+
+            .dropDownLogin {
+              display: flex;
+              width: 100%;
+              flex-direction: column;
+              height: 0;
+              overflow: hidden;
+              border: 0;
+              transition: $transition-medium;
+              &.loginDropdownActive {
+                margin: 48px auto 0 auto;
+                height: auto;
+
+              }
+
+              > p {
+                padding-bottom: 30px;
+                font-family: $font-alternative;
+                color: $color-black;
+                text-align: left;
+                font-size: 17px;
+                letter-spacing: 0.5px;
+                line-height: 30px;
+
+              }
+
+              .dropDownLoginRow {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+
+                .dropDownLoginColumn {
+                  display: flex;
+                  max-width: 480px;
+                  flex-direction: column;
+                  width: 100%;
+                  &.dropDownLoginColumn:nth-child(2) {
+                    input {
+                      padding-right: 40px;
+                    }
+                    .passwordVisible {
+                      position: absolute;
+                      right: 10px;
+                      bottom: -45px;
+                      cursor: pointer;
+                      svg {
+                        font-size: 20px;
+                      }
+                    }
+                  }
+
+                  label {
+                    margin-bottom: 15px;
+                    display: inline-flex;
+                    align-items: center;
+                    font-size: 18px;
+                    font-family: $font-alternative;
+                    position: relative;
+                    span {
+                      color: $color-orange;
+                      font-size: 20px;
+                    }
+
+                  }
+
+                  > input {
+                    width: 100%;
+                    border: 0;
+                    outline: 0;
+                    background-color: transparent;
+                    border-bottom: 1px solid $color-border;
+                    padding: 8px 0;
+                  }
+
+                  .rememberBlock {
+                    margin-top: 25px;
+                    display: flex;
+                    width: 100%;
+                    align-items: center;
+                    gap: 8px;
+                    font-size: 14px;
+                    font-family: $font-alternative;
+
+                    input {
+                      cursor: pointer;
+                      display: inline-flex;
+                      margin-bottom: 2px;
+                    }
+                  }
+
+                  button {
+                    text-align: center;
+                    width: 145px;
+                    height: 55px;
+                    background-color: $color-orange;
+                    color: $color-white;
+                    font-family: $font-main;
+                    font-size: 18px;
+                    cursor: pointer;
+                    transition: $transition-fast;
+                    margin-top: 20px;
+                    outline: 0;
+                    border: 0;
+
+                    &:hover {
+                      background-color: #c22f00;
+                    }
+                  }
+
+                  a {
+                    font-family: $font-alternative;
+                    color: $color-orange;
+                    margin-top: 20px;
+                    font-size: 16px;
+                  }
+                }
+              }
+            }
           }
         }
 
@@ -341,6 +487,291 @@
 
           }
 
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  .checkoutPageWrapper {
+    .checkoutSection {
+      padding: 30px 15px 100px 15px;
+
+      .checkoutContent {
+        max-width: 1100px;
+        .checkoutMain {
+          .headingDropdown {
+            max-width: 770px;
+            .titleBlock {
+              .dropDownLogin {
+                .dropDownLoginRow {
+                  .dropDownLoginColumn {
+                    max-width: 375px;
+                  }
+                }
+              }
+            }
+          }
+          .checkoutForm {
+            .checkoutLeft {
+              >h3 {
+                font-size: 38px;
+                padding-bottom: 30px;
+              }
+              max-width: 520px;
+              .formRow {
+                .formShortBlock {
+                  max-width: 245px;
+                }
+              }
+              .additionalInfo {
+                h3 {
+                  font-size: 28px;
+                  margin-bottom: 25px;
+                }
+              }
+            }
+            .checkoutRight {
+              max-width: 420px;
+              h3 {
+                font-size: 28px;
+                padding-bottom: 30px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1220px) {
+  .checkoutPageWrapper {
+    .checkoutSection {
+      .checkoutContent {
+        max-width: unset;
+        padding: 0 15px;
+        .checkoutMain {
+          .headingDropdown {
+            max-width: 600px;
+            padding-bottom: 25px;
+            .titleBlock {
+              margin-bottom: 25px;
+              .dropDownCoupon {
+                &.dropDownActive {
+                  margin-top: 25px;
+                }
+              }
+              .dropDownLogin {
+                &.loginDropdownActive {
+                  margin-top: 25px;
+                }
+                .dropDownLoginRow {
+                  .dropDownLoginColumn {
+                    max-width: 290px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 1024px) {
+  .checkoutPageWrapper {
+    .checkoutSection {
+      .checkoutContent {
+        .checkoutMain {
+          .checkoutForm {
+            gap: 40px;
+            .checkoutLeft {
+              >h3 {
+                font-size: 28px;
+                padding-bottom: 25px;
+              }
+              max-width: 520px;
+              .formRow {
+                gap: 25px;
+                padding-bottom: 30px;
+                .formShortBlock {
+                  max-width: 245px;
+                  p {
+                    margin-bottom: 10px;
+
+                  }
+                }
+                .formLongBlock {
+                  p {
+                    margin-bottom: 10px;
+                  }
+                }
+              }
+            }
+            .checkoutRight {
+              max-width: 380px;
+              h3 {
+                font-size: 22px;
+                padding-bottom: 25px;
+              }
+              .orderContainer {
+                padding: 12px 30px;
+                .orderRow {
+                  padding: 15px 0;
+                }
+              }
+              .paymentContainer {
+                padding: 12px 30px;
+                .paymentTypeRow {
+                  padding: 15px 0;
+                }
+                .paymentPrivacyPolicy {
+                  padding: 15px 0;
+                  p {
+                    margin-bottom: 15px;
+                  }
+                }
+
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 800px) {
+  .checkoutPageWrapper {
+    .checkoutSection {
+      padding: 30px 15px 50px 15px;
+
+      .checkoutContent {
+        padding: 0;
+        .checkoutMain {
+          .headingDropdown {
+            padding-bottom: 25px;
+            max-width: unset;
+            .titleBlock {
+              margin-bottom: 25px;
+              .dropDownLogin {
+                p {
+                  padding-bottom: 15px;
+                }
+                .dropDownLoginRow {
+                  flex-direction: column;
+                  justify-content: unset;
+                  gap: 25px;
+                  .dropDownLoginColumn {
+                    max-width: unset;
+                    button {
+                      width: 100px;
+                      height: 40px;
+                      margin-top: 10px;
+                    }
+                    .passwordVisible {
+                      bottom: -40px!important;
+
+                    }
+                    label {
+                      margin-bottom: 8px;
+                      font-size: 16px;
+                    }
+                    &:nth-child(1) {
+                      order: 2;
+                    }
+                  }
+                }
+              }
+            }
+          }
+          .checkoutForm {
+            flex-direction: column;
+            margin-top: 25px;
+            .checkoutLeft {
+              max-width: unset;
+              .formRow {
+                padding-bottom: 15px;
+                .formShortBlock {
+                  max-width: 50%;
+                  p {
+                    font-size: 16px;
+                  }
+                }
+                .formLongBlock {
+                  p {
+                    font-size: 16px;
+                  }
+                }
+              }
+              .additionalInfo {
+                margin-top: 15px;
+                h3 {
+                  font-size: 22px;
+                  margin-bottom: 15px;
+                }
+                label {
+                  font-size: 16px;
+                  textarea {
+                    height: 85px;
+                  }
+                }
+              }
+            }
+            .checkoutRight {
+              max-width: unset;
+              .paymentContainer {
+                .paymentTypeRow{
+                  p {
+                    font-size: 16px;
+                  }
+                }
+                .paymentPrivacyPolicy{
+                  button {
+                    width: 100px;
+                    height: 40px;
+                    font-size: 16px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 550px) {
+  .checkoutPageWrapper {
+    .checkoutSection {
+      .checkoutContent {
+        .checkoutMain {
+          .headingDropdown {
+            padding-bottom: 0;
+
+            .titleBlock {
+              .dropDownLogin {
+                p {
+                  font-size:  14px;
+                  line-height: 20px;
+
+                }
+              }
+            }
+          }
+          .checkoutForm {
+            .checkoutRight {
+              .orderContainer {
+                .orderRow{
+                  padding: 10px 0;
+                  p {
+                    font-size: 16px;
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }

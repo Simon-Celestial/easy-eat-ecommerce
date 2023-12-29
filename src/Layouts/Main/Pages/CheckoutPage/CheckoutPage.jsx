@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import {LayoutContext} from "../../../../Context/LayoutContext/LayoutContext.jsx";
 import {PageNameSection} from "../../Common/PageNameSection/PageNameSection.jsx";
 import {Header} from "../../Components/Header/Header.jsx";
@@ -7,12 +7,15 @@ import {ChangedFooter} from "../../Components/ChangedFooter/ChangedFooter.jsx";
 import {UiControl} from "../../Common/UiControl/UiControl.jsx";
 import {EmptyCartInfo} from "../../Common/EmpyCartInfo/EmptyCartInfo.jsx";
 import {StatusBar} from "../../Common/StatusBar/StatusBar.jsx";
+import {CouponBlock} from "../../Common/CouponBlock/CouponBlock.jsx";
+import {Eye, EyeSlash} from "@phosphor-icons/react";
 
 export const CheckoutPage = () => {
 
     const {
         setHeaderColorChange,
         setBasketVisible,
+        openHandler,
     } = useContext(LayoutContext);
 
     // useEffect TO CHANGE HEADER COLOR
@@ -24,6 +27,10 @@ export const CheckoutPage = () => {
     useEffect(() => {
         setBasketVisible(true);
     }, []);
+
+    const [couponDropDownActive, setCouponDropDownActive] = useState(false);
+    const [LoginDropDownActive, setLoginDropDownActive] = useState(false);
+    const [passwordVisible, setPasswordVisible] = useState(false);
 
 
     return (
@@ -41,14 +48,47 @@ export const CheckoutPage = () => {
 
                     <div className={styles.checkoutMain}>
                         <div className={styles.headingDropdown}>
-                        <div className={styles.titleBlock}>
-                            <p>Returning customer? <span>Click here to login</span></p>
-                            <div className={styles.dropDownContainer}></div>
-                        </div>
-                        <div className={styles.titleBlock}>
-                            <p>Have a coupon?  <span>Click here to enter your code</span></p>
-                            <div className={styles.dropDownContainer}></div>
-                        </div>
+                            <div className={styles.titleBlock}>
+                                <p>Returning customer? <span onClick={openHandler(setLoginDropDownActive)}>Click here to login</span></p>
+                                <form action="#" className={`${styles.dropDownLogin} ${LoginDropDownActive && styles.loginDropdownActive}`}>
+                                    <p>If you have shopped with us before, please enter your details below. If you are a
+                                        new customer, please proceed to the Billing section.</p>
+                                    <div className={styles.dropDownLoginRow}>
+                                        <div className={styles.dropDownLoginColumn}>
+                                            <label htmlFor="username">Username or email&nbsp;<span>*</span></label>
+                                            <input type="text" name="username" id="username" required
+                                                   autoComplete="username"/>
+                                            <div className={styles.rememberBlock}>
+                                                <input type="checkbox"/>
+                                                Remember me
+                                            </div>
+                                            <button type="submit">Login</button>
+                                            <a href="https://easyeat.ancorathemes.com/my-account/lost-password/">Lost
+                                                your password?</a>
+                                        </div>
+                                        <div className={styles.dropDownLoginColumn}>
+                                            <label htmlFor="password">Password&nbsp;<span>*</span>
+                                                <div className={styles.passwordVisible}
+                                                     onClick={openHandler(setPasswordVisible)}>
+                                                    {!passwordVisible ? <Eye/> : <EyeSlash/>}
+                                                </div>
+                                            </label>
+                                            <input type={`${passwordVisible? "text" : "password"}`} name="password" id="password" required
+                                                   autoComplete="password"/>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div className={styles.titleBlock}>
+                                <p>Have a coupon? <span onClick={openHandler(setCouponDropDownActive)}>Click here to enter your code</span>
+                                </p>
+                                <form action="#"
+                                      className={`${styles.dropDownCoupon} ${couponDropDownActive && styles.dropDownActive}`}>
+                                    <CouponBlock/>
+                                    <p>If you have a coupon code, please apply it below.</p>
+                                </form>
+                            </div>
                         </div>
                         <StatusBar first="#EC3D08" second="#EC3D08" third="black"/>
                         <form action="#" method="post" className={styles.checkoutForm}>
@@ -85,7 +125,7 @@ export const CheckoutPage = () => {
                                             <option value="Sabayel">Sabayel</option>
                                             <option value="Sabunchu">Sabunchu</option>
                                             <option value="Surakhny">Surakhny</option>
-                                            <option value="Garadagh ">Garadagh </option>
+                                            <option value="Garadagh ">Garadagh</option>
                                             <option value="Pirallahi">Pirallahi</option>
                                         </select>
                                     </div>
@@ -93,13 +133,14 @@ export const CheckoutPage = () => {
                                 <div className={styles.formRow}>
                                     <div className={styles.formLongBlock}>
                                         <p>Street Address<span>*</span></p>
-                                        <input type="text" required placeholder="Example (Dilara Aliyeva str.237 app.26)"/>
+                                        <input type="text" required
+                                               placeholder="Example (Dilara Aliyeva str.237 app.26)"/>
                                     </div>
                                 </div>
                                 <div className={styles.formRow}>
                                     <div className={styles.formLongBlock}>
                                         <p>Post Code (Optional)</p>
-                                        <input type="text" required />
+                                        <input type="text" required/>
                                     </div>
                                 </div>
                                 <div className={styles.formRow}>
@@ -118,7 +159,8 @@ export const CheckoutPage = () => {
                                     <h3>Additional information</h3>
                                     <label htmlFor="info">
                                         Order Notes (Optional)
-                                        <textarea name="info" id="info" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+                                        <textarea name="info" id="info"
+                                                  placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
                                     </label>
 
                                 </div>

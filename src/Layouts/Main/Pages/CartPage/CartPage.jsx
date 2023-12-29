@@ -5,9 +5,9 @@ import {Header} from "../../Components/Header/Header.jsx";
 import {UiControl} from "../../Common/UiControl/UiControl.jsx";
 import {PageNameSection} from "../../Common/PageNameSection/PageNameSection.jsx";
 import {ChangedFooter} from "../../Components/ChangedFooter/ChangedFooter.jsx";
-import {ArrowRight, CaretDown, CaretUp, Ticket, X} from "@phosphor-icons/react";
+import {CaretDown, CaretUp, X} from "@phosphor-icons/react";
 import {StatusBar} from "../../Common/StatusBar/StatusBar.jsx";
-import {EmptyCartInfo} from "../../Common/EmpyCartInfo/EmptyCartInfo.jsx";
+import {CouponBlock} from "../../Common/CouponBlock/CouponBlock.jsx";
 
 export const CartPage = () => {
     const {
@@ -224,13 +224,7 @@ export const CartPage = () => {
 
                             </div>
                             <div className={styles.cartBottom}>
-                                <div className={styles.couponBlock}>
-                                <span>
-                                    <Ticket weight="thin" style={{transform: "rotate(-45deg)"}}/>
-                                    <input type="text" placeholder="Coupon Code"/>
-                                </span>
-                                    <button type="submit">Apply Coupon</button>
-                                </div>
+                                <CouponBlock />
                                 <div className={styles.buttonBlock}>
                                     <a href="#">
                                         Continue Shopping
