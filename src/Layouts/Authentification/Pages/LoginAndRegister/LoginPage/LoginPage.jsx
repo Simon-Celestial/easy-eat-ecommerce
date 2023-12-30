@@ -1,13 +1,13 @@
 import React, {useContext, useEffect, useState} from 'react'
 import styles from "../LoginAndRegister.module.scss";
 import {Header} from "../../../../Main/Components/Header/Header.jsx";
-import {Footer} from "../../../../Main/Components/Footer/Footer.jsx";
 import {UiControl} from "../../../../Main/Common/UiControl/UiControl.jsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAngleDown, faEye, faEyeSlash, faKey, faUser} from "@fortawesome/free-solid-svg-icons";
 import {LayoutContext} from "../../../../../Context/LayoutContext/LayoutContext.jsx";
 import {Link} from "react-router-dom";
 import {PageNameSection} from "../../../../Main/Common/PageNameSection/PageNameSection.jsx";
+import {ChangedFooter} from "../../../../Main/Components/ChangedFooter/ChangedFooter.jsx";
 
 export const LoginPage = () => {
     const {
@@ -71,7 +71,7 @@ export const LoginPage = () => {
             </section>
 
             {/*SITE FOOTER*/}
-            <Footer/>
+            <ChangedFooter />
 
             {/*COMMON COMPONENTS FOR UI */}
             <UiControl/>

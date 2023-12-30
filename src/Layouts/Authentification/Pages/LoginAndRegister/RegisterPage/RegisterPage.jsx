@@ -1,7 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react'
 import styles from "../LoginAndRegister.module.scss";
 import {Header} from "../../../../Main/Components/Header/Header.jsx";
-import {Footer} from "../../../../Main/Components/Footer/Footer.jsx";
 import {UiControl} from "../../../../Main/Common/UiControl/UiControl.jsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
@@ -16,6 +15,7 @@ import {
 import {LayoutContext} from "../../../../../Context/LayoutContext/LayoutContext.jsx";
 import {Link} from "react-router-dom";
 import {PageNameSection} from "../../../../Main/Common/PageNameSection/PageNameSection.jsx";
+import {ChangedFooter} from "../../../../Main/Components/ChangedFooter/ChangedFooter.jsx";
 
 export const RegisterPage = () => {
     const {
@@ -92,7 +92,7 @@ export const RegisterPage = () => {
             </section>
 
             {/*SITE FOOTER*/}
-            <Footer />
+            <ChangedFooter />
 
             {/*COMMON COMPONENTS FOR UI */}
             <UiControl />

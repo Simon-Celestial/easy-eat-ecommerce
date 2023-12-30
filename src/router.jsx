@@ -8,6 +8,8 @@ import {ProductSingle} from "./Layouts/Main/Pages/ProductSinglePage/ProductSingl
 import {ProductList} from "./Layouts/Main/Pages/ProductList/ProductList.jsx";
 import {CartPage} from "./Layouts/Main/Pages/CartPage/CartPage.jsx";
 import {CheckoutPage} from "./Layouts/Main/Pages/CheckoutPage/CheckoutPage.jsx";
+import {AdminLogin} from "./Layouts/Authentification/Pages/AdminLogin/AdminLogin.jsx";
+import {AdminPageDashboard} from "./Layouts/Authentification/Pages/AdminPage/AdminPageDashboard/AdminPageDashboard.jsx";
 
 const router = createBrowserRouter([
     {
@@ -52,6 +54,8 @@ const router = createBrowserRouter([
             {path: '', element: <LoginPage/>},
             {path: 'login', element: <LoginPage/>},
             {path: 'register', element: <RegisterPage/>},
+            {path:'admin',element: <AdminLogin />},
+            {path:'dashboard',element: <AdminPageDashboard />},
         ],
     },
 ]);
