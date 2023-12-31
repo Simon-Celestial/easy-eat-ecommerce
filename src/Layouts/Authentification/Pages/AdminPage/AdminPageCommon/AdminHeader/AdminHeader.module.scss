@@ -1,0 +1,163 @@
+@import "../../../../../../Animations/Animations.module";
+@import "../../../../../../Variables/variables.module";
+
+.adminHeaderWrapper {
+  position: fixed;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  top: 0;
+  align-items: center;
+  background-color: $color-secondary;
+  height: 65px;
+
+  .adminHeaderContent {
+    display: flex;
+    width: 1300px;
+    align-items: center;
+    justify-content: space-between;
+
+    .sideMenuButton {
+      cursor: pointer;
+      padding: 5px;
+
+      &:hover {
+        svg {
+          color: $color-orange;
+          margin-bottom: 5px;
+        }
+      }
+
+      svg {
+        font-size: 25px;
+        color: $color-white;
+        transition: $transition-fast;
+      }
+
+    }
+
+    .headerLogo {
+      width: 50px;
+      height: 50px;
+
+      &:hover {
+        animation: logoRotate 1s linear;
+      }
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .adminBlock {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      position: relative;
+
+      p {
+        font-family: $font-alternative;
+        color: $color-white;
+      }
+
+      .adminLogo {
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        border: 1px solid $color-orange;
+        cursor: pointer;
+        transition: $transition-fast;
+        &:hover {
+          border-color: $color-white;
+          svg {
+            color: $color-white;
+            margin-bottom: 3px;
+          }
+        }
+        svg {
+          font-size: 18px;
+          transition: $transition-fast;
+          color: $color-orange;
+        }
+      }
+
+      .adminDropdown {
+        position: absolute;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        top: 55px;
+        overflow: hidden;
+        background-color: $color-secondary;
+        justify-content: center;
+        transition: height $transition-fast;
+        height: 0;
+        width: 135px;
+        pointer-events: none;
+        &.adminDropdownActive {
+          height: 67px;
+          pointer-events: auto;
+        }
+        a {
+          color: $color-white;
+          font-size: 16px;
+          transition: $transition-fast;
+          font-family: $font-alternative;
+          display: inline-flex;
+          gap: 5px;
+          align-items: center;
+          white-space: nowrap;
+          padding-left: 20px;
+          svg {
+            color: $color-white;
+            font-size: 16px;
+            transition: $transition-fast;
+          }
+
+          &:hover {
+            color: $color-orange;
+
+            svg {
+              color: $color-orange;
+            }
+          }
+        }
+        button {
+          background-color: transparent;
+          outline: 0;
+          padding-left: 20px;
+          cursor: pointer;
+          border: 0;
+          color: $color-white;
+          gap: 5px;
+          display: inline-flex;
+          font-size: 16px;
+          align-items: center;
+          white-space: nowrap;
+          transition: $transition-fast;
+
+          &:hover {
+            color: $color-orange;
+
+            svg {
+              color: $color-orange;
+            }
+          }
+
+          svg {
+            color: $color-white;
+            font-size: 16px;
+            transition: $transition-fast;
+
+          }
+        }
+      }
+
+    }
+  }
+}

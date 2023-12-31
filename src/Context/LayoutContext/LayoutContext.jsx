@@ -35,6 +35,10 @@ const defaults = {
     basketVisible: true,
     setBasketVisible: () => {
     },
+    adminSideMenuOpen: false,
+    setAdminSideMenuOpen: () => {
+    },
+
 }
 export const LayoutContext = React.createContext(defaults);
 
@@ -65,6 +69,10 @@ export const LayoutContextProvider = ({
 
     // ACCOUNT ICON DROPDOWN STATE, TO ENTER LOGIN OR REGISTER PAGE
     const [dropDownAccountOpen, setDropDownAccountOpen] = useState(false);
+
+    // SIDE MENU STATE IN DASHBOARD TO OPEN AND CLOSE MENU
+    const [adminSideMenuOpen, setAdminSideMenuOpen]= useState(false);
+
 
 
     // FUNCTION TO OPEN WIDGETS WITH CLICK
@@ -124,6 +132,8 @@ export const LayoutContextProvider = ({
         setMagnifiedOpen,
         setBasketVisible,
         basketVisible,
+        adminSideMenuOpen,
+        setAdminSideMenuOpen,
     }}>
         {children}
     </LayoutContext.Provider>

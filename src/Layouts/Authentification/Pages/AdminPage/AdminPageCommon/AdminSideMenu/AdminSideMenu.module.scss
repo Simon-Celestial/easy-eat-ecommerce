@@ -1,0 +1,74 @@
+@import "../../../../../../Animations/Animations.module";
+@import "../../../../../../Variables/variables.module";
+
+
+.adminSideMenuSection {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 200px;
+  background-color: $color-secondary;
+  height: 100vh;
+  justify-content: center;
+  flex-direction: column;
+  padding-left: 40px;
+  transition: left $transition-fast;
+  pointer-events: none;
+
+  &.adminSideMenuActive {
+    left: 0;
+    pointer-events: auto;
+  }
+
+  .sideMenuItem {
+    display: flex;
+    gap: 10px;
+    color: $color-white;
+    justify-content: center;
+    padding: 10px 0;
+    flex-direction: column;
+    .sideMenuElement {
+      font-size: 20px;
+      font-family: $font-main;
+      color: $color-white;
+      transition: color $transition-fast;
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      cursor: pointer;
+      svg {
+        font-size: 20px;
+        transition: color $transition-fast;
+      }
+      &:hover {
+          color: $color-orange;
+        svg {
+          color: $color-orange;
+        }
+      }
+    }
+    .pagesDropDown {
+      display: flex;
+      flex-direction: column;
+      padding-left: 25px;
+      overflow: hidden;
+      height: 0;
+      transition: $transition-fast;
+      a {
+        font-size: 18px;
+        color: $color-gray;
+        padding: 2px 0;
+        transition: $transition-fast;
+        &:hover {
+          color: $color-white;
+        }
+      }
+      &.pagesDropDownActive {
+        height: 162px;
+
+      }
+    }
+
+  }
+}
