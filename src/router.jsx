@@ -10,36 +10,42 @@ import {CartPage} from "./Layouts/Main/Pages/CartPage/CartPage.jsx";
 import {CheckoutPage} from "./Layouts/Main/Pages/CheckoutPage/CheckoutPage.jsx";
 import {AdminLogin} from "./Layouts/Authentification/Pages/AdminLogin/AdminLogin.jsx";
 import {AdminPageDashboard} from "./Layouts/Authentification/Pages/AdminPage/AdminPageDashboard/AdminPageDashboard.jsx";
+import {WishlistPage} from "./Layouts/Main/Pages/WishlistPage/WishlistPage.jsx";
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <MainLayout />,
+        element: <MainLayout/>,
         children: [
             {
                 path: '/',
-                element: <Home />,
+                element: <Home/>,
             },
             {
                 path: 'home',
-                element: <Home />,
+                element: <Home/>,
             },
             {
                 path: 'home/product',
-                element: <ProductSingle />
+                element: <ProductSingle/>
             },
             {
                 path: 'home/shop',
-                element: <ProductList />
+                element: <ProductList/>
             },
             {
                 path: 'home/cart',
-                element: <CartPage />
+                element: <CartPage/>
             },
             {
                 path: 'home/checkout',
-                element: <CheckoutPage />
+                element: <CheckoutPage/>
             },
+            {
+                path: 'home/wishlist',
+                element: <WishlistPage/>
+            },
+
 
             {
                 path: '*',
@@ -54,13 +60,13 @@ const router = createBrowserRouter([
             {path: '', element: <LoginPage/>},
             {path: 'login', element: <LoginPage/>},
             {path: 'register', element: <RegisterPage/>},
-            {path:'admin',element: <AdminLogin />},
-            {path:'dashboard',element: <AdminPageDashboard />},
+            {path: 'admin', element: <AdminLogin/>},
+            {path: 'dashboard', element: <AdminPageDashboard/>},
         ],
     },
 ]);
 const MainRouter = () => {
-    return <RouterProvider router={router} />;
+    return <RouterProvider router={router}/>;
 };
 
 export default MainRouter;

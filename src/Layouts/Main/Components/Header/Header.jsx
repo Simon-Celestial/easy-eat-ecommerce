@@ -291,9 +291,9 @@ export const Header = () => {
                                     <div
                                         className={styles.navDropdownItem}
                                     >
-                                        <a href="#">
+                                        <Link to="/home/wishlist">
                                             <p>Wishlist Page</p>
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
