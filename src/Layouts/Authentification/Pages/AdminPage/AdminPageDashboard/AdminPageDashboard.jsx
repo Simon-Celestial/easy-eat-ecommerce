@@ -1,22 +1,22 @@
 import React from 'react'
-import styles from "./AdminPageDasboard.module.scss";
 import {AdminHeader} from "../AdminPageCommon/AdminHeader/AdminHeader.jsx";
 import {AdminSideMenu} from "../AdminPageCommon/AdminSideMenu/AdminSideMenu.jsx";
 import {ArrowsClockwise, Motorcycle, ShoppingCart, X} from "@phosphor-icons/react";
+import {OrdersTable} from "../AdminPageCommon/OrdersTable/OrdersTable.jsx";
+import styles from "./AdminPageDasboard.module.scss"
+import {BlockTitle} from "../AdminPageCommon/BlockTitle/BlockTitle.jsx";
 
 export const AdminPageDashboard = () => {
     return (
         <div className={styles.pageWrapper}>
-            <AdminHeader />
-            <AdminSideMenu />
+            <AdminHeader/>
+            <AdminSideMenu/>
             <div className={styles.pageContent}>
-                <div className={styles.blockTitle}>
-                    <h4>Overview</h4>
-                </div>
+                <BlockTitle title="Overview"/>
                 <div className={styles.statisticsBlock}>
                     <div className={styles.statisticsItem}>
                         <div className={styles.statisticsCircle}>
-                            <ShoppingCart />
+                            <ShoppingCart/>
                         </div>
                         <div className={styles.statisticsTitle}>
                             <p>Total Orders</p>
@@ -25,7 +25,7 @@ export const AdminPageDashboard = () => {
                     </div>
                     <div className={styles.statisticsItem}>
                         <div className={styles.statisticsCircle}>
-                            <ArrowsClockwise  />
+                            <ArrowsClockwise/>
                         </div>
                         <div className={styles.statisticsTitle}>
                             <p>Orders Pending</p>
@@ -34,7 +34,7 @@ export const AdminPageDashboard = () => {
                     </div>
                     <div className={styles.statisticsItem}>
                         <div className={styles.statisticsCircle}>
-                            <Motorcycle  />
+                            <Motorcycle/>
                         </div>
                         <div className={styles.statisticsTitle}>
                             <p>Orders Processing</p>
@@ -43,7 +43,7 @@ export const AdminPageDashboard = () => {
                     </div>
                     <div className={styles.statisticsItem}>
                         <div className={styles.statisticsCircle}>
-                            <X />
+                            <X/>
                         </div>
                         <div className={styles.statisticsTitle}>
                             <p>Orders Rejected</p>
@@ -52,9 +52,12 @@ export const AdminPageDashboard = () => {
                     </div>
 
                 </div>
-                <div className={styles.blockTitle}>
-                    <h4>Recent Order</h4>
-                </div>
+
+                <BlockTitle title="Recent Orders"/>
+                {/*<div className={styles.noOrders}>*/}
+                {/*    <p>No orders received yet...</p>*/}
+                {/*</div>*/}
+                <OrdersTable/>
             </div>
         </div>
     )

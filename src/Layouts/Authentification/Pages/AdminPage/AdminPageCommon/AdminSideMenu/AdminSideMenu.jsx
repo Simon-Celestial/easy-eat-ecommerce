@@ -1,18 +1,30 @@
 import React, {useContext, useState} from 'react'
 import styles from "./AdminSideMenu.module.scss";
-import {Browser, Browsers, DiamondsFour, Hamburger, ListNumbers, UsersThree} from "@phosphor-icons/react";
+import {
+    Browser,
+    Browsers,
+    DiamondsFour,
+    Hamburger,
+    ListNumbers,
+    SkipBack,
+    UsersThree
+} from "@phosphor-icons/react";
 import {Link} from "react-router-dom";
 import {LayoutContext} from "../../../../../../Context/LayoutContext/LayoutContext.jsx";
 
 export const AdminSideMenu = () => {
     const {
         adminSideMenuOpen,
+        setAdminSideMenuOpen,
         openHandler,
     } = useContext(LayoutContext);
     const [pagesDropDownVisible,setPagesDropDownVisible] = useState(false);
 
     return (
         <section className={`${styles.adminSideMenuSection} ${!adminSideMenuOpen && styles.adminSideMenuActive}`}>
+            <div className={styles.sideMenuButton} onClick={openHandler(setAdminSideMenuOpen)}>
+                <SkipBack  />
+            </div>
             <div className={styles.sideMenuItem}>
                 <Link to="/" className={styles.sideMenuElement}>
                     <Browser  />

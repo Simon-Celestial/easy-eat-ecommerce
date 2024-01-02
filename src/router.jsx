@@ -11,6 +11,7 @@ import {CheckoutPage} from "./Layouts/Main/Pages/CheckoutPage/CheckoutPage.jsx";
 import {AdminLogin} from "./Layouts/Authentification/Pages/AdminLogin/AdminLogin.jsx";
 import {AdminPageDashboard} from "./Layouts/Authentification/Pages/AdminPage/AdminPageDashboard/AdminPageDashboard.jsx";
 import {WishlistPage} from "./Layouts/Main/Pages/WishlistPage/WishlistPage.jsx";
+import {AdminPageOrders} from "./Layouts/Authentification/Pages/AdminPage/AdminPageOrders/AdminPageOrders.jsx";
 
 const router = createBrowserRouter([
     {
@@ -45,8 +46,6 @@ const router = createBrowserRouter([
                 path: 'home/wishlist',
                 element: <WishlistPage/>
             },
-
-
             {
                 path: '*',
                 element: <h1>Page not found</h1>
@@ -62,6 +61,8 @@ const router = createBrowserRouter([
             {path: 'register', element: <RegisterPage/>},
             {path: 'admin', element: <AdminLogin/>},
             {path: 'dashboard', element: <AdminPageDashboard/>},
+            {path: 'orders', element: <AdminPageOrders/>},
+
         ],
     },
 ]);

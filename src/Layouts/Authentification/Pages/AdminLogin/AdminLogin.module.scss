@@ -1,2 +1,87 @@
 @import "../../../../Animations/Animations.module";
 @import "../../../../Variables/variables.module";
+
+
+
+
+
+.adminLoginPage {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background-color: $color-dark-theme;
+  align-items: center;
+  justify-content: center;
+  .adminLoginForm {
+    width: 450px;
+    background-color: $color-main;
+    border-radius: 10px;
+    flex-direction: column;
+    align-items: center;
+    display: flex;
+    padding: 25px;
+    border: 1px solid $color-border;
+
+    h2 {
+      font-size: 25px;
+      color: $color-white;
+      font-family: $font-main;
+      font-weight: 400;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      letter-spacing: 1px;
+      margin-bottom: 15px;
+      svg {
+        font-size: 25px;
+        color: $color-yellow;
+      }
+    }
+    label {
+      display: inline-flex;
+      align-items: center;
+      width: 320px;
+      height: 50px;
+      border: 1px solid $color-border;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-bottom: 15px;
+      .logoBlock {
+        width: 60px;
+        height: 100%;
+        background-color: $color-border;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        svg {
+          font-size: 25px;
+          color: $color-yellow;
+        }
+      }
+      input {
+        width: 100%;
+        height: 100%;
+        font-size: 18px;
+        outline: 0;
+        background-color: transparent;
+        border: 0;
+        color: $color-white;
+        padding: 0 10px;
+      }
+    }
+  }
+}
+@media  screen and (max-width: 550px) {
+  .adminLoginPage {
+    .adminLoginForm {
+      width: 300px;
+      label {
+        width: 250px;
+        input {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}

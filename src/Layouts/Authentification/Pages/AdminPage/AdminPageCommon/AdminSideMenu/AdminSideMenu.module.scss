@@ -15,6 +15,24 @@
   padding-left: 40px;
   transition: left $transition-fast;
   pointer-events: none;
+  border-right: 1px solid $color-border;
+  .sideMenuButton {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+    display: none;
+    &:hover {
+      svg {
+        color: $color-orange;
+      }
+    }
+    svg {
+      font-size: 20px;
+      color: $color-white;
+      transition: $transition-fast;
+    }
+  }
 
   &.adminSideMenuActive {
     left: 0;
@@ -70,5 +88,19 @@
       }
     }
 
+  }
+}
+
+@media screen and (max-width: 1700px) {
+  .adminSideMenuSection {
+   width: 150px ;
+    padding-left: 20px;
+  }
+}
+@media screen and (max-width: 1600px) {
+  .adminSideMenuSection {
+    .sideMenuButton {
+      display: block;
+    }
   }
 }

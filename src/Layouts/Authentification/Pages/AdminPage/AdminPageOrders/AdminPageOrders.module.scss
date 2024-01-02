@@ -1,0 +1,25 @@
+@import "../../../../../Animations/Animations.module";
+@import "../../../../../Variables/variables.module";
+
+.adminOrdersPageWrapper{
+  display: flex;
+  width: 100vw;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background-color: $color-main;
+  padding: 120px 15px 120px 15px;
+  .adminOrdersContent {
+    max-width: 1300px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    .ordersFilter {
+      display: flex;
+      width: 100%;
+      height: 200px;
+      background-color: $color-secondary;
+      margin-bottom: 25px;
+    }
+  }
+}

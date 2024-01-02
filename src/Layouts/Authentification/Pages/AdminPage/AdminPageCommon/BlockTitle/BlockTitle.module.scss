@@ -1,0 +1,17 @@
+@import "../../../../../../Animations/Animations.module";
+@import "../../../../../../Variables/variables.module";
+
+.blockTitle {
+  display: inline-flex;
+  width: 100%;
+  flex-direction: column;
+
+  h4 {
+    color: $color-white;
+    font-family: $font-main;
+    font-size: 25px;
+    font-weight: 400;
+    margin-bottom: 25px;
+  }
+
+}

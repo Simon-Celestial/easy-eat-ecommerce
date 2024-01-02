@@ -1,0 +1,228 @@
+@import "../../../../../../Animations/Animations.module";
+@import "../../../../../../Variables/variables.module";
+
+
+
+.ordersWrapper {
+  display: flex;
+  width: 100%;
+  .blockTitleContent {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid $color-border;
+    overflow-x: hidden;
+
+    .tableBlock {
+      display: flex;
+      width: 100%;
+      height: min-content;
+      flex-direction: column;
+
+      .tableRow {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        font-family: $font-alternative;
+        color: $color-white;
+        font-size: 12px;
+        border-bottom: 1px solid $color-border;
+
+        &.tableHeading {
+          background-color: $color-secondary;
+          border-color: transparent;
+
+        }
+
+        .tableBox {
+          padding: 8px 16px;
+          display: flex;
+        }
+
+        .invoiceNumber {
+          max-width: 152px;
+          width: 100%;
+        }
+
+        .orderTime {
+          max-width: 250px;
+          width: 100%;
+        }
+
+        .customerName {
+          max-width: 200px;
+          width: 100%;
+        }
+
+        .method {
+          max-width: 125px;
+          width: 100%;
+        }
+
+        .amount {
+          max-width: 125px;
+          width: 100%;
+
+        }
+
+        .status {
+          max-width: 135px;
+          width: 100%;
+
+          .statusElement {
+            padding: 5px 10px;
+            background-color: $color-orange;
+            border-radius: 5px;
+            color: $color-white;
+            text-align: center;
+            font-family: $font-alternative;
+            font-size: 12px;
+          }
+
+        }
+
+        .action {
+          max-width: 205px;
+          width: 100%;
+
+          select {
+            background-color: $color-secondary;
+            color: $color-white;
+            padding: 3px;
+            outline: 0
+          }
+
+        }
+
+        .viewInvoice {
+          max-width: 165px;
+          width: 100%;
+          justify-content: end;
+
+          .view {
+            cursor: pointer;
+
+            svg {
+              color: $color-white;
+              font-size: 20px;
+            }
+          }
+
+        }
+      }
+
+    }
+
+  }
+  .paginationBlock {
+    display: flex;
+    background-color: $color-secondary;
+    width: 50px;
+    padding: 5px 0;
+    flex-direction: column;
+    align-items: center;
+    border-left: 1px solid $color-border;
+    gap: 5px;
+
+    .paginationItem {
+      width: 40px;
+      height: 40px;
+      border: 1px solid $color-border;
+      border-radius: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: $font-main;
+      color: $color-white;
+      cursor: pointer;
+      transition: $transition-fast;
+
+      &:hover {
+        background-color: $color-orange;
+      }
+
+    }
+  }
+
+}
+
+
+@media screen and (max-width: 1440px) {
+  .ordersWrapper {
+    .blockTitleContent {
+      .tableBlock {
+        .tableRow {
+          .viewInvoice {
+            max-width: 50px;
+          }
+
+          .invoiceNumber {
+            max-width: 100px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1150px) {
+  .ordersWrapper {
+    flex-direction: column;
+    .blockTitleContent {
+      flex-direction: column;
+      .tableBlock {
+        .tableRow {
+          .method {
+            max-width: 85px;
+          }
+
+          .status {
+            max-width: 100px;
+          }
+
+          .action {
+            max-width: 130px;
+          }
+        }
+      }
+    }
+    .paginationBlock {
+      flex-direction: row;
+      width: 100%;
+      height: auto;
+      padding: 5px 15px 5px 15px;
+
+      .paginationItem {
+        width: 30px;
+        height: 30px;
+        &.leftArrow {
+          svg {
+            transform: rotate(-90deg);
+          }
+        }
+        &.rightArrow {
+          svg {
+            transform: rotate(-90deg);
+          }
+        }
+
+      }
+    }
+
+  }
+}
+
+@media screen and (max-width: 950px) {
+
+  .ordersWrapper {
+    .blockTitleContent {
+      overflow-x: auto;
+
+      .tableBlock {
+        width: 920px;
+        max-width: unset;
+      }
+    }
+
+  }
+}
