@@ -64,7 +64,7 @@ export const OrdersTable = () => {
                             </select>
                         </div>
                         <div className={`${styles.viewInvoice} ${styles.tableBox}`}>
-                            <Link to="#" className={styles.view}>
+                            <Link to="/auth/order" className={styles.view}>
                                 <Eye/>
                             </Link>
                         </div>
@@ -99,7 +99,7 @@ export const OrdersTable = () => {
                             </select>
                         </div>
                         <div className={`${styles.viewInvoice} ${styles.tableBox}`}>
-                            <Link to="#" className={styles.view}>
+                            <Link to="/auth/order" className={styles.view}>
                                 <Eye/>
                             </Link>
                         </div>
@@ -134,7 +134,7 @@ export const OrdersTable = () => {
                             </select>
                         </div>
                         <div className={`${styles.viewInvoice} ${styles.tableBox}`}>
-                            <Link to="#" className={styles.view}>
+                            <Link to="/auth/order" className={styles.view}>
                                 <Eye/>
                             </Link>
                         </div>

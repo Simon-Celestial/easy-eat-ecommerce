@@ -26,7 +26,7 @@ export const AdminSideMenu = () => {
                 <SkipBack  />
             </div>
             <div className={styles.sideMenuItem}>
-                <Link to="/" className={styles.sideMenuElement}>
+                <Link to="/auth/dashboard" className={styles.sideMenuElement}>
                     <Browser  />
                     Dashboard</Link>
             </div>
@@ -42,12 +42,12 @@ export const AdminSideMenu = () => {
                     Categories</Link>
             </div>
             <div className={styles.sideMenuItem}>
-                <Link to="/" className={styles.sideMenuElement}>
+                <Link to="/auth/orders" className={styles.sideMenuElement}>
                     <ListNumbers/>
                     Orders</Link>
             </div>
             <div className={styles.sideMenuItem}>
-                <Link to="/" className={styles.sideMenuElement}>
+                <Link to="/auth/staff" className={styles.sideMenuElement}>
                     <UsersThree/>
                     Staff</Link>
             </div>
@@ -56,12 +56,12 @@ export const AdminSideMenu = () => {
                     <Browsers/>
                     Pages</div>
                 <div className={`${styles.pagesDropDown} ${pagesDropDownVisible && styles.pagesDropDownActive}`} >
-                    <Link to="/">- Home</Link>
-                    <Link to="/">- Product List</Link>
-                    <Link to="/">- Product Single</Link>
-                    <Link to="/">- Cart</Link>
-                    <Link to="/">- Checkout</Link>
-                    <Link to="/">- Wishlist Page</Link>
+                    <Link to="/home">- Home</Link>
+                    <Link to="/home/shop">- Product List</Link>
+                    <Link to="/home/product">- Product Single</Link>
+                    <Link to="/home/cart">- Cart</Link>
+                    <Link to="/home/checkout">- Checkout</Link>
+                    <Link to="/home/wishlist">- Wishlist Page</Link>
                 </div>
             </div>
         </section>

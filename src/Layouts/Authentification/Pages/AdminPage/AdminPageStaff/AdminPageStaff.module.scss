@@ -1,0 +1,217 @@
+@import "../../../../../Animations/Animations.module";
+@import "../../../../../Variables/variables.module";
+
+.adminStaffWrapper {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 120px 15px 120px 15px;
+  background-color: $color-main;
+  height: 100vh;
+  .adminStaffContent {
+    display: flex;
+    max-width: 1300px;
+    width: 100%;
+    flex-direction: column;
+    .staffContainer {
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+      .staffManagement {
+        display: flex;
+        width: 100%;
+        background-color: $color-secondary;
+        margin-bottom: 25px;
+        border-radius: 10px 10px 0 0;
+        border: 1px solid $color-border;
+        padding: 15px;
+        gap: 25px;
+        .block {
+          width: 70%;
+          display: flex;
+          gap: 25px;
+          padding: 15px 0;
+          &:nth-child(2) {
+            width: 30%;
+          }
+          label {
+            display: flex;
+            width: 100%;
+            height: 48px;
+            input {
+              width: 100%;
+              height: 100%;
+              background-color: $color-border;
+              padding: 0 10px;
+              display: inline-flex;
+              align-items: center;
+              outline: 0;
+              border: 1px solid $color-white;
+              color: $color-white;
+              font-family: $font-alternative;
+              border-radius: 5px;
+            }
+            select {
+              width: 100%;
+              outline: 0;
+              background-color: $color-border;
+              border: 1px solid $color-white;
+              color: $color-white;
+              font-family: $font-alternative;
+              padding: 0 10px;
+              border-radius: 5px;
+            }
+            button {
+              width: 100%;
+              border-radius: 5px;
+              display: inline-flex;
+              align-items: center;
+              justify-content: center;
+              gap: 15px;
+              color: $color-white;
+              font-family: $font-alternative;
+              background-color: $color-orange;
+              outline: 0;
+              border: 0;
+              font-size: 17px;
+              cursor: pointer;
+              transition: $transition-fast;
+            }
+            .filter {
+              background-color: #9d2800;
+            }
+            .resetBtn {
+              background-color: $color-border;
+              border: 1px solid $color-white;
+              &:hover {
+                background-color: $color-orange;
+                border-color: transparent;
+              }
+            }
+          }
+        }
+      }
+      .staffTable {
+        display: flex;
+        width: 100%;
+        background-color: $color-secondary;
+        border: 1px solid $color-border;
+        flex-direction: column;
+        border-bottom: transparent;
+        .tableRow {
+          display: flex;
+          width: 100%;
+          align-items: center;
+          border-bottom: 1px solid $color-border;
+          .tableCell {
+            display: flex;
+            padding: 8px 16px;
+            color: $color-gray;
+            font-family: $font-main;
+            font-size: 16px;
+            span {
+              font-family: $font-alternative;
+              font-size: 14px;
+            }
+          }
+          .name {
+            max-width: 264px;
+            width: 100%;
+            justify-content: start;
+          }
+          .email {
+            max-width: 221px;
+            width: 100%;
+          }
+          .contact {
+            max-width: 164px;
+            width: 100%;
+          }
+          .date {
+            max-width: 157px;
+            width: 100%;
+          }
+          .role {
+            max-width: 178px;
+            width: 100%;
+          }
+          .status {
+            max-width: 126px;
+            width: 100%;
+            justify-content: center;
+            span {
+              background-color: darkgreen;
+              color: $color-white;
+              padding: 3px 10px;
+              border-radius: 5px;
+            }
+          }
+          .publish {
+            max-width: 135px;
+            width: 100%;
+            justify-content: center;
+            span {
+              width: 35px;
+              height: 17px;
+              border-radius: 10px;
+              overflow: hidden;
+              display: inline-flex;
+              align-items: center;
+              transition: $transition-fast;
+              cursor: pointer;
+              background-color: red;
+              justify-content: start;
+              &:hover {
+                .point {
+                  box-shadow: 0 0 2px 2px deepskyblue ;
+                }
+              }
+              .point {
+                width: 15px;
+                height: 15px;
+                border-radius: 50%  ;
+                background-color: $color-white;
+                transition: $transition-fast;
+              }
+              &.adminActive {
+                background-color: darkgreen;
+                .point {
+                  margin-left: 20px;
+
+                }
+              }
+            }
+          }
+          .action {
+            max-width: 141px;
+            width: 100%;
+            justify-content: end;
+            gap: 10px;
+            span {
+              cursor: pointer;
+              &:nth-child(1):hover {
+                svg {
+                  color: green;
+                }
+              }
+              &:nth-child(2):hover {
+                svg {
+                  color: $color-orange;
+                }
+              }
+
+              svg {
+                font-size: 22px;
+              }
+            }
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+}

@@ -17,9 +17,111 @@
     .ordersFilter {
       display: flex;
       width: 100%;
-      height: 200px;
       background-color: $color-secondary;
       margin-bottom: 25px;
+      flex-direction: column;
+      padding: 15px;
+      gap: 15px;
+      border-radius: 10px 10px 0 0;
+      .ordersFilterRow {
+        display: flex;
+        width: 100%;
+        align-items: end;
+        justify-content: center;
+        gap: 20px;
+        label {
+          display: flex;
+          max-width: 500px;
+          width: 100%;
+          flex-direction: column;
+          gap: 5px;
+          align-items: center;
+          p {
+            color: $color-white;
+            font-family: $font-alternative;
+            font-size: 14px;
+          }
+          input {
+            width: 100%;
+            background-color: $color-border;
+            color: $color-white;
+            padding: 10px;
+            height: 40px;
+            outline: 0;
+            border: 1px solid $color-white;
+
+          }
+          select {
+            width: 100%;
+            padding: 8px;
+            outline: 0;
+            height: 40px;
+            background-color: $color-border;
+            color: $color-white;
+            border: 1px solid $color-white;
+
+          }
+          button {
+            outline: 0;
+            font-family: $font-main;
+            color: $color-white;
+            font-size: 20px;
+            height: 40px;
+            border-radius: 3px;
+            width: 100%;
+            max-width: 250px;
+            background-color: $color-border;
+            border: 1px solid $color-white;
+            cursor: pointer;
+            transition: $transition-fast;
+            &:hover {
+              background-color: $color-orange;
+              border-color: transparent;
+            }
+            &.filterBtn {
+              background-color: $color-orange;
+              border-color: transparent;
+              &:hover {
+                background-color: #9d2800;
+                border-color: transparent;
+              }
+
+            }
+          }
+        }
+      }
+
+    }
+  }
+}
+@media screen and (max-width: 1440px) {
+  .adminOrdersPageWrapper {
+    .adminOrdersContent {
+      max-width: 1100px;
+      padding: 0 15px;
+    }
+  }
+}
+@media  screen and (max-width: 700px) {
+  .adminOrdersPageWrapper{
+    .adminOrdersContent {
+      padding: 0;
+      .ordersFilter {
+        .ordersFilterRow {
+          flex-direction: column;
+          align-items: start;
+          label {
+            max-width: unset;
+          }
+          &:nth-child(3) {
+            flex-direction: row;
+            button {
+              max-width: 300px;
+              width: 100%;
+            }
+          }
+        }
+      }
     }
   }
 }

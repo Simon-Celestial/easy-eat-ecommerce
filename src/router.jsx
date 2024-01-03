@@ -12,6 +12,8 @@ import {AdminLogin} from "./Layouts/Authentification/Pages/AdminLogin/AdminLogin
 import {AdminPageDashboard} from "./Layouts/Authentification/Pages/AdminPage/AdminPageDashboard/AdminPageDashboard.jsx";
 import {WishlistPage} from "./Layouts/Main/Pages/WishlistPage/WishlistPage.jsx";
 import {AdminPageOrders} from "./Layouts/Authentification/Pages/AdminPage/AdminPageOrders/AdminPageOrders.jsx";
+import {AdminOrderSingle} from "./Layouts/Authentification/Pages/AdminPage/AdminOrderSingle/AdminOrderSingle.jsx";
+import {AdminPageStaff} from "./Layouts/Authentification/Pages/AdminPage/AdminPageStaff/AdminPageStaff.jsx";
 
 const router = createBrowserRouter([
     {
@@ -62,6 +64,8 @@ const router = createBrowserRouter([
             {path: 'admin', element: <AdminLogin/>},
             {path: 'dashboard', element: <AdminPageDashboard/>},
             {path: 'orders', element: <AdminPageOrders/>},
+            {path: 'order', element: <AdminOrderSingle />},
+            {path: 'staff', element: <AdminPageStaff />},
 
         ],
     },
