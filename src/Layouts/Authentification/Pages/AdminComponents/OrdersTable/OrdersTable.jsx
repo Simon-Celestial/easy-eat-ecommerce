@@ -1,7 +1,8 @@
 import React from 'react'
 import {Link} from "react-router-dom";
-import {CaretDown, CaretUp, Eye} from "@phosphor-icons/react";
+import { Eye} from "@phosphor-icons/react";
 import styles from "./OrdersTable.module.scss";
+import {AdminPagination} from "../AdminPagination/AdminPagination.jsx";
 
 export const OrdersTable = () => {
     return (
@@ -141,29 +142,7 @@ export const OrdersTable = () => {
                     </div>
                 </div>
             </div>
-            <div className={styles.paginationBlock}>
-                <div className={`${styles.paginationItem} ${styles.leftArrow}`}>
-                    <CaretUp weight="regular"/>
-                </div>
-                <div className={styles.paginationItem}>
-                    1
-                </div>
-                <div className={styles.paginationItem}>
-                    2
-                </div>
-                <div className={styles.paginationItem}>
-                    3
-                </div>
-                <div className={styles.paginationItem}>
-                    4
-                </div>
-                <div className={styles.paginationItem}>
-                    5
-                </div>
-                <div className={`${styles.paginationItem} ${styles.rightArrow}`}>
-                    <CaretDown weight="regular"/>
-                </div>
-            </div>
+            <AdminPagination />
         </div>
 
     )

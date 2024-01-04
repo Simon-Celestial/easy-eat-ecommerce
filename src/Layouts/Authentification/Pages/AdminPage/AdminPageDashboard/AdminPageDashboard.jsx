@@ -1,10 +1,10 @@
 import React from 'react'
-import {AdminHeader} from "../AdminPageCommon/AdminHeader/AdminHeader.jsx";
-import {AdminSideMenu} from "../AdminPageCommon/AdminSideMenu/AdminSideMenu.jsx";
+import {AdminHeader} from "../../AdminComponents/AdminHeader/AdminHeader.jsx";
+import {AdminSideMenu} from "../../AdminComponents/AdminSideMenu/AdminSideMenu.jsx";
 import {ArrowsClockwise, Motorcycle, ShoppingCart, X} from "@phosphor-icons/react";
-import {OrdersTable} from "../AdminPageCommon/OrdersTable/OrdersTable.jsx";
+import {OrdersTable} from "../../AdminComponents/OrdersTable/OrdersTable.jsx";
 import styles from "./AdminPageDasboard.module.scss"
-import {BlockTitle} from "../AdminPageCommon/BlockTitle/BlockTitle.jsx";
+import {BlockTitle} from "../../AdminComponents/BlockTitle/BlockTitle.jsx";
 
 export const AdminPageDashboard = () => {
     return (

@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react'
 import styles from "./AdminHeader.module.scss";
 import {File, Power, Sidebar, User} from "@phosphor-icons/react";
 import {Link} from "react-router-dom";
-import {LayoutContext} from "../../../../../../Context/LayoutContext/LayoutContext.jsx";
+import {LayoutContext} from "../../../../../Context/LayoutContext/LayoutContext.jsx";
 
 export const AdminHeader = () => {
     const {

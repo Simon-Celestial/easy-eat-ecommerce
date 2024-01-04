@@ -1,8 +1,8 @@
 import React from 'react'
 import styles from "./AdminOrderSingle.module.scss";
-import {AdminHeader} from "../AdminPageCommon/AdminHeader/AdminHeader.jsx";
-import {AdminSideMenu} from "../AdminPageCommon/AdminSideMenu/AdminSideMenu.jsx";
-import {BlockTitle} from "../AdminPageCommon/BlockTitle/BlockTitle.jsx";
+import {AdminHeader} from "../../AdminComponents/AdminHeader/AdminHeader.jsx";
+import {AdminSideMenu} from "../../AdminComponents/AdminSideMenu/AdminSideMenu.jsx";
+import {BlockTitle} from "../../AdminComponents/BlockTitle/BlockTitle.jsx";
 
 export const AdminOrderSingle = () => {
     return (

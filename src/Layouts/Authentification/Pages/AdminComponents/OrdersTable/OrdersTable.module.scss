@@ -1,5 +1,5 @@
-@import "../../../../../../Animations/Animations.module";
-@import "../../../../../../Variables/variables.module";
+@import "../../../../../Animations/Animations.module";
+@import "../../../../../Variables/variables.module";
 
 
 
@@ -114,35 +114,6 @@
     }
 
   }
-  .paginationBlock {
-    display: flex;
-    background-color: $color-secondary;
-    width: 50px;
-    padding: 5px 0;
-    flex-direction: column;
-    align-items: center;
-    border-left: 1px solid $color-border;
-    gap: 5px;
-
-    .paginationItem {
-      width: 40px;
-      height: 40px;
-      border: 1px solid $color-border;
-      border-radius: 5px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: $font-main;
-      color: $color-white;
-      cursor: pointer;
-      transition: $transition-fast;
-
-      &:hover {
-        background-color: $color-orange;
-      }
-
-    }
-  }
 
 }
 
@@ -186,29 +157,6 @@
         }
       }
     }
-    .paginationBlock {
-      flex-direction: row;
-      width: 100%;
-      height: auto;
-      padding: 5px 15px 5px 15px;
-
-      .paginationItem {
-        width: 30px;
-        height: 30px;
-        &.leftArrow {
-          svg {
-            transform: rotate(-90deg);
-          }
-        }
-        &.rightArrow {
-          svg {
-            transform: rotate(-90deg);
-          }
-        }
-
-      }
-    }
-
   }
 }
 

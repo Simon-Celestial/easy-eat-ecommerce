@@ -1,9 +1,9 @@
 import React from 'react'
 import styles from "./AdminPageOrders.module.scss";
-import {AdminHeader} from "../AdminPageCommon/AdminHeader/AdminHeader.jsx";
-import {AdminSideMenu} from "../AdminPageCommon/AdminSideMenu/AdminSideMenu.jsx";
-import {BlockTitle} from "../AdminPageCommon/BlockTitle/BlockTitle.jsx";
-import {OrdersTable} from "../AdminPageCommon/OrdersTable/OrdersTable.jsx";
+import {AdminHeader} from "../../AdminComponents/AdminHeader/AdminHeader.jsx";
+import {AdminSideMenu} from "../../AdminComponents/AdminSideMenu/AdminSideMenu.jsx";
+import {BlockTitle} from "../../AdminComponents/BlockTitle/BlockTitle.jsx";
+import {OrdersTable} from "../../AdminComponents/OrdersTable/OrdersTable.jsx";
 
 export const AdminPageOrders = () => {
     return (
