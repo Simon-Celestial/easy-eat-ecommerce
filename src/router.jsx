@@ -17,6 +17,7 @@ import {AdminPageStaff} from "./Layouts/Authentification/Pages/AdminPage/AdminPa
 import {
     AdminPageCategories
 } from "./Layouts/Authentification/Pages/AdminPage/AdminPageCategories/AdminPageCategories.jsx";
+import {AdminProductsPage} from "./Layouts/Authentification/Pages/AdminPage/AdminPageProducts/AdminProductsPage.jsx";
 
 const router = createBrowserRouter([
     {
@@ -70,6 +71,8 @@ const router = createBrowserRouter([
             {path: 'order', element: <AdminOrderSingle/>},
             {path: 'staff', element: <AdminPageStaff/>},
             {path: 'category', element: <AdminPageCategories/>},
+            {path: 'products', element: <AdminProductsPage />},
+
 
 
         ],

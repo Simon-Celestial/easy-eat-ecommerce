@@ -32,7 +32,7 @@ export const AdminSideMenu = () => {
             </div>
 
             <div className={styles.sideMenuItem}>
-                <Link to="/" className={styles.sideMenuElement}>
+                <Link to="/auth/products" className={styles.sideMenuElement}>
                     <Hamburger/>
                     Products</Link>
             </div>
