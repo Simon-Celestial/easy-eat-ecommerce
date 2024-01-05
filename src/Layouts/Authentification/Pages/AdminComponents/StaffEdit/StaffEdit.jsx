@@ -3,7 +3,6 @@ import styles from "./StaffEdit.module.scss";
 import {Power} from "@phosphor-icons/react";
 
 export const StaffEdit = ({staffMenuOpen,setStaffMenuOpen,editMode}) => {
-    console.log(editMode)
     return (
         <div className={`${styles.staffEditOverlay} ${staffMenuOpen && styles.staffMenuActive}`}>
             <form className={styles.staffEditWrapper}>

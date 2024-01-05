@@ -67,17 +67,16 @@
         border-radius: 50%;
         transition: $transition-fast;
         &:hover {
-          background-color: $color-orange;
+          background-color: red;
+          box-shadow: 0 0 10px red;
           svg {
             color: $color-white;
           }
         }
-
         svg {
           font-size: 20px;
           color: $color-orange;
           transition: $transition-fast;
-
         }
       }
     }

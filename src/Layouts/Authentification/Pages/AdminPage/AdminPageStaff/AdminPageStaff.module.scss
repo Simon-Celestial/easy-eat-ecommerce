@@ -189,42 +189,6 @@
                 max-width: 135px;
                 width: 100%;
                 justify-content: center;
-
-                span {
-                  width: 35px;
-                  height: 17px;
-                  border-radius: 10px;
-                  overflow: hidden;
-                  display: inline-flex;
-                  align-items: center;
-                  transition: $transition-fast;
-                  cursor: pointer;
-                  background-color: red;
-                  justify-content: start;
-
-                  &:hover {
-                    .point {
-                      box-shadow: 0 0 2px 2px deepskyblue;
-                    }
-                  }
-
-                  .point {
-                    width: 15px;
-                    height: 15px;
-                    border-radius: 50%;
-                    background-color: $color-white;
-                    transition: $transition-fast;
-                  }
-
-                  &.adminActive {
-                    background-color: darkgreen;
-
-                    .point {
-                      margin-left: 20px;
-
-                    }
-                  }
-                }
               }
 
               .action {
