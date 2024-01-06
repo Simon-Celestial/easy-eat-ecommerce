@@ -9,35 +9,397 @@
   flex-direction: column;
   align-items: center;
   padding: 120px 15px 120px 15px;
+
   .adminProductPageContent {
     display: flex;
     flex-direction: column;
     max-width: 1300px;
     width: 100%;
-    .productsAddBlock {
-      height: 100px;
+
+    .productsManipulation {
       width: 100%;
       display: flex;
+      padding: 25px;
       background-color: $color-secondary;
       border-radius: 10px;
       margin-bottom: 25px;
+      gap: 15px;
+      border: 1px solid $color-border;
+
+      .filterBlocks {
+        display: flex;
+        width: 100%;
+        gap: 15px;
+
+        .inputBlocks {
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
+          width: 100%;
+          max-width: 500px;
+
+          label {
+            width: 100%;
+            height: 40px;
+
+            input {
+              width: 100%;
+              height: 100%;
+              padding: 0 10px;
+              border: 1px solid $color-white;
+              background-color: $color-border;
+              border-radius: 5px;
+              color: $color-white;
+              outline: 0;
+            }
+
+            select {
+              width: 100%;
+              height: 100%;
+              padding: 0 10px;
+              color: $color-white;
+              outline: 0;
+
+              border: 1px solid $color-white;
+              border-radius: 5px;
+              background-color: $color-border;
+
+
+            }
+          }
+
+        }
+
+        .filterButtons {
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
+          width: 100%;
+          max-width: 200px;
+
+          button {
+            width: 100%;
+            max-width: 200px;
+            height: 40px;
+            border-radius: 5px;
+            border: 0;
+            outline: 0;
+            color: $color-white;
+            font-family: $font-main;
+            font-size: 20px;
+            cursor: pointer;
+            transition: $transition-fast;
+
+            &:nth-child(1) {
+              background-color: green;
+
+              &:hover {
+                background-color: darkgreen;
+              }
+            }
+
+            &:nth-child(2) {
+              background-color: red;
+
+              &:hover {
+                background-color: darkred;
+              }
+            }
+
+
+          }
+        }
+      }
+
+      .addButtons {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-left: auto;
+
+        .button {
+          padding: 0 15px;
+          height: 40px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: $transition-fast;
+          border-radius: 5px;
+          font-family: $font-main;
+          color: $color-white;
+          font-size: 20px;
+
+          p {
+            white-space: nowrap;
+          }
+
+          svg {
+            display: none;
+            color: $color-white;
+            font-size: 22px;
+          }
+
+          &:nth-child(1) {
+            background-color: green;
+
+            &:hover {
+              background-color: darkgreen;
+            }
+          }
+
+          &:nth-child(2) {
+            background-color: $color-red;
+
+            &:hover {
+              background-color: darkred;
+            }
+          }
+        }
+      }
 
     }
-     .productsSearchBlock {
-      height: 100px;
-      width: 100%;
-      display: flex;
-      background-color: $color-secondary;
-      border-radius: 10px;
-       margin-bottom: 25px;
-    }
+
     .productsTableBlock {
-      height: 100px;
       width: 100%;
       display: flex;
       background-color: $color-secondary;
       border-radius: 10px 0 0 0;
-    }
+      border: 1px solid $color-border;
+      border-bottom: transparent;
 
+      .overflow {
+        display: flex;
+        width: 100%;
+
+        .table {
+          display: flex;
+          width: 100%;
+          flex-direction: column;
+
+          .tableRow {
+            display: flex;
+            width: 100%;
+            border-bottom: 1px solid $color-border;
+            font-family: $font-alternative;
+            font-size: 15px;
+            color: $color-gray;
+
+            &.headRow {
+              font-family: $font-main;
+              font-size: 17px;
+            }
+
+            .tableCell {
+              padding: 8px 16px;
+              display: flex;
+              width: 100%;
+              align-items: center;
+            }
+
+            .check {
+              max-width: 50px;
+            }
+
+            .name {
+              max-width: 320px;
+              align-items: center;
+
+              .imgBox {
+                width: 32px;
+                height: 32px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: $color-white;
+                border-radius: 50%;
+                overflow: hidden;
+                margin-right: 8px;
+
+                img {
+                  width: 80%;
+                  border-radius: 50%;
+
+                }
+              }
+            }
+
+            .category {
+              max-width: 170px;
+            }
+
+            .price {
+              max-width: 100px;
+            }
+
+            .sale {
+              max-width: 125px;
+            }
+
+            .stock {
+              max-width: 90px;
+              justify-content: center;
+            }
+
+            .status {
+              max-width: 100px;
+              justify-content: center;
+
+              span {
+                white-space: nowrap;
+                font-size: 12px;
+                background-color: $color-orange;
+                color: $color-white;
+                padding: 3px 5px;
+                border-radius: 4px;
+              }
+            }
+
+            .view {
+              max-width: 80px;
+              justify-content: center;
+              a{
+                color: $color-gray;
+                span {
+                  &:hover {
+                    svg {
+                      color: $color-orange;
+                    }
+                  }
+                  svg {
+                    font-size: 22px;
+                    cursor: pointer;
+                    transition: $transition-fast;
+                  }
+                }
+
+              }
+            }
+
+            .publish {
+              max-width: 125px;
+              justify-content: center;
+            }
+
+            .actions {
+              max-width: 130px;
+              justify-content: end;
+              gap: 10px;
+
+              span {
+                cursor: pointer;
+
+                svg {
+                  font-size: 22px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  .adminProductPageWrapper {
+    .adminProductPageContent {
+      max-width: 1100px;
+
+      .productsTableBlock {
+        .overflow {
+          .table {
+            .tableRow {
+              .check {
+                max-width: 40px;
+              }
+
+              .tableCell {
+                padding: 4px 8px;
+              }
+
+              .name {
+                max-width: 250px;
+              }
+
+              .stock {
+                max-width: 60px;
+              }
+
+              .view {
+                max-width: 60px;
+              }
+
+              .publish {
+                max-width: 80px;
+              }
+
+              .actions {
+                max-width: 100px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1150px) {
+  .adminProductPageWrapper {
+    .adminProductPageContent {
+      .productsTableBlock {
+        flex-direction: column;
+        .overflow {
+          overflow-x: auto;
+          .table {
+            min-width: 1100px;
+            .tableRow {
+              font-size: 12px;
+              &.headRow {
+                font-size: 15px!important;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .adminProductPageWrapper {
+    .adminProductPageContent {
+      .productsManipulation {
+        justify-content: space-between;
+        .filterBlocks {
+          flex-direction: column;
+          width: 100%;
+          .filterButtons {
+            width: 100%;
+            max-width: 500px;
+
+            button {
+              max-width: 500px;
+              width: 100%;
+            }
+          }
+        }
+        .addButtons {
+          margin-left: unset;
+          .button {
+            p {
+              display: none;
+            }
+            svg {
+              display: block;
+              pointer-events: none;
+            }
+
+          }
+        }
+      }
+
+    }
   }
 }

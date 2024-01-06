@@ -1,0 +1,377 @@
+@import "../../../../../Animations/Animations.module";
+@import "../../../../../Variables/variables.module";
+
+
+.productsMenuOverlay {
+  display: flex;
+  justify-content: end;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 5;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity $transition-fast;
+
+  &.menuActive {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .productsMenuContent {
+    height: 100vh;
+    width: 50%;
+    min-width: 650px;
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    background-color: $color-secondary;
+    justify-content: space-between;
+    gap: 25px;
+
+    .menuHead {
+      width: 100%;
+      justify-content: space-between;
+      display: flex;
+      gap: 25px;
+      align-items: center;
+      border-bottom: 1px solid $color-border;
+      padding-bottom: 25px;
+
+      .headTitle {
+        display: flex;
+        flex-direction: column;
+        color: $color-white;
+
+        h2 {
+          font-weight: 400;
+          font-size: 25px;
+          font-family: $font-main;
+        }
+
+        p {
+          font-size: 18px;
+          font-family: $font-alternative;
+        }
+      }
+
+      .closeMenu {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $color-white;
+        transition: $transition-fast;
+        cursor: pointer;
+
+        &:hover {
+          background-color: red;
+          box-shadow: 0 0 10px deepskyblue;
+
+          svg {
+            color: $color-white;
+          }
+        }
+
+        svg {
+          font-size: 22px;
+          color: $color-orange;
+          transition: $transition-fast;
+        }
+      }
+    }
+
+    .menuMain {
+      width: 100%;
+      flex-direction: column;
+      display: flex;
+      overflow-y: auto;
+
+      .elementsRow {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        padding: 10px 0;
+        gap: 10px;
+
+
+        p {
+          font-size: 20px;
+          color: $color-white;
+          font-family: $font-alternative;
+          max-width: 150px;
+          white-space: nowrap;
+        }
+
+        input {
+          max-width: 400px;
+          color: $color-white;
+          width: 100%;
+          height: 48px;
+          background-color: $color-border;
+          padding: 0 10px;
+          border-radius: 5px;
+          border: 1px solid $color-white;
+          outline: 0;
+          font-family: $font-alternative;
+        }
+
+        textarea {
+          max-width: 400px;
+          width: 100%;
+          height: 100px;
+          background-color: $color-border;
+          padding: 10px;
+          border-radius: 5px;
+          border: 1px solid $color-white;
+          resize: none;
+          outline: 0;
+          font-family: $font-alternative;
+          color: $color-white;
+        }
+
+        .imagesBox {
+          display: flex;
+          gap: 5px;
+          align-items: center;
+          margin-left: auto;
+          flex-direction: row-reverse;
+
+          .image {
+            width: 50px;
+            height: 50px;
+            overflow: hidden;
+            border: 1px solid $color-white;
+            position: relative;
+
+            &:nth-child(1) {
+              &:after {
+                content: "default";
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                font-size: 14px;
+                color: white;
+              }
+            }
+
+            img {
+              width: 100%;
+              object-fit: cover;
+              height: 100%;
+            }
+          }
+        }
+
+        .fileAddWrapper {
+          display: flex;
+          position: relative;
+          max-width: 400px;
+          width: 100%;
+          height: 50px;
+          border: 2px dashed $color-white;
+          flex-direction: column;
+
+          &:after {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            color: $color-white;
+            pointer-events: none;
+            content: "Upload Image Here";
+            font-family: $font-alternative;
+            white-space: nowrap;
+          }
+
+          input {
+            cursor: pointer;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            max-width: unset;
+          }
+        }
+
+        select {
+          width: 100%;
+          max-width: 400px;
+          height: 48px;
+          padding: 0 10px;
+          background-color: $color-border;
+          border: 1px solid $color-white;
+          color: $color-white;
+          font-family: $font-alternative;
+        }
+
+        .priceBox {
+          max-width: 400px;
+          width: 100%;
+        }
+      }
+
+    }
+
+    .menuButtons {
+      width: 100%;
+      justify-content: space-between;
+      display: flex;
+      align-items: center;
+
+      .button {
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        gap: 25px;
+        width: 49%;
+        height: 48px;
+        border-radius: 10px;
+        outline: 0;
+        font-family: $font-main;
+        transition: $transition-fast;
+        border: 0;
+
+        &:nth-child(1) {
+          background-color: $color-red;
+          color: $color-white;
+
+          &:hover {
+            background-color: darkred;
+          }
+        }
+
+        &:nth-child(2) {
+          background-color: green;
+          color: $color-white;
+
+          &:hover {
+            background-color: darkgreen;
+          }
+        }
+
+      }
+    }
+
+  }
+}
+@media screen and (max-width: 1440px) {
+  .productsMenuOverlay {
+    .productsMenuContent {
+      .menuMain {
+        .elementsRow {
+          input {
+            max-width: 300px;
+          }
+
+          textarea {
+            max-width: 300px;
+          }
+
+          .fileAddWrapper {
+            max-width: 300px;
+          }
+
+          select {
+            max-width: 300px;
+          }
+
+          .priceBox {
+            max-width: 300px;
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 1200px) {
+  .productsMenuOverlay {
+    .productsMenuContent {
+      min-width: unset;
+      width: auto;
+
+      .menuButtons {
+        gap: 15px;
+      }
+
+      .menuMain {
+        .elementsRow {
+          flex-direction: column;
+
+          .imagesBox {
+            margin: 0;
+            justify-content: start;
+            flex-direction: row;
+          }
+
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 800px) {
+  .productsMenuOverlay {
+    .productsMenuContent {
+      gap: 10px;
+      .menuMain {
+        .elementsRow {
+          padding: 5px 0;
+
+          p {
+            font-size: 15px;
+          }
+
+          input {
+            height: 40px;
+          }
+          textarea {
+            height: 40px;
+          }
+          .fileAddWrapper {
+            height: 40px;
+          }
+          select {
+            height: 40px;
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 550px) {
+  .productsMenuOverlay {
+    .productsMenuContent {
+      width: 100%;
+      .menuMain {
+        .elementsRow {
+          input {
+            height: 40px;
+            max-width: unset;
+          }
+          textarea {
+            max-width: unset;
+          }
+          .fileAddWrapper {
+            max-width: unset;
+          }
+          select {
+            height: 40px;
+            max-width: unset;
+          }
+          .priceBox {
+            max-width: unset;
+          }
+        }
+      }
+
+
+    }
+  }
+}
