@@ -3,7 +3,7 @@ import styles from "../LoginAndRegister.module.scss";
 import {Header} from "../../../../Main/Components/Header/Header.jsx";
 import {UiControl} from "../../../../Main/Common/UiControl/UiControl.jsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faAngleDown, faEye, faEyeSlash, faKey, faUser} from "@fortawesome/free-solid-svg-icons";
+import { faEye, faEyeSlash, faKey, faUser} from "@fortawesome/free-solid-svg-icons";
 import {LayoutContext} from "../../../../../Context/LayoutContext/LayoutContext.jsx";
 import {Link} from "react-router-dom";
 import {PageNameSection} from "../../../../Main/Common/PageNameSection/PageNameSection.jsx";
@@ -31,11 +31,11 @@ export const LoginPage = () => {
                 <div className={styles.formContent}>
                     <div className={styles.formWrapper}>
                         <form action="#">
-                            <label className={styles.inputWrapper} htmlFor="username">
+                            <label className={styles.inputWrapper} htmlFor="email">
                                 <div className={styles.inputIconBox}>
                                     <FontAwesomeIcon icon={faUser}/>
                                 </div>
-                                <input type="text" name="username" id="username" placeholder="Enter Username"
+                                <input type="email" name="email" id="email" placeholder="Enter Email"
                                        tabIndex={1} required/>
                             </label>
                             <label className={styles.inputWrapper} htmlFor="password">
