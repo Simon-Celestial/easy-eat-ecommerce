@@ -1,13 +1,16 @@
 import React, {useContext, useEffect, useState} from 'react'
 import styles from "../LoginAndRegister.module.scss";
-import {Header} from "../../../../Main/Components/Header/Header.jsx";
-import {UiControl} from "../../../../Main/Common/UiControl/UiControl.jsx";
+import {Header} from "../../../Components/Header/Header.jsx";
+import {UiControl} from "../../../Common/UiControl/UiControl.jsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash, faKey, faUser} from "@fortawesome/free-solid-svg-icons";
+import {faEye, faEyeSlash, faKey, faUser} from "@fortawesome/free-solid-svg-icons";
 import {LayoutContext} from "../../../../../Context/LayoutContext/LayoutContext.jsx";
 import {Link} from "react-router-dom";
-import {PageNameSection} from "../../../../Main/Common/PageNameSection/PageNameSection.jsx";
-import {ChangedFooter} from "../../../../Main/Components/ChangedFooter/ChangedFooter.jsx";
+import {PageNameSection} from "../../../Common/PageNameSection/PageNameSection.jsx";
+import {ChangedFooter} from "../../../Components/ChangedFooter/ChangedFooter.jsx";
+import {AuthContext} from "../../../../../Context/AuthContext/AuthContext.jsx";
+import {useFormik} from 'formik';
+
 
 export const LoginPage = () => {
     const {
@@ -19,8 +22,21 @@ export const LoginPage = () => {
         setHeaderColorChange(true);
     }, []);
 
+    const {
+        login,
+    } = useContext(AuthContext);
     const [passwordVisible, setPasswordVisible] = useState(false);
+    const [errorMessage,setErrorMessage] = useState("");
 
+    const formik = useFormik({
+        initialValues: {
+            email: '',
+            password: '',
+        },
+        onSubmit: values => {
+            login(values.email,values.password, setErrorMessage);
+        },
+    });
     return (
         <div className={styles.pageWrapper}>
             {/*SITE HEADER*/}
@@ -30,20 +46,37 @@ export const LoginPage = () => {
             <section className={styles.formSection}>
                 <div className={styles.formContent}>
                     <div className={styles.formWrapper}>
-                        <form action="#">
+                        <div className={styles.message}>
+                            {errorMessage}
+                        </div>
+                        <form onSubmit={formik.handleSubmit}>
                             <label className={styles.inputWrapper} htmlFor="email">
                                 <div className={styles.inputIconBox}>
                                     <FontAwesomeIcon icon={faUser}/>
                                 </div>
-                                <input type="email" name="email" id="email" placeholder="Enter Email"
-                                       tabIndex={1} required/>
+                                <input
+                                    onChange={formik.handleChange}
+                                    value={formik.values.email}
+                                    type="email"
+                                    name="email"
+                                    id="email"
+                                    placeholder="Enter Email"
+                                    tabIndex={1}
+                                    required/>
                             </label>
                             <label className={styles.inputWrapper} htmlFor="password">
                                 <div className={styles.inputIconBox}>
                                     <FontAwesomeIcon icon={faKey}/>
                                 </div>
-                                <input type={`${!passwordVisible && "password"}`} placeholder="Enter Password"
-                                       name="password" id="password" tabIndex={2} required/>
+                                <input
+                                       type={`${!passwordVisible && "password"}`}
+                                       placeholder="Enter Password"
+                                       name="password" id="password"
+                                       tabIndex={2}
+                                       onChange={formik.handleChange}
+                                       value={formik.values.password}
+                                       required
+                                />
                                 <div className={styles.viewPassword} onClick={openHandler(setPasswordVisible)}>
                                     <FontAwesomeIcon icon={passwordVisible ? faEye : faEyeSlash}/>
                                 </div>
@@ -61,7 +94,7 @@ export const LoginPage = () => {
                                 <button type="submit" tabIndex={5}>SIGN IN</button>
                             </div>
                             <div className={styles.transferToAnother}>
-                                <Link to="/auth/register" tabIndex={6}>
+                                <Link to="/register" tabIndex={6}>
                                     Don't have an account?
                                 </Link>
                             </div>
@@ -71,7 +104,7 @@ export const LoginPage = () => {
             </section>
 
             {/*SITE FOOTER*/}
-            <ChangedFooter />
+            <ChangedFooter/>
 
             {/*COMMON COMPONENTS FOR UI */}
             <UiControl/>

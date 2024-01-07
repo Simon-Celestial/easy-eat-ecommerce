@@ -34,7 +34,6 @@ export const LatestNewsSectionSlider = () => {
     const [position, setPosition] = useState({x: 0, y: 0});
     const [lastUpdated, setLastUpdated] = useState(0);
     const updateThreshold = 50;
-    console.log(hoverActive)
     const handleMouseEnter = () => {
         setHoverActive(true);
     };

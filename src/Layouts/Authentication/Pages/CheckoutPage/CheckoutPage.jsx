@@ -1,13 +1,13 @@
 import React, {useContext, useEffect, useState} from 'react'
 import {LayoutContext} from "../../../../Context/LayoutContext/LayoutContext.jsx";
-import {PageNameSection} from "../../Common/PageNameSection/PageNameSection.jsx";
-import {Header} from "../../Components/Header/Header.jsx";
+import {PageNameSection} from "../../../Main/Common/PageNameSection/PageNameSection.jsx";
+import {Header} from "../../../Main/Components/Header/Header.jsx";
 import styles from "./CheckoutPage.module.scss";
-import {ChangedFooter} from "../../Components/ChangedFooter/ChangedFooter.jsx";
-import {UiControl} from "../../Common/UiControl/UiControl.jsx";
-import {EmptyCartInfo} from "../../Common/EmpyCartInfo/EmptyCartInfo.jsx";
-import {StatusBar} from "../../Common/StatusBar/StatusBar.jsx";
-import {CouponBlock} from "../../Common/CouponBlock/CouponBlock.jsx";
+import {ChangedFooter} from "../../../Main/Components/ChangedFooter/ChangedFooter.jsx";
+import {UiControl} from "../../../Main/Common/UiControl/UiControl.jsx";
+import {EmptyCartInfo} from "../../../Main/Common/EmpyCartInfo/EmptyCartInfo.jsx";
+import {StatusBar} from "../../../Main/Common/StatusBar/StatusBar.jsx";
+import {CouponBlock} from "../../../Main/Common/CouponBlock/CouponBlock.jsx";
 import {Eye, EyeSlash} from "@phosphor-icons/react";
 
 export const CheckoutPage = () => {
@@ -143,18 +143,6 @@ export const CheckoutPage = () => {
                                         <input type="text" required/>
                                     </div>
                                 </div>
-                                <div className={styles.formRow}>
-                                    <div className={styles.formLongBlock}>
-                                        <p>Phone<span>*</span></p>
-                                        <input type="tel" required placeholder="+994"/>
-                                    </div>
-                                </div>
-                                <div className={styles.formRow}>
-                                    <div className={styles.formLongBlock}>
-                                        <p>Email Address<span>*</span></p>
-                                        <input type="email" required/>
-                                    </div>
-                                </div>
                                 <div className={styles.additionalInfo}>
                                     <h3>Additional information</h3>
                                     <label htmlFor="info">
@@ -162,10 +150,7 @@ export const CheckoutPage = () => {
                                         <textarea name="info" id="info"
                                                   placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
                                     </label>
-
                                 </div>
-
-
                             </div>
                             {/*RIGHT*/}
                             <div className={styles.checkoutRight}>

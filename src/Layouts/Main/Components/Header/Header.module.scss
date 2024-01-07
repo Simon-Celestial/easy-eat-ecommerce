@@ -274,16 +274,17 @@
           padding: 0;
           &.accountDropdownActive {
             pointer-events: auto;
-            height: 70px;
-            padding: 10px 0;
+            padding: 30px 0;
           }
-          a {
+          .accountItem {
             display: inline-flex;
             gap: 10px;
-            padding: 2px 30px;
+            padding: 2px 15px;
             color: $color-gray;
             transition: $transition-fast;
             align-items: center;
+            font-family: $font-main;
+
             svg {
               color: $color-gray;
               font-size: 12px;

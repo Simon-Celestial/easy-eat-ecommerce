@@ -8,6 +8,7 @@ import {ChangedFooter} from "../../Components/ChangedFooter/ChangedFooter.jsx";
 import {CaretDown, CaretUp, X} from "@phosphor-icons/react";
 import {StatusBar} from "../../Common/StatusBar/StatusBar.jsx";
 import {CouponBlock} from "../../Common/CouponBlock/CouponBlock.jsx";
+import {Link} from "react-router-dom";
 
 export const CartPage = () => {
     const {
@@ -178,8 +179,6 @@ export const CartPage = () => {
                                         <p>Subtotal:</p>
                                         <p>$14.00</p>
                                     </div>
-
-
                                 </div>
                                 <div className={styles.mobileProductCard}>
                                     <div className={styles.mobileProductName}>
@@ -218,10 +217,7 @@ export const CartPage = () => {
                                         <p>Subtotal:</p>
                                         <p>$14.00</p>
                                     </div>
-
-
                                 </div>
-
                             </div>
                             <div className={styles.cartBottom}>
                                 <CouponBlock />
@@ -256,7 +252,7 @@ export const CartPage = () => {
                                         </div>
                                     </div>
                                     <div className={styles.cartTotalButton}>
-                                        <a href="#">Proceed to checkout</a>
+                                        <Link to="/auth/checkout">Proceed to checkout</Link>
                                     </div>
                                 </div>
                             </div>

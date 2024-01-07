@@ -1,30 +1,34 @@
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import {AuthLayout} from "./Layouts/Authentification/AuthLayout.jsx";
-import {LoginPage} from "./Layouts/Authentification/Pages/LoginAndRegister/LoginPage/LoginPage.jsx";
-import {RegisterPage} from "./Layouts/Authentification/Pages/LoginAndRegister/RegisterPage/RegisterPage.jsx";
+import {AdminLayout} from "./Layouts/Admin/AdminLayout.jsx";
+import {LoginPage} from "./Layouts/Main/Pages/LoginAndRegister/LoginPage/LoginPage.jsx";
+import {RegisterPage} from "./Layouts/Main/Pages/LoginAndRegister/RegisterPage/RegisterPage.jsx";
 import {MainLayout} from "./Layouts/Main/MainLayout.jsx";
 import {Home} from "./Layouts/Main/Pages/Home/Home.jsx";
 import {ProductSingle} from "./Layouts/Main/Pages/ProductSinglePage/ProductSingle.jsx";
 import {ProductList} from "./Layouts/Main/Pages/ProductList/ProductList.jsx";
 import {CartPage} from "./Layouts/Main/Pages/CartPage/CartPage.jsx";
-import {CheckoutPage} from "./Layouts/Main/Pages/CheckoutPage/CheckoutPage.jsx";
-import {AdminLogin} from "./Layouts/Authentification/Pages/AdminLogin/AdminLogin.jsx";
-import {AdminPageDashboard} from "./Layouts/Authentification/Pages/AdminPage/AdminPageDashboard/AdminPageDashboard.jsx";
+import {CheckoutPage} from "./Layouts/Authentication/Pages/CheckoutPage/CheckoutPage.jsx";
+import {AdminLogin} from "./Layouts/Admin/Pages/AdminLogin/AdminLogin.jsx";
+import {AdminPageDashboard} from "./Layouts/Admin/Pages/AdminPage/AdminPageDashboard/AdminPageDashboard.jsx";
 import {WishlistPage} from "./Layouts/Main/Pages/WishlistPage/WishlistPage.jsx";
-import {AdminPageOrders} from "./Layouts/Authentification/Pages/AdminPage/AdminPageOrders/AdminPageOrders.jsx";
-import {AdminOrderSingle} from "./Layouts/Authentification/Pages/AdminPage/AdminOrderSingle/AdminOrderSingle.jsx";
-import {AdminPageStaff} from "./Layouts/Authentification/Pages/AdminPage/AdminPageStaff/AdminPageStaff.jsx";
-import {
-    AdminPageCategories
-} from "./Layouts/Authentification/Pages/AdminPage/AdminPageCategories/AdminPageCategories.jsx";
-import {AdminProductsPage} from "./Layouts/Authentification/Pages/AdminPage/AdminPageProducts/AdminProductsPage.jsx";
-import {AdminPageProduct} from "./Layouts/Authentification/Pages/AdminPage/AdminPageProduct/AdminPageProduct.jsx";
+import {AdminPageOrders} from "./Layouts/Admin/Pages/AdminPage/AdminPageOrders/AdminPageOrders.jsx";
+import {AdminOrderSingle} from "./Layouts/Admin/Pages/AdminPage/AdminOrderSingle/AdminOrderSingle.jsx";
+import {AdminPageStaff} from "./Layouts/Admin/Pages/AdminPage/AdminPageStaff/AdminPageStaff.jsx";
+import {AdminPageCategories} from "./Layouts/Admin/Pages/AdminPage/AdminPageCategories/AdminPageCategories.jsx";
+import {AdminProductsPage} from "./Layouts/Admin/Pages/AdminPage/AdminPageProducts/AdminProductsPage.jsx";
+import {AdminPageProduct} from "./Layouts/Admin/Pages/AdminPage/AdminPageProduct/AdminPageProduct.jsx";
+import {AuthLayout} from "./Layouts/Authentication/AuthLayout.jsx";
 
 const router = createBrowserRouter([
     {
         path: '/',
         element: <MainLayout/>,
         children: [
+            {
+                path: '*',
+                element: <h1>Page not found</h1>
+            },
+
             {
                 path: '/',
                 element: <Home/>,
@@ -34,28 +38,29 @@ const router = createBrowserRouter([
                 element: <Home/>,
             },
             {
-                path: 'home/product',
-                element: <ProductSingle/>
+                path: 'product',
+                element: <ProductSingle/>,
+            },
+
+            {
+                path: 'shop',
+                element: <ProductList/>,
             },
             {
-                path: 'home/shop',
-                element: <ProductList/>
-            },
-            {
-                path: 'home/cart',
+                path: 'cart',
                 element: <CartPage/>
             },
             {
-                path: 'home/checkout',
-                element: <CheckoutPage/>
-            },
-            {
-                path: 'home/wishlist',
+                path: 'wishlist',
                 element: <WishlistPage/>
             },
             {
-                path: '*',
-                element: <h1>Page not found</h1>
+                path: 'login',
+                element: <LoginPage />
+            },
+            {
+                path: 'register',
+                element: <RegisterPage />
             },
         ],
     },
@@ -63,10 +68,19 @@ const router = createBrowserRouter([
         path: 'auth',
         element: <AuthLayout/>,
         children: [
-            {path: '', element: <LoginPage/>},
-            {path: 'login', element: <LoginPage/>},
-            {path: 'register', element: <RegisterPage/>},
-            {path: 'admin', element: <AdminLogin/>},
+            {
+                path: 'checkout',
+                element: <CheckoutPage/>
+            },
+        ],
+    },
+
+    {
+        path: 'admin',
+        element: <AdminLayout/>,
+        children: [
+            {path: '', element: <AdminLogin />},
+            {path: 'login', element: <AdminLogin/>},
             {path: 'dashboard', element: <AdminPageDashboard/>},
             {path: 'orders', element: <AdminPageOrders/>},
             {path: 'order', element: <AdminOrderSingle/>},
@@ -74,10 +88,6 @@ const router = createBrowserRouter([
             {path: 'category', element: <AdminPageCategories/>},
             {path: 'products', element: <AdminProductsPage />},
             {path: 'product', element: <AdminPageProduct />},
-
-
-
-
         ],
     },
 ]);

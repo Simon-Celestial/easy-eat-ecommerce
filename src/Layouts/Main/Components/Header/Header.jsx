@@ -4,7 +4,8 @@ import React, {useCallback, useContext, useEffect, useState} from "react";
 import {LayoutContext} from "../../../../Context/LayoutContext/LayoutContext.jsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircleUser, faKey, faUsers} from "@fortawesome/free-solid-svg-icons";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {AuthContext} from "../../../../Context/AuthContext/AuthContext.jsx";
 
 
 export const Header = () => {
@@ -25,6 +26,15 @@ export const Header = () => {
         basketVisible,
     } = useContext(LayoutContext);
 
+    const {
+        logout: rawLogout,
+    } = useContext(AuthContext);
+
+
+    const navigator = useNavigate();
+    const logout = useCallback(() => {
+        return rawLogout(navigator);
+    }, [rawLogout])
     // HEADER COLOR STATE CHANGE
     useEffect(() => {
         setHeaderColorChange(false);
@@ -60,7 +70,7 @@ export const Header = () => {
             <section className={styles.headerContent}>
                 {/*HEADER CONTENT*/}
                 <div className={styles.headerLeft}>
-                    <Link to="/home" className={styles.headerLogo}>
+                    <Link to="" className={styles.headerLogo}>
                         <img
                             src={`${headerColorChange && !headerTransform ? "//easyeat.ancorathemes.com/wp-content/uploads/2023/05/logo.png" : "//easyeat.ancorathemes.com/wp-content/uploads/2023/05/logo-inverse.png"}`}
                             alt="Header Logo"/>
@@ -266,32 +276,32 @@ export const Header = () => {
                                 <div className={styles.navDropdown}>
                                     <div className={styles.navDropdownItem}
                                     >
-                                        <Link to="/home/shop">
+                                        <Link to="/shop">
                                             <p>Product List</p>
                                         </Link>
                                     </div>
                                     <div className={styles.navDropdownItem}
                                     >
-                                        <Link to="/home/product">
+                                        <Link to="/product">
                                             <p>Product Single</p>
                                         </Link>
                                     </div>
                                     <div className={styles.navDropdownItem}
                                     >
-                                        <Link to="/home/cart">
+                                        <Link to="/cart">
                                             <p>Cart</p>
                                         </Link>
                                     </div>
                                     <div className={styles.navDropdownItem}
                                     >
-                                        <Link to="/home/checkout">
+                                        <Link to="/auth/checkout">
                                             <p>Checkout</p>
                                         </Link>
                                     </div>
                                     <div
                                         className={styles.navDropdownItem}
                                     >
-                                        <Link to="/home/wishlist">
+                                        <Link to="/wishlist">
                                             <p>Wishlist Page</p>
                                         </Link>
                                     </div>
@@ -385,11 +395,15 @@ export const Header = () => {
                         <div
                             className={`${styles.accountDropdown} ${dropDownAccountOpen && styles.accountDropdownActive}`}
                             onClick={ev => ev.stopPropagation()}>
-                            <Link to="/auth/login">
+                            <Link to="/login" className={styles.accountItem}>
                                 <FontAwesomeIcon icon={faKey}/>
                                 LOGIN
                             </Link>
-                            <Link to="/auth/register">
+                            {/*<div className={styles.accountItem} onClick={logout}>*/}
+                            {/*    <FontAwesomeIcon icon={faKey}/>*/}
+                            {/*    LOGOUT*/}
+                            {/*</div>*/}
+                            <Link to="/register" className={styles.accountItem}>
                                 <FontAwesomeIcon icon={faUsers}/>
                                 REGISTER
                             </Link>
