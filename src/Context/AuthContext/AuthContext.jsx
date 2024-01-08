@@ -10,13 +10,14 @@ export const AuthContext = React.createContext({
     login: () => {
     },
     logout: () => {
-    }
+    },
+    userData: null,
 })
 const AuthContextProvider = ({
                                  children
                              }) => {
     const [token, setToken] = useState(localStorage.token);
-
+    const [userData, setUserData] = useState(localStorage.userData? JSON.parse(localStorage.userData): undefined);
 
     // LOGIN FUNC
     const login = useCallback(async (logIn, password, setErrorMessage, navigator = () => {
@@ -28,7 +29,6 @@ const AuthContextProvider = ({
             "password": password
         });
 
-        console.log({url})
         let result;
         try {
             result = await axios.post(url, raw, {
@@ -46,9 +46,12 @@ const AuthContextProvider = ({
         if (result) {
             console.log(result);
             const tkn = result.data.data.token;
+            const uData = result.data.data.user;
 
             localStorage.token = tkn;
+            localStorage.userData = JSON.stringify(uData);
             setToken(tkn);
+            setUserData(uData);
             navigator('/home');
             toast(`Successfully login as ${result?.data?.data?.user?.name + " " + result?.data?.data?.user?.surname || 'N/A'}`,
                 {
@@ -63,8 +66,10 @@ const AuthContextProvider = ({
 
     // LOGOUT FUNC
     const logout = useCallback((navigator) => {
-        localStorage.token = null;
-        setToken(null);
+        delete localStorage.token;
+        delete localStorage.userData;
+        setToken(undefined);
+        setUserData(undefined);
         navigator('/home');
         toast('You have logged out',
             {
@@ -78,10 +83,12 @@ const AuthContextProvider = ({
     }, [])
 
 
+    console.log(userData, token);
     return <AuthContext.Provider value={{
         login,
         token,
         logout,
+        userData,
     }}>
         {children}
     </AuthContext.Provider>

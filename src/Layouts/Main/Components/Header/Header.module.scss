@@ -264,26 +264,31 @@
           top: 66px;
           background-color: $color-black;
           flex-direction: column;
-          align-items: center;
           justify-content: center;
           height: 0;
           overflow: hidden;
           transform-origin: top;
           transition: $transition-medium;
           pointer-events: none;
-          padding: 0;
+          gap: 5px;
+          border-radius: 0 0 10px 10px ;
+          align-items: center;
+          min-width: 135px;
+
+
           &.accountDropdownActive {
             pointer-events: auto;
-            padding: 30px 0;
+            padding: 40px 0 40px 0px;
           }
           .accountItem {
             display: inline-flex;
             gap: 10px;
-            padding: 2px 15px;
             color: $color-gray;
             transition: $transition-fast;
             align-items: center;
             font-family: $font-main;
+            width: min-content;
+            text-align: center;
 
             svg {
               color: $color-gray;

@@ -1,4 +1,4 @@
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import {createBrowserRouter, Navigate, RouterProvider} from "react-router-dom";
 import {AdminLayout} from "./Layouts/Admin/AdminLayout.jsx";
 import {LoginPage} from "./Layouts/Main/Pages/LoginAndRegister/LoginPage/LoginPage.jsx";
 import {RegisterPage} from "./Layouts/Main/Pages/LoginAndRegister/RegisterPage/RegisterPage.jsx";
@@ -19,8 +19,10 @@ import {AdminProductsPage} from "./Layouts/Admin/Pages/AdminPage/AdminPageProduc
 import {AdminPageProduct} from "./Layouts/Admin/Pages/AdminPage/AdminPageProduct/AdminPageProduct.jsx";
 import {AuthLayout} from "./Layouts/Authentication/AuthLayout.jsx";
 import {PageNotFound} from "./Layouts/Main/Pages/PageNotFound/PageNotFound.jsx";
+import {useContext} from "react";
+import {AuthContext} from "./Context/AuthContext/AuthContext.jsx";
 
-const router = createBrowserRouter([
+const router = (userData, token) => createBrowserRouter([
     {
         path: '/',
         element: <MainLayout/>,
@@ -49,7 +51,7 @@ const router = createBrowserRouter([
             },
             {
                 path: 'cart',
-                element: <CartPage/>
+                element: (!!userData && !!token)? <CartPage/>: <Navigate to="/login" replace />
             },
             {
                 path: 'wishlist',
@@ -93,7 +95,11 @@ const router = createBrowserRouter([
     },
 ]);
 const MainRouter = () => {
-    return <RouterProvider router={router}/>;
+    const {
+        userData,
+        token,
+    } = useContext(AuthContext);
+    return <RouterProvider router={router(userData, token)}/>;
 };
 
 export default MainRouter;

@@ -29,6 +29,7 @@ export const Header = () => {
 
     const {
         logout: rawLogout,
+        userData,
     } = useContext(AuthContext);
 
 
@@ -403,13 +404,13 @@ export const Header = () => {
                                 <FontAwesomeIcon icon={faKey}/>
                                 LOGIN
                             </Link>)}
-                            {token !== null && (<div className={styles.accountItem} style={{fontSize: "12px"}}>
-                                Welcome, User
-                            </div>)}
-                            {token !== null && (<div className={styles.accountItem} onClick={logout}>
+                            {token? (<div className={styles.accountItem} style={{fontSize: "13px",cursor: "default",whiteSpace: "nowrap",padding: "0 10px"}}>
+                                {userData.name} {userData.surname}
+                            </div>) : null}
+                            {token ? (<div className={styles.accountItem} onClick={logout}>
                                 <FontAwesomeIcon icon={faKey}/>
                                 LOGOUT
-                            </div>)}
+                            </div>) : null}
                             {!token && (<Link to="/register" className={styles.accountItem}>
                                 <FontAwesomeIcon icon={faUsers}/>
                                 REGISTER

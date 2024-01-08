@@ -9,6 +9,7 @@ import {CaretDown, CaretUp, X} from "@phosphor-icons/react";
 import {StatusBar} from "../../Common/StatusBar/StatusBar.jsx";
 import {CouponBlock} from "../../Common/CouponBlock/CouponBlock.jsx";
 import {Link} from "react-router-dom";
+import {AuthContext} from "../../../../Context/AuthContext/AuthContext.jsx";
 
 export const CartPage = () => {
     const {
