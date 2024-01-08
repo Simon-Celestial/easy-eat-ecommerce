@@ -8,6 +8,7 @@ import {Link, useNavigate} from "react-router-dom";
 import {AuthContext} from "../../../../Context/AuthContext/AuthContext.jsx";
 
 
+
 export const Header = () => {
     const {
         setMobileMenuOpen,
@@ -63,6 +64,9 @@ export const Header = () => {
     const [dropDownToolsOpen, setDropDownToolsOpen] = useState(false);
     const [dropDownPostOpen, setDropDownPostOpen] = useState(false);
 
+    const {
+        token
+    } = useContext(AuthContext);
     return (
         // HEADER WRAPPER
         <header
@@ -316,7 +320,7 @@ export const Header = () => {
                 </div>
                 {/*HEADER RIGHT CONTAINER*/}
                 <div className={styles.headerRight}>
-                    <div className={styles.headerRightItem} style={{ display: basketVisible ? "flex" : "none" }}>
+                    <div className={styles.headerRightItem} style={{display: basketVisible ? "flex" : "none"}}>
                         <div className={styles.basketCount}>0</div>
                         <div onClick={handleWidgetOpen(setBasketOpen)}>
                             <ShoppingBag/>
@@ -395,18 +399,21 @@ export const Header = () => {
                         <div
                             className={`${styles.accountDropdown} ${dropDownAccountOpen && styles.accountDropdownActive}`}
                             onClick={ev => ev.stopPropagation()}>
-                            <Link to="/login" className={styles.accountItem}>
+                            {!token && (<Link to="/login" className={styles.accountItem}>
                                 <FontAwesomeIcon icon={faKey}/>
                                 LOGIN
-                            </Link>
-                            {/*<div className={styles.accountItem} onClick={logout}>*/}
-                            {/*    <FontAwesomeIcon icon={faKey}/>*/}
-                            {/*    LOGOUT*/}
-                            {/*</div>*/}
-                            <Link to="/register" className={styles.accountItem}>
+                            </Link>)}
+                            {token !== null && (<div className={styles.accountItem} style={{fontSize: "12px"}}>
+                                Welcome, User
+                            </div>)}
+                            {token !== null && (<div className={styles.accountItem} onClick={logout}>
+                                <FontAwesomeIcon icon={faKey}/>
+                                LOGOUT
+                            </div>)}
+                            {!token && (<Link to="/register" className={styles.accountItem}>
                                 <FontAwesomeIcon icon={faUsers}/>
                                 REGISTER
-                            </Link>
+                            </Link>)}
                         </div>
                     </div>
 

@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, {useCallback, useContext, useEffect, useState} from 'react'
 import styles from "../LoginAndRegister.module.scss";
 import {Header} from "../../../Components/Header/Header.jsx";
 import {UiControl} from "../../../Common/UiControl/UiControl.jsx";
@@ -9,11 +9,14 @@ import {
     faEyeSlash,
 } from "@fortawesome/free-solid-svg-icons";
 import {LayoutContext} from "../../../../../Context/LayoutContext/LayoutContext.jsx";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {PageNameSection} from "../../../Common/PageNameSection/PageNameSection.jsx";
 import {ChangedFooter} from "../../../Components/ChangedFooter/ChangedFooter.jsx";
-import {IdentificationCard, Key} from "@phosphor-icons/react";
+import {CircleDashed, IdentificationCard, Key} from "@phosphor-icons/react";
 import {useFormik} from "formik";
+import axios from "axios";
+import {API_KEY, BASE_URL} from "../../../../../Context/AuthContext/AuthContext.jsx";
+import toast from "react-hot-toast";
 
 export const RegisterPage = () => {
     const {
@@ -21,12 +24,56 @@ export const RegisterPage = () => {
         openHandler,
     } = useContext(LayoutContext);
 
+
     useEffect(() => {
         setHeaderColorChange(true);
     }, []);
+    const navigation = useNavigate();
 
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+    const [errorMessage, setErrorMessage] = useState(null);
+    const [loading, setLoading] = useState(false);
+
+
+    // REGISTER FUNC
+    const register = useCallback(async (name, surname, password, email) => {
+        const url = `${BASE_URL}/${API_KEY}/site/register`;
+
+        const raw = {
+            "name": name,
+            "surname": surname,
+            "password": password,
+            "email": email,
+        };
+
+        let result;
+        setLoading(true);
+        try {
+            result = await axios.post(url, raw);
+        } catch (e) {
+            console.log({
+                e,
+            })
+            setErrorMessage(e.response.data.message);
+            setLoading(false);
+            return;
+        } finally {
+            setLoading(false);
+        }
+        if (result) {
+            toast("Registration Successful", {
+                position: 'top-center',
+                style: {
+                    zIndex: 999,
+                    background: 'green',
+                    color: 'white',
+                    borderRadius: '6px',
+                }
+            })
+            navigation("/login");
+        }
+    }, [])
 
 
     const formik = useFormik({
@@ -46,8 +93,14 @@ export const RegisterPage = () => {
             }
             return errors;
         },
-        onSubmit: values => {
+        onSubmit: async values => {
             console.log(values);
+            try {
+                await register(values.name, values.surname, values.password, values.email);
+            } catch (error) {
+                console.error("Registration error:", error);
+                setErrorMessage(error.response?.data?.message || "An error occurred during registration.");
+            }
         },
     });
 
@@ -66,6 +119,7 @@ export const RegisterPage = () => {
                         >
                             <div className={styles.message}>
                                 {formik.errors.confirmPassword && formik.touched.confirmPassword && (`${formik.errors.confirmPassword}`)}
+                                {errorMessage}
                             </div>
                             <label className={styles.inputWrapper} htmlFor="name">
                                 <div className={styles.inputIconBox}>
@@ -86,7 +140,7 @@ export const RegisterPage = () => {
                                 </div>
                                 <input type="text"
                                        name="surname"
-                                       id="surmane"
+                                       id="surname"
                                        placeholder="Enter Surname"
                                        tabIndex={2}
                                        required
@@ -145,8 +199,20 @@ export const RegisterPage = () => {
                                 <button
                                     type="submit"
                                     tabIndex={6}
+                                    style={{
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        opacity: loading ? 0.5 : 1,
+                                    }}
+                                    disabled={loading}
                                 >
-                                    SIGN UP
+                                    {
+                                        loading && (<CircleDashed className={styles.circleLoading} size={30}/>)
+                                    }
+                                    {
+                                        !loading && "SIGN UP"
+                                    }
                                 </button>
                             </div>
                             <div className={styles.transferToAnother}>

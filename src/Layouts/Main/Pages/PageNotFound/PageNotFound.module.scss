@@ -1,0 +1,22 @@
+@import "../../../../Animations/Animations.module";
+@import "../../../../Variables/variables.module";
+
+.pageNotFound {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  flex-direction: column;
+  background-color: $color-yellow;
+  align-items: center;
+  justify-content: center;
+
+  p {
+    font-size: 40px;
+    font-family: $font-alternative;
+  }
+
+  span {
+    font-size: 40px;
+    font-family: $font-main;
+  }
+}

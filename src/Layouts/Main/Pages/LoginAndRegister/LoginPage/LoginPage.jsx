@@ -5,7 +5,7 @@ import {UiControl} from "../../../Common/UiControl/UiControl.jsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEye, faEyeSlash, faKey, faUser} from "@fortawesome/free-solid-svg-icons";
 import {LayoutContext} from "../../../../../Context/LayoutContext/LayoutContext.jsx";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {PageNameSection} from "../../../Common/PageNameSection/PageNameSection.jsx";
 import {ChangedFooter} from "../../../Components/ChangedFooter/ChangedFooter.jsx";
 import {AuthContext} from "../../../../../Context/AuthContext/AuthContext.jsx";
@@ -22,6 +22,7 @@ export const LoginPage = () => {
         setHeaderColorChange(true);
     }, []);
 
+    const navigator = useNavigate();
     const {
         login,
     } = useContext(AuthContext);
@@ -34,7 +35,7 @@ export const LoginPage = () => {
             password: '',
         },
         onSubmit: values => {
-            login(values.email,values.password, setErrorMessage);
+            login(values.email,values.password, setErrorMessage, navigator);
         },
     });
     return (

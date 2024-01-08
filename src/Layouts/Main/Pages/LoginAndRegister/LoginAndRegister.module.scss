@@ -1,6 +1,8 @@
 @import "../../../../Animations/Animations.module";
 @import "../../../../Variables/variables.module";
-
+.circleLoading {
+  animation: rotateAnimation 1s linear forwards infinite;
+}
 .pageWrapper {
   display: flex;
   width: 100vw;
@@ -40,6 +42,9 @@
           white-space: nowrap;
           color: $color-red;
           padding: 20px 0;
+          span {
+            color: green;
+          }
         }
 
         &:hover {
@@ -115,6 +120,7 @@
               cursor: pointer;
               transition: $transition-fast;
               white-space: nowrap;
+              min-width: 301px;
               &:hover {
                 background-color: $color-orange;
                 color: $color-white;
@@ -215,6 +221,9 @@
                 padding: 10px 102px;
                 font-size: 18px;
                 white-space: nowrap;
+                width: 248px;
+                min-width: unset;
+                height: 40px;
               }
             }
           }

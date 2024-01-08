@@ -18,6 +18,7 @@ import {AdminPageCategories} from "./Layouts/Admin/Pages/AdminPage/AdminPageCate
 import {AdminProductsPage} from "./Layouts/Admin/Pages/AdminPage/AdminPageProducts/AdminProductsPage.jsx";
 import {AdminPageProduct} from "./Layouts/Admin/Pages/AdminPage/AdminPageProduct/AdminPageProduct.jsx";
 import {AuthLayout} from "./Layouts/Authentication/AuthLayout.jsx";
+import {PageNotFound} from "./Layouts/Main/Pages/PageNotFound/PageNotFound.jsx";
 
 const router = createBrowserRouter([
     {
@@ -26,7 +27,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '*',
-                element: <h1>Page not found</h1>
+                element: <PageNotFound />
             },
 
             {
