@@ -11,8 +11,8 @@
     align-items: center;
     transition: $transition-fast;
     cursor: pointer;
-    background-color: red;
-    justify-content: start;
+    background-color: green;
+    justify-content: end;
 
     &:hover {
       .point {
@@ -29,10 +29,10 @@
     }
 
     &.adminActive {
-      background-color: darkgreen;
+      background-color: red;
 
       .point {
-        margin-left: 20px;
+        margin-right: 20px;
 
       }
     }

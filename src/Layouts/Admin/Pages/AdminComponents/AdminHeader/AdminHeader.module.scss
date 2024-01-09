@@ -174,10 +174,31 @@
 @media screen and (max-width: 800px) {
   .adminHeaderWrapper {
     .adminHeaderContent {
+      gap: 10px;
+      .sideMenuButton {
+        svg {
+          font-size: 25px;
+        }
+      }
+
+      .adminBlock {
+        p {
+          font-size: 14px;
+        }
+      }
 .headerLogo {
   width: 40px;
   height: 40px;
 }
+    }
+  }
+}
+@media screen and (max-width: 500px) {
+  .adminHeaderWrapper {
+    .adminHeaderContent {
+      .headerLogo {
+        display: none;
+      }
     }
   }
 }

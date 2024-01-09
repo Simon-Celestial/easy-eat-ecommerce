@@ -3,8 +3,13 @@ import styles from "./AdminHeader.module.scss";
 import {File, Power, Sidebar, User} from "@phosphor-icons/react";
 import {Link} from "react-router-dom";
 import {LayoutContext} from "../../../../../Context/LayoutContext/LayoutContext.jsx";
+import {AuthContext} from "../../../../../Context/AuthContext/AuthContext.jsx";
 
 export const AdminHeader = () => {
+    const {
+        userData,
+    } = useContext(AuthContext);
+
     const {
         openHandler,
         setAdminSideMenuOpen,
@@ -22,7 +27,7 @@ export const AdminHeader = () => {
 
                 </Link>
                 <div className={styles.adminBlock}>
-                    <p>Hello, Admin!</p>
+                    <p>Hello, {userData.name} {userData.surname}</p>
                     <div className={styles.adminLogo} onClick={openHandler(setAdminDropDownVisible)}>
                         <User/>
                     </div>

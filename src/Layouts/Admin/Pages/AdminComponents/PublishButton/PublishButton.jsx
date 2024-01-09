@@ -2,17 +2,16 @@ import React, {useContext, useState} from 'react'
 import styles from "./PublishButton.module.scss";
 import {LayoutContext} from "../../../../../Context/LayoutContext/LayoutContext.jsx";
 
-export const PublishButton = () => {
+export const PublishButton = ({userActive,setUserActive}) => {
     const {
         openHandler,
     } = useContext(LayoutContext);
-    const [adminActive, setAdminActive] = useState(false);
 
     return (
         <div className={styles.publishButton}>
             <span
-                className={`${adminActive && styles.adminActive}`}
-                onClick={openHandler(setAdminActive)}>
+                className={`${!userActive && styles.adminActive}`}
+                onClick={openHandler(setUserActive)}>
             <div className={styles.point}></div>
             </span>
         </div>

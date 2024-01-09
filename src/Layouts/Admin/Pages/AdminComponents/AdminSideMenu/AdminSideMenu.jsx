@@ -26,28 +26,28 @@ export const AdminSideMenu = () => {
                 <SkipBack  />
             </div>
             <div className={styles.sideMenuItem}>
-                <Link to="/auth/dashboard" className={styles.sideMenuElement}>
+                <Link to="/admin/dashboard" className={styles.sideMenuElement}>
                     <Browser  />
                     Dashboard</Link>
             </div>
 
             <div className={styles.sideMenuItem}>
-                <Link to="/auth/products" className={styles.sideMenuElement}>
+                <Link to="/admin/products" className={styles.sideMenuElement}>
                     <Hamburger/>
                     Products</Link>
             </div>
             <div className={styles.sideMenuItem}>
-                <Link to="/auth/category" className={styles.sideMenuElement}>
+                <Link to="/admin/category" className={styles.sideMenuElement}>
                     <DiamondsFour/>
                     Categories</Link>
             </div>
             <div className={styles.sideMenuItem}>
-                <Link to="/auth/orders" className={styles.sideMenuElement}>
+                <Link to="/admin/orders" className={styles.sideMenuElement}>
                     <ListNumbers/>
                     Orders</Link>
             </div>
             <div className={styles.sideMenuItem}>
-                <Link to="/auth/staff" className={styles.sideMenuElement}>
+                <Link to="/admin/staff" className={styles.sideMenuElement}>
                     <UsersThree/>
                     Staff</Link>
             </div>

@@ -1,11 +1,10 @@
-import React from 'react'
+import {useEffect, useRef} from 'react'
 import styles from "./StaffEdit.module.scss";
 import {Power} from "@phosphor-icons/react";
 import {useFormik} from "formik";
-import {API_KEY, BASE_URL} from "../../../../../Context/AuthContext/AuthContext.jsx";
 
 
-export const StaffEdit = ({staffMenuOpen, setStaffMenuOpen, editMode}) => {
+export const StaffEdit = ({id, staffMenuOpen, setStaffMenuOpen, editMode}) => {
 
     const formik = useFormik({
         initialValues: {
@@ -66,12 +65,11 @@ export const StaffEdit = ({staffMenuOpen, setStaffMenuOpen, editMode}) => {
                         <p>Email:</p>
                         <label htmlFor="email">
                             <input type="email"
-                                   required
                                    id="email"
                                    name="email"
                                    onChange={formik.handleChange}
                                    value={formik.values.email}
-
+                                   required
                             />
                         </label>
                     </div>
@@ -79,12 +77,11 @@ export const StaffEdit = ({staffMenuOpen, setStaffMenuOpen, editMode}) => {
                         <p>Password:</p>
                         <label htmlFor="password">
                             <input type="password"
-                                   required
                                    id="password"
                                    name="password"
                                    onChange={formik.handleChange}
                                    value={formik.values.password}
-
+                                   required
                             />
                         </label>
                     </div>

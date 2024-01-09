@@ -22,14 +22,14 @@ import {PageNotFound} from "./Layouts/Main/Pages/PageNotFound/PageNotFound.jsx";
 import {useContext} from "react";
 import {AuthContext} from "./Context/AuthContext/AuthContext.jsx";
 
-const router = (userData, token) => createBrowserRouter([
+const router = (userData, isAdmin, token) => createBrowserRouter([
     {
         path: '/',
         element: <MainLayout/>,
         children: [
             {
                 path: '*',
-                element: <PageNotFound />
+                element: <PageNotFound/>
             },
 
             {
@@ -51,7 +51,7 @@ const router = (userData, token) => createBrowserRouter([
             },
             {
                 path: 'cart',
-                element: (!!userData && !!token)? <CartPage/>: <Navigate to="/login" replace />
+                element: <CartPage/>
             },
             {
                 path: 'wishlist',
@@ -59,11 +59,11 @@ const router = (userData, token) => createBrowserRouter([
             },
             {
                 path: 'login',
-                element: <LoginPage />
+                element: <LoginPage/>
             },
             {
                 path: 'register',
-                element: <RegisterPage />
+                element: <RegisterPage/>
             },
         ],
     },
@@ -73,33 +73,34 @@ const router = (userData, token) => createBrowserRouter([
         children: [
             {
                 path: 'checkout',
-                element: <CheckoutPage/>
+                element: (!!userData && !!token) ? <CheckoutPage/> : <Navigate to="/login" replace/>
             },
         ],
     },
 
     {
         path: 'admin',
-        element: <AdminLayout/>,
-        children: [
-            {path: '', element: <AdminLogin />},
+        element: isAdmin ? <AdminLayout/> : <PageNotFound/>,
+        children: isAdmin ? [
+            {path: '', element: isAdmin ? <Navigate to={'/admin/dashboard'}/> : <AdminLogin/>},
             {path: 'login', element: <AdminLogin/>},
             {path: 'dashboard', element: <AdminPageDashboard/>},
             {path: 'orders', element: <AdminPageOrders/>},
             {path: 'order', element: <AdminOrderSingle/>},
             {path: 'staff', element: <AdminPageStaff/>},
             {path: 'category', element: <AdminPageCategories/>},
-            {path: 'products', element: <AdminProductsPage />},
-            {path: 'product', element: <AdminPageProduct />},
-        ],
+            {path: 'products', element: <AdminProductsPage/>},
+            {path: 'product', element: <AdminPageProduct/>},
+        ] : [],
     },
 ]);
 const MainRouter = () => {
     const {
+        isAdmin,
         userData,
         token,
     } = useContext(AuthContext);
-    return <RouterProvider router={router(userData, token)}/>;
+    return <RouterProvider router={router(userData, isAdmin, token)}/>;
 };
 
 export default MainRouter;

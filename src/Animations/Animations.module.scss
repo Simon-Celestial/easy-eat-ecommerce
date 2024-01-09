@@ -37,7 +37,9 @@
   100% {
     text-shadow: 0 0 0 $color-orange;
   }
-}  ;
+}
+
+;
 
 @keyframes headerTransform {
   from {
@@ -46,7 +48,9 @@
   to {
     transform: scaleY(1);
   }
-};
+}
+
+;
 
 @keyframes rotateAnimation {
   0% {
@@ -54,5 +58,18 @@
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeAnimation {
+  0% {
+    opacity: 0.5
+  }
+  50% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 0.5;
+
   }
 }

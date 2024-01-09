@@ -3,7 +3,7 @@ import {CaretRight, MagnifyingGlass, ShoppingBag, X} from "@phosphor-icons/react
 import React, {useCallback, useContext, useEffect, useState} from "react";
 import {LayoutContext} from "../../../../Context/LayoutContext/LayoutContext.jsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCircleUser, faKey, faUsers} from "@fortawesome/free-solid-svg-icons";
+import {faCircleUser, faKey, faScrewdriverWrench, faUsers} from "@fortawesome/free-solid-svg-icons";
 import {Link, useNavigate} from "react-router-dom";
 import {AuthContext} from "../../../../Context/AuthContext/AuthContext.jsx";
 
@@ -30,6 +30,7 @@ export const Header = () => {
     const {
         logout: rawLogout,
         userData,
+        isAdmin,
     } = useContext(AuthContext);
 
 
@@ -321,6 +322,11 @@ export const Header = () => {
                 </div>
                 {/*HEADER RIGHT CONTAINER*/}
                 <div className={styles.headerRight}>
+                    {isAdmin && <div className={styles.adminPanel}>
+                        <Link to="/admin/dashboard">
+                            <FontAwesomeIcon icon={faScrewdriverWrench} />
+                        </Link>
+                    </div>}
                     <div className={styles.headerRightItem} style={{display: basketVisible ? "flex" : "none"}}>
                         <div className={styles.basketCount}>0</div>
                         <div onClick={handleWidgetOpen(setBasketOpen)}>
@@ -417,7 +423,6 @@ export const Header = () => {
                             </Link>)}
                         </div>
                     </div>
-
                     <div className={styles.headerRightItem} onClick={handleWidgetOpen(setSearchOpen)}>
                         <MagnifyingGlass/>
                     </div>

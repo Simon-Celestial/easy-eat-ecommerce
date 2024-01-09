@@ -10,7 +10,6 @@ export const AdminPageOrders = () => {
         <div className={styles.adminOrdersPageWrapper}>
             <AdminHeader/>
             <AdminSideMenu/>
-
             <div className={styles.adminOrdersContent}>
                 <BlockTitle title="Orders"/>
                 <form className={styles.ordersFilter}>

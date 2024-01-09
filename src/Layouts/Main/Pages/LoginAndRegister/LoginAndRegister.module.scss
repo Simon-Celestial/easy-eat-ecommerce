@@ -121,6 +121,11 @@
               transition: $transition-fast;
               white-space: nowrap;
               min-width: 301px;
+              height: 48px;
+              svg {
+                font-size: 28px;
+                animation: rotateAnimation 1s linear infinite;
+              }
               &:hover {
                 background-color: $color-orange;
                 color: $color-white;

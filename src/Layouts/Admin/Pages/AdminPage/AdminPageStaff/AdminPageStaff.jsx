@@ -1,16 +1,44 @@
-import React, {useState} from 'react'
+import React, {useCallback, useEffect, useState} from 'react'
 import styles from "./AdminPageStaff.module.scss";
 import {AdminHeader} from "../../AdminComponents/AdminHeader/AdminHeader.jsx";
 import {AdminSideMenu} from "../../AdminComponents/AdminSideMenu/AdminSideMenu.jsx";
 import {BlockTitle} from "../../AdminComponents/BlockTitle/BlockTitle.jsx";
-import {Trash, Wrench} from "@phosphor-icons/react";
 import {AdminPagination} from "../../AdminComponents/AdminPagination/AdminPagination.jsx";
 import {StaffEdit} from "../../AdminComponents/StaffEdit/StaffEdit.jsx";
-import {PublishButton} from "../../AdminComponents/PublishButton/PublishButton.jsx";
+import useApi from "../../../../../Hooks/useApi.js";
+import {StaffTableRow} from "./StaffTableRow/StaffTableRow.jsx";
+import {CircleDashed} from "@phosphor-icons/react";
 
+const mapData = ({
+                     createdAt,
+                     email,
+                     name,
+                     password,
+                     role,
+                     surname,
+                     updatedAt,
+                     _id,
+                 }) => ({
+    createdAt,
+    email,
+    name,
+    password,
+    role,
+    surname,
+    updatedAt,
+    id: _id,
+})
 export const AdminPageStaff = () => {
+    const [data, setData] = useState([]);
     const [staffMenuOpen, setStaffMenuOpen] = useState(false);
     const [editMode, setEditMode] = useState(false);
+    const [shouldUpdate, setShouldUpdate] = useState(Date.now());
+    const [loading, setLoading] = useState(true);
+
+
+    const update = useCallback(() => {
+        setShouldUpdate(Date.now());
+    }, []);
 
     const handleOpenEditMenu = () => {
         setEditMode(true);
@@ -21,7 +49,32 @@ export const AdminPageStaff = () => {
         setStaffMenuOpen(true);
     }
 
+    const {
+        GET: getAllUsers,
+    } = useApi('/dashboard/users')
 
+
+    useEffect(() => {
+        (async () => {
+            try {
+                const result = await getAllUsers();
+                if (result.status === 200) {
+                    setData(JSON.parse(result.data).data.map(it => mapData(it)));
+                    setLoading(false);
+                } else {
+                    console.log(result)
+                }
+            } catch (e) {
+                setLoading(false);
+            }
+
+        })()
+    }, [shouldUpdate]);
+    console.log(loading)
+
+    const handleDelete = useCallback((id) => {
+        console.log(id);
+    }, [])
     return (
         <div className={styles.adminStaffWrapper}>
             <AdminHeader/>
@@ -57,6 +110,13 @@ export const AdminPageStaff = () => {
                         </div>
                     </form>
                     <div className={styles.staffTableWrapper}>
+                        {loading
+                            &&
+                            <div className={styles.loader}>
+                                <CircleDashed />
+                            </div>
+                        }
+
                         <div className={styles.overflowBlock}>
                             <div className={styles.staffTable}>
                                 <div className={styles.tableRow}>
@@ -66,11 +126,11 @@ export const AdminPageStaff = () => {
                                     <div className={`${styles.email} ${styles.tableCell}`}>
                                         <p>Email</p>
                                     </div>
-                                    <div className={`${styles.contact} ${styles.tableCell}`}>
-                                        <p>Contact</p>
-                                    </div>
                                     <div className={`${styles.date} ${styles.tableCell}`}>
                                         <p>Joining Date</p>
+                                    </div>
+                                    <div className={`${styles.date} ${styles.tableCell}`}>
+                                        <p>Update Date</p>
                                     </div>
                                     <div className={`${styles.role} ${styles.tableCell}`}>
                                         <p>Role</p>
@@ -85,60 +145,16 @@ export const AdminPageStaff = () => {
                                         <p>Actions</p>
                                     </div>
                                 </div>
-                                <div className={styles.tableRow}>
-                                    <div className={`${styles.name} ${styles.tableCell}`}>
-                                        <span>John Wick</span>
-                                    </div>
-                                    <div className={`${styles.email} ${styles.tableCell}`}>
-                                        <span>salam@popolam.com</span>
-                                    </div>
-                                    <div className={`${styles.contact} ${styles.tableCell}`}>
-                                        <span>+994558280192</span>
-                                    </div>
-                                    <div className={`${styles.date} ${styles.tableCell}`}>
-                                        <span>Jan 4, 2024</span>
-                                    </div>
-                                    <div className={`${styles.role} ${styles.tableCell}`}>
-                                        <span>Admin</span>
-                                    </div>
-                                    <div className={`${styles.status} ${styles.tableCell}`}>
-                                        <span>Active</span>
-                                    </div>
-                                    <div className={`${styles.publish} ${styles.tableCell}`}>
-                                        <PublishButton />
-                                    </div>
-                                    <div className={`${styles.action} ${styles.tableCell}`}>
-                                        <span onClick={handleOpenEditMenu}><Wrench/></span>
-                                        <span><Trash/></span>
-                                    </div>
-                                </div>
-                                <div className={styles.tableRow}>
-                                    <div className={`${styles.name} ${styles.tableCell}`}>
-                                        <span>John Wick</span>
-                                    </div>
-                                    <div className={`${styles.email} ${styles.tableCell}`}>
-                                        <span>salam@popolam.com</span>
-                                    </div>
-                                    <div className={`${styles.contact} ${styles.tableCell}`}>
-                                        <span>+994558280192</span>
-                                    </div>
-                                    <div className={`${styles.date} ${styles.tableCell}`}>
-                                        <span>Jan 4, 2024</span>
-                                    </div>
-                                    <div className={`${styles.role} ${styles.tableCell}`}>
-                                        <span>Admin</span>
-                                    </div>
-                                    <div className={`${styles.status} ${styles.tableCell}`}>
-                                        <span>Active</span>
-                                    </div>
-                                    <div className={`${styles.publish} ${styles.tableCell}`}>
-                                        <PublishButton />
-                                    </div>
-                                    <div className={`${styles.action} ${styles.tableCell}`}>
-                                        <span onClick={handleOpenEditMenu}><Wrench/></span>
-                                        <span><Trash/></span>
-                                    </div>
-                                </div>
+                                {!loading &&
+                                    (data.map((item) => (
+                                        <StaffTableRow
+                                            key={item.id}
+                                            item={item}
+                                            onDelete={handleDelete}
+                                            handleOpenEditMenu={handleOpenEditMenu}
+                                        />
+                                    )))
+                                }
 
                             </div>
                         </div>

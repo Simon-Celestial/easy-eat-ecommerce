@@ -4,21 +4,21 @@ import {AuthContext} from "../Context/AuthContext/AuthContext.jsx";
 
 
 const instance = new Axios({
-    baseURL: `${import.meta.env.BASE_URL}/${import.meta.env.API_KEY}`,
+    baseURL: `${import.meta.env.VITE_BASE_URL}/${import.meta.env.VITE_API_KEY}`,
 });
 
 
-const useApi = ({url}) => {
+const useApi = (url) => {
     const {
         token,
     } = useContext(AuthContext);
 
     const baseConfig = useMemo(() => ({
         headers: {
-            Authorization: token,
+            Authorization: `Bearer ${token}`,
         }
     }), [token])
-    const GET = useCallback(async (id = null) => {
+    const GET = useCallback(async (id = '') => {
 
         return instance.get(`${url}/${id !== null ? id : ''}`, {
             ...baseConfig,

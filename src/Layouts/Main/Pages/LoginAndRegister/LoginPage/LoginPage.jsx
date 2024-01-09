@@ -10,6 +10,7 @@ import {PageNameSection} from "../../../Common/PageNameSection/PageNameSection.j
 import {ChangedFooter} from "../../../Components/ChangedFooter/ChangedFooter.jsx";
 import {AuthContext} from "../../../../../Context/AuthContext/AuthContext.jsx";
 import {useFormik} from 'formik';
+import {CircleDashed} from "@phosphor-icons/react";
 
 
 export const LoginPage = () => {
@@ -17,6 +18,7 @@ export const LoginPage = () => {
         setHeaderColorChange,
         openHandler,
     } = useContext(LayoutContext);
+    const [shouldRedirect, setShouldRedirect] = useState(false);
 
     useEffect(() => {
         setHeaderColorChange(true);
@@ -25,17 +27,23 @@ export const LoginPage = () => {
     const navigator = useNavigate();
     const {
         login,
+        loading,
     } = useContext(AuthContext);
     const [passwordVisible, setPasswordVisible] = useState(false);
-    const [errorMessage,setErrorMessage] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
+    useEffect(() => {
+        if(navigator && shouldRedirect) navigator('/home');
+    }, [shouldRedirect, navigator]);
     const formik = useFormik({
         initialValues: {
             email: '',
             password: '',
         },
         onSubmit: values => {
-            login(values.email,values.password, setErrorMessage, navigator);
+            login(values.email, values.password, setErrorMessage, () => {
+                setShouldRedirect(true);
+            });
         },
     });
     return (
@@ -70,13 +78,13 @@ export const LoginPage = () => {
                                     <FontAwesomeIcon icon={faKey}/>
                                 </div>
                                 <input
-                                       type={`${!passwordVisible && "password"}`}
-                                       placeholder="Enter Password"
-                                       name="password" id="password"
-                                       tabIndex={2}
-                                       onChange={formik.handleChange}
-                                       value={formik.values.password}
-                                       required
+                                    type={`${!passwordVisible && "password"}`}
+                                    placeholder="Enter Password"
+                                    name="password" id="password"
+                                    tabIndex={2}
+                                    onChange={formik.handleChange}
+                                    value={formik.values.password}
+                                    required
                                 />
                                 <div className={styles.viewPassword} onClick={openHandler(setPasswordVisible)}>
                                     <FontAwesomeIcon icon={passwordVisible ? faEye : faEyeSlash}/>
@@ -92,7 +100,14 @@ export const LoginPage = () => {
                                 </Link>
                             </div>
                             <div className={styles.buttonWrapper}>
-                                <button type="submit" tabIndex={5}>SIGN IN</button>
+                                <button type="submit"
+                                        tabIndex={5}
+                                        disabled={loading}
+                                        style={{
+                                            opacity: loading ? 0.5 : 1
+                                        }}>
+                                    {loading ? <CircleDashed/> : "SIGN IN"}
+                                </button>
                             </div>
                             <div className={styles.transferToAnother}>
                                 <Link to="/register" tabIndex={6}>
