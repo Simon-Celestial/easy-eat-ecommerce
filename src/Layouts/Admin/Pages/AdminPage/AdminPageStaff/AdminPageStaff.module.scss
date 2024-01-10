@@ -33,7 +33,7 @@
         gap: 25px;
 
         .block {
-          width: 70%;
+          width: 100%;
           display: flex;
           gap: 25px;
           padding: 15px 0;
@@ -46,6 +46,7 @@
             display: flex;
             width: 100%;
             height: 48px;
+            justify-content: end;
 
             input {
               width: 100%;
@@ -87,10 +88,6 @@
               font-size: 17px;
               cursor: pointer;
               transition: $transition-fast;
-            }
-
-            .filter {
-              background-color: #9d2800;
             }
 
             .resetBtn {
@@ -161,7 +158,7 @@
               }
 
               .name {
-                max-width: 200px;
+                max-width: 180px;
                 width: 100%;
                 justify-content: start;
               }
@@ -217,20 +214,13 @@
 
                 span {
                   cursor: pointer;
-
-                  &:nth-child(1):hover {
+                  &:hover {
                     svg {
-                      color: green;
+                      color: $color-red;
                     }
                   }
-
-                  &:nth-child(2):hover {
-                    svg {
-                      color: $color-orange;
-                    }
-                  }
-
                   svg {
+                    transition: $transition-fast;
                     font-size: 22px;
                   }
                 }
@@ -259,6 +249,14 @@
           .overflowBlock {
             .staffTable {
               .tableRow {
+                .tableCell {
+                  span {
+                    font-size: 13px;
+                  }
+                }
+                .name {
+                  max-width: 170px;
+                }
                 .date {
                   max-width: 145px;
                 }
@@ -296,14 +294,27 @@
           .overflowBlock {
             .staffTable {
               .tableRow {
+                .action {
+                  max-width: 60px;
+                }
+                .publish {
+                  max-width: 70px;
+                }
+                .status {
+                  max-width: 70px;
+                }
+
                 .tableCell {
                   padding: 4px 8px;
                 }
                 .name {
-                  max-width: 185px;
+                  max-width: 170px;
                 }
                 .email {
-                  max-width: 220px;
+                  max-width: 320px;
+                }
+                .date {
+                  max-width: 125px;
                 }
               }
             }
@@ -346,10 +357,10 @@
     .adminStaffContent {
       .staffContainer {
         .staffManagement {
-          flex-direction: column;
-          gap: 15px;
+          flex-direction: column-reverse;
           .block {
-            gap: 15px;
+            padding: 0;
+            flex-direction: column;
             width: 100%!important;
           }
         }
@@ -363,7 +374,6 @@
       .staffContainer {
         .staffManagement {
           .block {
-            padding: 0;
             flex-direction: column;
           }
         }

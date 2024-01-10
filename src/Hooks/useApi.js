@@ -16,6 +16,7 @@ const useApi = (url) => {
     const baseConfig = useMemo(() => ({
         headers: {
             Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
         }
     }), [token])
     const GET = useCallback(async (id = '') => {
@@ -26,7 +27,7 @@ const useApi = (url) => {
     }, [url, baseConfig]);
     const POST = useCallback(async (id = null, data = {}) => {
 
-        return instance.post(`${url}/${id !== null ? id : ''}`, data, {
+        return instance.post(`${url}/${id !== null ? id : ''}`, JSON.stringify(data), {
             ...baseConfig,
         })
     }, [url, baseConfig]);
@@ -36,7 +37,7 @@ const useApi = (url) => {
             ...baseConfig,
         })
     }, [url, baseConfig]);
-    const DELETE = useCallback(async (id = null, data = {}) => {
+    const DELETE = useCallback(async (id = null) => {
 
         return instance.delete(`${url}/${id !== null ? id : ''}`, {
             ...baseConfig,

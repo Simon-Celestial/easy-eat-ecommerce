@@ -1,13 +1,14 @@
-import React, {useCallback, useEffect, useState} from 'react'
+import React, {useCallback, useEffect, useMemo, useState} from 'react'
 import styles from "./AdminPageStaff.module.scss";
 import {AdminHeader} from "../../AdminComponents/AdminHeader/AdminHeader.jsx";
 import {AdminSideMenu} from "../../AdminComponents/AdminSideMenu/AdminSideMenu.jsx";
 import {BlockTitle} from "../../AdminComponents/BlockTitle/BlockTitle.jsx";
 import {AdminPagination} from "../../AdminComponents/AdminPagination/AdminPagination.jsx";
-import {StaffEdit} from "../../AdminComponents/StaffEdit/StaffEdit.jsx";
+import {StaffAdd} from "../../AdminComponents/StaffAdd/StaffAdd.jsx";
 import useApi from "../../../../../Hooks/useApi.js";
 import {StaffTableRow} from "./StaffTableRow/StaffTableRow.jsx";
 import {CircleDashed} from "@phosphor-icons/react";
+import toast from "react-hot-toast";
 
 const mapData = ({
                      createdAt,
@@ -27,35 +28,42 @@ const mapData = ({
     surname,
     updatedAt,
     id: _id,
-})
+});
+
+const PAGE_SIZE = 10;
+
+const filterStaff = (searchText, staffData) => {
+    return staffData.filter(({name, role}) =>
+        (!searchText || name.toLowerCase().includes(searchText.toLowerCase())) && role === 'admin'
+    );
+};
+
+
 export const AdminPageStaff = () => {
     const [data, setData] = useState([]);
     const [staffMenuOpen, setStaffMenuOpen] = useState(false);
-    const [editMode, setEditMode] = useState(false);
     const [shouldUpdate, setShouldUpdate] = useState(Date.now());
     const [loading, setLoading] = useState(true);
-
+    const [searchText, setSearchText] = useState("");
+    const [currentPage, setCurrentPage] = useState(0);
 
     const update = useCallback(() => {
         setShouldUpdate(Date.now());
     }, []);
 
-    const handleOpenEditMenu = () => {
-        setEditMode(true);
-        setStaffMenuOpen(true);
-    }
     const handleOpenAddMenu = () => {
-        setEditMode(false);
         setStaffMenuOpen(true);
     }
 
     const {
         GET: getAllUsers,
-    } = useApi('/dashboard/users')
+        DELETE: deleteUser,
+    } = useApi('/dashboard/users');
 
 
     useEffect(() => {
         (async () => {
+            setLoading(true);
             try {
                 const result = await getAllUsers();
                 if (result.status === 200) {
@@ -70,27 +78,73 @@ export const AdminPageStaff = () => {
 
         })()
     }, [shouldUpdate]);
-    console.log(loading)
 
-    const handleDelete = useCallback((id) => {
-        console.log(id);
-    }, [])
+
+    const handleDelete = useCallback(async (id) => {
+        try {
+            setLoading(true)
+            const result = await deleteUser(id);
+
+            if (result.status === 200) {
+                update();
+                const initialUser = data.find(it => it.id === id);
+                toast(`${initialUser.name} ${initialUser.surname} deleted successfully`,{
+                    style : {
+                        background:"red",
+                        color: "white",
+                    }
+                });
+
+            } else {
+                console.error(result);
+            }
+        } catch (error) {
+            console.error(error);
+
+        } finally {
+            setLoading(false);
+        }
+    }, [data]);
+
+
+    const filtered = useMemo(() => {
+        return filterStaff(searchText, data);
+    }, [searchText, data])
+
+    const pagedStaff = useMemo(() => {
+        const newArr = [...filtered];
+        return newArr.slice(currentPage * PAGE_SIZE, (currentPage + 1) * PAGE_SIZE);
+    }, [currentPage, filtered]);
+    console.log({
+        currentPage,
+        pagedStaff,
+    })
+    const handleResetSearch = () => {
+        setSearchText("");
+    };
     return (
         <div className={styles.adminStaffWrapper}>
             <AdminHeader/>
             <AdminSideMenu/>
-            <StaffEdit staffMenuOpen={staffMenuOpen} setStaffMenuOpen={setStaffMenuOpen} editMode={editMode}/>
+            <StaffAdd
+                staffMenuOpen={staffMenuOpen}
+                setStaffMenuOpen={setStaffMenuOpen}
+                update={update}
+            />
             <div className={styles.adminStaffContent}>
                 <BlockTitle title="All Staff"/>
                 <div className={styles.staffContainer}>
-                    <form className={styles.staffManagement}>
+                    <div className={styles.staffManagement}>
                         <div className={styles.block}>
                             <label htmlFor="">
-                                <input type="text" placeholder="Search by Name"/>
+                                <input type="text"
+                                       placeholder="Search by Name"
+                                       value={searchText}
+                                       onChange={(e) => setSearchText(e.target.value)}
+                                />
                             </label>
                             <label htmlFor="">
-                                <select>
-                                    <option value="" hidden>Staff Role</option>
+                                <select disabled>
                                     <option value="admin">Admin</option>
                                 </select>
                             </label>
@@ -101,19 +155,20 @@ export const AdminPageStaff = () => {
                             </label>
                         </div>
                         <div className={styles.block}>
-                            <label htmlFor="">
-                                <button disabled className={`${styles.filter} ${styles.button}`}>Filter</button>
-                            </label>
-                            <label htmlFor="">
-                                <button className={`${styles.resetBtn} ${styles.button}`}>Reset</button>
+                            <label>
+                                <button className={`${styles.resetBtn} ${styles.button}`}
+                                        onClick={handleResetSearch}
+                                >
+                                    Reset
+                                </button>
                             </label>
                         </div>
-                    </form>
+                    </div>
                     <div className={styles.staffTableWrapper}>
                         {loading
                             &&
                             <div className={styles.loader}>
-                                <CircleDashed />
+                                <CircleDashed/>
                             </div>
                         }
 
@@ -146,19 +201,22 @@ export const AdminPageStaff = () => {
                                     </div>
                                 </div>
                                 {!loading &&
-                                    (data.map((item) => (
+                                    (pagedStaff.map((item) => (
                                         <StaffTableRow
                                             key={item.id}
                                             item={item}
                                             onDelete={handleDelete}
-                                            handleOpenEditMenu={handleOpenEditMenu}
                                         />
                                     )))
                                 }
-
                             </div>
                         </div>
-                        <AdminPagination/>
+                        <AdminPagination
+                            pageSize={PAGE_SIZE}
+                            totalElements={filtered.length}
+                            currentPage={currentPage}
+                            setCurrentPage={setCurrentPage}
+                        />
                     </div>
                 </div>
             </div>

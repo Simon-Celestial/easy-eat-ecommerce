@@ -1,15 +1,15 @@
 import React, {useState} from 'react'
 import styles from "../AdminPageStaff.module.scss";
 import {PublishButton} from "../../../AdminComponents/PublishButton/PublishButton.jsx";
-import {Trash, Wrench} from "@phosphor-icons/react";
+import {Trash} from "@phosphor-icons/react";
 import moment from "moment";
 
 export const StaffTableRow = ({
-                                  handleOpenEditMenu,
                                   item,
                                   onDelete,
                               }) => {
 const [userActive,setUserActive] = useState(true);
+
     return (
         <div className={styles.tableRow}>
             <div className={`${styles.name} ${styles.tableCell}`}>
@@ -34,7 +34,6 @@ const [userActive,setUserActive] = useState(true);
                 <PublishButton userActive={userActive} setUserActive={setUserActive}/>
             </div>
             <div className={`${styles.action} ${styles.tableCell}`}>
-                <span onClick={handleOpenEditMenu}><Wrench/></span>
                 <span><Trash onClick={() => onDelete(item.id)}/></span>
             </div>
         </div>
