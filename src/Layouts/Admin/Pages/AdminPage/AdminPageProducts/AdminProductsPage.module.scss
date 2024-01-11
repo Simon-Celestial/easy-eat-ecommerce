@@ -4,7 +4,7 @@
 .adminProductPageWrapper {
   display: flex;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   background-color: $color-main;
   flex-direction: column;
   align-items: center;
@@ -30,7 +30,7 @@
         display: flex;
         width: 100%;
         gap: 15px;
-
+        flex-direction: column;
         .inputBlocks {
           display: flex;
           flex-direction: column;
@@ -69,17 +69,15 @@
           }
 
         }
-
         .filterButtons {
           display: flex;
           flex-direction: column;
           gap: 15px;
           width: 100%;
-          max-width: 200px;
+          max-width: 250px;
 
           button {
             width: 100%;
-            max-width: 200px;
             height: 40px;
             border-radius: 5px;
             border: 0;
@@ -89,24 +87,10 @@
             font-size: 20px;
             cursor: pointer;
             transition: $transition-fast;
-
-            &:nth-child(1) {
-              background-color: green;
-
+            background-color: $color-orange;
               &:hover {
-                background-color: darkgreen;
+                background-color: #9d2800;
               }
-            }
-
-            &:nth-child(2) {
-              background-color: red;
-
-              &:hover {
-                background-color: darkred;
-              }
-            }
-
-
           }
         }
       }
@@ -167,6 +151,24 @@
       border-radius: 10px 0 0 0;
       border: 1px solid $color-border;
       border-bottom: transparent;
+      position: relative;
+      .loadingBox {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        display: flex;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        svg {
+          font-size: 45px;
+          color: $color-gray;
+          animation: rotateAnimation 1s linear infinite;
+        }
+      }
+
 
       .overflow {
         display: flex;
@@ -176,6 +178,8 @@
           display: flex;
           width: 100%;
           flex-direction: column;
+          position: relative;
+          min-height: 300px;
 
           .tableRow {
             display: flex;
@@ -248,7 +252,7 @@
               span {
                 white-space: nowrap;
                 font-size: 12px;
-                background-color: $color-orange;
+                background-color: green;
                 color: $color-white;
                 padding: 3px 5px;
                 border-radius: 4px;
@@ -285,12 +289,21 @@
               max-width: 130px;
               justify-content: end;
               gap: 10px;
-
               span {
                 cursor: pointer;
-
+                &:nth-child(1):hover {
+                  svg {
+                    color: green;
+                  }
+                }
+                &:nth-child(2):hover {
+                  svg {
+                    color: red;
+                  }
+                }
                 svg {
                   font-size: 22px;
+                  transition: color $transition-fast;
                 }
               }
             }

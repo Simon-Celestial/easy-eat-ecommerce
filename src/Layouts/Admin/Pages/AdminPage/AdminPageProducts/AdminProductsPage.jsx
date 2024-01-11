@@ -1,60 +1,205 @@
-import React, {useState} from 'react'
+import React, {useCallback, useEffect, useMemo, useState} from 'react'
 import styles from "./AdminProductsPage.module.scss";
 import {AdminHeader} from "../../AdminComponents/AdminHeader/AdminHeader.jsx";
 import {AdminSideMenu} from "../../AdminComponents/AdminSideMenu/AdminSideMenu.jsx";
 import {BlockTitle} from "../../AdminComponents/BlockTitle/BlockTitle.jsx";
-import {Eye, Plus, Trash, Wrench} from "@phosphor-icons/react";
+import {CircleDashed, Plus, Trash} from "@phosphor-icons/react";
 import {AdminPagination} from "../../AdminComponents/AdminPagination/AdminPagination.jsx";
-import {PublishButton} from "../../AdminComponents/PublishButton/PublishButton.jsx";
 import {ProductsMenu} from "../../AdminComponents/ProductsMenu/ProductsMenu.jsx";
-import {Link} from "react-router-dom";
+import {ProductRow} from "./ProductRow/ProductRow.jsx";
+import useApi from "../../../../../Hooks/useApi.js";
+import toast from "react-hot-toast";
+
+const mapData = ({
+                     _id,
+                     title,
+                     description,
+                     productPrice,
+                     salePrice,
+                     brandId,
+                     stock,
+                     isPublish,
+                     isDeal,
+                     images,
+                     createdAt,
+                     updatedAt,
+                     totalCount,
+
+
+                 }) => ({
+    id: _id,
+    title,
+    description,
+    productPrice,
+    brandId,
+    stock,
+    isPublish,
+    salePrice,
+    isDeal,
+    images,
+    createdAt,
+    updatedAt,
+    totalCount,
+});
+const PAGE_SIZE = 10;
 
 export const AdminProductsPage = () => {
+
     const [productsMenuOpen, setProductsMenuOpen] = useState(false);
     const [editMode, setEditMode] = useState(false);
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [currentPage, setCurrentPage] = useState(0);
+    const [shouldUpdate, setShouldUpdate] = useState(Date.now());
+    const [brands, setBrands] = useState([]);
+    const [selectedItem, setSelectedItem] = useState(null);
+    const [searchSample, setSearchSample] = useState('');
+    const [sorter, setSorter] = useState('');
 
-    const handleOpenEditMenu = () => {
+    const update = useCallback(() => {
+        setShouldUpdate(Date.now());
+    }, []);
+
+    const {
+        GET: getAllProducts,
+        DELETE: deleteProduct,
+    } = useApi('/dashboard/products');
+    const {
+        GET: getAllBrands,
+    } = useApi('/dashboard/brands');
+
+    useEffect(() => {
+        (async () => {
+            const result = await getAllBrands();
+            const brandsRaw = JSON.parse(result.data);
+            setBrands(
+                brandsRaw?.data?.map(it => ({
+                    value: it._id,
+                    label: it.name
+                }))
+            )
+        })()
+
+    }, []);
+    useEffect(() => {
+        if (loading) return;
+        (async () => {
+            setLoading(true);
+            try {
+                const result = await getAllProducts();
+                if (result.status === 200) {
+                    const dataRaw = JSON.parse(result.data).data.product;
+                    setData(dataRaw.map(it => mapData(it)));
+                    setLoading(false);
+                } else {
+                    console.log(result)
+                }
+            } catch (e) {
+                setLoading(false);
+            }
+
+        })();
+    }, [shouldUpdate]);
+
+    const handleOpenEditMenu = (id) => {
         setEditMode(true);
         setProductsMenuOpen(true);
+        const initialOjb = data.find(it => it.id === id);
+        setSelectedItem({
+            ...initialOjb,
+        });
     }
-    const handleOpenAddMenu = () => {
+    const handleOpenMenu = () => {
         setEditMode(false);
         setProductsMenuOpen(true);
+        setSelectedItem(null);
     }
+
+    // DELETE PRODUCT
+    const handleDelete = useCallback(async (id) => {
+        try {
+            setLoading(true)
+            const result = await deleteProduct(id);
+            if (result.status === 200) {
+                toast('Product Deleted', {
+                    style: {
+                        background: "red",
+                        color: "white",
+                    }
+                });
+                update();
+            }
+        } catch (error) {
+            console.error(error);
+
+        } finally {
+            setLoading(false);
+        }
+
+    }, [])
+
+    // SORTING
+    const dataSorted = useMemo(() => {
+        if (!sorter) return data || [];
+        const [sortField, sortOrder] = sorter.split('_');
+        console.log({
+            sortField,
+            sortOrder,
+        })
+        const isDesc = sortOrder !== 'asc' ? -1 : 1;
+        return data.sort((a, b) => a[sortField] > b[sortField] ? (1 * isDesc) : (-1 * isDesc)) || [];
+    }, [data, sorter])
+    const dataFiltered = useMemo(() => {
+        return dataSorted?.filter((it) => {
+            return it.title.includes(searchSample) || it.description.includes(searchSample);
+        }) || [];
+    }, [dataSorted, sorter, searchSample]);
+    // PAGINATION
+    const dataPaginated = useMemo(() => {
+        const newArr = [...dataFiltered];
+        return newArr.slice(currentPage * PAGE_SIZE, (currentPage + 1) * PAGE_SIZE);
+    }, [dataFiltered, sorter, currentPage]);
 
     return (
         <div className={styles.adminProductPageWrapper}>
             <AdminHeader/>
             <AdminSideMenu/>
-            <ProductsMenu productsMenuOpen={productsMenuOpen} setProductsMenuOpen={setProductsMenuOpen} editMode={editMode}/>
+            <ProductsMenu
+                productsMenuOpen={productsMenuOpen}
+                setProductsMenuOpen={setProductsMenuOpen}
+                editMode={editMode}
+                brands={brands}
+                update={update}
+                selectedItem={selectedItem}
+            />
             <div className={styles.adminProductPageContent}>
                 <BlockTitle title="Products"/>
                 <div className={styles.productsManipulation}>
-                    <form className={styles.filterBlocks}>
+                    <div className={styles.filterBlocks}>
                         <div className={styles.inputBlocks}>
                             <label htmlFor="">
-                                <input type="text" placeholder="Search Product"/>
+                                <input
+                                    type="text"
+                                    placeholder="Search Product"
+                                    value={searchSample}
+                                    onChange={(e) => setSearchSample(e.target.value)}
+                                />
                             </label>
                             <label htmlFor="">
-                                <select>
-                                    <option value="All" hidden>Price</option>
-                                    <option value="low">Low to High</option>
-                                    <option value="high">High to Low</option>
-                                    <option value="published">Published</option>
-                                    <option value="unPublished">Unpublished</option>
-                                    <option value="status-selling">Status - Selling</option>
-                                    <option value="status-out-of-stock"> Status - Out of Stock</option>
+                                <select value={sorter} onChange={e => setSorter(e.target.value)}>
+                                    <option value="" hidden>Price</option>
+                                    <option value="salePrice_asc">Low to High</option>
+                                    <option value="salePrice_desc">High to Low</option>
                                 </select>
                             </label>
                         </div>
                         <div className={styles.filterButtons}>
-                            <button>Filter</button>
-                            <button>Clear</button>
+                            <button onClick={() => setSearchSample("")}>Clear</button>
                         </div>
-                    </form>
+                    </div>
                     <div className={styles.addButtons}>
-                        <div className={styles.button} onClick={handleOpenAddMenu}>
-                            <p >Add Product</p>
+                        <div className={styles.button} onClick={handleOpenMenu}>
+                            <p>Add Product</p>
                             <Plus/>
                         </div>
                         <div className={styles.button}>
@@ -64,6 +209,12 @@ export const AdminProductsPage = () => {
                     </div>
                 </div>
                 <div className={styles.productsTableBlock}>
+                    {loading
+                        &&
+                        <div className={styles.loadingBox}>
+                            <CircleDashed/>
+                        </div>
+                    }
                     <div className={styles.overflow}>
                         <div className={styles.table}>
                             <div className={`${styles.tableRow} ${styles.headRow}`}>
@@ -98,50 +249,25 @@ export const AdminProductsPage = () => {
                                     <p>Actions</p>
                                 </div>
                             </div>
-                            <div className={`${styles.tableRow}`}>
-                                <div className={`${styles.tableCell} ${styles.check}`}>
-                                    <input type="checkbox"/>
-                                </div>
-                                <div className={`${styles.tableCell} ${styles.name}`}>
-                                    <div className={styles.imgBox}>
-                                        <img
-                                            src="https://res.cloudinary.com/ahossain/image/upload/v1682058933/product/CMTHP-COR12-deep-ash-920x920.webp"
-                                            alt="Product"/>
-                                    </div>
-                                    <p>Premium T-shirt</p>
-                                </div>
-                                <div className={`${styles.tableCell} ${styles.category}`}>
-                                    <p>Men</p>
-                                </div>
-                                <div className={`${styles.tableCell} ${styles.price}`}>
-                                    <p>$500.00</p>
-                                </div>
-                                <div className={`${styles.tableCell} ${styles.sale}`}>
-                                    <p>$450.00</p>
-                                </div>
-                                <div className={`${styles.tableCell} ${styles.stock}`}>
-                                    <p>23</p>
-                                </div>
-                                <div className={`${styles.tableCell} ${styles.status}`}>
-                                    <span>Out of Stock</span>
-                                </div>
-                                <div className={`${styles.tableCell} ${styles.view}`}>
-                                    <Link to="/auth/product">
-                                    <span><Eye/></span>
-                                    </Link>
-                                </div>
-                                <div className={`${styles.tableCell} ${styles.publish}`}>
-                                    <PublishButton/>
-                                </div>
-                                <div className={`${styles.tableCell} ${styles.actions}`}>
-                                    <span onClick={handleOpenEditMenu}><Wrench/></span>
-                                    <span><Trash/></span>
-                                </div>
-                            </div>
-
+                            {!loading &&
+                                dataPaginated.map((item) => (
+                                    <ProductRow
+                                        key={item.id}
+                                        data={item}
+                                        brands={brands}
+                                        handleOpenEditMenu={handleOpenEditMenu}
+                                        handleDelete={handleDelete}
+                                    />
+                                ))
+                            }
                         </div>
                     </div>
-                    <AdminPagination/>
+                    <AdminPagination
+                        currentPage={currentPage}
+                        setCurrentPage={setCurrentPage}
+                        pageSize={PAGE_SIZE}
+                        totalElements={data.length}
+                    />
                 </div>
             </div>
         </div>

@@ -31,6 +31,22 @@
     background-color: $color-secondary;
     justify-content: space-between;
     gap: 25px;
+    .loadingOverlay {
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      width: 100vw;
+      height: 100vh;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 10000;
+      div {
+        width: 50px;
+        height: 50px;
+      }
+    }
 
     .menuHead {
       width: 100%;

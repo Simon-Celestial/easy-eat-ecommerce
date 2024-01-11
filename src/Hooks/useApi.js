@@ -33,7 +33,7 @@ const useApi = (url) => {
     }, [url, baseConfig]);
     const PUT = useCallback(async (id = null, data = {}) => {
 
-        return instance.put(`${url}/${id !== null ? id : ''}`, data, {
+        return instance.put(`${url}/${id !== null ? id : ''}`, JSON.stringify(data), {
             ...baseConfig,
         })
     }, [url, baseConfig]);

@@ -49,9 +49,7 @@ export const AdminPageProduct = () => {
                         <div className={styles.edit} onClick={handleOpenEditMenu}>
                             Edit Product
                         </div>
-
                     </div>
-
                 </div>
             </div>
         </div>
