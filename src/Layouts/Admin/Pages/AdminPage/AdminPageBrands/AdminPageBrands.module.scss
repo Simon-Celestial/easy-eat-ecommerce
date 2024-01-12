@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: column;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   align-items: center;
   background-color: $color-main;
   padding: 120px 15px 120px 15px;
@@ -21,20 +21,20 @@
       width: 100%;
       gap: 25px;
       margin-bottom: 50px;
+      justify-content: space-between;
 
       .searchBlock {
         display: flex;
-        width: 70%;
         background-color: $color-secondary;
+        width: 100%;
         border-radius: 10px;
         padding: 25px;
         gap: 25px;
 
         label {
           width: 100%;
-          max-width: 350px;
           height: 48px;
-
+          max-width: 550px;
           input {
             width: 100%;
             height: 100%;
@@ -46,6 +46,7 @@
             color: $color-white;
             font-family: $font-alternative;
             font-size: 18px;
+
           }
         }
 
@@ -53,9 +54,10 @@
           display: flex;
           width: 100%;
           gap: 25px;
+          max-width: 250px;
+
 
           button {
-            max-width: 230px;
             width: 100%;
             border-radius: 5px;
             display: flex;
@@ -66,24 +68,11 @@
             transition: $transition-fast;
             font-size: 18px;
             font-family: $font-alternative;
+            background-color: $color-orange;
+            color: $color-white;
 
-            &:nth-child(1) {
-              background-color: $color-orange;
-              color: $color-white;
-
-              &:hover {
-                background-color: #9d2800;
-              }
-            }
-
-            &:nth-child(2) {
-              background-color: transparent;
-              color: $color-white;
-              border-color: $color-white;
-
-              &:hover {
-                background-color: $color-border;
-              }
+            &:hover {
+              background-color: #9d2800;
             }
 
 
@@ -93,15 +82,16 @@
 
       .addCategory {
         display: flex;
-        width: 30%;
         gap: 25px;
-        justify-content: space-between;
+        justify-content: end;
         padding: 25px;
         background-color: $color-secondary;
         border-radius: 10px;
+        max-width: 500px;
+        width: 50%;
 
         button {
-          width: 50%;
+          width: 100%;
           height: 48px;
           border-radius: 5px;
           border: 1px solid transparent;
@@ -110,24 +100,11 @@
           font-family: $font-alternative;
           transition: $transition-fast;
           color: $color-white;
+          background-color: green;
 
-          &:nth-child(1) {
-            background-color: green;
-
-            &:hover {
-              background-color: darkgreen;
-            }
+          &:hover {
+            background-color: darkgreen;
           }
-
-          &:nth-child(2) {
-            background-color: red;
-
-            &:hover {
-              background-color: darkred;
-            }
-          }
-
-
         }
       }
     }
@@ -136,6 +113,18 @@
       display: flex;
       width: 100%;
       background-color: $color-secondary;
+      position: relative;
+      .loadingCircle {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        svg {
+          font-size: 42px;
+          color: $color-gray;
+          animation: rotateAnimation 1s linear infinite;
+        }
+      }
 
       .categoryOverflow {
         display: flex;
@@ -148,6 +137,8 @@
           border-radius: 5px 0 0 0;
           flex-direction: column;
           border-bottom: transparent;
+          min-height: 300px;
+
 
           .tableRow {
             display: flex;
@@ -164,18 +155,13 @@
               color: $color-gray;
             }
 
-            .checkBox {
-              max-width: 70px;
-              width: 100%;
-            }
-
             .id {
-              max-width: 95px;
+              max-width: 100px;
               width: 100%;
             }
 
             .icon {
-              max-width: 120px;
+              max-width: 100px;
               width: 100%;
 
               .iconBox {
@@ -194,23 +180,23 @@
 
             }
 
+            .date {
+              width: 100%;
+              max-width: 200px;
+            }
+
             .name {
               max-width: 400px;
               width: 100%;
             }
 
             .description {
-              max-width: 250px;
-              width: 100%;
-            }
-
-            .published {
-              max-width: 150px;
+              max-width: 300px;
               width: 100%;
             }
 
             .action {
-              max-width: 200px;
+              max-width: 120px;
               width: 100%;
               justify-content: end;
               gap: 10px;
@@ -262,31 +248,30 @@
   .categoriesPageWrapper {
     .categoriesPageContent {
       .categoryManipulation {
-        flex-direction: column;
-        margin-bottom: 25px;
         .searchBlock {
-          width: 100%;
-        }
-        .addCategory {
-          justify-content: start;
-          width: 100%;
-          button {
-            width: 28%;
+          .searchButtons {
+            max-width: 150px;
           }
         }
       }
       .categoryTableWrapper {
         flex-direction: column;
+
         .categoryOverflow {
+          overflow-x: auto;
+
           .categoryTable {
+            min-width: 1000px;
+
             .tableRow {
-              .published {
-                justify-content: center;
-                max-width: 90px;
-              }
               .action {
-                max-width: 90px;
+                max-width: 80px;
               }
+
+              .icon {
+                max-width: 100px;
+              }
+
               .name {
                 max-width: 300px;
               }
@@ -297,16 +282,22 @@
     }
   }
 }
+
 @media screen and (max-width: 800px) {
   .categoriesPageWrapper {
     .categoriesPageContent {
       .categoryManipulation {
-        gap: 15px;
+        flex-direction: column;
+        gap: 0;
         margin-bottom: 15px;
         .searchBlock {
           width: 100%;
           flex-direction: column;
-          padding: 15px;
+          padding: 15px 15px 0 15px;
+          gap: 15px;
+          border-radius:10px 10px  0 0 ;
+
+
           label {
             max-width: unset;
             height: 40px;
@@ -315,6 +306,7 @@
               font-size: 14px;
             }
           }
+
           .searchButtons {
             button {
               max-width: unset;
@@ -324,25 +316,22 @@
           }
 
         }
+
         .addCategory {
           padding: 15px;
+          width: 100%;
+          justify-content: start;
+          max-width: unset;
+          border-radius: 0 0 10px 10px;
+
           button {
-            width: 50%;
             height: 40px;
             font-size: 12px;
-          }
-        }
-      }
-
-      .categoryTableWrapper {
-        .categoryOverflow {
-         overflow-x: auto;
-          .categoryTable {
-            min-width: 800px;
-            overflow-x: auto;
+            max-width: 150px;
           }
         }
       }
     }
   }
 }
+

@@ -65,7 +65,10 @@ export const AdminPageStaff = () => {
         (async () => {
             setLoading(true);
             try {
-                const result = await getAllUsers();
+                const result = await getAllUsers(null,{
+                    perPage: 999999,
+                    page: 1,
+                });
                 if (result.status === 200) {
                     setData(JSON.parse(result.data).data.map(it => mapData(it)));
                     setLoading(false);

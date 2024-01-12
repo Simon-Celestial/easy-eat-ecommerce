@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react'
 import styles from "./PublishButton.module.scss";
 import {LayoutContext} from "../../../../../Context/LayoutContext/LayoutContext.jsx";
 
-export const PublishButton = ({userActive,setUserActive}) => {
+export const PublishButton = ({userActive,setUserActive = () => {}}) => {
     const {
         openHandler,
     } = useContext(LayoutContext);

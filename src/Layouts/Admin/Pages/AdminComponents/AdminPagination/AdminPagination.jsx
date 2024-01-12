@@ -9,7 +9,6 @@ export const AdminPagination = ({
                                     setCurrentPage,
                                 }) => {
 
-    // styles.paginationItem
     const totalPages = useMemo(() => {
         return Math.ceil(totalElements / pageSize);
     }, [pageSize, totalElements])
@@ -36,8 +35,7 @@ export const AdminPagination = ({
             }
             <div className={`${styles.paginationItem} ${styles.rightArrow}`}>
                 <CaretDown
-                    onClick={() => setCurrentPage(Math.min(currentPage + 1,totalPages-1))}
-
+                    onClick={() => setCurrentPage(Math.min(currentPage + 1, totalPages - 1))}
                     weight="regular"
                 />
             </div>

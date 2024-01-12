@@ -14,7 +14,7 @@ import {WishlistPage} from "./Layouts/Main/Pages/WishlistPage/WishlistPage.jsx";
 import {AdminPageOrders} from "./Layouts/Admin/Pages/AdminPage/AdminPageOrders/AdminPageOrders.jsx";
 import {AdminOrderSingle} from "./Layouts/Admin/Pages/AdminPage/AdminOrderSingle/AdminOrderSingle.jsx";
 import {AdminPageStaff} from "./Layouts/Admin/Pages/AdminPage/AdminPageStaff/AdminPageStaff.jsx";
-import {AdminPageCategories} from "./Layouts/Admin/Pages/AdminPage/AdminPageCategories/AdminPageCategories.jsx";
+import {AdminPageBrands} from "./Layouts/Admin/Pages/AdminPage/AdminPageBrands/AdminPageBrands.jsx";
 import {AdminProductsPage} from "./Layouts/Admin/Pages/AdminPage/AdminPageProducts/AdminProductsPage.jsx";
 import {AdminPageProduct} from "./Layouts/Admin/Pages/AdminPage/AdminPageProduct/AdminPageProduct.jsx";
 import {AuthLayout} from "./Layouts/Authentication/AuthLayout.jsx";
@@ -88,7 +88,7 @@ const router = (userData, isAdmin, token) => createBrowserRouter([
             {path: 'orders', element: <AdminPageOrders/>},
             {path: 'order', element: <AdminOrderSingle/>},
             {path: 'staff', element: <AdminPageStaff/>},
-            {path: 'category', element: <AdminPageCategories/>},
+            {path: 'brands', element: <AdminPageBrands/>},
             {path: 'products', element: <AdminProductsPage/>},
             {path: 'product', element: <AdminPageProduct/>},
         ] : [],

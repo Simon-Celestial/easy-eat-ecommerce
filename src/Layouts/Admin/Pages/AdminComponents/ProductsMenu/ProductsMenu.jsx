@@ -4,7 +4,7 @@ import {Power} from "@phosphor-icons/react";
 import useApi from "../../../../../Hooks/useApi.js";
 import toast, {LoaderIcon} from "react-hot-toast";
 
-const getBase64 = (file) => {
+export const getBase64 = (file) => {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
@@ -25,11 +25,18 @@ const initialState = {
     productPrice: '',
     brandId: '',
     stock: '',
+    isPublish: false,
     images: [],
 }
-export const ProductsMenu = ({productsMenuOpen, setProductsMenuOpen, editMode, brands, update, selectedItem}) => {
+export const ProductsMenu = ({
+                                 productsMenuOpen,
+                                 setProductsMenuOpen,
+                                 editMode,
+                                 brands,
+                                 update,
+                                 selectedItem
+                             }) => {
     const [loading, setLoading] = useState(false);
-
     const [state, setState] = useState(selectedItem || initialState);
     const {
         id,
@@ -40,6 +47,7 @@ export const ProductsMenu = ({productsMenuOpen, setProductsMenuOpen, editMode, b
         brandId,
         stock,
         images,
+        isPublish,
     } = state;
 
     const updateField = useCallback((field, val) => {
@@ -77,7 +85,7 @@ export const ProductsMenu = ({productsMenuOpen, setProductsMenuOpen, editMode, b
                     setState(initialState);
                     update();
                 } else {
-                    toast("Add full information",{
+                    toast("Add full information", {
                         style: {
                             background: "red",
                             color: "white",
@@ -88,7 +96,7 @@ export const ProductsMenu = ({productsMenuOpen, setProductsMenuOpen, editMode, b
                 const result = await updateProduct(id, reqData);
 
                 if (result.status === 200) {
-                    toast('Product Updated',{
+                    toast('Product Updated', {
                         style: {
                             background: "green",
                             color: "white",
@@ -109,8 +117,7 @@ export const ProductsMenu = ({productsMenuOpen, setProductsMenuOpen, editMode, b
                 }
             })
 
-        }
-        finally {
+        } finally {
             setLoading(false);
         }
 
@@ -175,10 +182,10 @@ export const ProductsMenu = ({productsMenuOpen, setProductsMenuOpen, editMode, b
                         <p>Product Image:</p>
                         <div className={styles.imagesBox}>
                             {
-                                images.map(((image, i) => <div className={styles.image}>
+                                images.map((image, i) => (<div className={styles.image}>
                                     <img
                                         key={i}
-                                        src={typeof image === "string"? image : image.url}
+                                        src={typeof image === "string" ? image : image.url}
                                         alt="Image"
                                         onClick={() => setState((prev) => ({
                                             ...prev,
@@ -203,7 +210,8 @@ export const ProductsMenu = ({productsMenuOpen, setProductsMenuOpen, editMode, b
                             {
                                 brands.map(it => (<option
                                     key={it.value}
-                                    value={it.value}>{it.label}</option>))
+                                    value={it.value}>{it.label}
+                                </option>))
                             }
                         </select>
 
@@ -239,13 +247,23 @@ export const ProductsMenu = ({productsMenuOpen, setProductsMenuOpen, editMode, b
                             onChange={({target}) => updateField('stock', target.value)}
                         />
                     </div>
+                    <div className={`${styles.elementsRow} ${styles.publishElementRow}`}>
+                        <p>Published:</p>
+                        <input
+                            className={styles.publishCheck}
+                            type="checkbox"
+                            placeholder="Product Quantity"
+                            checked={isPublish}
+                            onChange={({target}) => updateField('isPublish', target.checked)}
+                        />
+                    </div>
                 </div>
                 <div className={styles.menuButtons}>
                     <div className={styles.button} onClick={() => setProductsMenuOpen(false)}>Cancel</div>
                     <button
                         disabled={loading}
                         className={styles.button}
-                            onClick={handleSave}>{editMode ? "Edit Product" : "Add Product"}</button>
+                        onClick={handleSave}>{editMode ? "Edit Product" : "Add Product"}</button>
                 </div>
 
             </div>

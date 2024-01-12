@@ -2,30 +2,33 @@
 @import "../../../../../Variables/variables.module";
 
 .adminProductWrapper {
+  position: fixed;
+  left: 0;
+  top: 0;
   display: flex;
   width: 100vw;
-  height: 100vh;
-  background-color: $color-main;
+  min-height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
   justify-content: center;
-  padding: 120px 15px 120px 15px;
+  z-index: 100000;
+  padding: 200px 15px 0 160px;
 
   .adminProductContent {
     display: flex;
-    max-width: 1300px;
+    max-width: 1000px;
     width: 100%;
     flex-direction: column;
-
+    overflow-y: auto;
     .productBlock {
       display: flex;
       width: 100%;
       gap: 25px;
       justify-content: space-between;
       align-items: center;
-      margin-top: 50px;
 
       .productImage {
-        width: 256px;
-        height: 256px;
+        width: 275px;
+        height: 275px;
 
         img {
           width: 100%;
@@ -35,11 +38,12 @@
 
       .productTitle {
         width: 100%;
-        max-width: 1020px;
         display: flex;
         flex-direction: column;
         gap: 15px;
         color: $color-gray !important;
+        overflow-y: auto;
+
 
         .productStatus {
           display: inline-flex;
@@ -61,12 +65,21 @@
 
         .productInfo {
           display: flex;
+          .price {
+            display: inline-flex;
+            gap: 10px;
+            h2 {
+              &:nth-child(2) {
+                text-decoration: line-through;
+                color: $color-orange;
+              }
+            }
+          }
 
           h2 {
             font-size: 32px;
             font-family: $font-main;
             line-height: 25px;
-
           }
         }
 
@@ -93,7 +106,6 @@
         .description {
           font-size: 16px;
           font-family: $font-alternative;
-          max-width: 600px;
         }
 
         .category {
@@ -108,10 +120,10 @@
             font-size: 16px;
           }
         }
-        .edit {
+        .back {
           font-size: 20px;
           font-family: $font-main;
-          height: 50px;
+          height: 40px;
           width: 100%;
           max-width: 200px;
           background-color: $color-orange;
@@ -121,6 +133,8 @@
           align-items: center;
           justify-content: center;
           cursor: pointer;
+          border: 1px solid $color-white;
+          outline: 0;
           transition: background-color $transition-fast;
           &:hover {
             background-color: #9d2800;
@@ -131,15 +145,38 @@
   }
 }
 
-@media screen and (max-width: 1440px) {
+@media screen and (max-width: 1200px) {
   .adminProductWrapper {
     .adminProductContent {
-      max-width: 1100px;
+      max-width: unset;
+      .productBlock {
+        justify-content: center;
+
+      }
     }
   }
 }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1000px) {
   .adminProductWrapper {
+    padding: 100px 15px 0 160px;
+
+    height: auto;
+    .adminProductContent {
+      height: 420px;
+
+      .productBlock {
+        flex-direction: column;
+        align-items: start;
+        margin-top: 0;
+      }
+    }
+  }
+}
+@media screen and (max-width: 575px) {
+  .adminProductWrapper {
+    background: black;
+    padding: 25px 15px 25px 15px;
+
     height: auto;
     .adminProductContent {
       .productBlock {

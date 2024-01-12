@@ -7,6 +7,9 @@ const instance = new Axios({
     baseURL: `${import.meta.env.VITE_BASE_URL}/${import.meta.env.VITE_API_KEY}`,
 });
 
+const serializeQueryParams = (obj) => `?${Object.keys(obj).map(function (key) {
+    return key + '=' + obj[key];
+}).join('&')}`;
 
 const useApi = (url) => {
     const {
@@ -18,10 +21,10 @@ const useApi = (url) => {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
         }
-    }), [token])
-    const GET = useCallback(async (id = '') => {
+    }), [token]);
+    const GET = useCallback(async (id = '', query = null) => {
 
-        return instance.get(`${url}/${id !== null ? id : ''}`, {
+        return instance.get(`${url}/${id !== null ? id : ''}${query?serializeQueryParams(query): ''}`, {
             ...baseConfig,
         })
     }, [url, baseConfig]);

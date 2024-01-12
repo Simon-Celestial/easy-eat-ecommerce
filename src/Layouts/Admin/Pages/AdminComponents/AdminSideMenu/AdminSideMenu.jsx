@@ -37,9 +37,9 @@ export const AdminSideMenu = () => {
                     Products</Link>
             </div>
             <div className={styles.sideMenuItem}>
-                <Link to="/admin/category" className={styles.sideMenuElement}>
+                <Link to="/admin/brands" className={styles.sideMenuElement}>
                     <DiamondsFour/>
-                    Categories</Link>
+                    Brands</Link>
             </div>
             <div className={styles.sideMenuItem}>
                 <Link to="/admin/orders" className={styles.sideMenuElement}>

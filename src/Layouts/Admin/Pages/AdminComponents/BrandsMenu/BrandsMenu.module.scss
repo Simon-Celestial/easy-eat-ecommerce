@@ -15,6 +15,20 @@
   justify-content: end;
   transition: opacity $transition-fast;
   pointer-events: none;
+  .loader {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    >div {
+      width: 50px;
+      height: 50px;
+    }
+  }
 
   &.categoryVisible {
     opacity: 1;
@@ -28,6 +42,8 @@
     background-color: $color-secondary;
     width: 40%;
     justify-content: space-between;
+    position: relative;
+
 
     .categoryHead {
       display: flex;
@@ -150,6 +166,14 @@
 
       .publishedWrapper {
         justify-content: start;
+        .imgBlock {
+          width: 50px;
+          height: 50px;
+          border: 1px dashed $color-white;
+          img{
+            width: 100%;
+          }
+        }
       }
     }
 

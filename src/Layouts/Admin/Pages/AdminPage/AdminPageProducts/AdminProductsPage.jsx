@@ -9,6 +9,7 @@ import {ProductsMenu} from "../../AdminComponents/ProductsMenu/ProductsMenu.jsx"
 import {ProductRow} from "./ProductRow/ProductRow.jsx";
 import useApi from "../../../../../Hooks/useApi.js";
 import toast from "react-hot-toast";
+import {AdminPageProduct} from "../AdminPageProduct/AdminPageProduct.jsx";
 
 const mapData = ({
                      _id,
@@ -55,13 +56,18 @@ export const AdminProductsPage = () => {
     const [selectedItem, setSelectedItem] = useState(null);
     const [searchSample, setSearchSample] = useState('');
     const [sorter, setSorter] = useState('');
+    const [productToReview, setProductToReview] = useState(null);
+
 
     const update = useCallback(() => {
         setShouldUpdate(Date.now());
     }, []);
 
+    // ALIASES FOR API METHODS
     const {
+        // GET ALIAS
         GET: getAllProducts,
+        // DELETE ALIAS
         DELETE: deleteProduct,
     } = useApi('/dashboard/products');
     const {
@@ -70,7 +76,10 @@ export const AdminProductsPage = () => {
 
     useEffect(() => {
         (async () => {
-            const result = await getAllBrands();
+            const result = await getAllBrands(null,{
+                perPage: 9999999,
+                page: 1,
+            });
             const brandsRaw = JSON.parse(result.data);
             setBrands(
                 brandsRaw?.data?.map(it => ({
@@ -78,15 +87,18 @@ export const AdminProductsPage = () => {
                     label: it.name
                 }))
             )
-        })()
-
+        })();
     }, []);
+
     useEffect(() => {
         if (loading) return;
         (async () => {
             setLoading(true);
             try {
-                const result = await getAllProducts();
+                const result = await getAllProducts(null, {
+                    page: 1,
+                    perPage: 999999,
+                });
                 if (result.status === 200) {
                     const dataRaw = JSON.parse(result.data).data.product;
                     setData(dataRaw.map(it => mapData(it)));
@@ -101,6 +113,7 @@ export const AdminProductsPage = () => {
         })();
     }, [shouldUpdate]);
 
+// OPEN EDIT MENU
     const handleOpenEditMenu = (id) => {
         setEditMode(true);
         setProductsMenuOpen(true);
@@ -140,26 +153,25 @@ export const AdminProductsPage = () => {
 
     // SORTING
     const dataSorted = useMemo(() => {
-        if (!sorter) return data || [];
+        if (!sorter || sorter === '_') return data || [];
         const [sortField, sortOrder] = sorter.split('_');
-        console.log({
-            sortField,
-            sortOrder,
-        })
         const isDesc = sortOrder !== 'asc' ? -1 : 1;
-        return data.sort((a, b) => a[sortField] > b[sortField] ? (1 * isDesc) : (-1 * isDesc)) || [];
+        const sorted = [...data];
+        return sorted.sort((a, b) => a[sortField] > b[sortField] ? (1 * isDesc) : (-1 * isDesc)) || [];
     }, [data, sorter])
     const dataFiltered = useMemo(() => {
         return dataSorted?.filter((it) => {
             return it.title.includes(searchSample) || it.description.includes(searchSample);
         }) || [];
     }, [dataSorted, sorter, searchSample]);
+
     // PAGINATION
     const dataPaginated = useMemo(() => {
         const newArr = [...dataFiltered];
         return newArr.slice(currentPage * PAGE_SIZE, (currentPage + 1) * PAGE_SIZE);
     }, [dataFiltered, sorter, currentPage]);
 
+    console.log({productToReview});
     return (
         <div className={styles.adminProductPageWrapper}>
             <AdminHeader/>
@@ -172,104 +184,108 @@ export const AdminProductsPage = () => {
                 update={update}
                 selectedItem={selectedItem}
             />
-            <div className={styles.adminProductPageContent}>
-                <BlockTitle title="Products"/>
-                <div className={styles.productsManipulation}>
-                    <div className={styles.filterBlocks}>
-                        <div className={styles.inputBlocks}>
-                            <label htmlFor="">
-                                <input
-                                    type="text"
-                                    placeholder="Search Product"
-                                    value={searchSample}
-                                    onChange={(e) => setSearchSample(e.target.value)}
-                                />
-                            </label>
-                            <label htmlFor="">
-                                <select value={sorter} onChange={e => setSorter(e.target.value)}>
-                                    <option value="" hidden>Price</option>
-                                    <option value="salePrice_asc">Low to High</option>
-                                    <option value="salePrice_desc">High to Low</option>
-                                </select>
-                            </label>
-                        </div>
-                        <div className={styles.filterButtons}>
-                            <button onClick={() => setSearchSample("")}>Clear</button>
-                        </div>
-                    </div>
-                    <div className={styles.addButtons}>
-                        <div className={styles.button} onClick={handleOpenMenu}>
-                            <p>Add Product</p>
-                            <Plus/>
-                        </div>
-                        <div className={styles.button}>
-                            <p>Delete Product</p>
-                            <Trash/>
-                        </div>
-                    </div>
-                </div>
-                <div className={styles.productsTableBlock}>
-                    {loading
-                        &&
-                        <div className={styles.loadingBox}>
-                            <CircleDashed/>
-                        </div>
-                    }
-                    <div className={styles.overflow}>
-                        <div className={styles.table}>
-                            <div className={`${styles.tableRow} ${styles.headRow}`}>
-                                <div className={`${styles.tableCell} ${styles.check}`}>
-                                    <input type="checkbox"/>
+            {
+                productToReview ? <AdminPageProduct
+                        brands={brands}
+                        data={productToReview}
+                        onReturn={() => setProductToReview(null)}/>
+                    : <div className={styles.adminProductPageContent}>
+                        <BlockTitle title="Products"/>
+                        <div className={styles.productsManipulation}>
+                            <div className={styles.filterBlocks}>
+                                <div className={styles.inputBlocks}>
+                                    <label htmlFor="">
+                                        <input
+                                            type="text"
+                                            placeholder="Search Product"
+                                            value={searchSample}
+                                            onChange={(e) => setSearchSample(e.target.value)}
+                                        />
+                                    </label>
+                                    <label htmlFor="">
+                                        <select value={sorter} onChange={e => setSorter(e.target.value)}>
+                                            <option value="_">Without sort</option>
+                                            <option value="salePrice_asc">Price: Low to High</option>
+                                            <option value="salePrice_desc">Price: High to Low</option>
+                                            <option value="stock_desc">Stock: Low to High</option>
+                                            <option value="stock_asc">Stock: High to Low</option>
+                                        </select>
+                                    </label>
                                 </div>
-                                <div className={`${styles.tableCell} ${styles.name}`}>
-                                    <p>Product Name</p>
-                                </div>
-                                <div className={`${styles.tableCell} ${styles.category}`}>
-                                    <p>Category</p>
-                                </div>
-                                <div className={`${styles.tableCell} ${styles.price}`}>
-                                    <p>Price</p>
-                                </div>
-                                <div className={`${styles.tableCell} ${styles.sale}`}>
-                                    <p>Sale Price</p>
-                                </div>
-                                <div className={`${styles.tableCell} ${styles.stock}`}>
-                                    <p>Stock</p>
-                                </div>
-                                <div className={`${styles.tableCell} ${styles.status}`}>
-                                    <p>Status</p>
-                                </div>
-                                <div className={`${styles.tableCell} ${styles.view}`}>
-                                    <p>View</p>
-                                </div>
-                                <div className={`${styles.tableCell} ${styles.publish}`}>
-                                    <p>Published</p>
-                                </div>
-                                <div className={`${styles.tableCell} ${styles.actions}`}>
-                                    <p>Actions</p>
+                                <div className={styles.filterButtons}>
+                                    <button onClick={() => setSearchSample("")}>Clear</button>
                                 </div>
                             </div>
-                            {!loading &&
-                                dataPaginated.map((item) => (
-                                    <ProductRow
-                                        key={item.id}
-                                        data={item}
-                                        brands={brands}
-                                        handleOpenEditMenu={handleOpenEditMenu}
-                                        handleDelete={handleDelete}
-                                    />
-                                ))
+                            <div className={styles.addButtons}>
+                                <div className={styles.button} onClick={handleOpenMenu}>
+                                    <p>Add Product</p>
+                                    <Plus/>
+                                </div>
+                            </div>
+                        </div>
+                        <div className={styles.productsTableBlock}>
+                            {loading
+                                &&
+                                <div className={styles.loadingBox}>
+                                    <CircleDashed/>
+                                </div>
                             }
+                            <div className={styles.overflow}>
+                                <div className={styles.table}>
+                                    <div className={`${styles.tableRow} ${styles.headRow}`}>
+                                        <div className={`${styles.tableCell} ${styles.name}`}>
+                                            <p>Product Name</p>
+                                        </div>
+                                        <div className={`${styles.tableCell} ${styles.category}`}>
+                                            <p>Category</p>
+                                        </div>
+                                        <div className={`${styles.tableCell} ${styles.price}`}>
+                                            <p>Price</p>
+                                        </div>
+                                        <div className={`${styles.tableCell} ${styles.sale}`}>
+                                            <p>Sale Price</p>
+                                        </div>
+                                        <div className={`${styles.tableCell} ${styles.stock}`}>
+                                            <p>Stock</p>
+                                        </div>
+                                        <div className={`${styles.tableCell} ${styles.status}`}>
+                                            <p>Status</p>
+                                        </div>
+                                        <div className={`${styles.tableCell} ${styles.view}`}>
+                                            <p>View</p>
+                                        </div>
+                                        <div className={`${styles.tableCell} ${styles.publish}`}>
+                                            <p>Published</p>
+                                        </div>
+                                        <div className={`${styles.tableCell} ${styles.actions}`}>
+                                            <p>Actions</p>
+                                        </div>
+                                    </div>
+                                    {!loading &&
+                                        dataPaginated.map((item) => (
+                                            <ProductRow
+                                                key={item.id}
+                                                data={item}
+                                                brands={brands}
+                                                handleOpenEditMenu={handleOpenEditMenu}
+                                                handleDelete={handleDelete}
+                                                update={update}
+                                                onReview={() => setProductToReview(item)}
+                                            />
+                                        ))
+                                    }
+                                </div>
+                            </div>
+                            <AdminPagination
+                                currentPage={currentPage}
+                                setCurrentPage={setCurrentPage}
+                                pageSize={PAGE_SIZE}
+                                totalElements={dataFiltered.length}
+
+                            />
                         </div>
                     </div>
-                    <AdminPagination
-                        currentPage={currentPage}
-                        setCurrentPage={setCurrentPage}
-                        pageSize={PAGE_SIZE}
-                        totalElements={data.length}
-                    />
-                </div>
-            </div>
+            }
         </div>
     )
 }

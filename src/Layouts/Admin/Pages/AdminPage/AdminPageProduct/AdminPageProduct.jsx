@@ -1,54 +1,63 @@
-import React, {useState} from 'react'
+import React from 'react'
 import styles from "./AdminPageProduct.module.scss";
-import {AdminHeader} from "../../AdminComponents/AdminHeader/AdminHeader.jsx";
-import {AdminSideMenu} from "../../AdminComponents/AdminSideMenu/AdminSideMenu.jsx";
-import {BlockTitle} from "../../AdminComponents/BlockTitle/BlockTitle.jsx";
-import {ProductsMenu} from "../../AdminComponents/ProductsMenu/ProductsMenu.jsx";
 
-export const AdminPageProduct = () => {
+// title,
+//     description,
+//     productPrice,
+//     brandId,
+//     stock,
+//     isPublish,
+//     salePrice,
+//     isDeal,
+//     images,
+//     createdAt,
+//     updatedAt,
+//     totalCount,
+export const AdminPageProduct = ({
+                                     data,
+                                     onReturn,
+                                     brands,
+                                 }) => {
 
-    const [productsMenuOpen, setProductsMenuOpen] = useState(false);
-    const [editMode, setEditMode] = useState(false);
-
-    const handleOpenEditMenu = () => {
-        setEditMode(true);
-        setProductsMenuOpen(true);
-    }
+    console.log({brands, data });
     return (
         <div className={styles.adminProductWrapper}>
-            <AdminHeader />
-            <AdminSideMenu />
-            <ProductsMenu setProductsMenuOpen={setProductsMenuOpen} productsMenuOpen={productsMenuOpen} editMode={editMode}/>
             <div className={styles.adminProductContent}>
-                <BlockTitle title="Product Single"/>
                 <div className={styles.productBlock}>
                     <div className={styles.productImage}>
-                        <img src="https://res.cloudinary.com/ahossain/image/upload/v1682058933/product/CMTHP-COR12-deep-ash-920x920.webp" alt="Product"/>
+                        <img
+                            src={data?.images?.[0]?.url}
+                            alt="Product"/>
                     </div>
                     <div className={styles.productTitle}>
                         <span className={styles.productStatus}>
                             Status:
-                            <p>Published</p>
+                            <p style={{ background: data.isPublish ? "green" : "red" }}>{data.isPublish ? 'Published' : 'Not Published'}</p>
                         </span>
                         <div className={styles.productInfo}>
-                            <h2>Premium T-Shirt</h2>
+                            <h2>{data.title}</h2>
                         </div>
                         <div className={styles.productInfo}>
-                            <h2>$25.00</h2>
+                            <div className={styles.price}>
+                                <h2>${data.salePrice.toFixed(2) || 'N\A'}</h2>
+                                <h2>${data.productPrice.toFixed(2) || 'N\A'}</h2>
+                            </div>
+
+
                         </div>
                         <div className={styles.quantityBlock}>
-                            <span>In Stock</span>
-                            <p>Quantity: 4500</p>
+                            <span style={{
+                                background: data.stock? "green" : "red"
+                            }}>{data.stock < 1 ? 'Out of stock' : 'In Stock'}</span>
+                            <p>Quantity: {data.stock}</p>
                         </div>
                         <div className={styles.description}>
-                            A T-shirt (also spelled tee-shirt or tee shirt), or tee for short, is a style of fabric shirt named after the T shape of its body and sleeves. Traditionally, it has short sleeves and a round neckline, known as a crew neck, which lacks a collar.
+                            {data.description}
                         </div>
                         <div className={styles.category}>
-                            Category: <p>Man</p>
+                            Category: <p>{brands.find(it => it.value === data.brandId)?.label}</p>
                         </div>
-                        <div className={styles.edit} onClick={handleOpenEditMenu}>
-                            Edit Product
-                        </div>
+                        <button onClick={onReturn} className={styles.back}>RETURN</button>
                     </div>
                 </div>
             </div>
