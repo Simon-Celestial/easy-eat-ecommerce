@@ -288,12 +288,6 @@ export const Header = () => {
                                     </div>
                                     <div className={styles.navDropdownItem}
                                     >
-                                        <Link to="/product">
-                                            <p>Product Single</p>
-                                        </Link>
-                                    </div>
-                                    <div className={styles.navDropdownItem}
-                                    >
                                         <Link to="/cart">
                                             <p>Cart</p>
                                         </Link>

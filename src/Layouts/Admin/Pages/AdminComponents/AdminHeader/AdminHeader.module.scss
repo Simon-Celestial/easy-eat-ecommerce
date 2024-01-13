@@ -11,6 +11,7 @@
   align-items: center;
   background-color: $color-secondary;
   height: 65px;
+  z-index: 10;
 
   .adminHeaderContent {
     display: flex;

@@ -54,7 +54,6 @@ const AuthContextProvider = ({
             return;
         }
         if (result) {
-            console.log(result);
             const tkn = result.data.data.token;
             const uDataRaw = result.data.data.user;
             const rolesArray = ['user', 'admin', 'superadmin'];
@@ -99,7 +98,6 @@ const AuthContextProvider = ({
     }, [])
 
 
-    console.log(userData, token);
     return <AuthContext.Provider value={{
         login,
         token,

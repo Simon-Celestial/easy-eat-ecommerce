@@ -76,7 +76,7 @@ export const AdminProductsPage = () => {
 
     useEffect(() => {
         (async () => {
-            const result = await getAllBrands(null,{
+            const result = await getAllBrands(null, {
                 perPage: 9999999,
                 page: 1,
             });
@@ -128,28 +128,6 @@ export const AdminProductsPage = () => {
         setSelectedItem(null);
     }
 
-    // DELETE PRODUCT
-    const handleDelete = useCallback(async (id) => {
-        try {
-            setLoading(true)
-            const result = await deleteProduct(id);
-            if (result.status === 200) {
-                toast('Product Deleted', {
-                    style: {
-                        background: "red",
-                        color: "white",
-                    }
-                });
-                update();
-            }
-        } catch (error) {
-            console.error(error);
-
-        } finally {
-            setLoading(false);
-        }
-
-    }, [])
 
     // SORTING
     const dataSorted = useMemo(() => {
@@ -165,13 +143,39 @@ export const AdminProductsPage = () => {
         }) || [];
     }, [dataSorted, sorter, searchSample]);
 
+
     // PAGINATION
     const dataPaginated = useMemo(() => {
         const newArr = [...dataFiltered];
         return newArr.slice(currentPage * PAGE_SIZE, (currentPage + 1) * PAGE_SIZE);
     }, [dataFiltered, sorter, currentPage]);
 
-    console.log({productToReview});
+    // DELETE PRODUCT
+    const handleDelete = useCallback(async (id) => {
+        try {
+            setLoading(true)
+            const result = await deleteProduct(id);
+            if (result.status === 200) {
+                toast('Product Deleted', {
+                    style: {
+                        background: "red",
+                        color: "white",
+                    }
+                });
+                if (((dataFiltered.length - 1) / PAGE_SIZE) < (currentPage + 1)) {
+                    setCurrentPage(prev => Math.max(prev - 1, 0));
+                }
+                update();
+            }
+        } catch (error) {
+            console.error(error);
+
+        } finally {
+            setLoading(false);
+        }
+
+    }, [dataFiltered, currentPage])
+
     return (
         <div className={styles.adminProductPageWrapper}>
             <AdminHeader/>

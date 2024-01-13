@@ -52,7 +52,6 @@ export const StaffAdd = ({staffMenuOpen, setStaffMenuOpen, update}) => {
                     }
                 })
             }
-            console.log(result);
 
         } catch (e) {
             console.log(e);

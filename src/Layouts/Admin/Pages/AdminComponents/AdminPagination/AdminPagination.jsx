@@ -7,13 +7,14 @@ export const AdminPagination = ({
                                     totalElements,
                                     currentPage,
                                     setCurrentPage,
+                                    theme = 'dark',
                                 }) => {
 
     const totalPages = useMemo(() => {
         return Math.ceil(totalElements / pageSize);
     }, [pageSize, totalElements])
     return (
-        <div className={styles.paginationBlock}>
+        <div className={`${styles.paginationBlock} ${theme === 'dark'? styles.paginationDark: styles.paginationLight}`}>
             <div className={`${styles.paginationItem} ${styles.leftArrow}`}>
                 <CaretUp
                     onClick={() => setCurrentPage(Math.max(currentPage - 1, 0))}
@@ -28,7 +29,8 @@ export const AdminPagination = ({
                         className={styles.paginationItem}
                         onClick={() => setCurrentPage(i)}
                         style={isActive ? {
-                            background: '#EC3D08'
+                            background: theme === "dark" ?'#EC3D08' : "#0C0F26",
+                            color: theme === "dark" ? "white" : "white",
                         } : {}}
                     >{i + 1}</div>);
                 })

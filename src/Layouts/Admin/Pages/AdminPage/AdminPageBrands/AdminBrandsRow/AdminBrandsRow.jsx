@@ -24,9 +24,6 @@ export const AdminBrandsRow = ({
             <div className={`${styles.name} ${styles.box}`}>
                 <p>{brand?.name}</p>
             </div>
-            <div className={`${styles.description} ${styles.box}`}>
-                <p>{brand?.name}</p>
-            </div>
             <div className={`${styles.date} ${styles.box}`}>
                 <p>{moment(brand.createdAt).format('YYYY.DD.MM HH:mm')}</p>
             </div>

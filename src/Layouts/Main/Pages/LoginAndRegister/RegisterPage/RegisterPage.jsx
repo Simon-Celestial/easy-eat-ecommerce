@@ -94,7 +94,6 @@ export const RegisterPage = () => {
             return errors;
         },
         onSubmit: async values => {
-            console.log(values);
             try {
                 await register(values.name, values.surname, values.password, values.email);
             } catch (error) {

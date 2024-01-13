@@ -118,10 +118,6 @@ export const AdminPageStaff = () => {
         const newArr = [...filtered];
         return newArr.slice(currentPage * PAGE_SIZE, (currentPage + 1) * PAGE_SIZE);
     }, [currentPage, filtered]);
-    console.log({
-        currentPage,
-        pagedStaff,
-    })
     const handleResetSearch = () => {
         setSearchText("");
     };

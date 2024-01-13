@@ -156,12 +156,12 @@
             }
 
             .id {
-              max-width: 100px;
+              max-width: 120px;
               width: 100%;
             }
 
             .icon {
-              max-width: 100px;
+              max-width: 200px;
               width: 100%;
 
               .iconBox {
@@ -175,6 +175,8 @@
 
                 img {
                   width: 80%;
+                  border-radius: 50%;
+
                 }
               }
 
@@ -186,11 +188,6 @@
             }
 
             .name {
-              max-width: 400px;
-              width: 100%;
-            }
-
-            .description {
               max-width: 300px;
               width: 100%;
             }
@@ -200,6 +197,7 @@
               width: 100%;
               justify-content: end;
               gap: 10px;
+              margin-left: auto;
 
               span {
                 cursor: pointer;

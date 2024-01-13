@@ -41,7 +41,7 @@ const router = (userData, isAdmin, token) => createBrowserRouter([
                 element: <Home/>,
             },
             {
-                path: 'product',
+                path: 'product/:id',
                 element: <ProductSingle/>,
             },
 

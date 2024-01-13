@@ -150,9 +150,6 @@ export const AdminPageBrands = () => {
                                 <div className={`${styles.name} ${styles.box}`}>
                                     <p>Name</p>
                                 </div>
-                                <div className={`${styles.description} ${styles.box}`}>
-                                    <p>Description</p>
-                                </div>
                                 <div className={`${styles.date} ${styles.box}`}>
                                     <p>Date Created</p>
                                 </div>

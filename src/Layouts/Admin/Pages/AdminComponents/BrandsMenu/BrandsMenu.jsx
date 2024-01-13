@@ -14,12 +14,12 @@ const initialState = {
 }
 
 export const BrandsMenu = ({
-                                 brandsMenuOpen,
-                                 setBrandsMenuOpen,
-                                 editMode,
-                                 selectedItem,
-                                 update,
-                             }) => {
+                               brandsMenuOpen,
+                               setBrandsMenuOpen,
+                               editMode,
+                               selectedItem,
+                               update,
+                           }) => {
     const [state, setState] = useState(selectedItem || initialState);
     const [loading, setLoading] = useState(false);
     const {
@@ -28,8 +28,10 @@ export const BrandsMenu = ({
     } = useApi('dashboard/brands');
 
     useEffect(() => {
-        if (selectedItem) setState(selectedItem);
-    }, [selectedItem]);
+        if (selectedItem) setState(selectedItem); else {
+            setState(initialState);
+        }
+    }, [selectedItem, brandsMenuOpen]);
 
     const handleSave = useCallback(async () => {
         try {
@@ -60,6 +62,7 @@ export const BrandsMenu = ({
                     })
                 }
             } else {
+                if (typeof reqData.image === 'object') delete reqData.image;
                 const result = await updateBrand(id, reqData);
 
                 if (result.status === 200) {
@@ -78,7 +81,7 @@ export const BrandsMenu = ({
                             background: "red",
                             color: "white",
                         }
-                    })
+                    });
                 }
             }
         } catch (e) {
@@ -161,7 +164,7 @@ export const BrandsMenu = ({
                         <div className={styles.imgBlock}>
                             {
                                 state.image && <img
-                                    src={typeof state.image === 'string'? state.image: state.image.url}
+                                    src={typeof state.image === 'string' ? state.image : state.image.url}
                                     alt="Image"/>
                             }
                         </div>

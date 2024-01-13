@@ -16,7 +16,8 @@
   transition: left $transition-fast;
   pointer-events: none;
   border-right: 1px solid $color-border;
-  z-index: 5;
+  z-index: 10;
+  padding-top: 50px;
   .sideMenuButton {
     position: absolute;
     right: 20px;

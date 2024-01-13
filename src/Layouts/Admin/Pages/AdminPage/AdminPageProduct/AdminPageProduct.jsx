@@ -19,7 +19,6 @@ export const AdminPageProduct = ({
                                      brands,
                                  }) => {
 
-    console.log({brands, data });
     return (
         <div className={styles.adminProductWrapper}>
             <div className={styles.adminProductContent}>

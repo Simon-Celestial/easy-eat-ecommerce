@@ -244,7 +244,8 @@
               max-width: 80px;
               justify-content: center;
                 color: $color-gray;
-                span {
+              gap: 10px;
+              span {
                   &:hover {
                     svg {
                       color: $color-orange;
@@ -256,6 +257,19 @@
                     transition: $transition-fast;
                   }
                 }
+              a {
+                &:hover {
+                  svg {
+                    color: $color-orange;
+                  }
+                }
+                svg {
+                  color: $color-gray;
+                  font-size: 22px;
+                }
+
+              }
+
 
             }
 

@@ -1,9 +1,10 @@
 import React, {useCallback, useState} from 'react'
 import styles from "../AdminProductsPage.module.scss";
-import {Eye, Trash, Wrench} from "@phosphor-icons/react";
+import {LinkSimple, Eye, Trash, Wrench} from "@phosphor-icons/react";
 import {PublishButton} from "../../../AdminComponents/PublishButton/PublishButton.jsx";
 import useApi from "../../../../../../Hooks/useApi.js";
 import toast from "react-hot-toast";
+import {Link} from "react-router-dom";
 
 export const ProductRow = ({
                                handleOpenEditMenu,
@@ -35,7 +36,6 @@ export const ProductRow = ({
         }
 
         setLoading(false);
-        console.log(result);
 
     }, [data]);
     return (
@@ -73,6 +73,9 @@ export const ProductRow = ({
                 <span onClick={onReview} style={{
                     cursor: 'pointer'
                 }}><Eye/></span>
+                <Link to={`/product/${data.id}`} style={{
+                    cursor: 'pointer'
+                }} target={'_blank'}><LinkSimple /></Link>
             </div>
             <div className={`${styles.tableCell} ${styles.publish}`}>
                 <div onClick={handlePublish}>

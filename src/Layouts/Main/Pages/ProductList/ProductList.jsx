@@ -5,26 +5,93 @@ import {UiControl} from "../../Common/UiControl/UiControl.jsx";
 import {Header} from "../../Components/Header/Header.jsx";
 import {LayoutContext} from "../../../../Context/LayoutContext/LayoutContext.jsx";
 import {PageNameSection} from "../../Common/PageNameSection/PageNameSection.jsx";
-import {ArrowRight, DotOutline, Heart, MagnifyingGlass, ShoppingCart, Star, X} from "@phosphor-icons/react";
+import {ArrowRight, CircleDashed, MagnifyingGlass} from "@phosphor-icons/react";
 import RangeSlider from "../../Common/RangeSlider/RangeSlider.jsx";
+import {ProductCard} from "./ProductCard/ProductCard.jsx";
+import {BasketProductCard} from "./BasketProductCard/BasketProductCard.jsx";
+import {ProductStock} from "./ProductsStock/ProductStock.jsx";
+import {ProductBrands} from "./ProductBrands/ProductBrands.jsx";
+import {TagItem} from "./TagItem/TagItem.jsx";
+import useApi from "../../../../Hooks/useApi.js";
+import {AdminPagination} from "../../../Admin/Pages/AdminComponents/AdminPagination/AdminPagination.jsx";
 
+const tags = [
+    {
+        title: "Item",
+    },
+    {
+        title: "Sale",
+    },
+    {
+        title: "Simple",
+    },
+    {
+        title: "Special",
+    },
+    {
+        title: "Stock",
+    },
+    {
+        title: "Food",
+    },
+]
+
+const PER_PAGE = 6;
 export const ProductList = () => {
     const {
         setHeaderColorChange,
         setBasketVisible,
     } = useContext(LayoutContext);
 
+    const [loading, setLoading] = useState(true);
     // useEffect TO CHANGE HEADER COLOR
     useEffect(() => {
         setHeaderColorChange(true);
     }, []);
+    const [searchSample, setSearchSample] = useState('')
 
     // useEffect to TURN BASKET BUTTON ON
     useEffect(() => {
         setBasketVisible(true);
     }, []);
+    const [page, setPage] = useState(0);
+    const [productsResponse, setProductsResponse] = useState(null);
+    const [priceBounds, setPriceBounds] = useState([0, 500]);
+    const [brands, setBrands] = useState([]);
+    const [filters, setFilters] = useState({});
+    const {
+        GET: getAllProducts,
+    } = useApi('/site/products');
+    const {
+        GET: getAllBrands,
+    } = useApi('/site/brands');
 
-    const [bounds, setBounds] = useState([0, 260]);
+    useEffect(() => {
+        setLoading(true);
+        (async () => {
+            const result = await getAllProducts(null, {
+                page: page + 1,
+                perPage: PER_PAGE,
+                ...filters,
+            });
+            if (result.status === 200) {
+                const data = JSON.parse(result.data);
+                setProductsResponse(data.data)
+            }
+            setLoading(false);
+        })()
+    }, [page, filters]);
+    useEffect(() => {
+        setLoading(true);
+        (async () => {
+            const result = await getAllBrands();
+            if (result.status === 200) {
+                const data = JSON.parse(result.data);
+                setBrands(data.data)
+                setLoading(false);
+            }
+        })()
+    }, []);
 
     return (
         <div className={styles.productListWrapper}>
@@ -37,7 +104,13 @@ export const ProductList = () => {
                     <div className={styles.allProductsContent}>
                         <div className={styles.leftBlockProducts}>
                             <div className={styles.leftBlockSorting}>
-                                <p>Showing 1–6 of 33 results</p>
+                                {
+                                    loading ? 'Loading...' : <p>Showing {
+                                        page * PER_PAGE + 1
+                                    }–{
+                                        Math.min((page + 1) * PER_PAGE, productsResponse?.totalCount)
+                                    } of {productsResponse?.totalCount} results</p>
+                                }
                                 <form method="get" className={styles.selectionBlock}>
                                     <select name="sorting">
                                         <option value="popularity" selected="selected">Sort by popularity</option>
@@ -47,267 +120,29 @@ export const ProductList = () => {
                                         <option value="price-reverse">Sort by price: high to low</option>
                                     </select>
                                 </form>
-
                             </div>
-                            <div className={styles.leftAllProducts}>
-                                {/*TO ADD SALE PRICE WRITE IT IN SPAN INSIDE P*/}
-                                {/*TO ADD SALE MARK ADD productOnSale class div*/}
-                                {/*TO ADD OUT OF STOCK ADD outOfStock class div*/}
-                                <div className={styles.productCard}>
-                                    <div className={styles.outOfStock}>
-                                        Out of Stock
-                                    </div>
-                                    <div className={styles.productImage}>
-                                        <div className={styles.productOptions}>
-                                            <a href="">
-                                                <Heart/>
-                                            </a>
-                                            <a href="">
-                                                <ShoppingCart/>
-                                            </a>
-                                            <a href="">
-                                                <ArrowRight/>
-                                            </a>
-                                        </div>
-                                        <a href="#">
-                                            <img
-                                                src="https://easyeat.ancorathemes.com/wp-content/uploads/2020/05/product-3-copyright-1024x1024.png"
-                                                alt="Product"/>
-                                        </a>
-                                    </div>
-                                    <div className={styles.productTitle}>
-                                        <a href="#">
-                                            Chicken Burger
-                                        </a>
-                                        <p>
-                                            {/*<span>discounted price</span>*/}
-                                            $165.00</p>
-                                        <div className={styles.productRating}>
-                                            <Star weight="fill"/>
-                                            <Star weight="fill"/>
-                                            <Star weight="fill"/>
-                                            <Star weight="fill"/>
-                                            <Star weight="fill"/>
-
-                                        </div>
-                                    </div>
-
+                            {
+                                productsResponse ? <div className={styles.leftAllProducts}>
+                                    {
+                                        productsResponse.product.map(product => <ProductCard
+                                            product={product}
+                                        />)
+                                    }
+                                </div> : <div className={styles.productsLoading}>
+                                    <CircleDashed />
                                 </div>
-                                <div className={styles.productCard}>
-                                    <div className={styles.productOnSale}>
-                                        10%
-                                    </div>
-                                    <div className={styles.productImage}>
-                                        <div className={styles.productOptions}>
-                                            <a href="">
-                                                <Heart/>
-                                            </a>
-                                            <a href="">
-                                                <ShoppingCart/>
-                                            </a>
-                                            <a href="">
-                                                <ArrowRight/>
-                                            </a>
-                                        </div>
-                                        <a href="#">
-                                            <img
-                                                src="https://easyeat.ancorathemes.com/wp-content/uploads/2020/05/product-4-copyright-480x480.png"
-                                                alt="Product"/>
-                                        </a>
-                                    </div>
-                                    <div className={styles.productTitle}>
-                                        <a href="#">
-                                            Black Burger
-                                        </a>
-                                        <p>
-                                            <span>$99.00</span>
-                                            $89.00</p>
-                                        <div className={styles.productRating}>
-                                            <Star weight="fill"/>
-                                            <Star weight="fill"/>
-                                            <Star weight="fill"/>
-                                            <Star weight="fill"/>
-                                            <Star weight="fill"/>
+                            }
+                            {
+                                productsResponse &&
 
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div className={styles.productCard}>
-                                    <div className={styles.productImage}>
-                                        <div className={styles.productOptions}>
-                                            <a href="">
-                                                <Heart/>
-                                            </a>
-                                            <a href="">
-                                                <ShoppingCart/>
-                                            </a>
-                                            <a href="">
-                                                <ArrowRight/>
-                                            </a>
-                                        </div>
-                                        <a href="#">
-                                            <img
-                                                src="https://easyeat.ancorathemes.com/wp-content/uploads/2020/05/product-3-copyright-1024x1024.png"
-                                                alt="Product"/>
-                                        </a>
-                                    </div>
-                                    <div className={styles.productTitle}>
-                                        <a href="#">
-                                            Chicken Burger
-                                        </a>
-                                        <p>
-                                            {/*<span>discounted price</span>*/}
-                                            $165.00</p>
-                                        <div className={styles.productRating}>
-                                            <Star weight="fill"/>
-                                            <Star weight="fill"/>
-                                            <Star weight="fill"/>
-                                            <Star weight="fill"/>
-                                            <Star weight="fill"/>
-
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div className={styles.productCard}>
-                                    <div className={styles.productImage}>
-                                        <div className={styles.productOptions}>
-                                            <a href="">
-                                                <Heart/>
-                                            </a>
-                                            <a href="">
-                                                <ShoppingCart/>
-                                            </a>
-                                            <a href="">
-                                                <ArrowRight/>
-                                            </a>
-                                        </div>
-                                        <a href="#">
-                                            <img
-                                                src="https://easyeat.ancorathemes.com/wp-content/uploads/2020/05/product-3-copyright-1024x1024.png"
-                                                alt="Product"/>
-                                        </a>
-                                    </div>
-                                    <div className={styles.productTitle}>
-                                        <a href="#">
-                                            Chicken Burger
-                                        </a>
-                                        <p>
-                                            {/*<span>discounted price</span>*/}
-                                            $165.00</p>
-                                        <div className={styles.productRating}>
-                                            <Star weight="fill"/>
-                                            <Star weight="fill"/>
-                                            <Star weight="fill"/>
-                                            <Star weight="fill"/>
-                                            <Star weight="fill"/>
-
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div className={styles.productCard}>
-                                    <div className={styles.productImage}>
-                                        <div className={styles.productOptions}>
-                                            <a href="">
-                                                <Heart/>
-                                            </a>
-                                            <a href="">
-                                                <ShoppingCart/>
-                                            </a>
-                                            <a href="">
-                                                <ArrowRight/>
-                                            </a>
-                                        </div>
-                                        <a href="#">
-                                            <img
-                                                src="https://easyeat.ancorathemes.com/wp-content/uploads/2020/05/product-3-copyright-1024x1024.png"
-                                                alt="Product"/>
-                                        </a>
-                                    </div>
-                                    <div className={styles.productTitle}>
-                                        <a href="#">
-                                            Chicken Burger
-                                        </a>
-                                        <p>
-                                            {/*<span>discounted price</span>*/}
-                                            $165.00</p>
-                                        <div className={styles.productRating}>
-                                            <Star weight="fill"/>
-                                            <Star weight="fill"/>
-                                            <Star weight="fill"/>
-                                            <Star weight="fill"/>
-                                            <Star weight="fill"/>
-
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div className={styles.productCard}>
-                                    <div className={styles.productImage}>
-                                        <div className={styles.productOptions}>
-                                            <a href="">
-                                                <Heart/>
-                                            </a>
-                                            <a href="">
-                                                <ShoppingCart/>
-                                            </a>
-                                            <a href="">
-                                                <ArrowRight/>
-                                            </a>
-                                        </div>
-                                        <a href="#">
-                                            <img
-                                                src="https://easyeat.ancorathemes.com/wp-content/uploads/2020/05/product-3-copyright-1024x1024.png"
-                                                alt="Product"/>
-                                        </a>
-                                    </div>
-                                    <div className={styles.productTitle}>
-                                        <a href="#">
-                                            Chicken Burger
-                                        </a>
-                                        <p>
-                                            {/*<span>discounted price</span>*/}
-                                            $165.00</p>
-                                        <div className={styles.productRating}>
-                                            <Star weight="fill"/>
-                                            <Star weight="fill"/>
-                                            <Star weight="fill"/>
-                                            <Star weight="fill"/>
-                                            <Star weight="fill"/>
-
-                                        </div>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                            <div className={styles.leftAllProductsPagination}>
-                                <div className={styles.paginationItem}>
-                                    1
-                                </div>
-                                <div className={styles.paginationItem}>
-                                    2
-                                </div>
-                                <div className={styles.paginationItem}>
-                                    3
-                                </div>
-                                <div className={styles.paginationItem}>
-                                    4
-                                </div>
-                                <div className={styles.paginationItem}>
-                                    5
-                                </div>
-                                <div className={styles.paginationItem}>
-                                    6
-                                </div>
-                                <div className={styles.paginationItem}>
-                                    <ArrowRight/>
-                                </div>
-
-                            </div>
+                                <AdminPagination
+                                    currentPage={page}
+                                    setCurrentPage={setPage}
+                                    totalElements={productsResponse?.totalCount}
+                                    pageSize={PER_PAGE}
+                                    theme="light"
+                                />
+                            }
 
                         </div>
                         <div className={styles.rightBlockFilter}>
@@ -316,44 +151,15 @@ export const ProductList = () => {
                                     <p>Cart</p>
                                 </div>
                                 <div className={styles.rightBasketContent}>
+
                                     {/*EMPTY BASKET*/}
                                     {/*<div className={styles.emptyBasket}>*/}
-                                    {/*    <p>No products in the cart.</p>*/}
+                                    {/*    <p>No productsResponse in the cart.</p>*/}
                                     {/*</div>*/}
                                     <div className={styles.rightBasketProducts}>
                                         <div className={styles.productsCards}>
-                                            <div className={styles.productCard}>
-                                                <div className={styles.deleteProduct}>
-                                                    <X/>
-                                                </div>
-                                                <div className={styles.productImage}>
-                                                    <a href="#">
-                                                        <img
-                                                            src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/02/product-18-copyright-480x480.png"
-                                                            alt="Product"/>
-                                                    </a>
-                                                </div>
-                                                <div className={styles.productTitle}>
-                                                    <a href="#">Veggie Pizza</a>
-                                                    <p>2 × $13.00</p>
-                                                </div>
-                                            </div>
-                                            <div className={styles.productCard}>
-                                                <div className={styles.deleteProduct}>
-                                                    <X/>
-                                                </div>
-                                                <div className={styles.productImage}>
-                                                    <a href="#">
-                                                        <img
-                                                            src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/02/product-18-copyright-480x480.png"
-                                                            alt="Product"/>
-                                                    </a>
-                                                </div>
-                                                <div className={styles.productTitle}>
-                                                    <a href="#">Veggie Pizza</a>
-                                                    <p>2 × $13.00</p>
-                                                </div>
-                                            </div>
+                                            <BasketProductCard/>
+                                            <BasketProductCard/>
                                         </div>
                                         <div className={styles.productSubtotal}>
                                             <span>Subtotal: <p>$26.00</p></span>
@@ -371,103 +177,93 @@ export const ProductList = () => {
                                 <div className={styles.containerHeading}>
                                     <p>Search</p>
                                 </div>
-                                <form className={styles.rightSearchContent}>
-                                    <button><MagnifyingGlass weight="light"/></button>
+                                <div className={styles.rightSearchContent}>
+                                    <button
+                                        onClick={() => {
+                                            setFilters(prev => ({
+                                                ...prev,
+                                                search: searchSample,
+                                            }))
+                                        }}
+                                    ><MagnifyingGlass weight="light"/></button>
+                                    <input
+                                        type="text"
+                                        placeholder="Search for products ..."
+                                        value={searchSample}
+                                        onKeyDown={({key}) => {
+                                            if (key === 'Enter') setFilters(prev => ({
+                                                ...prev,
+                                                search: searchSample,
+                                            }))
+                                        }}
+                                        onChange={({target}) => {
+                                            setSearchSample(target.value)
 
-                                    <input type="text" placeholder="Search for products ..."/>
-                                </form>
-
-
+                                            if (target.value === '') {
+                                                setFilters(prev => {
+                                                    const {search, ...newval} = prev;
+                                                    return newval;
+                                                })
+                                            }
+                                        }}
+                                    />
+                                </div>
                             </div>
                             <div className={styles.rightBlockContainer}>
                                 <div className={styles.containerHeading}>
                                     <p>Availability</p>
                                 </div>
                                 <div className={styles.availabilityContent}>
-                                    <div className={styles.availabilityItem}>
-                                        <input type="checkbox"/>
-                                        In Stock
-                                        <span>(23)</span>
-
-                                    </div>
-                                    <div className={styles.availabilityItem}>
-                                        <input type="checkbox"/>
-                                        Out of Stock
-                                        <span>(11)</span>
-                                    </div>
+                                    {
+                                        ['inStock', 'outOfStock'].map(stockState => (
+                                            <ProductStock
+                                                label={stockState}
+                                                active={stockState === filters.stock}
+                                                onClick={() => setFilters(prev => {
+                                                    if (prev.stock === stockState) {
+                                                        const {stock, ...rest} = prev;
+                                                        return rest;
+                                                    } else {
+                                                        return {
+                                                            ...prev,
+                                                            stock: stockState,
+                                                        }
+                                                    }
+                                                })}/>
+                                        ))
+                                    }
 
                                 </div>
-
                             </div>
                             <div className={styles.rightBlockContainer}>
                                 <div className={styles.containerHeading}>
                                     <p>Categories</p>
                                 </div>
-                                <div className={styles.rightCategoriesContent}>
-                                    <div className={styles.rightCategoriesItem}>
-                                        <a href="#">
-                                            <DotOutline weight="fill"/>
-                                            Burgers & Panini
-                                        </a>
-                                        <span>(4)</span>
-                                    </div>
-                                    <div className={styles.rightCategoriesItem}>
-                                        <a href="#">
-                                            <DotOutline weight="fill"/>
-                                            Hot Dogs & Snacks
-                                        </a>
-                                        <span>(4)</span>
-                                    </div>
-                                    <div className={styles.rightCategoriesItem}>
-                                        <a href="#">
-                                            <DotOutline weight="fill"/>
-                                            Meat & Fish
-                                        </a>
-                                        <span>(3)</span>
-                                    </div>
-                                    <div className={styles.rightCategoriesItem}>
-                                        <a href="#">
-                                            <DotOutline weight="fill"/>
-                                            Pizzas & Pastas
-                                        </a>
-                                        <span>(4)</span>
-                                    </div>
-                                    <div className={styles.rightCategoriesItem}>
-                                        <a href="#">
-                                            <DotOutline weight="fill"/>
-                                            Popular Dishes
-                                        </a>
-                                        <span>(6)</span>
-                                    </div>
-                                    <div className={styles.rightCategoriesItem}>
-                                        <a href="#">
-                                            <DotOutline weight="fill"/>
-                                            The Dishes
-                                        </a>
-                                        <span>(4)</span>
-                                    </div>
-                                    <div className={styles.rightCategoriesItem}>
-                                        <a href="#">
-                                            <DotOutline weight="fill"/>
-                                            Uncategorized
-                                        </a>
-                                        <span>(0)</span>
-                                    </div>
-                                    <div className={styles.rightCategoriesItem}>
-                                        <a href="#">
-                                            <DotOutline weight="fill"/>
-                                            Vietnamese Coffee
-                                        </a>
-                                        <span>(5)</span>
-                                    </div>
-                                    <div className={styles.rightCategoriesItem}>
-                                        <a href="#">
-                                            <DotOutline weight="fill"/>
-                                            Vindaloo
-                                        </a>
-                                        <span>(3)</span>
-                                    </div>
-                                </div>
+                                {
+                                    brands ?
+                                        <div className={styles.rightCategoriesContent}>
+                                        {
+                                            !loading ?
+                                            brands.map(brand => <ProductBrands
+                                                brand={brand}
+                                                onClick={() => setFilters(prev => {
+                                                    if (prev.brandId === brand._id) {
+                                                        const {brandId, ...rest} = prev;
+                                                        return rest;
+                                                    }
+                                                    return ({
+                                                        ...prev,
+                                                        brandId: brand._id,
+                                                    });
+                                                })}
+                                                active={brand._id === filters.brandId}
+                                            />)
+                                            : <div className={styles.brandsLoading}>
+                                                <CircleDashed />
+                                            </div>
+                                        }
+                                    </div> : <p className={styles.noBrands}>There is no brands.</p>
+                                }
 
 
                             </div>
@@ -475,60 +271,41 @@ export const ProductList = () => {
                                 <div className={styles.containerHeading}>
                                     <p>Filter</p>
                                 </div>
-                                <form className={styles.rightFilterContent}>
+                                <div className={styles.rightFilterContent}>
                                     <RangeSlider
                                         min={0}
-                                        max={260}
-                                        bounds={bounds}
-                                        setBounds={setBounds}
+                                        max={500}
+                                        bounds={priceBounds}
+                                        setBounds={setPriceBounds}
                                     />
                                     <div className={styles.filterPrice}>
                                         Price:
-                                        <p>${bounds[0]}</p>
+                                        <p>${priceBounds[0]}</p>
                                         <p>-</p>
-                                        <p>${bounds[1]}</p>
+                                        <p>${priceBounds[1]}</p>
                                     </div>
-                                    <button type="submit">
+                                    <button
+                                        type="submit"
+                                        onClick={() => {
+                                            setFilters(prev => ({
+                                                ...prev,
+                                                maxPrice: priceBounds[1],
+                                            }))
+                                        }}
+                                    >
                                         Filter
-                                    <ArrowRight />
+                                        <ArrowRight/>
                                     </button>
-                                </form>
+                                </div>
                             </div>
                             <div className={styles.rightBlockContainer}>
                                 <div className={styles.containerHeading}>
                                     <p>Tags</p>
                                 </div>
                                 <div className={styles.rightTagsContent}>
-                                    <div className={styles.tagItem}>
-                                        <a href="#">
-                                            Item
-                                        </a>
-                                    </div>
-                                    <div className={styles.tagItem}>
-                                        <a href="#">
-                                            Sale
-                                        </a>
-                                    </div>
-                                    <div className={styles.tagItem}>
-                                        <a href="#">
-                                            Simple
-                                        </a>
-                                    </div>
-                                    <div className={styles.tagItem}>
-                                        <a href="#">
-                                            Special
-                                        </a>
-                                    </div>
-                                    <div className={styles.tagItem}>
-                                        <a href="#">
-                                            Stock
-                                        </a>
-                                    </div>
-                                    <div className={styles.tagItem}>
-                                        <a href="#">
-                                            Variable
-                                        </a>
-                                    </div>
+                                    {tags.map((tag, i) => (
+                                        <TagItem key={i} tag={tag}/>
+                                    ))}
                                 </div>
                             </div>
                         </div>
