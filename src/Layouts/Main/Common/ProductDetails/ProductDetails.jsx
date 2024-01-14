@@ -217,7 +217,7 @@ export const ProductDetails = ({product, brands}) => {
                     {/*PRODUCTS RIGHT CONTAINER*/}
                     <div className={styles.productDetailsRight}>
                         {
-                            salePercent ? <div className={styles.productSale}>
+                            salePercent !== 100 ? <div className={styles.productSale}>
                                 -{salePercent.toFixed(2)}%
                             </div> : ''
                         }
@@ -225,14 +225,21 @@ export const ProductDetails = ({product, brands}) => {
                             <h1>{product?.title}</h1>
                         </div>
                         <div className={styles.productPrice}>
+                            {/*PRODUCT SINGLE */}
                             <div className={styles.productPriceWrapper}>
                                 {
-                                    salePercent ? (
+                                    product.salePrice && <p className={`${styles.normalPrice} ${styles.price}`}>$ {(product.productPrice)?.toFixed(2)}</p>
+                                }
+
+                                {
+
                                         <p
                                             className={`${styles.discountedPrice} ${styles.price}`}
-                                        >$ {product?.productPrice}</p>) : ''
+                                        >
+                                            {`$ ${(product.salePrice || product?.productPrice).toFixed(2)}`}
+                                        </p>
                                 }
-                                <p className={`${styles.normalPrice} ${styles.price}`}>$ {product?.salePrice}</p>
+                                {/*STANDARD PRICE*/}
                             </div>
                             <div className={styles.productRating}>
                                 <Star size={15} weight="fill" color="#EC3D08"/>

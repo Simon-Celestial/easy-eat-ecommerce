@@ -259,13 +259,14 @@
           }
 
           .discountedPrice {
-            text-decoration: line-through;
-            color: $color-lightgray;
-            opacity: 0.5;
+            color: $color-orange;
+
           }
 
           .normalPrice {
-            color: $color-orange;
+            text-decoration: line-through;
+            opacity: 0.5;
+            color: $color-lightgray;
           }
         }
 

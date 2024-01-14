@@ -2,13 +2,19 @@ import React, {useContext} from 'react'
 import styles from "../ProductList.module.scss";
 import {X} from "@phosphor-icons/react";
 import {UserDataContext} from "../../../../../Context/UserDataContext/UserDataContext.jsx";
+import {Link} from "react-router-dom";
 
 export const BasketProductCard = ({
-                                      item
+                                      item,
+                                      data
                                   }) => {
     const {
         remove,
     } = useContext(UserDataContext);
+
+    console.log({
+        data
+    })
     return (
         <div className={styles.productCard}>
             <div className={styles.deleteProduct}>
@@ -17,13 +23,13 @@ export const BasketProductCard = ({
             <div className={styles.productImage}>
                 <a href="#">
                     <img
-                        src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/02/product-18-copyright-480x480.png"
+                        src={data?.images?.[0]?.url}
                         alt="Product"/>
                 </a>
             </div>
             <div className={styles.productTitle}>
-                <span>{item.productId}</span>
-                <p>${item.productCount} × $13.00</p>
+                <Link to={`/product/${item.productId}`}>{data.title}</Link>
+                <p>{item.productCount} × ${(data.salePrice? data.salePrice :data.productPrice).toFixed(2)}</p>
             </div>
         </div>
     )

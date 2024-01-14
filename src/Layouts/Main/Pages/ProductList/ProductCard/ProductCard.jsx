@@ -1,12 +1,13 @@
 import React, {useContext} from 'react'
 import styles from "../ProductList.module.scss";
-import {ArrowRight, Heart, ShoppingCart, Star} from "@phosphor-icons/react";
+import {ArrowRight, CircleDashed, Heart, ShoppingCart, Star} from "@phosphor-icons/react";
 import {Link} from "react-router-dom";
 import {UserDataContext} from "../../../../../Context/UserDataContext/UserDataContext.jsx";
 import toast from "react-hot-toast";
 
 export const ProductCard = ({
                                 product,
+                                loading
                             }) => {
     const salePercent = (100 - ((product?.salePrice / product?.productPrice) * 100));
     const {
@@ -17,7 +18,12 @@ export const ProductCard = ({
         basket,
     } = useContext(UserDataContext);
     return (
-        <div className={`${styles.productCard}`}>
+        <div className={`${styles.productCard} ${loading && styles.loadingAnimation}`}>
+            {loading &&
+                <div className={styles.productLoader}>
+                    <CircleDashed/>
+                </div>
+            }
             {product.stock <= 0 ?
                 <div className={styles.outOfStock}>
                     Out of Stock
@@ -43,10 +49,20 @@ export const ProductCard = ({
                                             ...prev,
                                         }
                                         delete newVal[id];
-                                        toast(`${product.title} is removed from wishlist!`);
+                                        toast(`${product.title} removed from wishlist`, {
+                                            style: {
+                                                background: "red",
+                                                color: "white",
+                                            }
+                                        });
                                         return newVal;
                                     }
-                                    toast(`${product.title} added to wishlist!`);
+                                    toast(`${product.title} added to wishlist`, {
+                                        style: {
+                                            background: "green",
+                                            color: "white",
+                                        }
+                                    });
                                     return ({
                                         ...prev,
                                         [id]: product,
@@ -56,20 +72,18 @@ export const ProductCard = ({
                     </p>
                     <p className={styles.optionButton}>
                         <ShoppingCart
-                            color={basket.find(it => it.productId === product._id)? 'red': 'unset'}
+                            color={basket.find(it => it.productId === product._id) ? 'red' : 'unset'}
                             onClick={() => {
-                            const foundItem = basket.find(it => it.productId === product._id);
-                            if (foundItem) {
-                                update(product._id, foundItem.productCount + 1)
-                            } else {
-                                add([
-                                    {
-                                        productId: product._id,
-                                        productCount: 1,
-                                    }
-                                ])
-                            }
-                        }}/>
+                                const foundItem = basket.find(it => it.productId === product._id);
+                                if (foundItem) {
+                                    update(foundItem._id, foundItem.productCount + 1)
+                                } else {
+                                    add({
+                                        ...product,
+                                        count: 1,
+                                    })
+                                }
+                            }}/>
                     </p>
                     <Link className={styles.optionButton} to={`/product/${product._id}`} target={'_blank'}>
                         <ArrowRight/>
@@ -86,12 +100,15 @@ export const ProductCard = ({
                     {product.title}
                 </Link>
                 <p>
-                    {
-                        product.salePrice > 0 ?
-                            <span>${product.salePrice.toFixed(2)}</span> : null
-                    }
+                    {/*STANDARD PRICE*/}
+                    <span
+                        className={`${product.salePrice ? styles.productPrice : styles.salePrice}`}>${product?.productPrice.toFixed(2)}</span>
+                    {/*DISCOUNTED PRICE*/}
+                    {(product.salePrice) ?
+                        <span className={styles.salePrice}>{`$${product?.salePrice?.toFixed(2)}`}</span>
+                        : ""}
+                </p>
 
-                    ${product.productPrice.toFixed(2)}</p>
                 <div className={styles.productRating}>
                     <Star weight="fill"/>
                     <Star weight="fill"/>

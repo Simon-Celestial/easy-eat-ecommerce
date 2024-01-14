@@ -70,6 +70,25 @@
               width: 50%;
               padding: 0 30px 35px 0;
               position: relative;
+              &.loadingAnimation {
+                animation: fadeAnimation 0.5s linear infinite;
+              }
+              .productLoader {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 90%;
+                height: 95%;
+                z-index: 50;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                svg {
+                  color: $color-black;
+                  animation: rotateAnimation 1s linear infinite;
+                  font-size: 80px;
+                }
+              }
               .productOnSale {
                 position: absolute;
                 left: 10px;
@@ -189,11 +208,9 @@
                   display: inline-flex;
                   align-items: center;
                   gap: 10px;
-
-                  span {
+                  .productPrice {
                     text-decoration: line-through;
                   }
-
                 }
 
                 .productRating {

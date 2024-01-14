@@ -248,7 +248,7 @@ export const ProductSingle = () => {
                             {
                                 !loading?
                                 relatedProducts.map(related => {
-                                    const salePercent = (100 - ((related?.salePrice / related?.productPrice) * 100));
+                                    const salePercent = (100 - (((related?.salePrice) / related?.productPrice) * 100));
 
                                     return (
                                         <div className={styles.relatedProductsCard}>
@@ -267,7 +267,7 @@ export const ProductSingle = () => {
                                                     </div>
                                                 </div>
                                                 {
-                                                    salePercent ?
+                                                    Math.round(salePercent) !== 100 ?
                                                         <div className={`${styles.relatedWithSale} ${styles.hasSale}`}>
                                                             -{salePercent.toFixed(2)} %
                                                         </div> : ''
@@ -287,7 +287,11 @@ export const ProductSingle = () => {
                                                       to={`/product/${related._id}`} target={'_blank'}>
                                                     {related.title}
                                                 </Link>
-                                                <span><p>$ {related.productPrice}</p> $ {related.salePrice}</span>
+                                                <span><p style={{
+                                                    textDecoration: related.salePrice? 'line-through': 'unset'
+                                                }}>${related.productPrice.toFixed(2)}</p> {
+                                                    related.salePrice && `$${related.salePrice.toFixed(2)}`
+                                                }</span>
                                                 {/*NO RATING IN API, SO I MADE IT STATIC*/}
                                                 <div className={styles.relatedProductRating}>
                                                     <Star size={14} weight="fill" color="#EC3D08"/>

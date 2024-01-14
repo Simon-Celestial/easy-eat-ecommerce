@@ -310,7 +310,7 @@
       .relatedProductsCards {
         display: flex;
         width: 100%;
-        justify-content: space-between;
+        gap: 35px;
 
         .relatedLoading {
           width: 100%;
@@ -335,11 +335,18 @@
           .relatedProductImg {
             display: flex;
             width: 100%;
-            height: 410px;
+            height: 400px;
             position: relative;
             align-items: center;
             justify-content: center;
             cursor: pointer;
+            img {
+              position: absolute;
+              left: 0;
+              top: 0;
+              width: 90%;
+              transition: width $transition-fast;
+            }
 
             &:hover img {
               width: 100%;
@@ -363,6 +370,7 @@
               color: $color-white;
               font-family: $font-main;
               font-size: 14px;
+              z-index: 10;
 
               &.hasSale {
                 display: flex !important;
@@ -380,6 +388,7 @@
               color: $color-white;
               font-family: $font-main;
               font-size: 14px;
+              z-index: 10;
 
             }
 
@@ -394,6 +403,7 @@
               pointer-events: none;
               opacity: 0;
               transition: $transition-fast;
+              z-index: 3;
 
               .relatedManipulationItems {
                 display: flex;
@@ -407,6 +417,7 @@
 
                 a {
                   display: flex;
+                  color: $color-black;
                 }
 
                 &:hover {
@@ -424,10 +435,6 @@
               }
             }
 
-            img {
-              width: 90%;
-              transition: width $transition-fast;
-            }
           }
 
           .relatedProductTittle {
@@ -454,9 +461,6 @@
               font-size: 18px;
               gap: 5px;
 
-              p {
-                text-decoration: line-through;
-              }
             }
           }
 
@@ -493,16 +497,22 @@
         }
       }
     }
-
     .relatedProductsSection {
       padding: 25px 15px 80px 15px;
-
       .relatedProductsContent {
         .relatedProductsHeading {
           margin-bottom: 25px;
 
           h1 {
             font-size: 35px;
+          }
+        }
+        .relatedProductsCards {
+          .relatedProductsCard {
+            gap: 10px;
+            .relatedProductImg {
+              height: 360px;
+            }
           }
         }
       }
@@ -519,6 +529,57 @@
         }
       }
     }
+    .relatedProductsSection {
+      .relatedProductsContent {
+        .relatedProductsCards {
+          .relatedProductsCard {
+            .relatedProductImg {
+              height: 310px;
+            }
+          }
+        }
+      }
+    }
+
+  }
+}
+@media screen and (max-width: 1000px) {
+  .productSingleWrapper {
+    .relatedProductsSection {
+      .relatedProductsContent {
+        .relatedProductsCards {
+          flex-wrap: wrap;
+          .relatedProductsCard {
+            align-items: center;
+            max-width: 45%;
+            .relatedProductImg {
+              height: 400px;
+              img {
+                left: 50%;
+                transform: translateX(-50%);
+              }
+            }
+          }
+        }
+      }
+    }
+
+  }
+}
+@media screen and (max-width: 900px) {
+  .productSingleWrapper {
+    .relatedProductsSection {
+      .relatedProductsContent {
+        .relatedProductsCards {
+          .relatedProductsCard {
+            .relatedProductImg {
+              height: 370px;
+            }
+          }
+        }
+      }
+    }
+
   }
 }
 
@@ -583,20 +644,11 @@
 
       .relatedProductsContent {
         .relatedProductsCards {
-          flex-wrap: wrap;
-          gap: 15px;
-
           .relatedProductsCard {
-            max-width: 25%;
-            height: 280px;
-            justify-content: space-between;
-
+            max-width: 330px;
+            width: 330px;
             .relatedProductImg {
-              height: auto;
-            }
-
-            .relatedProductTittle {
-              align-items: center;
+              height: 320px;
             }
           }
         }
@@ -604,20 +656,27 @@
     }
   }
 }
-
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 725px) {
   .productSingleWrapper {
     .relatedProductsSection {
       .relatedProductsContent {
         .relatedProductsCards {
+          flex-wrap: nowrap;
+          flex-direction: column;
+          align-items: center;
           .relatedProductsCard {
-            height: 250px;
-
+            max-width: unset;
+            width: 450px;
             .relatedProductImg {
-              height: auto;
+              height: 415px;
             }
-
             .relatedProductTittle {
+              a {
+                text-align: center;
+              }
+              span {
+                justify-content: center;
+              }
             }
           }
         }
@@ -631,24 +690,12 @@
     .relatedProductsSection {
       .relatedProductsContent {
         .relatedProductsCards {
-          justify-content: center;
-          flex-direction: column;
-          align-items: center;
-
           .relatedProductsCard {
-            width: 290px;
-            max-width: 290px;
-            height: 380px;
-
+            width: 300px;
             .relatedProductImg {
-              height: auto;
-            }
-
-            .relatedProductTittle {
-              align-items: center;
+              height: 280px;
             }
           }
-
         }
       }
     }

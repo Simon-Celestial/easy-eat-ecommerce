@@ -1,5 +1,5 @@
 import styles from "./ProductList.module.scss";
-import React, {useContext, useEffect, useState} from 'react'
+import React, {useCallback, useContext, useEffect, useState} from 'react'
 import {Footer} from "../../Components/Footer/Footer.jsx";
 import {UiControl} from "../../Common/UiControl/UiControl.jsx";
 import {Header} from "../../Components/Header/Header.jsx";
@@ -46,6 +46,7 @@ export const ProductList = () => {
 
     const {
         basket,
+        cache,
     } = useContext(UserDataContext);
     const [loading, setLoading] = useState(true);
     // useEffect TO CHANGE HEADER COLOR
@@ -70,11 +71,12 @@ export const ProductList = () => {
         GET: getAllBrands,
     } = useApi('/site/brands');
 
-    useEffect(() => {
+
+    const loadData = useCallback((pageOverride = null) => {
         setLoading(true);
         (async () => {
             const result = await getAllProducts(null, {
-                page: page + 1,
+                page: pageOverride!==null? pageOverride: (page + 1),
                 perPage: PER_PAGE,
                 ...filters,
             });
@@ -84,7 +86,15 @@ export const ProductList = () => {
             }
             setLoading(false);
         })()
-    }, [page, filters]);
+    }, [page, filters])
+    useEffect(() => {
+        loadData();
+    }, [page]);
+    useEffect(() => {
+        if(page === 0) {
+            loadData();
+        } else setPage(0);
+    }, [filters]);
     useEffect(() => {
         setLoading(true);
         (async () => {
@@ -96,7 +106,12 @@ export const ProductList = () => {
             }
         })()
     }, []);
-
+    console.log({
+        dad: basket.map(it => {
+            const item = cache.find(cached => cached._id === it.productId);
+            return (item.salePrice? item.salePrice: item.productPrice)*it.productCount
+        }),
+    })
     return (
         <div className={styles.productListWrapper}>
             {/*HEADER*/}
@@ -121,6 +136,7 @@ export const ProductList = () => {
                                     {
                                         productsResponse.product.map(product => <ProductCard
                                             product={product}
+                                            loading={loading}
                                         />)
                                     }
                                 </div> : <div className={styles.productsLoading}>
@@ -146,29 +162,35 @@ export const ProductList = () => {
                                     <p>Cart</p>
                                 </div>
                                 <div className={styles.rightBasketContent}>
+                                    {basket.length < 1 ?
+                                        <div className={styles.emptyBasket}>
+                                            <p>No products in the cart.</p>
+                                        </div>
+                                        :
+                                        <div className={styles.rightBasketProducts}>
+                                            <div className={styles.productsCards}>
+                                                {
+                                                    basket.map(bItem => <BasketProductCard
+                                                        key={bItem._id}
+                                                        item={bItem}
+                                                        data={(cache || []).find(it=> it._id === bItem.productId)}
+                                                    />)
+                                                }
+                                            </div>
+                                            <div className={styles.productSubtotal}>
+                                                <span>Subtotal:<p>${basket.map(it => {
+                                                    const item = cache.find(cached => cached._id === it.productId);
+                                                    return (item.salePrice? item.salePrice: item.productPrice)*it.productCount
+                                                }).reduce((a,b) => a + b,0).toFixed(2)}</p></span>
+                                            </div>
+                                            <div className={styles.cartOperations}>
+                                                <a href="#">View Cart</a>
+                                                <a href="#">Checkout</a>
+                                            </div>
 
-                                    {/*EMPTY BASKET*/}
-                                    {/*<div className={styles.emptyBasket}>*/}
-                                    {/*    <p>No productsResponse in the cart.</p>*/}
-                                    {/*</div>*/}
-                                    <div className={styles.rightBasketProducts}>
-                                        <div className={styles.productsCards}>
-                                            {
-                                                basket.map(bItem => <BasketProductCard
-                                                    key={bItem._id}
-                                                    item={bItem}
-                                                />)
-                                            }
-                                        </div>
-                                        <div className={styles.productSubtotal}>
-                                            <span>Subtotal: <p>$26.00</p></span>
-                                        </div>
-                                        <div className={styles.cartOperations}>
-                                            <a href="#">View Cart</a>
-                                            <a href="#">Checkout</a>
                                         </div>
 
-                                    </div>
+                                    }
 
                                 </div>
                             </div>
@@ -214,8 +236,9 @@ export const ProductList = () => {
                                 </div>
                                 <div className={styles.availabilityContent}>
                                     {
-                                        ['inStock', 'outOfStock'].map(stockState => (
+                                        ['inStock', 'outOfStock'].map((stockState,i) => (
                                             <ProductStock
+                                                key={i}
                                                 label={stockState}
                                                 active={stockState === filters.stock}
                                                 onClick={() => setFilters(prev => {

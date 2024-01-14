@@ -1,4 +1,4 @@
-import React, {useCallback, useContext, useEffect, useState} from 'react'
+import React, {useCallback, useContext, useEffect, useMemo, useState} from 'react'
 import useApi from "../../Hooks/useApi.js";
 import {AuthContext} from "../AuthContext/AuthContext.jsx";
 
@@ -17,6 +17,8 @@ export const UserDataContext = React.createContext({
     },
     update: () => {
     },
+    cache: [],
+    loading: false,
 
 })
 export const UserDataContextProvider = ({
@@ -24,7 +26,15 @@ export const UserDataContextProvider = ({
                                         }) => {
     const [basket, setBasket] = useState([]);
     const [wishlist, setWishlist] = useState(JSON.parse(localStorage.wishlist || '{}'));
+    const [cache, setCache] = useState(JSON.parse(localStorage.cache || '[]'));
     const [shouldUpdate, setShouldUpdate] = useState(Date.now());
+    const [cacheLoading, setCacheLoading] = useState(false);
+    const [basketOperationInProgress, setBasketOperationInProgress] = useState(false);
+
+
+    const loading = useMemo(() => {
+        return basketOperationInProgress || cacheLoading;
+    }, [basketOperationInProgress, cacheLoading])
     const {
         GET,
         DELETE,
@@ -32,12 +42,36 @@ export const UserDataContextProvider = ({
         POST,
     } = useApi('site/basket');
     const {
+        GET: getProducts,
+    } = useApi('site/products');
+    const {
         token,
     } = useContext(AuthContext);
+
+    useEffect(() => {
+        (async () => {
+            setCacheLoading(true);
+            const result = await getProducts(null, {
+                page: 1,
+                perPage: 99999,
+            });
+            if (result.status === 200) {
+                const data = JSON.parse(result.data);
+                setCache(data.data.product || []);
+            }
+
+            setCacheLoading(false);
+
+        })()
+
+    }, []);
     useEffect(() => {
         if (!token)
             localStorage.basket = JSON.stringify(basket);
     }, [basket]);
+    useEffect(() => {
+        localStorage.cache = JSON.stringify(cache);
+    }, [cache]);
     useEffect(() => {
         localStorage.wishlist = JSON.stringify(wishlist);
     }, [wishlist]);
@@ -69,19 +103,26 @@ export const UserDataContextProvider = ({
             }));
         }
     }, [token]);
-    const add = useCallback((basketItems) => {
-        if (token) {
-            POST(null, {
-                basket: basketItems
-            }).then(res => {
-                if (res.status === 200) {
-                    setShouldUpdate(Date.now());
+    const add = useCallback((...products) => {
+                const basketItems = products.map(it => ({
+                    productId: it._id,
+                    productCount: it.count,
+                }));
+                if (token) {
+                    POST(null, {
+                        basket: basketItems,
+                    }).then(res => {
+                        if (res.status === 200) {
+                            setShouldUpdate(Date.now());
+                        }
+                    })
+                } else {
+                    setBasket(prev => [...prev, ...basketItems]);
                 }
-            })
-        } else {
-            setBasket(prev => [...prev, ...basketItems]);
-        }
-    }, [token]);
+            },
+            [token]
+        )
+    ;
     const remove = useCallback((id) => {
         if (token) {
             DELETE(id).then(res => {
@@ -91,11 +132,12 @@ export const UserDataContextProvider = ({
             })
         } else {
             setBasket(prev => {
-                return prev.filter(it => it.productId !==id);
+                return prev.filter(it => it.productId !== id);
             });
         }
 
     }, []);
+    console.log({cache})
     return (
         <UserDataContext.Provider value={{
             basket,
@@ -105,6 +147,8 @@ export const UserDataContextProvider = ({
             remove,
             update,
             add,
+            cache,
+            loading,
         }}>
             {children}
         </UserDataContext.Provider>
