@@ -4,19 +4,26 @@ import {AuthContext} from "../AuthContext/AuthContext.jsx";
 
 
 export const UserDataContext = React.createContext({
-    basket:{},
-    setBasket: () => {},
+    basket: {},
+    setBasket: () => {
+    },
     wishlist: {},
-    setWishlist: () => {},
-    remove: () => {},
-    update: () => {},
+    setWishlist: () => {
+    },
+    add: () => {
+
+    },
+    remove: (id) => {
+    },
+    update: () => {
+    },
 
 })
 export const UserDataContextProvider = ({
                                             children,
                                         }) => {
-    const [basket, setBasket] = useState({});
-    const [wishlist, setWishlist] = useState({});
+    const [basket, setBasket] = useState([]);
+    const [wishlist, setWishlist] = useState(JSON.parse(localStorage.wishlist || '{}'));
     const [shouldUpdate, setShouldUpdate] = useState(Date.now());
     const {
         GET,
@@ -43,7 +50,7 @@ export const UserDataContextProvider = ({
                 }
             })
         } else {
-            setBasket(JSON.parse(localStorage.basket || '{}'))
+            setBasket(JSON.parse(localStorage.basket || '[]'))
         }
     }, [token, shouldUpdate]);
 
@@ -57,8 +64,22 @@ export const UserDataContextProvider = ({
             })
         } else {
             setBasket(prev => ({
-                ...prev, [id]:count
+                ...prev,
+
             }));
+        }
+    }, [token]);
+    const add = useCallback((basketItems) => {
+        if (token) {
+            POST(null, {
+                basket: basketItems
+            }).then(res => {
+                if (res.status === 200) {
+                    setShouldUpdate(Date.now());
+                }
+            })
+        } else {
+            setBasket(prev => [...prev, ...basketItems]);
         }
     }, [token]);
     const remove = useCallback((id) => {
@@ -70,14 +91,11 @@ export const UserDataContextProvider = ({
             })
         } else {
             setBasket(prev => {
-                const newData = {...prev};
-                delete prev[id];
-                return newData;
+                return prev.filter(it => it.productId !==id);
             });
         }
 
-    }, [])
-
+    }, []);
     return (
         <UserDataContext.Provider value={{
             basket,
@@ -86,6 +104,7 @@ export const UserDataContextProvider = ({
             setWishlist,
             remove,
             update,
+            add,
         }}>
             {children}
         </UserDataContext.Provider>

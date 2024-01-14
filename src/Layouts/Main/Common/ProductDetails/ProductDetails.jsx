@@ -7,6 +7,8 @@ import styles from "../../Common/ProductDetails/ProductDetails.module.scss";
 import {LayoutContext} from "../../../../Context/LayoutContext/LayoutContext.jsx";
 
 import {FullScreen, useFullScreenHandle} from "react-full-screen";
+import toast from "react-hot-toast";
+import {UserDataContext} from "../../../../Context/UserDataContext/UserDataContext.jsx";
 
 export const ProductDetails = ({product, brands}) => {
     const {
@@ -15,7 +17,10 @@ export const ProductDetails = ({product, brands}) => {
         setMagnifiedOpen,
     } = useContext(LayoutContext);
 
-
+    const {
+        wishlist,
+        setWishlist,
+    } = useContext(UserDataContext);
     const [productCount, setProductCount] = useState(1);
 
     // PRODUCT COUNTER STATE
@@ -260,7 +265,29 @@ export const ProductDetails = ({product, brands}) => {
                                 Buy Now
                             </button>
                             <div className={styles.productWishList}>
-                                <Heart weight="light"/>
+                                <Heart
+                                    weight="light"
+                                    style={{
+                                        color: wishlist[product._id]? 'red': 'unset'
+                                    }}
+                                    onClick={() => {
+                                        setWishlist(prev => {
+                                            const id = product._id;
+                                            if(prev[id]) {
+                                                const newVal = {
+                                                    ...prev,
+                                                }
+                                                delete newVal[id];
+                                                toast(`${product.title} is removed from wishlist!`);
+                                                return newVal;
+                                            }
+                                            toast(`${product.title} added to wishlist!`);
+                                            return ({
+                                                ...prev,
+                                                [id]: product,
+                                            });
+                                        });
+                                    }}/>
                             </div>
 
                         </div>

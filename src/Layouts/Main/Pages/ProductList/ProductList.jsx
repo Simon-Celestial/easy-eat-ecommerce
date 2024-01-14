@@ -14,6 +14,7 @@ import {ProductBrands} from "./ProductBrands/ProductBrands.jsx";
 import {TagItem} from "./TagItem/TagItem.jsx";
 import useApi from "../../../../Hooks/useApi.js";
 import {AdminPagination} from "../../../Admin/Pages/AdminComponents/AdminPagination/AdminPagination.jsx";
+import {UserDataContext} from "../../../../Context/UserDataContext/UserDataContext.jsx";
 
 const tags = [
     {
@@ -43,6 +44,9 @@ export const ProductList = () => {
         setBasketVisible,
     } = useContext(LayoutContext);
 
+    const {
+        basket,
+    } = useContext(UserDataContext);
     const [loading, setLoading] = useState(true);
     // useEffect TO CHANGE HEADER COLOR
     useEffect(() => {
@@ -111,15 +115,6 @@ export const ProductList = () => {
                                         Math.min((page + 1) * PER_PAGE, productsResponse?.totalCount)
                                     } of {productsResponse?.totalCount} results</p>
                                 }
-                                <form method="get" className={styles.selectionBlock}>
-                                    <select name="sorting">
-                                        <option value="popularity" selected="selected">Sort by popularity</option>
-                                        <option value="rating">Sort by average rating</option>
-                                        <option value="date">Sort by latest</option>
-                                        <option value="price">Sort by price: low to high</option>
-                                        <option value="price-reverse">Sort by price: high to low</option>
-                                    </select>
-                                </form>
                             </div>
                             {
                                 productsResponse ? <div className={styles.leftAllProducts}>
@@ -129,7 +124,7 @@ export const ProductList = () => {
                                         />)
                                     }
                                 </div> : <div className={styles.productsLoading}>
-                                    <CircleDashed />
+                                    <CircleDashed/>
                                 </div>
                             }
                             {
@@ -158,8 +153,12 @@ export const ProductList = () => {
                                     {/*</div>*/}
                                     <div className={styles.rightBasketProducts}>
                                         <div className={styles.productsCards}>
-                                            <BasketProductCard/>
-                                            <BasketProductCard/>
+                                            {
+                                                basket.map(bItem => <BasketProductCard
+                                                    key={bItem._id}
+                                                    item={bItem}
+                                                />)
+                                            }
                                         </div>
                                         <div className={styles.productSubtotal}>
                                             <span>Subtotal: <p>$26.00</p></span>
@@ -242,27 +241,27 @@ export const ProductList = () => {
                                 {
                                     brands ?
                                         <div className={styles.rightCategoriesContent}>
-                                        {
-                                            !loading ?
-                                            brands.map(brand => <ProductBrands
-                                                brand={brand}
-                                                onClick={() => setFilters(prev => {
-                                                    if (prev.brandId === brand._id) {
-                                                        const {brandId, ...rest} = prev;
-                                                        return rest;
-                                                    }
-                                                    return ({
-                                                        ...prev,
-                                                        brandId: brand._id,
-                                                    });
-                                                })}
-                                                active={brand._id === filters.brandId}
-                                            />)
-                                            : <div className={styles.brandsLoading}>
-                                                <CircleDashed />
-                                            </div>
-                                        }
-                                    </div> : <p className={styles.noBrands}>There is no brands.</p>
+                                            {
+                                                !loading ?
+                                                    brands.map(brand => <ProductBrands
+                                                        brand={brand}
+                                                        onClick={() => setFilters(prev => {
+                                                            if (prev.brandId === brand._id) {
+                                                                const {brandId, ...rest} = prev;
+                                                                return rest;
+                                                            }
+                                                            return ({
+                                                                ...prev,
+                                                                brandId: brand._id,
+                                                            });
+                                                        })}
+                                                        active={brand._id === filters.brandId}
+                                                    />)
+                                                    : <div className={styles.brandsLoading}>
+                                                        <CircleDashed/>
+                                                    </div>
+                                            }
+                                        </div> : <p className={styles.noBrands}>There is no brands.</p>
                                 }
 
 
@@ -290,6 +289,7 @@ export const ProductList = () => {
                                             setFilters(prev => ({
                                                 ...prev,
                                                 maxPrice: priceBounds[1],
+                                                minPrice: priceBounds[0],
                                             }))
                                         }}
                                     >

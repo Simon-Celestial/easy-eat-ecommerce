@@ -58,7 +58,8 @@ export const ProductRow = ({
                 <p>${data.productPrice.toFixed(2)}</p>
             </div>
             <div className={`${styles.tableCell} ${styles.sale}`}>
-                <p>${data.salePrice?.toFixed(2)}</p>
+                <p>{data.salePrice === data.productPrice ? 'No Sale'
+                    : `$${data.salePrice?.toFixed(2)}`}</p>
             </div>
             <div className={`${styles.tableCell} ${styles.stock}`}>
                 <p>{data.stock}</p>
@@ -75,7 +76,7 @@ export const ProductRow = ({
                 }}><Eye/></span>
                 <Link to={`/product/${data.id}`} style={{
                     cursor: 'pointer'
-                }} target={'_blank'}><LinkSimple /></Link>
+                }} target={'_blank'}><LinkSimple/></Link>
             </div>
             <div className={`${styles.tableCell} ${styles.publish}`}>
                 <div onClick={handlePublish}>

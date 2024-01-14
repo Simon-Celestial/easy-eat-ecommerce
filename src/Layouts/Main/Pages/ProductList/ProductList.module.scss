@@ -45,24 +45,6 @@
               line-height: 22px;
             }
 
-            .selectionBlock {
-              display: flex;
-
-              select {
-                padding-right: 25px;
-                font-size: 18px;
-                color: $color-black;
-                border: 0;
-                background-color: transparent;
-                font-family: $font-alternative;
-                outline: 0;
-
-                option {
-                  background-color: $color-yellow;
-                }
-
-              }
-            }
           }
           .productsLoading {
             width: 100%;
@@ -91,7 +73,7 @@
               .productOnSale {
                 position: absolute;
                 left: 10px;
-                top: 40px;
+                top: 30px;
                 background-color: $color-orange;
                 color: $color-white;
                 font-family: $font-main;
@@ -104,7 +86,7 @@
               .outOfStock {
                 position: absolute;
                 left: 10px;
-                top: 10px;
+                top: 0;
                 background-color: $color-dark-theme;
                 color: $color-white;
                 font-family: $font-main;
@@ -690,12 +672,6 @@
                 font-size: 16px;
               }
 
-              .selectionBlock {
-                select {
-                  font-size: 16px;
-                  padding-right: 0;
-                }
-              }
             }
             .leftAllProducts {
               .productCard {
@@ -748,15 +724,6 @@
                 padding-left: 4px;
               }
 
-              .selectionBlock {
-                width: 100%;
-
-                select {
-                  display: inline-flex;
-                  width: 100%;
-                  font-size: 18px;
-                }
-              }
             }
 
             .leftAllProducts {

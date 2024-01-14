@@ -35,7 +35,7 @@ const mapData = ({
     brandId,
     stock,
     isPublish,
-    salePrice,
+    salePrice: salePrice || productPrice,
     isDeal,
     images,
     createdAt,

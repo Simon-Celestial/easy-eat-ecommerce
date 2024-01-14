@@ -164,7 +164,9 @@
             border: 0;
             cursor: pointer;
             transition: background-color $transition-fast;
-
+            &:disabled {
+              opacity: 0.5;
+            }
             svg {
               display: none;
             }
@@ -189,18 +191,9 @@
         display: flex;
         align-items: center;
         gap: 10px;
-
-        select {
-          height: 55px;
-          padding: 0 25px;
-          border: 1px solid $color-border;
-          font-size: 14px;
-          font-family: $font-alternative;
-          width: 250px;
-          background-color: $color-yellow;
-          outline: 0;
+        button:disabled {
+          opacity: 0.5!important;
         }
-
         button {
           height: 55px;
           padding: 18px 57px 16px;
@@ -249,9 +242,6 @@
         margin-top: 50px;
 
         .actionsBlock {
-          select {
-            width: 150px;
-          }
           button {
             width: 150px;
             font-size: 15px;

@@ -1,18 +1,6 @@
 import React from 'react'
 import styles from "./AdminPageProduct.module.scss";
 
-// title,
-//     description,
-//     productPrice,
-//     brandId,
-//     stock,
-//     isPublish,
-//     salePrice,
-//     isDeal,
-//     images,
-//     createdAt,
-//     updatedAt,
-//     totalCount,
 export const AdminPageProduct = ({
                                      data,
                                      onReturn,

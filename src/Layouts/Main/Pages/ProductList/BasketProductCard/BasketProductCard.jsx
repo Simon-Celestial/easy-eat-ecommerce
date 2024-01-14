@@ -1,12 +1,18 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import styles from "../ProductList.module.scss";
 import {X} from "@phosphor-icons/react";
+import {UserDataContext} from "../../../../../Context/UserDataContext/UserDataContext.jsx";
 
-export const BasketProductCard = () => {
+export const BasketProductCard = ({
+                                      item
+                                  }) => {
+    const {
+        remove,
+    } = useContext(UserDataContext);
     return (
         <div className={styles.productCard}>
             <div className={styles.deleteProduct}>
-                <X/>
+                <X onClick={() => remove(item._id)}/>
             </div>
             <div className={styles.productImage}>
                 <a href="#">
@@ -16,8 +22,8 @@ export const BasketProductCard = () => {
                 </a>
             </div>
             <div className={styles.productTitle}>
-                <a href="#">Veggie Pizza</a>
-                <p>2 × $13.00</p>
+                <span>{item.productId}</span>
+                <p>${item.productCount} × $13.00</p>
             </div>
         </div>
     )
