@@ -76,11 +76,15 @@ export const Header = () => {
             <section className={styles.headerContent}>
                 {/*HEADER CONTENT*/}
                 <div className={styles.headerLeft}>
-                    <Link to="" className={styles.headerLogo}>
+                    <Link to="/home" className={styles.headerLogo}>
                         <img
                             src={`${headerColorChange && !headerTransform ? "//easyeat.ancorathemes.com/wp-content/uploads/2023/05/logo.png" : "//easyeat.ancorathemes.com/wp-content/uploads/2023/05/logo-inverse.png"}`}
                             alt="Header Logo"/>
                     </Link>
+                    <Link className={`${styles.headerLogo} ${styles.blackImage}`} to="/home">
+                        <img src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/logo.png" alt="Logo Black"/>
+                    </Link>
+
                     {/*HEADER NAVIGATION*/}
                     <div className={styles.headerNavigation}>
                         {/*HEADER NAVIGATION ITEMS*/}
@@ -420,7 +424,7 @@ export const Header = () => {
                     <div className={styles.headerRightItem} onClick={handleWidgetOpen(setSearchOpen)}>
                         <MagnifyingGlass/>
                     </div>
-                    <div className={styles.headerRightItem} onClick={handleWidgetOpen(setSideMenuOpen)}>
+                    <div className={`${styles.headerRightItem} ${styles.sideMenu}`}onClick={handleWidgetOpen(setSideMenuOpen)}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21">
                             <g transform="translate(-2124 -2665)">
                                 <path

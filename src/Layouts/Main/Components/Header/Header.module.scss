@@ -83,7 +83,9 @@
     .headerLeft {
       display: flex;
       align-items: center;
-
+      .blackImage {
+        display: none!important;
+      }
       .headerLogo {
         display: flex;
         align-items: center;
@@ -299,7 +301,7 @@
 
           &.accountDropdownActive {
             pointer-events: auto;
-            padding: 40px 0 40px 0px;
+            padding: 40px 0 40px 0;
           }
           .accountItem {
             display: inline-flex;
@@ -572,8 +574,7 @@
   }
 }
 
-//HEADER ADAPTIVE STYLES
-
+//HEADER MEDIA STYLES
 @media screen and (max-width: 1200px) {
   .siteHeader {
     .headerContent {
@@ -592,23 +593,71 @@
       }
 
       .headerRight {
-        .adminPanel {
-          display: none;
-        }
-        .headerRightItem {
-          &:nth-child(2) {
+          .sideMenu {
             display: none;
           }
-
-          &:nth-child(3) {
-            display: none;
-          }
-        }
-
         .mobileMenuBtn {
           display: flex;
         }
 
+      }
+    }
+  }
+}
+@media screen and (max-width: 800px) {
+  .siteHeader {
+    .headerContent {
+      .headerLeft {
+        .headerNavigation {
+        }
+        .blackImage {
+          display: block!important;
+        }
+
+
+        .headerLogo {
+          display: none;
+          img {
+            width: 60px;
+          }
+        }
+      }
+
+      .headerRight {
+        gap: 10px;
+
+        .headerRightItem {
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 550px) {
+  .siteHeader {
+    .headerContent {
+      .headerRight {
+        .headerRightItem {
+          .basketDropdown {
+            padding: 20px 0;
+
+            .basketDropdown {
+              .basketProducts {
+                padding-top: 40px;
+              }
+
+              .basketFooter {
+                padding: 45px 20px;
+              }
+            }
+          }
+        }
+      }
+      .headerLeft {
+        .headerLogo {
+          img {
+            width: 40px;
+          }
+        }
       }
     }
   }
@@ -669,52 +718,3 @@
     }
   }
 }
-
-//HEADER MEDIA STYLES
-@media screen and (max-width: 800px) {
-  .siteHeader {
-    .headerContent {
-      .headerLeft {
-        .headerNavigation {
-        }
-
-        .headerLogo {
-          img {
-            width: 60px;
-          }
-        }
-      }
-
-      .headerRight {
-        gap: 10px;
-
-        .headerRightItem {
-        }
-      }
-    }
-  }
-}
-@media screen and (max-width: 550px) {
-  .siteHeader {
-    .headerContent {
-      .headerRight {
-        .headerRightItem {
-          .basketDropdown {
-            padding: 20px 0;
-
-            .basketDropdown {
-              .basketProducts {
-                padding-top: 40px;
-              }
-
-              .basketFooter {
-                padding: 45px 20px;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-

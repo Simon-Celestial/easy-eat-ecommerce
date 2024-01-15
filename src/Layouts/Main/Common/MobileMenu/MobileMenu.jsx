@@ -60,9 +60,9 @@ export const MobileMenu = () => {
                         <div className={styles.mobileMenuItems}>
                             {/*HOME*/}
                             <div className={styles.mobileMenuItem} >
-                                <a href="#" onClick={openHandler(setMobileHomeDropdown)}>HOME
+                                <p onClick={openHandler(setMobileHomeDropdown)}>HOME
                                     <ArrowRight/>
-                                </a>
+                                </p>
                                 <div className={`${styles.mobileMenuDropdown} ${mobileHomeDropdown && styles.mobileDropdownActive}`}>
                                     <div className={styles.mobileMenuDropdownItems}>
                                         <a href="#">Burger Shop</a>
@@ -90,9 +90,9 @@ export const MobileMenu = () => {
                             </div>
                             {/*PAGES*/}
                             <div className={styles.mobileMenuItem} >
-                                <a href="#" onClick={openHandler(setMobilePagesDropdown)}>PAGES
+                                <p onClick={openHandler(setMobilePagesDropdown)}>PAGES
                                     <ArrowRight/>
-                                </a>
+                                </p>
                                 <div className={`${styles.mobileMenuDropdown} ${mobilePagesDropdown && styles.mobileDropdownActive}`}>
                                     <div className={styles.mobileMenuDropdownItems}>
                                         <a href="#">About Us</a>
@@ -135,9 +135,9 @@ export const MobileMenu = () => {
 
                             {/*BLOG*/}
                             <div className={styles.mobileMenuItem}>
-                                <a href="#" onClick={openHandler(setMobileBlogDropdown)}>BLOG
+                                <p onClick={openHandler(setMobileBlogDropdown)}>BLOG
                                     <ArrowRight/>
-                                </a>
+                                </p>
                                 <div className={`${styles.mobileMenuDropdown} ${mobileBlogDropdown && styles.mobileDropdownActive}`}>
                                     <div className={styles.mobileMenuDropdownItems}>
                                         <a href="#">Standard</a>
@@ -169,56 +169,33 @@ export const MobileMenu = () => {
 
                             {/*SHOP*/}
                             <div className={styles.mobileMenuItem}>
-                                <a href="#" onClick={openHandler(setMobileShopDropdown)}>SHOP
+                                <p onClick={openHandler(setMobileShopDropdown)}>SHOP
                                     <ArrowRight/>
-                                </a>
+                                </p>
                                 <div className={`${styles.mobileMenuDropdown} ${mobileShopDropdown && styles.mobileDropdownActive}`}>
                                     <div className={styles.mobileMenuDropdownItems}>
-                                        <a href="#">Product List</a>
+                                        <Link to="/shop" >Product List</Link>
                                     </div>
                                     <div className={styles.mobileMenuDropdownItems}>
-                                        <a href="#">Product Single</a>
+                                        <Link to="/cart">Cart</Link>
                                     </div>
                                     <div className={styles.mobileMenuDropdownItems}>
-                                        <a href="#">Cart</a>
+                                        <Link to="/auth/checkout">Checkout</Link>
                                     </div>
                                     <div className={styles.mobileMenuDropdownItems}>
-                                        <a href="#">Checkout</a>
-                                    </div>
-                                    <div className={styles.mobileMenuDropdownItems}>
-                                        <a href="#">Wishlist Page</a>
+                                        <Link to="/wishlist">Wishlist Page</Link>
                                     </div>
                                 </div>
                             </div>
-
                             {/*CONTACT*/}
                             <div className={styles.mobileMenuItem}>
-                                <a href="/contact-us">CONTACTS
-                                </a>
+                                <Link to="/contact-us">CONTACTS
+                                </Link>
                             </div>
                         </div>
                     </div>
                     <div className={styles.mobileMenuFooter}>
                         <SocialIcons />
-                        {/*<div className={styles.mobileFooterContent}>*/}
-                        {/*    <a href="https://www.facebook.com/AncoraThemes/" target="_blank">*/}
-                        {/*        <FontAwesomeIcon icon={faFacebookF}/>*/}
-                        {/*    </a>*/}
-                        {/*    <a href="https://twitter.com/themes_ancora" target="_blank">*/}
-                        {/*        <FontAwesomeIcon icon={faTwitter}/>*/}
-                        {/*    </a>*/}
-                        {/*    <a href="https://dribbble.com/AncoraThemes" target="_blank">*/}
-                        {/*        <FontAwesomeIcon icon={faBasketball}/>*/}
-                        {/*    </a>*/}
-                        {/*    <a href="https://www.instagram.com/ancora_themes/" target="_blank">*/}
-                        {/*        <FontAwesomeIcon icon={faInstagram}/>*/}
-                        {/*    </a>*/}
-                        {/*</div>*/}
-                        <div className={styles.footerUserLogin}>
-                            <Link to="/auth/login">
-                                <FontAwesomeIcon icon={faCircleUser} />
-                            </Link>
-                        </div>
                     </div>
                 </div>
                 <div className={styles.mobileMenuSide}>
@@ -235,9 +212,9 @@ export const MobileMenu = () => {
                         </div>
                         <div className={styles.mobileMenuSideItems}>
                             <p>Want to Buy Pastry?</p>
-                            <a href="shop/">Go to Shop
+                            <Link to="/shop">Go to Shop
                                 <FontAwesomeIcon icon={faArrowRightLong}/>
-                            </a>
+                            </Link>
                         </div>
 
                     </div>

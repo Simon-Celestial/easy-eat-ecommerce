@@ -47,6 +47,7 @@ export const ProductList = () => {
     const {
         basket,
         cache,
+        basketOperationInProgress,
     } = useContext(UserDataContext);
     const [loading, setLoading] = useState(true);
     // useEffect TO CHANGE HEADER COLOR
@@ -76,7 +77,7 @@ export const ProductList = () => {
         setLoading(true);
         (async () => {
             const result = await getAllProducts(null, {
-                page: pageOverride!==null? pageOverride: (page + 1),
+                page: pageOverride !== null ? pageOverride : (page + 1),
                 perPage: PER_PAGE,
                 ...filters,
             });
@@ -91,9 +92,10 @@ export const ProductList = () => {
         loadData();
     }, [page]);
     useEffect(() => {
-        if(page === 0) {
+        if (page === 0) {
             loadData();
-        } else setPage(0);
+        }
+        else setPage(0);
     }, [filters]);
     useEffect(() => {
         setLoading(true);
@@ -109,7 +111,7 @@ export const ProductList = () => {
     console.log({
         dad: basket.map(it => {
             const item = cache.find(cached => cached._id === it.productId);
-            return (item.salePrice? item.salePrice: item.productPrice)*it.productCount
+            return (item.salePrice ? item.salePrice : item.productPrice) * it.productCount
         }),
     })
     return (
@@ -169,19 +171,23 @@ export const ProductList = () => {
                                         :
                                         <div className={styles.rightBasketProducts}>
                                             <div className={styles.productsCards}>
-                                                {
+                                                {basketOperationInProgress && basket.length > 0 ?
+                                                    <div className={styles.basketProductLoader}>
+                                                        <CircleDashed/>
+                                                    </div>
+                                                    :
                                                     basket.map(bItem => <BasketProductCard
                                                         key={bItem._id}
                                                         item={bItem}
-                                                        data={(cache || []).find(it=> it._id === bItem.productId)}
+                                                        data={(cache || []).find(it => it._id === bItem.productId)}
                                                     />)
                                                 }
                                             </div>
                                             <div className={styles.productSubtotal}>
                                                 <span>Subtotal:<p>${basket.map(it => {
                                                     const item = cache.find(cached => cached._id === it.productId);
-                                                    return (item.salePrice? item.salePrice: item.productPrice)*it.productCount
-                                                }).reduce((a,b) => a + b,0).toFixed(2)}</p></span>
+                                                    return (item.salePrice ? item.salePrice : item.productPrice) * it.productCount
+                                                }).reduce((a, b) => a + b, 0).toFixed(2)}</p></span>
                                             </div>
                                             <div className={styles.cartOperations}>
                                                 <a href="#">View Cart</a>
@@ -236,7 +242,7 @@ export const ProductList = () => {
                                 </div>
                                 <div className={styles.availabilityContent}>
                                     {
-                                        ['inStock', 'outOfStock'].map((stockState,i) => (
+                                        ['inStock', 'outOfStock'].map((stockState, i) => (
                                             <ProductStock
                                                 key={i}
                                                 label={stockState}
@@ -245,7 +251,8 @@ export const ProductList = () => {
                                                     if (prev.stock === stockState) {
                                                         const {stock, ...rest} = prev;
                                                         return rest;
-                                                    } else {
+                                                    }
+                                                    else {
                                                         return {
                                                             ...prev,
                                                             stock: stockState,

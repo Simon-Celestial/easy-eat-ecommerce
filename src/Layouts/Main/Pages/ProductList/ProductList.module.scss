@@ -285,6 +285,20 @@
                   display: flex;
                   flex-direction: column;
                   width: 100%;
+                  position: relative;
+                  .basketProductLoader {
+                    display: flex;
+                    height: 200px;
+                    width: 100%;
+                    align-items: center;
+                    justify-content: center;
+                    svg {
+                      font-size: 45px;
+                      animation: rotateAnimation 1s linear infinite;
+                    }
+
+                  }
+
 
                   .productCard {
                     padding: 10px 0 20px 0;

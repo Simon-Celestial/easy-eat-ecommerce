@@ -134,18 +134,18 @@ export const ProductSingle = () => {
                         <div className={styles.reviewContentMain} style={{display: reviewBlockOpen ? "flex" : "none"}}>
                             <div className={styles.reviewContentLeft}>
                                 <div className={styles.reviewLeftHeading}>
-                                    <p>1 REVIEW FOR PRODUCTS</p>
+                                    <p>2 REVIEWS FOR THIS PRODUCTS</p>
                                 </div>
                                 <div className={styles.reviewLeftReviewBlock}>
                                     <div className={styles.reviewerCard}>
                                         <div className={styles.reviewerImg}>
                                             <img
-                                                src="https://secure.gravatar.com/avatar/d04d6ce6de65011a75f5b2edb0f0e982?s=60&d=mm&r=g"
+                                                src="https://media-sof1-2.cdn.whatsapp.net/v/t61.24694-24/369551572_2144320669238776_3474047027888388529_n.jpg?ccb=11-4&oh=01_AdQAAFnfEoJDdSRy0tKkQbf8-wInPI_lonNOTW00eJjMTw&oe=65AFA1F2&_nc_sid=e6ed6c&_nc_cat=106"
                                                 alt="Reviewer"/>
                                         </div>
                                         <div className={styles.reviewerTittle}>
-                                            <span>Ashton Porter  <p>– May 26, 2020</p></span>
-                                            <p>Excellent product! I will be shopping again soon</p>
+                                            <span>Murad Tate <p>– May 26, 2020</p></span>
+                                            <p>Gozel bir mehsuldu, yene sifarish edecem!</p>
                                             <div className={styles.reviewerProductRating}>
                                                 <Star size={14} weight="fill"/>
                                                 <Star size={14} weight="fill"/>
@@ -158,12 +158,12 @@ export const ProductSingle = () => {
                                     <div className={styles.reviewerCard}>
                                         <div className={styles.reviewerImg}>
                                             <img
-                                                src="https://secure.gravatar.com/avatar/d04d6ce6de65011a75f5b2edb0f0e982?s=60&d=mm&r=g"
+                                                src="https://lumiere-a.akamaihd.net/v1/images/eu_capt-marvel_article_hero_m_73e28747.jpeg?region=0,0,750,663"
                                                 alt="Reviewer"/>
                                         </div>
                                         <div className={styles.reviewerTittle}>
-                                            <span>Santa Clause<p>- May 26, 2020</p></span>
-                                            <p>Nice product! I hope you all will love it!</p>
+                                            <span>Captain Marvel<p>- May 27, 2020</p></span>
+                                            <p>Nice product! I highly recommend it!</p>
                                             <div className={styles.reviewerProductRating}>
                                                 <Star size={14} weight="fill"/>
                                                 <Star size={14} weight="fill"/>

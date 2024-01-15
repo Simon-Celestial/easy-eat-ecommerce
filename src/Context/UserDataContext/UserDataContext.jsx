@@ -19,6 +19,7 @@ export const UserDataContext = React.createContext({
     },
     cache: [],
     loading: false,
+    basketOperationInProgress: false,
 
 })
 export const UserDataContextProvider = ({
@@ -83,32 +84,42 @@ export const UserDataContextProvider = ({
                     setBasket(JSON.parse(result.data).data)
                 }
             })
-        } else {
+        }
+        else {
             setBasket(JSON.parse(localStorage.basket || '[]'))
         }
     }, [token, shouldUpdate]);
 
 
+    // BASKET UPDATE
     const update = useCallback((id, count) => {
+        setBasketOperationInProgress(true);
         if (token) {
             PUT(id, {productCount: count}).then(res => {
                 if (res.status === 200) {
                     setShouldUpdate(Date.now());
                 }
             })
-        } else {
+                .finally(() => {
+                    setBasketOperationInProgress(false);
+                });
+        }
+        else {
             setBasket(prev => ({
                 ...prev,
 
             }));
         }
     }, [token]);
+
+    // BASKET ADD
     const add = useCallback((...products) => {
                 const basketItems = products.map(it => ({
                     productId: it._id,
                     productCount: it.count,
                 }));
-                if (token) {
+            setBasketOperationInProgress(true);
+            if (token) {
                     POST(null, {
                         basket: basketItems,
                     }).then(res => {
@@ -116,27 +127,39 @@ export const UserDataContextProvider = ({
                             setShouldUpdate(Date.now());
                         }
                     })
-                } else {
+                        .finally(() => {
+                            setBasketOperationInProgress(false);
+                        });
+                }
+                else {
                     setBasket(prev => [...prev, ...basketItems]);
                 }
             },
             [token]
         )
     ;
+
+    // BASKET REMOVE
     const remove = useCallback((id) => {
+        setBasketOperationInProgress(true);
         if (token) {
             DELETE(id).then(res => {
                 if (res.status === 200) {
                     setShouldUpdate(Date.now());
                 }
             })
-        } else {
+                .finally(() => {
+                    setBasketOperationInProgress(false);
+                });
+        }
+        else {
             setBasket(prev => {
                 return prev.filter(it => it.productId !== id);
             });
+            setBasketOperationInProgress(false);
         }
 
-    }, []);
+    }, [token, setShouldUpdate, setBasket]);
     console.log({cache})
     return (
         <UserDataContext.Provider value={{
@@ -149,6 +172,7 @@ export const UserDataContextProvider = ({
             add,
             cache,
             loading,
+            basketOperationInProgress,
         }}>
             {children}
         </UserDataContext.Provider>
