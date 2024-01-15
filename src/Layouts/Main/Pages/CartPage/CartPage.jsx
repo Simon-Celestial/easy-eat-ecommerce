@@ -9,19 +9,21 @@ import {CaretDown, CaretUp, X} from "@phosphor-icons/react";
 import {StatusBar} from "../../Common/StatusBar/StatusBar.jsx";
 import {CouponBlock} from "../../Common/CouponBlock/CouponBlock.jsx";
 import {Link} from "react-router-dom";
-import {AuthContext} from "../../../../Context/AuthContext/AuthContext.jsx";
+import {UserDataContext} from "../../../../Context/UserDataContext/UserDataContext.jsx";
 
 export const CartPage = () => {
     const {
         setBasketVisible,
     } = useContext(LayoutContext);
+    const {
+        basket,
+        cache: products,
+        update,
+        remove,
+        loading,
+    } = useContext(UserDataContext);
 
 
-    const [cartCounter, setCartCounter] = useState(1);
-
-    const handleCounter = (count) => {
-        setCartCounter(prevState => prevState + count);
-    }
     const {
         setHeaderColorChange,
     } = useContext(LayoutContext);
@@ -35,6 +37,7 @@ export const CartPage = () => {
     useEffect(() => {
         setBasketVisible(false);
     }, []);
+
 
     return (
         <div className={styles.cartPageWrapper}>
@@ -70,158 +73,109 @@ export const CartPage = () => {
                                         Remove
                                     </div>
                                 </div>
-                                <div className={styles.cartRow}>
-                                    <div className={styles.productName}>
+                                {
+                                    basket.length === 0 && 'No items'
+                                }
+                                {
+                                    basket.map(bItem => {
+                                        const product = products.find(it => it._id === bItem.productId);
+                                        const price = product.salePrice || product.productPrice;
+
+                                        return <div
+                                            key={`${bItem._id}desktop`}
+                                            className={styles.cartRow}
+                                        >
+                                            <div className={styles.productName}>
                                     <span className={styles.productNameInner}>
-                                        <a href="#">
+                                        <Link to="#">
                                             <img
-                                                src="https://easyeat.ancorathemes.com/wp-content/uploads/2020/05/product-4-copyright-480x480.png"
-                                                alt="Product"/>
-                                        </a>
-                                        <a href="#">Black Burger</a>
+                                                src={product?.images?.[0]?.url}
+                                                alt={product?.images?.[0]?.public_id}/>
+                                        </Link>
+                                        <a href="#">{product.title}</a>
                                     </span>
-                                    </div>
-                                    <div className={styles.productPrice}>
-                                        <span>$89.00</span>
-                                    </div>
-                                    <div className={styles.productQuantity}>
-                                        <div className={styles.productCount}>
-                                            <p>{cartCounter}</p>
-                                            <div className={styles.counterControl}>
-                                            <span onClick={() => handleCounter(+1)}>
-                                                <CaretUp/>
-                                            </span>
-                                                <span onClick={cartCounter > 0 ? () => handleCounter(-1) : null}>
-                                                <CaretDown/>
-                                            </span>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div className={styles.productSubtotal}>
-                                        <span>$178.00</span>
-                                    </div>
-                                    <div className={styles.productRemove}>
-                                    <span>
-                                        <X weight="thin"/>
-                                    </span>
-                                    </div>
-                                </div>
-                                <div className={styles.cartRow}>
-                                    <div className={styles.productName}>
-                                    <span className={styles.productNameInner}>
-                                        <a href="#">
-                                            <img
-                                                src="https://png.pngtree.com/png-clipart/20231020/original/pngtree-pink-cute-hamburger-png-image_13383224.png"
-                                                alt="Product"/>
-                                        </a>
-                                        <a href="#">Pink Burger</a>
-                                    </span>
-                                    </div>
-                                    <div className={styles.productPrice}>
-                                        <span>$22.00</span>
-                                    </div>
-                                    <div className={styles.productQuantity}>
-                                        <div className={styles.productCount}>
-                                            <p>{cartCounter}</p>
-                                            <div className={styles.counterControl}>
-                                            <span onClick={() => handleCounter(+1)}>
+                                            <div className={styles.productPrice}>
+                                                <span>${price}</span>
+                                            </div>
+                                            <div className={styles.productQuantity}>
+                                                <div className={styles.productCount}>
+                                                    <p>{bItem.productCount}</p>
+                                                    <div className={styles.counterControl}>
+                                            <span onClick={() => update(bItem._id, bItem.productCount + 1)}>
                                                 <CaretUp/>
-                                            </span>
-                                                <span onClick={cartCounter > 0 ? () => handleCounter(-1) : null}>
+                                            </span> <span
+                                                        onClick={() => bItem.productCount > 0 ? update(bItem._id, bItem.productCount - 1) : {}}
+                                                    >
                                                 <CaretDown/>
                                             </span>
 
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div className={styles.productSubtotal}>
-                                        <span>$44.00</span>
-                                    </div>
-                                    <div className={styles.productRemove}>
+                                            <div className={styles.productSubtotal}>
+                                                <span>${bItem.productCount * price}</span>
+                                            </div>
+                                            <div className={styles.productRemove}>
                                     <span>
-                                        <X weight="thin"/>
+                                        <X onClick={() => remove(bItem._id)} weight="thin" />
                                     </span>
-                                    </div>
-                                </div>
-                                <div className={styles.mobileProductCard}>
-                                    <div className={styles.mobileProductName}>
-                                        <p>Product:</p>
-                                        <div className={styles.deleteMobileProduct}>
-                                            <X/>
-                                        </div>
-                                    </div>
-                                    <div className={styles.mobileProductNameInner}>
-                                        <div className={styles.mobileImgBlock}>
-                                            <img
-                                                src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/02/product-17-copyright-1024x1024.png"
-                                                alt="Product"/>
-                                        </div>
-                                        <p>Margherita Pizza</p>
-                                    </div>
-                                    <div className={styles.mobileProductPrice}>
-                                        <p>Price:</p>
-                                        <p>$14.00</p>
-                                    </div>
-                                    <div className={styles.mobileProductQuantity}>
-                                        <p>Quantity:</p>
-                                        <div className={styles.mobileProductCount}>
-                                            <p>{cartCounter}</p>
-                                            <div className={styles.counterControl}>
-                                            <span onClick={() => handleCounter(+1)}>
-                                                <CaretUp/>
-                                            </span>
-                                                <span onClick={cartCounter > 0 ? () => handleCounter(-1) : null}>
-                                                <CaretDown/>
-                                            </span>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className={styles.mobileProductSubtotal}>
-                                        <p>Subtotal:</p>
-                                        <p>$14.00</p>
-                                    </div>
-                                </div>
-                                <div className={styles.mobileProductCard}>
-                                    <div className={styles.mobileProductName}>
-                                        <p>Product:</p>
-                                        <div className={styles.deleteMobileProduct}>
-                                            <X/>
-                                        </div>
-                                    </div>
-                                    <div className={styles.mobileProductNameInner}>
-                                        <div className={styles.mobileImgBlock}>
-                                            <img
-                                                src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/02/product-17-copyright-1024x1024.png"
-                                                alt="Product"/>
-                                        </div>
-                                        <p>Margherita Pizza</p>
-                                    </div>
-                                    <div className={styles.mobileProductPrice}>
-                                        <p>Price:</p>
-                                        <p>$14.00</p>
-                                    </div>
-                                    <div className={styles.mobileProductQuantity}>
-                                        <p>Quantity:</p>
-                                        <div className={styles.mobileProductCount}>
-                                            <p>{cartCounter}</p>
-                                            <div className={styles.counterControl}>
-                                            <span onClick={() => handleCounter(+1)}>
+                                    })
+                                }
+                                {
+                                    basket.map(bItem => {
+                                        const product = products.find(it => it._id === bItem.productId);
+                                        const price = product.salePrice || product.productPrice;
+
+                                        return <div
+                                            key={`${bItem._id}mobile`}
+                                            className={styles.mobileProductCard}>
+                                            <div className={styles.mobileProductName}>
+                                                <p>Product:</p>
+                                                <div className={styles.deleteMobileProduct}>
+                                                    <X onClick={() => remove(bItem._id)}/>
+                                                </div>
+                                            </div>
+                                            <div className={styles.mobileProductNameInner}>
+                                                <div className={styles.mobileImgBlock}>
+                                                    <img
+                                                        src={product?.images?.[0]?.url}
+                                                        alt={product?.images?.[0]?.public_id}/>
+                                                </div>
+                                                <p>{product.title}</p>
+                                            </div>
+                                            <div className={styles.mobileProductPrice}>
+                                                <p>Price:</p>
+                                                <p>${price}</p>
+                                            </div>
+                                            <div className={styles.mobileProductQuantity}>
+                                                <p>Quantity:</p>
+                                                <div className={styles.mobileProductCount}>
+                                                    <p>{bItem.productCount}</p>
+                                                    <div className={styles.counterControl}>
+                                            <span onClick={() => update(bItem._id, bItem.productCount + 1)}>
                                                 <CaretUp/>
-                                            </span>
-                                                <span onClick={cartCounter > 0 ? () => handleCounter(-1) : null}>
+                                            </span> <span
+                                                        onClick={() => bItem.productCount > 0 ? update(bItem._id, bItem.productCount - 1) : {}}
+                                                    >
                                                 <CaretDown/>
                                             </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className={styles.mobileProductSubtotal}>
+                                                <p>Subtotal:</p>
+                                                <span>${bItem.productCount * price}</span>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className={styles.mobileProductSubtotal}>
-                                        <p>Subtotal:</p>
-                                        <p>$14.00</p>
-                                    </div>
-                                </div>
+                                    })
+                                }
+
                             </div>
                             <div className={styles.cartBottom}>
-                                <CouponBlock />
+                                <CouponBlock/>
                                 <div className={styles.buttonBlock}>
                                     <a href="#">
                                         Continue Shopping
@@ -240,7 +194,10 @@ export const CartPage = () => {
                                                 Subtotal
                                             </div>
                                             <div className={styles.cartTotalPrice}>
-                                                $24.00
+                                                ${basket.map(bItem => {
+                                                const product = products.find(it => it._id === bItem.productId);
+                                                return (product.salePrice || product.productPrice) * bItem.productCount;
+                                            }).reduce((a, b) => a + b, 0).toFixed(2)}
                                             </div>
                                         </div>
                                         <div className={styles.cartTotalRow}>
@@ -248,7 +205,10 @@ export const CartPage = () => {
                                                 Total
                                             </div>
                                             <div className={styles.cartTotalPrice}>
-                                                $24.00
+                                                ${basket.map(bItem => {
+                                                const product = products.find(it => it._id === bItem.productId);
+                                                return (product.salePrice || product.productPrice) * bItem.productCount;
+                                            }).reduce((a, b) => a + b, 0).toFixed(2)}
                                             </div>
                                         </div>
                                     </div>

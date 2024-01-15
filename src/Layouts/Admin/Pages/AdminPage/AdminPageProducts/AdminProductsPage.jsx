@@ -103,7 +103,8 @@ export const AdminProductsPage = () => {
                     const dataRaw = JSON.parse(result.data).data.product;
                     setData(dataRaw.map(it => mapData(it)));
                     setLoading(false);
-                } else {
+                }
+                else {
                     console.log(result)
                 }
             } catch (e) {
@@ -139,9 +140,9 @@ export const AdminProductsPage = () => {
     }, [data, sorter])
     const dataFiltered = useMemo(() => {
         return dataSorted?.filter((it) => {
-            return it.title.includes(searchSample) || it.description.includes(searchSample);
+            return it.title?.toLowerCase().includes(searchSample?.toLowerCase());
         }) || [];
-    }, [dataSorted, sorter, searchSample]);
+    }, [dataSorted, sorter, searchSample, brands]);
 
 
     // PAGINATION

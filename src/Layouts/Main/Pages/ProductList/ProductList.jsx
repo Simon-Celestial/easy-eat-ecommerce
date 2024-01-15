@@ -47,7 +47,7 @@ export const ProductList = () => {
     const {
         basket,
         cache,
-        basketOperationInProgress,
+        loading:basketLoading,
     } = useContext(UserDataContext);
     const [loading, setLoading] = useState(true);
     // useEffect TO CHANGE HEADER COLOR
@@ -171,7 +171,7 @@ export const ProductList = () => {
                                         :
                                         <div className={styles.rightBasketProducts}>
                                             <div className={styles.productsCards}>
-                                                {basketOperationInProgress && basket.length > 0 ?
+                                                {basketLoading && basket.length > 0 ?
                                                     <div className={styles.basketProductLoader}>
                                                         <CircleDashed/>
                                                     </div>

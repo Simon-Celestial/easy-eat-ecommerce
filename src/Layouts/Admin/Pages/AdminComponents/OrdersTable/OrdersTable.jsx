@@ -3,7 +3,10 @@ import styles from "./OrdersTable.module.scss";
 import {AdminPagination} from "../AdminPagination/AdminPagination.jsx";
 import {OrdersTableRows} from "./OrdersTableRows/OrdersTableRows.jsx";
 
-export const OrdersTable = () => {
+export const OrdersTable = ({
+                                orders,
+                                updateOrder,
+                            }) => {
 
     return (
         <div className={styles.ordersWrapper}>
@@ -35,10 +38,12 @@ export const OrdersTable = () => {
                             INVOICE
                         </div>
                     </div>
-                    <OrdersTableRows />
+                    {
+                        (orders || []).map(order => <OrdersTableRows order={order} updateOrder={updateOrder}/>)
+                    }
                 </div>
             </div>
-            <AdminPagination />
+            <AdminPagination/>
         </div>
 
     )

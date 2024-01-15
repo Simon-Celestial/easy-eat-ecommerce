@@ -42,6 +42,7 @@
         .invoiceNumber {
           max-width: 152px;
           width: 100%;
+          text-transform: uppercase;
         }
 
         .orderTime {
@@ -57,6 +58,7 @@
         .method {
           max-width: 125px;
           width: 100%;
+          text-transform: capitalize;
         }
 
         .amount {
@@ -77,6 +79,7 @@
             text-align: center;
             font-family: $font-alternative;
             font-size: 12px;
+            text-transform: capitalize;
           }
 
         }

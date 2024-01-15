@@ -17,6 +17,7 @@ export const UserDataContext = React.createContext({
     },
     update: () => {
     },
+    refresh: () => {},
     cache: [],
     loading: false,
     basketOperationInProgress: false,
@@ -31,11 +32,12 @@ export const UserDataContextProvider = ({
     const [shouldUpdate, setShouldUpdate] = useState(Date.now());
     const [cacheLoading, setCacheLoading] = useState(false);
     const [basketOperationInProgress, setBasketOperationInProgress] = useState(false);
+    const [basketFetching, setBasketFetching] = useState(false);
 
 
     const loading = useMemo(() => {
-        return basketOperationInProgress || cacheLoading;
-    }, [basketOperationInProgress, cacheLoading])
+        return basketOperationInProgress || cacheLoading || basketFetching;
+    }, [basketOperationInProgress, cacheLoading, basketFetching])
     const {
         GET,
         DELETE,
@@ -79,10 +81,12 @@ export const UserDataContextProvider = ({
 
     useEffect(() => {
         if (token) {
+            setBasketFetching(true);
             GET().then(result => {
                 if (result.status === 200) {
                     setBasket(JSON.parse(result.data).data)
                 }
+                setBasketFetching(false);
             })
         }
         else {
@@ -118,8 +122,8 @@ export const UserDataContextProvider = ({
                     productId: it._id,
                     productCount: it.count,
                 }));
-            setBasketOperationInProgress(true);
-            if (token) {
+                setBasketOperationInProgress(true);
+                if (token) {
                     POST(null, {
                         basket: basketItems,
                     }).then(res => {
@@ -173,6 +177,7 @@ export const UserDataContextProvider = ({
             cache,
             loading,
             basketOperationInProgress,
+            refresh: () => setShouldUpdate(Date.now()),
         }}>
             {children}
         </UserDataContext.Provider>

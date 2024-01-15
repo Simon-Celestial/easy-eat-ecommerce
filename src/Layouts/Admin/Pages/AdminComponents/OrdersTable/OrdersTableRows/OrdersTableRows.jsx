@@ -1,42 +1,68 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import styles from "../OrdersTable.module.scss";
 import {Link} from "react-router-dom";
 import {Eye} from "@phosphor-icons/react";
+import moment from "moment";
+import {UserDataContext} from "../../../../../../Context/UserDataContext/UserDataContext.jsx";
+import useApi from "../../../../../../Hooks/useApi.js";
 
-export const OrdersTableRows = () => {
-    const ordersData = [
-        {
+export const OrdersTableRows = ({
+                                    order,
+                                    updateOrder,
+                                }) => {
 
-        }
-    ]
+    const {
+        completed,
+        createdAt,
+        customer,
+        method,
+        products,
+        status,
+        total,
+        updatedAt,
+        _id
+    } = order;
+    const {
+        cache,
+    } = useContext(UserDataContext);
+    console.log(cache);
     return (
         <div className={styles.tableRow}>
             <div className={`${styles.invoiceNumber} ${styles.tableBox}`}>
-                <span>10622</span>
+                <span>{_id?.slice(0, 5)}</span>
             </div>
             <div className={`${styles.orderTime} ${styles.tableBox}`}>
-                <span>Jan 2, 2024 1:24 PM</span>
+                <span>{moment(createdAt).format("MMM D, YYYY h:mm A")}</span>
             </div>
             <div className={`${styles.customerName} ${styles.tableBox}`}>
-                <span>Harriet Ballard</span>
+                <span>{customer.name}</span>
             </div>
             <div className={`${styles.method} ${styles.tableBox}`}>
-                <span>Cash</span>
+                <span>{method}</span>
             </div>
             <div className={`${styles.amount} ${styles.tableBox}`}>
-                <span>$360.77</span>
+                <span>${products.map(it => {
+                    const product = cache?.find(cached => cached._id === it.productId);
+
+                    if (!product) return 0;
+                    return (product.salePrice || product.productPrice) * Number(it.productCount);
+                }).reduce((a, b) => a + b, 0).toFixed(2)}</span>
             </div>
             <div className={`${styles.status} ${styles.tableBox}`}>
                 <div className={styles.statusElement}>
-                    Canceled
+                    {status}
                 </div>
             </div>
             <div className={`${styles.action} ${styles.tableBox}`}>
-                <select>
-                    <option value="Delivered">Delivered</option>
-                    <option value="Pending">Pending</option>
-                    <option value="Processing">Processing</option>
-                    <option value="Cancel">Cancel</option>
+                <select value={status} onChange={({target}) => {
+                    updateOrder(order, {
+                        status: target.value,
+                    });
+                }}>
+                    <option value="delivered">Delivered</option>
+                    <option value="pending">Pending</option>
+                    <option value="processing">Processing</option>
+                    <option value="cancel">Cancel</option>
                 </select>
             </div>
             <div className={`${styles.viewInvoice} ${styles.tableBox}`}>

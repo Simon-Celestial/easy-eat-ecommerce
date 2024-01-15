@@ -9,6 +9,9 @@ import {EmptyCartInfo} from "../../../Main/Common/EmpyCartInfo/EmptyCartInfo.jsx
 import {StatusBar} from "../../../Main/Common/StatusBar/StatusBar.jsx";
 import {CouponBlock} from "../../../Main/Common/CouponBlock/CouponBlock.jsx";
 import {Eye, EyeSlash} from "@phosphor-icons/react";
+import {UserDataContext} from "../../../../Context/UserDataContext/UserDataContext.jsx";
+import useApi from "../../../../Hooks/useApi.js";
+import {useNavigate} from "react-router-dom";
 
 export const CheckoutPage = () => {
 
@@ -17,6 +20,18 @@ export const CheckoutPage = () => {
         setBasketVisible,
         openHandler,
     } = useContext(LayoutContext);
+
+    const {
+        basket,
+        cache: products,
+        update,
+        refresh,
+        loading,
+    } = useContext(UserDataContext);
+
+    const {
+        POST: postOrder,
+    } = useApi('site/orders')
 
     // useEffect TO CHANGE HEADER COLOR
     useEffect(() => {
@@ -28,6 +43,8 @@ export const CheckoutPage = () => {
         setBasketVisible(true);
     }, []);
 
+
+    const navigate = useNavigate();
     const [couponDropDownActive, setCouponDropDownActive] = useState(false);
     const [LoginDropDownActive, setLoginDropDownActive] = useState(false);
     const [passwordVisible, setPasswordVisible] = useState(false);
@@ -49,8 +66,10 @@ export const CheckoutPage = () => {
                     <div className={styles.checkoutMain}>
                         <div className={styles.headingDropdown}>
                             <div className={styles.titleBlock}>
-                                <p>Returning customer? <span onClick={openHandler(setLoginDropDownActive)}>Click here to login</span></p>
-                                <form action="#" className={`${styles.dropDownLogin} ${LoginDropDownActive && styles.loginDropdownActive}`}>
+                                <p>Returning customer? <span onClick={openHandler(setLoginDropDownActive)}>Click here to login</span>
+                                </p>
+                                <form action="#"
+                                      className={`${styles.dropDownLogin} ${LoginDropDownActive && styles.loginDropdownActive}`}>
                                     <p>If you have shopped with us before, please enter your details below. If you are a
                                         new customer, please proceed to the Billing section.</p>
                                     <div className={styles.dropDownLoginRow}>
@@ -73,7 +92,8 @@ export const CheckoutPage = () => {
                                                     {!passwordVisible ? <Eye/> : <EyeSlash/>}
                                                 </div>
                                             </label>
-                                            <input type={`${passwordVisible? "text" : "password"}`} name="password" id="password" required
+                                            <input type={`${passwordVisible ? "text" : "password"}`} name="password"
+                                                   id="password" required
                                                    autoComplete="password"/>
 
                                         </div>
@@ -91,7 +111,7 @@ export const CheckoutPage = () => {
                             </div>
                         </div>
                         <StatusBar first="#EC3D08" second="#EC3D08" third="black"/>
-                        <form action="#" method="post" className={styles.checkoutForm}>
+                        <div className={styles.checkoutForm}>
                             {/*LEFT*/}
                             <div className={styles.checkoutLeft}>
                                 <h3>Billing Details</h3>
@@ -157,23 +177,33 @@ export const CheckoutPage = () => {
                                 <h3>Your Order</h3>
                                 <div className={styles.orderContainer}>
                                     {/*PRODUCTS HERE*/}
-                                    <div className={styles.orderRow}>
-                                        <p>Margherita Pizza <span>× 1</span></p>
-                                        <p>$14.00</p>
-                                    </div>
-                                    <div className={styles.orderRow}>
-                                        <p>Classic Hamburger<span>× 1</span></p>
-                                        <p>$10.00</p>
-                                    </div>
+                                    {
+                                        basket.map(bItem => {
+                                            const product = products.find(it => it._id === bItem.productId);
+                                            const price = product.salePrice || product.productPrice;
+
+                                            return <div className={styles.orderRow}>
+                                                <p>{product.title} <span> × {bItem.productCount}</span></p>
+                                                <p>${price}</p>
+                                            </div>
+                                        })
+                                    }
+
                                     {/*TOTAL AND SUBTOTAL PRICE HERE*/}
                                     <div className={styles.orderRow}>
                                         <p>Subtotal</p>
-                                        <p>$24.00</p>
+                                        <p>${basket.map(bItem => {
+                                            const product = products.find(it => it._id === bItem.productId);
+                                            return (product.salePrice || product.productPrice) * bItem.productCount;
+                                        }).reduce((a, b) => a + b, 0).toFixed(2)}</p>
                                     </div>
                                     <div className={styles.orderRow}
                                          style={{borderColor: "transparent", color: "#EC3D08"}}>
                                         <p>Total</p>
-                                        <p>$24.00</p>
+                                        <p>${basket.map(bItem => {
+                                            const product = products.find(it => it._id === bItem.productId);
+                                            return (product.salePrice || product.productPrice) * bItem.productCount;
+                                        }).reduce((a, b) => a + b, 0).toFixed(2)}</p>
                                     </div>
                                 </div>
                                 <h3 className={styles.payment}>Payment</h3>
@@ -191,7 +221,17 @@ export const CheckoutPage = () => {
                                             our <a href="https://easyeat.ancorathemes.com/privacy-policy/"
                                                    className="woocommerce-privacy-policy-link" target="_blank">privacy
                                                 policy</a>.</p>
-                                        <button type="submit">
+                                        <button onClick={async () => {
+                                            const result = await postOrder(null, {
+                                                products: basket.map(({ productId, productCount}) => ({
+                                                    productId, productCount,
+                                                }))
+                                            });
+                                            if(result.status  === 200) {
+                                                refresh();
+                                                navigate('/order-completed');
+                                            }
+                                        }}>
                                             Place Order
                                         </button>
                                     </div>
@@ -199,7 +239,7 @@ export const CheckoutPage = () => {
 
 
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </section>
