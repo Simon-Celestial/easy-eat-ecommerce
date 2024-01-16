@@ -44,6 +44,8 @@ export const Header = () => {
     const logout = useCallback(() => {
         return rawLogout(navigator);
     }, [rawLogout])
+
+
     // HEADER COLOR STATE CHANGE
     useEffect(() => {
         setHeaderColorChange(false);

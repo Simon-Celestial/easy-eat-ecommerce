@@ -1,6 +1,7 @@
 import React, {useCallback, useContext, useEffect, useMemo, useState} from 'react'
 import useApi from "../../Hooks/useApi.js";
 import {AuthContext} from "../AuthContext/AuthContext.jsx";
+import toast from "react-hot-toast";
 
 
 export const UserDataContext = React.createContext({
@@ -19,8 +20,10 @@ export const UserDataContext = React.createContext({
     },
     refresh: () => {},
     cache: [],
+    cacheLoading: false,
     loading: false,
     basketOperationInProgress: false,
+    basketFetching: false,
 
 })
 export const UserDataContextProvider = ({
@@ -164,7 +167,6 @@ export const UserDataContextProvider = ({
         }
 
     }, [token, setShouldUpdate, setBasket]);
-    console.log({cache})
     return (
         <UserDataContext.Provider value={{
             basket,
@@ -175,7 +177,9 @@ export const UserDataContextProvider = ({
             update,
             add,
             cache,
+            cacheLoading,
             loading,
+            basketFetching,
             basketOperationInProgress,
             refresh: () => setShouldUpdate(Date.now()),
         }}>

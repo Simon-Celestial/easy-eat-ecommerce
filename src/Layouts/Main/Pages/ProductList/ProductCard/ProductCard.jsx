@@ -16,6 +16,7 @@ export const ProductCard = ({
         update,
         add,
         basket,
+        loading: productLoading
     } = useContext(UserDataContext);
     return (
         <div className={`${styles.productCard} ${loading && styles.loadingAnimation}`}>
@@ -71,19 +72,37 @@ export const ProductCard = ({
                             }}/>
                     </p>
                     <p className={styles.optionButton}>
-                        <ShoppingCart
-                            color={basket.find(it => it.productId === product._id) ? 'red' : 'unset'}
-                            onClick={() => {
-                                const foundItem = basket.find(it => it.productId === product._id);
-                                if (foundItem) {
-                                    update(foundItem._id, foundItem.productCount + 1)
-                                } else {
-                                    add({
-                                        ...product,
-                                        count: 1,
-                                    })
-                                }
-                            }}/>
+                        {productLoading ?
+                            <div className={styles.buttonLoader}>
+                                <CircleDashed/>
+                            </div>
+                            :
+                            <ShoppingCart
+                                color={basket.find(it => it.productId === product._id) ? 'red' : 'unset'}
+                                onClick={() => {
+                                    const foundItem = basket.find(it => it.productId === product._id);
+                                    if (foundItem) {
+                                        console.log(product)
+                                        update(foundItem._id, foundItem.productCount + 1)
+                                        toast.success(`${product.title} added to basket`, {
+                                            position: "top-center",
+                                            style: {
+                                                background: "green",
+                                                color: "white",
+                                            },
+                                        });
+
+                                    }
+                                    else {
+                                        add({
+                                            ...product,
+                                            count: 1,
+                                        })
+                                    }
+                                }}/>
+                        }
+
+
                     </p>
                     <Link className={styles.optionButton} to={`/product/${product._id}`} target={'_blank'}>
                         <ArrowRight/>

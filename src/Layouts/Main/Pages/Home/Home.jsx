@@ -23,7 +23,8 @@ export const Home = () => {
     const handleMouseMove = useCallback((e) => {
         if (parallaxEnabled) {
             setPosition({x: e.clientX, y: e.clientY});
-        } else {
+        }
+        else {
 
         }
     }, [parallaxEnabled]);
@@ -51,7 +52,11 @@ export const Home = () => {
     useEffect(() => {
         setBasketVisible(true);
     }, []);
+    const [visibleActive, setVisibleActive] = useState(false);
 
+    useEffect(() => {
+        setVisibleActive(true);
+    }, []);
 
 
     return (
@@ -72,7 +77,7 @@ export const Home = () => {
                     className={styles.aboutUsSection}
                 >
                     <div className={styles.aboutUsContent}>
-                        <div className={styles.aboutUsLeft}>
+                        <div className={`${styles.aboutUsLeft} ${visibleActive && styles.transformActive}`}>
                             <div className={styles.aboutUsLeftTittle}>
                                 <p>About Us</p>
                                 <h1>UNFORGETTABLE BURGERS,</h1>
@@ -107,7 +112,7 @@ export const Home = () => {
 
                             </div>
                         </div>
-                        <div className={styles.aboutUsRight}>
+                        <div className={`${styles.aboutUsRight} ${visibleActive && styles.visibleActive}`}>
                             <div className={styles.spinningCircle}>
                                 <img
                                     src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/05/circle-dotted-3.svg"

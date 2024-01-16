@@ -148,7 +148,9 @@
                     transition: $transition-fast;
                     display: flex;
                     cursor: pointer;
-
+                    position: relative;
+                    width: 46px;
+                    height: 46px;
                     &:hover {
                       margin-bottom: 10px;
 
@@ -156,16 +158,32 @@
                         color: $color-orange;
                       }
                     }
-
                     svg {
                       color: $color-black;
                       font-size: 18px;
                       transition: color $transition-fast;
-
+                    }
+                    .buttonLoader {
+                      position: absolute;
+                      z-index: 3;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      left: 50%;
+                      top: 50%;
+                      transform: translate(-50%, -50%);
+                      background: $color-white;
+                      width: 46px;
+                      height: 46px;
+                      box-shadow: 0 0 5px $color-black;
+                      svg {
+                        font-size: 22px;
+                        color: $color-black;
+                        animation: rotateAnimation 1s linear infinite;
+                      }
                     }
                   }
                 }
-
                 a {
                   display: flex;
                   width: 100%;

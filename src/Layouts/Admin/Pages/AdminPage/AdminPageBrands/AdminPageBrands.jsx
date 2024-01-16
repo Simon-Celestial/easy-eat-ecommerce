@@ -36,19 +36,24 @@ export const AdminPageBrands = () => {
     const [loading, setLoading] = useState(false);
     const [shouldUpdate, setShouldUpdate] = useState(Date.now());
 
+    // UPDATE FUNC
     const update = useCallback(() => {
         setShouldUpdate(Date.now());
     }, []);
 
+    // ADDING ALIASES
     const {
         GET: getAllBrands,
         DELETE: deleteBrand,
     } = useApi('dashboard/brands')
+
+    // OPEN EDIT MENU
     const handleOpenEditMenu = (item) => {
         setSelectedItem(item);
         setBrandsMenuOpen(true);
     }
 
+    // GET BRANDS DATA
     useEffect(() => {
         if (loading) return;
         (async () => {
@@ -66,6 +71,7 @@ export const AdminPageBrands = () => {
                 setLoading(false)
             }
         })();
+
     }, [shouldUpdate]);
 
     // DELETE
@@ -91,11 +97,15 @@ export const AdminPageBrands = () => {
 
     }, [])
 
+    // BRANDS FILTER
     const dataFiltered = useMemo(() => {
         return brands?.filter((it) => {
-            return it.name.includes(searchSample);
+            return it.name.toLowerCase().includes(searchSample.toLowerCase());
         }) || [];
     }, [searchSample, brands])
+
+
+
     const dataPaginated = useMemo(() => {
         const newArr = [...dataFiltered];
         return newArr.slice(currentPage * PAGE_SIZE, (currentPage + 1) * PAGE_SIZE);

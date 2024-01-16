@@ -1,13 +1,14 @@
 import React, {useContext, useState} from 'react'
 import styles from "./AdminHeader.module.scss";
 import {File, Power, Sidebar, User} from "@phosphor-icons/react";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {LayoutContext} from "../../../../../Context/LayoutContext/LayoutContext.jsx";
 import {AuthContext} from "../../../../../Context/AuthContext/AuthContext.jsx";
 
 export const AdminHeader = () => {
     const {
         userData,
+        logout,
     } = useContext(AuthContext);
 
     const {
@@ -15,6 +16,8 @@ export const AdminHeader = () => {
         setAdminSideMenuOpen,
     } = useContext(LayoutContext);
     const [adminDropDownVisible, setAdminDropDownVisible] = useState(false);
+
+    const navigator = useNavigate();
 
     return (
         <header className={styles.adminHeaderWrapper}>
@@ -32,10 +35,10 @@ export const AdminHeader = () => {
                         <User/>
                     </div>
                     <div className={`${styles.adminDropdown} ${adminDropDownVisible && styles.adminDropdownActive}`}>
-                        <Link to="/auth/dashboard">
+                        <Link to="/admin/dashboard">
                             <File/>
                             Main page</Link>
-                        <button>
+                        <button onClick={() => logout(navigator)}>
                             <Power/>
                             Log Out
                         </button>

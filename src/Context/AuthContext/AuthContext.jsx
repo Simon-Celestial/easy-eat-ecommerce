@@ -1,7 +1,6 @@
 import React, {useCallback, useMemo, useState} from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
-import {useNavigate} from "react-router-dom";
 
 
 export const BASE_URL = import.meta.env.VITE_BASE_URL;

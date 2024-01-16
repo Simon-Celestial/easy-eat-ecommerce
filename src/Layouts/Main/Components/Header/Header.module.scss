@@ -632,6 +632,7 @@
     }
   }
 }
+
 @media screen and (max-width: 550px) {
   .siteHeader {
     .headerContent {
@@ -669,6 +670,9 @@
     .headerContent {
       .headerRight {
         .headerRightItem {
+          .accountDropdown {
+            top: 50px;
+          }
           .basketDropdown {
             width: 100vw;
             height: 100vh;

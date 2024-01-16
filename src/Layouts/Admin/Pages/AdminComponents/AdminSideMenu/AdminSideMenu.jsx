@@ -57,11 +57,10 @@ export const AdminSideMenu = () => {
                     Pages</div>
                 <div className={`${styles.pagesDropDown} ${pagesDropDownVisible && styles.pagesDropDownActive}`} >
                     <Link to="/home">- Home</Link>
-                    <Link to="/home/shop">- Product List</Link>
-                    <Link to="/home/product">- Product Single</Link>
-                    <Link to="/home/cart">- Cart</Link>
-                    <Link to="/home/checkout">- Checkout</Link>
-                    <Link to="/home/wishlist">- Wishlist Page</Link>
+                    <Link to="/shop">- Shop</Link>
+                    <Link to="/cart">- Cart</Link>
+                    <Link to="/auth/checkout">- Checkout</Link>
+                    <Link to="/wishlist">- Wishlist Page</Link>
                 </div>
             </div>
         </section>

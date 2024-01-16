@@ -45,6 +45,12 @@ a {
           background-size: cover;
           z-index: 3;
           padding: 220px 30px 240px 70px;
+          transition: transform 0.5s ease-in-out;
+          transform: scaleX(0);
+          transform-origin: left;
+          &.transformActive {
+            transform: scaleX(1)!important;
+          }
 
           .aboutUsLeftTittle {
             display: flex;
@@ -113,7 +119,10 @@ a {
                 margin-top: 45px;
                 padding: 16px;
                 cursor: pointer;
-
+                transition: $transition-fast;
+                &:hover {
+                  background-color: #9d2800;
+                }
                 svg {
                   font-size: 20px;
                   padding-bottom: 3px;
@@ -129,6 +138,11 @@ a {
           width: 50%;
           position: relative;
           background-color: $color-yellow;
+          opacity: 0;
+          transition: opacity 2s ease;
+          &.visibleActive {
+            opacity: 1;
+          }
 
           .spinningCircle {
             display: flex;
