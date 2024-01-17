@@ -6,6 +6,7 @@ import {OrdersTableRows} from "./OrdersTableRows/OrdersTableRows.jsx";
 export const OrdersTable = ({
                                 orders,
                                 updateOrder,
+                                pagination,
                             }) => {
 
     return (
@@ -31,9 +32,11 @@ export const OrdersTable = ({
                         <div className={`${styles.status} ${styles.tableBox}`}>
                             STATUS
                         </div>
-                        <div className={`${styles.action} ${styles.tableBox}`}>
+
+                        {updateOrder && <div className={`${styles.action} ${styles.tableBox}`}>
                             ACTION
                         </div>
+                        }
                         <div className={`${styles.viewInvoice} ${styles.tableBox}`}>
                             INVOICE
                         </div>
@@ -43,7 +46,7 @@ export const OrdersTable = ({
                     }
                 </div>
             </div>
-            <AdminPagination/>
+            {updateOrder && pagination}
         </div>
 
     )

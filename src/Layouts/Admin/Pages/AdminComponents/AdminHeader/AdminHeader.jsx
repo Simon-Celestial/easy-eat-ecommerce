@@ -4,6 +4,7 @@ import {File, Power, Sidebar, User} from "@phosphor-icons/react";
 import {Link, useNavigate} from "react-router-dom";
 import {LayoutContext} from "../../../../../Context/LayoutContext/LayoutContext.jsx";
 import {AuthContext} from "../../../../../Context/AuthContext/AuthContext.jsx";
+import {UserDataContext} from "../../../../../Context/UserDataContext/UserDataContext.jsx";
 
 export const AdminHeader = () => {
     const {
@@ -11,6 +12,9 @@ export const AdminHeader = () => {
         logout,
     } = useContext(AuthContext);
 
+    const {
+        setBasket,
+    } = useContext(UserDataContext)
     const {
         openHandler,
         setAdminSideMenuOpen,
@@ -38,7 +42,7 @@ export const AdminHeader = () => {
                         <Link to="/admin/dashboard">
                             <File/>
                             Main page</Link>
-                        <button onClick={() => logout(navigator)}>
+                        <button onClick={() => logout(navigator, () => setBasket([]))}>
                             <Power/>
                             Log Out
                         </button>

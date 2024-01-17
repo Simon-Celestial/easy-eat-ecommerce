@@ -7,27 +7,17 @@ import {UserDataContext} from "../../../../../../Context/UserDataContext/UserDat
 import useApi from "../../../../../../Hooks/useApi.js";
 
 export const OrdersTableRows = ({
-                                    order,
-                                    updateOrder,
+                                    order, updateOrder,
                                 }) => {
 
     const {
-        completed,
-        createdAt,
-        customer,
-        method,
-        products,
-        status,
-        total,
-        updatedAt,
-        _id
+        completed, createdAt, customer, method, products, status, total, updatedAt, _id
     } = order;
     const {
         cache,
     } = useContext(UserDataContext);
     console.log(cache);
-    return (
-        <div className={styles.tableRow}>
+    return (<div className={styles.tableRow}>
             <div className={`${styles.invoiceNumber} ${styles.tableBox}`}>
                 <span>{_id?.slice(0, 5)}</span>
             </div>
@@ -53,7 +43,7 @@ export const OrdersTableRows = ({
                     {status}
                 </div>
             </div>
-            <div className={`${styles.action} ${styles.tableBox}`}>
+            {updateOrder && <div className={`${styles.action} ${styles.tableBox}`}>
                 <select value={status} onChange={({target}) => {
                     updateOrder(order, {
                         status: target.value,
@@ -64,9 +54,9 @@ export const OrdersTableRows = ({
                     <option value="processing">Processing</option>
                     <option value="cancel">Cancel</option>
                 </select>
-            </div>
+            </div>}
             <div className={`${styles.viewInvoice} ${styles.tableBox}`}>
-                <Link to="/admin/order" className={styles.view}>
+                <Link to={`/admin/order/${_id}`} className={styles.view}>
                     <Eye/>
                 </Link>
             </div>

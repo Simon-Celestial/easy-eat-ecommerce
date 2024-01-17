@@ -21,6 +21,7 @@ import {AuthLayout} from "./Layouts/Authentication/AuthLayout.jsx";
 import {PageNotFound} from "./Layouts/Main/Pages/PageNotFound/PageNotFound.jsx";
 import {useContext} from "react";
 import {AuthContext} from "./Context/AuthContext/AuthContext.jsx";
+import {CompletedOrder} from "./Layouts/Main/Pages/CompletedOrder/CompletedOrder.jsx";
 
 const router = (userData, isAdmin, token) => createBrowserRouter([
     {
@@ -65,6 +66,10 @@ const router = (userData, isAdmin, token) => createBrowserRouter([
                 path: 'register',
                 element: <RegisterPage/>
             },
+            {
+                path: '/order-completed',
+                element: <CompletedOrder />
+            }
         ],
     },
     {
@@ -86,7 +91,7 @@ const router = (userData, isAdmin, token) => createBrowserRouter([
             {path: 'login', element: <AdminLogin/>},
             {path: 'dashboard', element: <AdminPageDashboard/>},
             {path: 'orders', element: <AdminPageOrders/>},
-            {path: 'order', element: <AdminOrderSingle/>},
+            {path: 'order/:id', element: <AdminOrderSingle/>},
             {path: 'staff', element: <AdminPageStaff/>},
             {path: 'brands', element: <AdminPageBrands/>},
             {path: 'products', element: <AdminProductsPage/>},

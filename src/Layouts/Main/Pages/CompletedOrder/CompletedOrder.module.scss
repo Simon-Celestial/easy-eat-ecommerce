@@ -1,0 +1,94 @@
+@import "../../../../Variables/variables.module.scss";
+@import "../../../../Animations/Animations.module.scss";
+
+
+.completedOrderWrapper {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 30px 120px 30px;
+    background-color: $color-yellow;
+    .pageContent {
+        display: flex;
+        width: 100%;
+        max-width: 600px;
+        padding: 50px 25px;
+        align-items: center;
+        background-color: $color-white;
+        flex-direction: column;
+        box-shadow: 0 0 5px $color-gray;
+        h2 {
+            font-family: $font-main;
+            font-weight: 400;
+            font-size: 30px;
+        }
+        svg {
+            font-size: 60px;
+            color: green;
+            margin-top: 15px;
+        }
+        h3 {
+            font-family: $font-alternative;
+            font-weight: 400;
+            font-size: 20px;
+            margin-top: 15px;
+        }
+        p {
+            font-family: $font-alternative;
+            font-size: 14px;
+            text-align: center;
+            margin-top: 25px;
+        }
+        a {
+            width: 100%;
+            max-width: 200px;
+            height: 50px;
+            background-color: $color-orange;
+            transition: $transition-fast;
+            font-size: 18px;
+            font-family: $font-main;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: $color-white;
+            margin-top: 25px;
+            &:hover {
+                background-color: #9d2800;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1200px ) {
+    .completedOrderWrapper {
+        .pageContent {
+            max-width: 500px;
+        }
+    }
+}
+@media screen and (max-width: 800px ) {
+    .completedOrderWrapper {
+        padding: 50px 10px 50px 10px;
+
+        .pageContent {
+            max-width: 300px;
+            padding: 35px 25px;
+            h2 {
+                font-size: 20px;
+            }
+            svg {
+                font-size: 35px;
+            }
+            h3 {
+                font-size: 18px;
+                text-align: center;
+            }
+            a {
+                height: 40px;
+
+            }
+        }
+    }
+}

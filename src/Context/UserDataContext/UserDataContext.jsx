@@ -29,7 +29,6 @@ export const UserDataContext = React.createContext({
 export const UserDataContextProvider = ({
                                             children,
                                         }) => {
-    const [basket, setBasket] = useState([]);
     const [wishlist, setWishlist] = useState(JSON.parse(localStorage.wishlist || '{}'));
     const [cache, setCache] = useState(JSON.parse(localStorage.cache || '[]'));
     const [shouldUpdate, setShouldUpdate] = useState(Date.now());
@@ -53,6 +52,7 @@ export const UserDataContextProvider = ({
     const {
         token,
     } = useContext(AuthContext);
+    const [basket, setBasket] = useState(token? []: JSON.parse(localStorage.basket || '[]'));
 
     useEffect(() => {
         (async () => {
@@ -72,9 +72,8 @@ export const UserDataContextProvider = ({
 
     }, []);
     useEffect(() => {
-        if (!token)
-            localStorage.basket = JSON.stringify(basket);
-    }, [basket]);
+        if (!token) localStorage.basket = JSON.stringify(basket);
+    }, [basket, token]);
     useEffect(() => {
         localStorage.cache = JSON.stringify(cache);
     }, [cache]);
@@ -92,18 +91,15 @@ export const UserDataContextProvider = ({
                 setBasketFetching(false);
             })
         }
-        else {
-            setBasket(JSON.parse(localStorage.basket || '[]'))
-        }
     }, [token, shouldUpdate]);
 
 
     // BASKET UPDATE
-    const update = useCallback((id, count) => {
-        setBasketOperationInProgress(true);
+    const update = useCallback((id, count, shouldUpdate = true) => {
         if (token) {
+            setBasketOperationInProgress(true);
             PUT(id, {productCount: count}).then(res => {
-                if (res.status === 200) {
+                if (res.status === 200 && shouldUpdate) {
                     setShouldUpdate(Date.now());
                 }
             })
@@ -112,21 +108,23 @@ export const UserDataContextProvider = ({
                 });
         }
         else {
-            setBasket(prev => ({
-                ...prev,
-
-            }));
+            setBasket((prev) => {
+                const prevData = [...prev];
+                prevData.find(it => it._id === id).productCount = count;
+                return prevData;
+            });
         }
-    }, [token]);
+    }, [token, basket]);
 
     // BASKET ADD
     const add = useCallback((...products) => {
                 const basketItems = products.map(it => ({
                     productId: it._id,
                     productCount: it.count,
+                    _id: Date.now().toString(),
                 }));
-                setBasketOperationInProgress(true);
                 if (token) {
+                    setBasketOperationInProgress(true);
                     POST(null, {
                         basket: basketItems,
                     }).then(res => {
@@ -147,11 +145,11 @@ export const UserDataContextProvider = ({
     ;
 
     // BASKET REMOVE
-    const remove = useCallback((id) => {
-        setBasketOperationInProgress(true);
+    const remove = useCallback((id, shouldUpdate = true) => {
         if (token) {
+            setBasketOperationInProgress(true);
             DELETE(id).then(res => {
-                if (res.status === 200) {
+                if (res.status === 200 && shouldUpdate) {
                     setShouldUpdate(Date.now());
                 }
             })
@@ -160,10 +158,7 @@ export const UserDataContextProvider = ({
                 });
         }
         else {
-            setBasket(prev => {
-                return prev.filter(it => it.productId !== id);
-            });
-            setBasketOperationInProgress(false);
+            setBasket(prev => prev.filter(it => it._id !== id));
         }
 
     }, [token, setShouldUpdate, setBasket]);

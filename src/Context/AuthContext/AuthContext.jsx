@@ -79,7 +79,7 @@ const AuthContextProvider = ({
     }, [])
 
     // LOGOUT FUNC
-    const logout = useCallback((navigator) => {
+    const logout = useCallback((navigator, callback) => {
         delete localStorage.token;
         delete localStorage.userData;
         setToken(undefined);
@@ -94,6 +94,7 @@ const AuthContextProvider = ({
                 }
             }
         )
+        callback();
     }, [])
 
 

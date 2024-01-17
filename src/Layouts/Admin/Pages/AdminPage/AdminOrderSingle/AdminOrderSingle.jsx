@@ -1,10 +1,36 @@
-import React from 'react'
+import React, {useContext, useMemo} from 'react'
 import styles from "./AdminOrderSingle.module.scss";
 import {AdminHeader} from "../../AdminComponents/AdminHeader/AdminHeader.jsx";
 import {AdminSideMenu} from "../../AdminComponents/AdminSideMenu/AdminSideMenu.jsx";
 import {BlockTitle} from "../../AdminComponents/BlockTitle/BlockTitle.jsx";
+import {useGetData} from "../AdminPageDashboard/useGetData.js";
+import {useParams} from "react-router-dom";
+import {UserDataContext} from "../../../../../Context/UserDataContext/UserDataContext.jsx";
 
 export const AdminOrderSingle = () => {
+
+    const {
+        id,
+    } = useParams();
+    const {
+        data: orders = [],
+        loading: ordersLoading,
+        error: ordersError
+    } = useGetData('dashboard/orders', {
+        postProcess: data => data?.data?.data,
+        defaultValue: [],
+    });
+    const {
+        cache,
+        cacheLoading,
+    } = useContext(UserDataContext);
+    const order = useMemo(() => {
+        if (!orders || orders.length === 0) return null;
+        return orders.find(({_id}) => _id = id);
+    }, [orders, id])
+
+    console.log(order);
+    console.log(cache);
     return (
         <div className={styles.orderSinglePageWrapper}>
             <AdminHeader/>
@@ -51,110 +77,48 @@ export const AdminOrderSingle = () => {
                         </div>
                     </div>
                     <div className={styles.overFlowX}>
-                        <div className={styles.invoiceMiddle}>
-                            <div className={styles.invoiceMiddleRow}>
-                                <div className={`${styles.sr} ${styles.box}`}>
-                                    <p>SR</p>
+                        {
+                            (order && !ordersLoading && !cacheLoading) && <div className={styles.invoiceMiddle}>
+                                <div className={styles.invoiceMiddleRow}>
+                                    <div className={`${styles.sr} ${styles.box}`}>
+                                        <p>SR</p>
+                                    </div>
+                                    <div className={`${styles.title} ${styles.box}`}>
+                                        <p>PRODUCT TITLE</p>
+                                    </div>
+                                    <div className={`${styles.quantity} ${styles.box}`}>
+                                        <p>QUANTITY</p>
+                                    </div>
+                                    <div className={`${styles.price} ${styles.box}`}>
+                                        <p>PRICE</p>
+                                    </div>
+                                    <div className={`${styles.amount} ${styles.box}`}>
+                                        <p>AMOUNT</p>
+                                    </div>
                                 </div>
-                                <div className={`${styles.title} ${styles.box}`}>
-                                    <p>PRODUCT TITLE</p>
-                                </div>
-                                <div className={`${styles.quantity} ${styles.box}`}>
-                                    <p>QUANTITY</p>
-                                </div>
-                                <div className={`${styles.price} ${styles.box}`}>
-                                    <p>PRICE</p>
-                                </div>
-                                <div className={`${styles.amount} ${styles.box}`}>
-                                    <p>AMOUNT</p>
-                                </div>
+
+                                {order.products.map((pd, i) => {
+                                    const product = cache.find(it => it._id === pd.productId);
+                                    return <div className={styles.invoiceMiddleRow}>
+                                        <div className={`${styles.sr} ${styles.box}`}>
+                                            <span>{i + 1}</span>
+                                        </div>
+                                        <div className={`${styles.title} ${styles.box}`}>
+                                            <span>{product.title}</span>
+                                        </div>
+                                        <div className={`${styles.quantity} ${styles.box}`}>
+                                            <span>{product.stock}</span>
+                                        </div>
+                                        <div className={`${styles.price} ${styles.box}`}>
+                                            <span>${product.salePrice || product.productPrice}</span>
+                                        </div>
+                                        <div className={`${styles.amount} ${styles.box}`}>
+                                            <span>${(product.salePrice || product.productPrice) * product.stock}</span>
+                                        </div>
+                                    </div>;
+                                })}
                             </div>
-                            <div className={styles.invoiceMiddleRow}>
-                                <div className={`${styles.sr} ${styles.box}`}>
-                                    <span>1</span>
-                                </div>
-                                <div className={`${styles.title} ${styles.box}`}>
-                                    <span>Premium T-Shirt-Small,Red</span>
-                                </div>
-                                <div className={`${styles.quantity} ${styles.box}`}>
-                                    <span>2</span>
-                                </div>
-                                <div className={`${styles.price} ${styles.box}`}>
-                                    <span>$450.00</span>
-                                </div>
-                                <div className={`${styles.amount} ${styles.box}`}>
-                                    <span>$900.00</span>
-                                </div>
-                            </div>
-                            <div className={styles.invoiceMiddleRow}>
-                                <div className={`${styles.sr} ${styles.box}`}>
-                                    <span>1</span>
-                                </div>
-                                <div className={`${styles.title} ${styles.box}`}>
-                                    <span>Premium T-Shirt-Small,Red</span>
-                                </div>
-                                <div className={`${styles.quantity} ${styles.box}`}>
-                                    <span>2</span>
-                                </div>
-                                <div className={`${styles.price} ${styles.box}`}>
-                                    <span>$450.00</span>
-                                </div>
-                                <div className={`${styles.amount} ${styles.box}`}>
-                                    <span>$900.00</span>
-                                </div>
-                            </div>
-                            <div className={styles.invoiceMiddleRow}>
-                                <div className={`${styles.sr} ${styles.box}`}>
-                                    <span>1</span>
-                                </div>
-                                <div className={`${styles.title} ${styles.box}`}>
-                                    <span>Premium T-Shirt-Small,Red</span>
-                                </div>
-                                <div className={`${styles.quantity} ${styles.box}`}>
-                                    <span>2</span>
-                                </div>
-                                <div className={`${styles.price} ${styles.box}`}>
-                                    <span>$450.00</span>
-                                </div>
-                                <div className={`${styles.amount} ${styles.box}`}>
-                                    <span>$900.00</span>
-                                </div>
-                            </div>
-                            <div className={styles.invoiceMiddleRow}>
-                                <div className={`${styles.sr} ${styles.box}`}>
-                                    <span>1</span>
-                                </div>
-                                <div className={`${styles.title} ${styles.box}`}>
-                                    <span>Premium T-Shirt-Small,Red</span>
-                                </div>
-                                <div className={`${styles.quantity} ${styles.box}`}>
-                                    <span>2</span>
-                                </div>
-                                <div className={`${styles.price} ${styles.box}`}>
-                                    <span>$450.00</span>
-                                </div>
-                                <div className={`${styles.amount} ${styles.box}`}>
-                                    <span>$900.00</span>
-                                </div>
-                            </div>
-                            <div className={styles.invoiceMiddleRow}>
-                                <div className={`${styles.sr} ${styles.box}`}>
-                                    <span>1</span>
-                                </div>
-                                <div className={`${styles.title} ${styles.box}`}>
-                                    <span>Premium T-Shirt-Small,Red</span>
-                                </div>
-                                <div className={`${styles.quantity} ${styles.box}`}>
-                                    <span>2</span>
-                                </div>
-                                <div className={`${styles.price} ${styles.box}`}>
-                                    <span>$450.00</span>
-                                </div>
-                                <div className={`${styles.amount} ${styles.box}`}>
-                                    <span>$900.00</span>
-                                </div>
-                            </div>
-                        </div>
+                        }
                     </div>
                 </div>
             </div>

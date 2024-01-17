@@ -13,6 +13,17 @@ import {UserDataContext} from "../../../../Context/UserDataContext/UserDataConte
 import useApi from "../../../../Hooks/useApi.js";
 import {useNavigate} from "react-router-dom";
 
+
+export const resolveSequential = async (tasks) => {
+    return tasks.reduce(async (
+        accumulator, currentPromise,
+    ) => {
+        const results = await accumulator;
+
+        return [...results, await currentPromise()];
+    }, Promise.resolve([]));
+};
+
 export const CheckoutPage = () => {
 
     const {
@@ -25,6 +36,7 @@ export const CheckoutPage = () => {
         basket,
         cache: products,
         update,
+        remove,
         refresh,
         loading,
     } = useContext(UserDataContext);
@@ -223,12 +235,16 @@ export const CheckoutPage = () => {
                                                 policy</a>.</p>
                                         <button onClick={async () => {
                                             const result = await postOrder(null, {
-                                                products: basket.map(({ productId, productCount}) => ({
+                                                products: basket.map(({productId, productCount}) => ({
                                                     productId, productCount,
                                                 }))
                                             });
-                                            if(result.status  === 200) {
-                                                refresh();
+                                            if (result.status === 200) {
+                                                // To make sure that an update will happen only if we've completed the removal
+                                                await resolveSequential(basket.map((bItem, i) => async () => remove(
+                                                    bItem._id,
+                                                    i === basket.length - 1)
+                                                ));
                                                 navigate('/order-completed');
                                             }
                                         }}>

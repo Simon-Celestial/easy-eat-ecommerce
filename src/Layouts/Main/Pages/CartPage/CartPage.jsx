@@ -42,6 +42,7 @@ export const CartPage = () => {
         setBasketVisible(false);
     }, []);
 
+    console.log({basket})
     return (
         <div className={styles.cartPageWrapper}>
             <Header/>

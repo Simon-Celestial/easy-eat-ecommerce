@@ -34,6 +34,7 @@ export const Header = () => {
     } = useContext(AuthContext);
     const {
         basket,
+        setBasket,
         cache: products,
         remove: removeItemInBasket,
         update: updateItemInBasket,
@@ -42,7 +43,7 @@ export const Header = () => {
 
     const navigator = useNavigate();
     const logout = useCallback(() => {
-        return rawLogout(navigator);
+        return rawLogout(navigator, () => setBasket([]));
     }, [rawLogout])
 
 
@@ -336,7 +337,7 @@ export const Header = () => {
                         </Link>
                     </div>}
                     <div className={styles.headerRightItem} style={{display: basketVisible ? "flex" : "none"}}>
-                        <div className={styles.basketCount}>0</div>
+                        <div className={styles.basketCount}>{basket?.length || 0}</div>
                         <div onClick={handleWidgetOpen(setBasketOpen)}>
                             <ShoppingBag/>
                         </div>
