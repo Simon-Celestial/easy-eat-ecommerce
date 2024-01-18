@@ -1,6 +1,6 @@
 import React, {useCallback, useMemo, useState} from "react";
 import axios from "axios";
-import toast from "react-hot-toast";
+import {Bounce, toast} from 'react-toastify';
 
 
 export const BASE_URL = import.meta.env.VITE_BASE_URL;
@@ -66,14 +66,18 @@ const AuthContextProvider = ({
             setLoading(false);
             setToken(tkn);
             setUserData(uData);
-            toast(`Successfully login as ${result?.data?.data?.user?.name + " " + result?.data?.data?.user?.surname || 'N/A'}`,
+            toast.success(`Successfully login as ${result?.data?.data?.user?.name + " " + result?.data?.data?.user?.surname || 'N/A'}`,
                 {
-                    position: "top-center",
-                    style: {
-                        background: "green",
-                        color: "white",
-                    }
-                });
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                    transition: Bounce,
+                }
+            );
+
             onFinish();
         }
     }, [])
@@ -85,15 +89,17 @@ const AuthContextProvider = ({
         setToken(undefined);
         setUserData(undefined);
         navigator('/home');
-        toast('You have logged out',
+        toast.error('You have logged out',
             {
-                position: "top-center",
-                style: {
-                    background: "red",
-                    color: "white",
-                }
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Bounce,
             }
-        )
+        );
         callback();
     }, [])
 

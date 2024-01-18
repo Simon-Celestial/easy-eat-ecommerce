@@ -1,6 +1,5 @@
 import React from 'react'
 import {CircleDashed} from "@phosphor-icons/react";
-import {LoaderIcon} from "react-hot-toast";
 
 export const LoadingWrapper = ({
                                    children,

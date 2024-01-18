@@ -1,17 +1,18 @@
 import React from 'react'
 import styles from "./OrdersTable.module.scss";
-import {AdminPagination} from "../AdminPagination/AdminPagination.jsx";
 import {OrdersTableRows} from "./OrdersTableRows/OrdersTableRows.jsx";
+import {CircleDashed} from "@phosphor-icons/react";
 
 export const OrdersTable = ({
                                 orders,
                                 updateOrder,
                                 pagination,
+                                loading
                             }) => {
-
     return (
         <div className={styles.ordersWrapper}>
             <div className={styles.blockTitleContent}>
+
                 <div className={styles.tableBlock}>
                     <div className={`${styles.tableRow} ${styles.tableHeading}`}>
                         <div className={`${styles.invoiceNumber} ${styles.tableBox}`}>
@@ -33,7 +34,8 @@ export const OrdersTable = ({
                             STATUS
                         </div>
 
-                        {updateOrder && <div className={`${styles.action} ${styles.tableBox}`}>
+                        {updateOrder && <div className={`${styles.action} ${styles.tableBox}`}
+                       >
                             ACTION
                         </div>
                         }
@@ -41,10 +43,20 @@ export const OrdersTable = ({
                             INVOICE
                         </div>
                     </div>
+
                     {
-                        (orders || []).map(order => <OrdersTableRows order={order} updateOrder={updateOrder}/>)
+                        !loading &&
+                        (orders || []).map((order, _id) =>
+                            <OrdersTableRows
+                            key={_id} order={order}
+                            updateOrder={updateOrder}/>)
                     }
                 </div>
+                {loading &&
+                    <div className={styles.ordersLoader}>
+                        <CircleDashed />
+                    </div>
+                }
             </div>
             {updateOrder && pagination}
         </div>

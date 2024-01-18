@@ -409,10 +409,9 @@
                 display: flex;
                 flex-direction: column;
                 width: 100%;
-                gap: 10px;
+                gap: 5px;
                 padding: 23px 0;
                 border-bottom: 1px solid $color-light-border;
-
                 .paymentTypeItem {
                   display: inline-flex;
                   align-items: center;
@@ -420,19 +419,15 @@
                   color: $color-black;
                   font-family: $font-main;
                   gap: 10px;
-
                   input {
                     margin-bottom: 2px;
                   }
+                  p {
+                    font-size: 15px;
+                    color: $color-black;
+                    font-family: $font-alternative;
+                  }
                 }
-
-                p {
-                  font-size: 17px;
-                  color: $color-black;
-                  font-family: $font-alternative;
-                }
-
-
               }
 
               .paymentPrivacyPolicy {
@@ -728,8 +723,10 @@
                   }
                 }
                 .paymentPrivacyPolicy{
+                  align-items: center;
+
                   button {
-                    width: 100px;
+                    width: 250px;
                     height: 40px;
                     font-size: 16px;
                   }
@@ -767,6 +764,13 @@
                   padding: 10px 0;
                   p {
                     font-size: 16px;
+                  }
+                }
+              }
+              .paymentContainer {
+                .paymentPrivacyPolicy {
+                  button {
+                    width: 100%;
                   }
                 }
               }

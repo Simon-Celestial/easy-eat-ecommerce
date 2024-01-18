@@ -18,6 +18,18 @@
     padding: 120px 15px 120px 15px;
     display: flex;
     flex-direction: column;
+    .loader {
+      display: flex;
+      height: 250px;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+      svg {
+        font-size: 45px;
+        color: $color-gray;
+        animation: rotateAnimation 1s linear infinite;
+      }
+    }
     .noOrders {
       p {
         font-size: 20px;
@@ -28,15 +40,16 @@
     .statisticsBlock {
       width: 100%;
       display: flex;
-      justify-content: space-between;
       margin-bottom: 50px;
+      flex-wrap: wrap;
+      gap: 25px;
 
       .statisticsItem {
         display: flex;
         gap: 10px;
         background-color: $color-secondary;
         align-items: center;
-        width: 24%;
+        width: 230px;
         padding: 15px 0 15px 15px;
         border-radius: 5px;
         border: 1px solid $color-border;
@@ -99,13 +112,20 @@
   .pageWrapper {
     .pageContent {
       .statisticsBlock {
-        flex-wrap: wrap;
-        justify-content: start;
-        gap: 20px;
         margin-bottom: 25px;
         .statisticsItem {
-          width: 250px;
+          width: 220px;
+          padding: 10px 0 10px 10px;
+
+          .statisticsCircle {
+            width: 40px;
+            height: 40px;
+            svg {
+              font-size: 18px;
+            }
+          }
         }
+
       }
     }
   }

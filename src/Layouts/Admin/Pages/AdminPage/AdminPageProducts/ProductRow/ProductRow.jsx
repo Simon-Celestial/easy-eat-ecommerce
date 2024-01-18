@@ -3,7 +3,7 @@ import styles from "../AdminProductsPage.module.scss";
 import {LinkSimple, Eye, Trash, Wrench} from "@phosphor-icons/react";
 import {PublishButton} from "../../../AdminComponents/PublishButton/PublishButton.jsx";
 import useApi from "../../../../../../Hooks/useApi.js";
-import toast from "react-hot-toast";
+import {Bounce, toast} from 'react-toastify';
 import {Link} from "react-router-dom";
 
 export const ProductRow = ({
@@ -27,12 +27,17 @@ export const ProductRow = ({
         const result = await updateProduct(id, rest)
         if (result.status === 200) {
             update();
-            toast(rest.isPublish ? 'Element is now published' : 'Element publish stopped', {
-                style: {
-                    background: "green",
-                    color: "white",
-                },
-            });
+            toast.success(rest.isPublish ? 'Element is now published' : 'Element publish stopped',
+                {
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                    transition: Bounce,
+                }
+            );
         }
 
         setLoading(false);

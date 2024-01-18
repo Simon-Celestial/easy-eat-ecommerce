@@ -103,12 +103,12 @@ export const Home = () => {
                                         <span className={styles.serviceCardTittle}>Lorem ipsum dolor sit amet adipiscing elit</span>
                                     </a>
                                 </div>
-                                <a href="#">
+                                <Link to="/about-us">
                                     <button>
                                         About Us
                                         <ArrowRight/>
                                     </button>
-                                </a>
+                                </Link>
 
                             </div>
                         </div>

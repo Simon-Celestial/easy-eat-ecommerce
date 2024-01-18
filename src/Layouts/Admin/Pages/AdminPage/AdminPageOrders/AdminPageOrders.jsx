@@ -7,8 +7,9 @@ import {OrdersTable} from "../../AdminComponents/OrdersTable/OrdersTable.jsx";
 import useApi from "../../../../../Hooks/useApi.js";
 import {AdminPagination} from "../../AdminComponents/AdminPagination/AdminPagination.jsx";
 import moment from "moment";
+import {Bounce, toast} from "react-toastify";
 
-const PER_PAGE = 2;
+const PER_PAGE = 10;
 export const AdminPageOrders = () => {
 
     const {
@@ -20,28 +21,72 @@ export const AdminPageOrders = () => {
     const [loading, setLoading] = useState(false);
 
     const handleUpdateOrder = useCallback(async (order, data) => {
-        const result = await updateOrder(order._id, data);
-        if (result.status === 200) {
-            setOrders(prev => {
-                const newOrders = [...prev];
-                const foundOrder = newOrders.find(it => it._id === order._id);
-                foundOrder.status = data.status;
-                return newOrders;
-            })
+        try {
+            setLoading(true);
+            const result = await updateOrder(order._id, data);
+            if (result.status === 200) {
+                toast.success(`Order status successfully updated!`,
+                    {
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: false,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                        transition: Bounce,
+                    }
+                );
+                setOrders(prev => {
+                    const newOrders = [...prev];
+                    const foundOrder = newOrders.find(it => it._id === order._id);
+                    foundOrder.status = data.status;
+                    return newOrders;
+
+                });
+            }
+            else {
+                toast.error(`Failed to update order status!`,
+                    {
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: false,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                        transition: Bounce,
+                    }
+                );
+            }
         }
-    }, [])
+        catch (e) {
+            console.log(e)
+        }
+
+        finally {
+            setLoading(false);
+        }
+    }, []);
     useEffect(() => {
         (async () => {
-            setLoading(true);
-            const result = await getOrders();
-            if (result.status === 200) {
-                const response = JSON.parse(result?.data || '{}');
-                setOrders(response?.data?.data || []);
-            }
+            try {
+                setLoading(true);
+                const result = await getOrders();
 
-            setLoading(false);
-        })()
+                if (result.status === 200) {
+                    const response = JSON.parse(result?.data || '{}');
+                    setOrders(response?.data?.data || []);
+                }
+                else {
+                    console.error(`Failed to fetch orders. Status: ${result.status}`);
+                }
+            } catch (error) {
+                console.error("Error fetching orders:", error.message);
+            } finally {
+                setLoading(false);
+            }
+        })();
     }, []);
+
     const [page, setPage] = useState(0);
     const [filters, setFilters] = useState({});
 
@@ -67,7 +112,6 @@ export const AdminPageOrders = () => {
             return passed;
         });
     }, [filters, orders]);
-    console.log(filters);
     useEffect(() => {
         setPage(0);
     }, [filters])
@@ -126,7 +170,7 @@ export const AdminPageOrders = () => {
                             <p>End Date</p>
                             <input
                                 type="datetime-local"
-                                value={filters.endDate  || ''}
+                                value={filters.endDate || ''}
                                 onChange={({target}) => setFilters(prev => ({
                                     ...prev,
                                     endDate: target.value,
@@ -140,13 +184,14 @@ export const AdminPageOrders = () => {
                         </label>
                     </div>
                 </div>
-                <OrdersTable orders={dataPaginated} updateOrder={handleUpdateOrder} pagination={<AdminPagination
-                    currentPage={page}
-                    setCurrentPage={setPage}
-                    totalElements={dataFiltered?.length}
-                    pageSize={PER_PAGE}
-                />
-                }/>
+                <OrdersTable orders={dataPaginated} loading={loading} updateOrder={handleUpdateOrder}
+                             pagination={<AdminPagination
+                                 currentPage={page}
+                                 setCurrentPage={setPage}
+                                 totalElements={dataFiltered?.length}
+                                 pageSize={PER_PAGE}
+                             />
+                             }/>
 
             </div>
         </div>

@@ -8,7 +8,7 @@ import {AdminPagination} from "../../AdminComponents/AdminPagination/AdminPagina
 import {ProductsMenu} from "../../AdminComponents/ProductsMenu/ProductsMenu.jsx";
 import {ProductRow} from "./ProductRow/ProductRow.jsx";
 import useApi from "../../../../../Hooks/useApi.js";
-import toast from "react-hot-toast";
+import { toast } from 'react-toastify';
 import {AdminPageProduct} from "../AdminPageProduct/AdminPageProduct.jsx";
 
 const mapData = ({
@@ -138,6 +138,8 @@ export const AdminProductsPage = () => {
         const sorted = [...data];
         return sorted.sort((a, b) => a[sortField] > b[sortField] ? (1 * isDesc) : (-1 * isDesc)) || [];
     }, [data, sorter])
+
+    // FILTERING
     const dataFiltered = useMemo(() => {
         return dataSorted?.filter((it) => {
             return it.title?.toLowerCase().includes(searchSample?.toLowerCase());
@@ -212,8 +214,8 @@ export const AdminProductsPage = () => {
                                             <option value="_">Without sort</option>
                                             <option value="salePrice_asc">Price: Low to High</option>
                                             <option value="salePrice_desc">Price: High to Low</option>
-                                            <option value="stock_desc">Stock: Low to High</option>
-                                            <option value="stock_asc">Stock: High to Low</option>
+                                            <option value="stock_asc">Stock: Low to High</option>
+                                            <option value="stock_desc">Stock: High to Low</option>
                                         </select>
                                     </label>
                                 </div>

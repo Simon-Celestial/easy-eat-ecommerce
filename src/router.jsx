@@ -1,4 +1,4 @@
-import {createBrowserRouter, Navigate, RouterProvider} from "react-router-dom";
+import {createBrowserRouter, Navigate, RouterProvider, useLocation} from "react-router-dom";
 import {AdminLayout} from "./Layouts/Admin/AdminLayout.jsx";
 import {LoginPage} from "./Layouts/Main/Pages/LoginAndRegister/LoginPage/LoginPage.jsx";
 import {RegisterPage} from "./Layouts/Main/Pages/LoginAndRegister/RegisterPage/RegisterPage.jsx";
@@ -19,7 +19,7 @@ import {AdminProductsPage} from "./Layouts/Admin/Pages/AdminPage/AdminPageProduc
 import {AdminPageProduct} from "./Layouts/Admin/Pages/AdminPage/AdminPageProduct/AdminPageProduct.jsx";
 import {AuthLayout} from "./Layouts/Authentication/AuthLayout.jsx";
 import {PageNotFound} from "./Layouts/Main/Pages/PageNotFound/PageNotFound.jsx";
-import {useContext} from "react";
+import {useContext, useEffect} from "react";
 import {AuthContext} from "./Context/AuthContext/AuthContext.jsx";
 import {CompletedOrder} from "./Layouts/Main/Pages/CompletedOrder/CompletedOrder.jsx";
 

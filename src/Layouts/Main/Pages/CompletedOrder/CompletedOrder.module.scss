@@ -4,9 +4,10 @@
 
 .completedOrderWrapper {
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
+    flex-direction: column;
     justify-content: center;
     padding: 120px 30px 120px 30px;
     background-color: $color-yellow;
@@ -73,6 +74,7 @@
         padding: 50px 10px 50px 10px;
 
         .pageContent {
+            margin-top: 50px;
             max-width: 300px;
             padding: 35px 25px;
             h2 {

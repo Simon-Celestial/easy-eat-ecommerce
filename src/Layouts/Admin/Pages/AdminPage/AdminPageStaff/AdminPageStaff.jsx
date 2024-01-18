@@ -8,7 +8,7 @@ import {StaffAdd} from "../../AdminComponents/StaffAdd/StaffAdd.jsx";
 import useApi from "../../../../../Hooks/useApi.js";
 import {StaffTableRow} from "./StaffTableRow/StaffTableRow.jsx";
 import {CircleDashed} from "@phosphor-icons/react";
-import toast from "react-hot-toast";
+import {Bounce, toast} from 'react-toastify';
 
 const mapData = ({
                      createdAt,
@@ -91,12 +91,17 @@ export const AdminPageStaff = () => {
             if (result.status === 200) {
                 update();
                 const initialUser = data.find(it => it.id === id);
-                toast(`${initialUser.name} ${initialUser.surname} deleted successfully`,{
-                    style : {
-                        background:"red",
-                        color: "white",
+                toast.error(`${initialUser.name} ${initialUser.surname} deleted successfully`,
+                    {
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: false,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                        transition: Bounce,
                     }
-                });
+                );
 
             } else {
                 console.error(result);

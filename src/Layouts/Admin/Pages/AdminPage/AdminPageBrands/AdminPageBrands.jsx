@@ -7,7 +7,7 @@ import {AdminPagination} from "../../AdminComponents/AdminPagination/AdminPagina
 import {BrandsMenu} from "../../AdminComponents/BrandsMenu/BrandsMenu.jsx";
 import {AdminBrandsRow} from "./AdminBrandsRow/AdminBrandsRow.jsx";
 import useApi from "../../../../../Hooks/useApi.js";
-import toast from "react-hot-toast";
+import {Bounce, toast} from 'react-toastify';
 import {CircleDashed} from "@phosphor-icons/react";
 
 // FOR PAGINATION
@@ -80,12 +80,17 @@ export const AdminPageBrands = () => {
             setLoading(true)
             const result = await deleteBrand(id);
             if (result.status === 200) {
-                toast('Brand Deleted', {
-                    style: {
-                        background: "red",
-                        color: "white",
+                toast.error(`Brand Deleted`,
+                    {
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: false,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                        transition: Bounce,
                     }
-                });
+                );
                 update();
             }
         } catch (error) {

@@ -16,7 +16,7 @@ import {CircleDashed, IdentificationCard, Key} from "@phosphor-icons/react";
 import {useFormik} from "formik";
 import axios from "axios";
 import {API_KEY, BASE_URL} from "../../../../../Context/AuthContext/AuthContext.jsx";
-import toast from "react-hot-toast";
+import {Bounce, toast} from 'react-toastify';
 
 export const RegisterPage = () => {
     const {
@@ -62,15 +62,17 @@ export const RegisterPage = () => {
             setLoading(false);
         }
         if (result) {
-            toast("Registration Successful", {
-                position: 'top-center',
-                style: {
-                    zIndex: 999,
-                    background: 'green',
-                    color: 'white',
-                    borderRadius: '6px',
+            toast.success("Registration Successful",
+                {
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                    transition: Bounce,
                 }
-            })
+            );
             navigation("/login");
         }
     }, [])

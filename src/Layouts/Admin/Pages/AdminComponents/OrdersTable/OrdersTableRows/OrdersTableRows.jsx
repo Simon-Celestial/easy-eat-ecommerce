@@ -16,7 +16,7 @@ export const OrdersTableRows = ({
     const {
         cache,
     } = useContext(UserDataContext);
-    console.log(cache);
+
     return (<div className={styles.tableRow}>
             <div className={`${styles.invoiceNumber} ${styles.tableBox}`}>
                 <span>{_id?.slice(0, 5)}</span>

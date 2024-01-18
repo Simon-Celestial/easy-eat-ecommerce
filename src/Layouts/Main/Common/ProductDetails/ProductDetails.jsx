@@ -5,9 +5,8 @@ import {Splide, SplideSlide} from "@splidejs/react-splide";
 import {CaretDown, CaretUp, Heart, MagnifyingGlass, ShoppingCart, Star} from "@phosphor-icons/react";
 import styles from "../../Common/ProductDetails/ProductDetails.module.scss";
 import {LayoutContext} from "../../../../Context/LayoutContext/LayoutContext.jsx";
-
 import {FullScreen, useFullScreenHandle} from "react-full-screen";
-import toast from "react-hot-toast";
+import {Bounce, toast} from 'react-toastify';
 import {UserDataContext} from "../../../../Context/UserDataContext/UserDataContext.jsx";
 
 export const ProductDetails = ({product, brands}) => {
@@ -53,7 +52,8 @@ export const ProductDetails = ({product, brands}) => {
     useEffect(() => {
         if (magnifiedOpen) {
             document.body.style.overflowY = 'auto';
-        } else {
+        }
+        else {
             document.body.style.overflowY = 'hidden';
         }
     }, [magnifiedOpen]);
@@ -72,7 +72,8 @@ export const ProductDetails = ({product, brands}) => {
                 magWidth: rect.width,
                 magHeight: rect.height
             }
-        } else {
+        }
+        else {
             return {
                 magX: 0,
                 magY: 0,
@@ -116,6 +117,8 @@ export const ProductDetails = ({product, brands}) => {
 
     const [expandImage, setExpandImage] = useState(false);
 
+    const isOnSale = useMemo(() => !!product.salePrice && (product.salePrice !== product.productPrice),
+        [product]);
 
     return (
         <>
@@ -217,7 +220,7 @@ export const ProductDetails = ({product, brands}) => {
                     {/*PRODUCTS RIGHT CONTAINER*/}
                     <div className={styles.productDetailsRight}>
                         {
-                            salePercent !== 100 ? <div className={styles.productSale}>
+                            (salePercent !== 100 && salePercent !== 0) ? <div className={styles.productSale}>
                                 -{salePercent.toFixed(2)}%
                             </div> : ''
                         }
@@ -228,16 +231,17 @@ export const ProductDetails = ({product, brands}) => {
                             {/*PRODUCT SINGLE */}
                             <div className={styles.productPriceWrapper}>
                                 {
-                                    product.salePrice && <p className={`${styles.normalPrice} ${styles.price}`}>$ {(product.productPrice)?.toFixed(2)}</p>
+                                    isOnSale &&
+                                    <p className={`${styles.normalPrice} ${styles.price}`}>$ {(product.productPrice)?.toFixed(2)}</p>
                                 }
 
                                 {
 
-                                        <p
-                                            className={`${styles.discountedPrice} ${styles.price}`}
-                                        >
-                                            {`$ ${(product.salePrice || product?.productPrice).toFixed(2)}`}
-                                        </p>
+                                    <p
+                                        className={`${styles.discountedPrice} ${styles.price}`}
+                                    >
+                                        {`$ ${(product.salePrice || product?.productPrice).toFixed(2)}`}
+                                    </p>
                                 }
                                 {/*STANDARD PRICE*/}
                             </div>
@@ -273,22 +277,44 @@ export const ProductDetails = ({product, brands}) => {
                             </button>
                             <div className={styles.productWishList}>
                                 <Heart
-                                    weight="light"
+                                    weight="regular"
                                     style={{
-                                        color: wishlist[product._id]? 'red': 'unset'
+                                        color: wishlist[product._id] ? 'red' : 'unset'
                                     }}
                                     onClick={() => {
                                         setWishlist(prev => {
                                             const id = product._id;
-                                            if(prev[id]) {
+                                            if (prev[id]) {
                                                 const newVal = {
                                                     ...prev,
                                                 }
                                                 delete newVal[id];
-                                                toast(`${product.title} is removed from wishlist!`);
+                                                toast.error(`${product.title} removed from wishlist!`,
+                                                    {
+                                                        hideProgressBar: false,
+                                                        closeOnClick: true,
+                                                        pauseOnHover: false,
+                                                        draggable: true,
+                                                        progress: undefined,
+                                                        theme: "colored",
+                                                        transition: Bounce,
+                                                    }
+                                                );
+
+
                                                 return newVal;
                                             }
-                                            toast(`${product.title} added to wishlist!`);
+                                            toast.success(`${product.title} added to wishlist!`,
+                                                {
+                                                    hideProgressBar: false,
+                                                    closeOnClick: true,
+                                                    pauseOnHover: false,
+                                                    draggable: true,
+                                                    progress: undefined,
+                                                    theme: "colored",
+                                                    transition: Bounce,
+                                                }
+                                            );
                                             return ({
                                                 ...prev,
                                                 [id]: product,

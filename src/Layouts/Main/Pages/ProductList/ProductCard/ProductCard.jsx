@@ -1,9 +1,9 @@
-import React, {useContext} from 'react'
+import React, {useContext, useMemo} from 'react'
 import styles from "../ProductList.module.scss";
 import {ArrowRight, CircleDashed, Heart, ShoppingCart, Star} from "@phosphor-icons/react";
 import {Link} from "react-router-dom";
 import {UserDataContext} from "../../../../../Context/UserDataContext/UserDataContext.jsx";
-import toast from "react-hot-toast";
+import {Bounce, toast} from 'react-toastify';
 
 export const ProductCard = ({
                                 product,
@@ -18,6 +18,8 @@ export const ProductCard = ({
         basket,
         loading: productLoading
     } = useContext(UserDataContext);
+    const isOnSale = useMemo(() => !!product.salePrice && (product.salePrice !== product.productPrice),
+        [product]);
     return (
         <div className={`${styles.productCard} ${loading && styles.loadingAnimation}`}>
             {loading &&
@@ -30,7 +32,7 @@ export const ProductCard = ({
                     Out of Stock
                 </div> : null
             }
-            {salePercent !== 100 ?
+            {(salePercent !== 100 && salePercent !== 0) ?
                 <div className={styles.productOnSale}>
                     -{salePercent.toFixed(2)} %
                 </div> : null
@@ -50,20 +52,31 @@ export const ProductCard = ({
                                             ...prev,
                                         }
                                         delete newVal[id];
-                                        toast(`${product.title} removed from wishlist`, {
-                                            style: {
-                                                background: "red",
-                                                color: "white",
+                                        toast.error(`${product.title} removed from wishlist`,
+                                            {
+                                                hideProgressBar: false,
+                                                closeOnClick: true,
+                                                pauseOnHover: false,
+                                                draggable: true,
+                                                progress: undefined,
+                                                theme: "colored",
+                                                transition: Bounce,
                                             }
-                                        });
+                                        );
                                         return newVal;
                                     }
-                                    toast(`${product.title} added to wishlist`, {
-                                        style: {
-                                            background: "green",
-                                            color: "white",
+                                    toast.success(`${product.title} added to wishlist`,
+                                        {
+                                            hideProgressBar: false,
+                                            closeOnClick: true,
+                                            pauseOnHover: false,
+                                            draggable: true,
+                                            progress: undefined,
+                                            theme: "colored",
+                                            transition: Bounce,
                                         }
-                                    });
+                                    );
+
                                     return ({
                                         ...prev,
                                         [id]: product,
@@ -78,27 +91,46 @@ export const ProductCard = ({
                             </div>
                             :
                             <ShoppingCart
+
                                 color={basket.find(it => it.productId === product._id) ? 'red' : 'unset'}
                                 onClick={() => {
                                     const foundItem = basket.find(it => it.productId === product._id);
                                     if (foundItem) {
-                                        console.log(product)
+                                        toast.success(`${product.title} basket count updated`,
+                                            {
+                                                hideProgressBar: false,
+                                                closeOnClick: true,
+                                                pauseOnHover: false,
+                                                draggable: true,
+                                                progress: undefined,
+                                                theme: "colored",
+                                                transition: Bounce,
+                                            }
+                                        );
                                         update(foundItem._id, foundItem.productCount + 1)
-                                        toast.success(`${product.title} added to basket`, {
-                                            position: "top-center",
-                                            style: {
-                                                background: "green",
-                                                color: "white",
-                                            },
-                                        });
-
                                     }
                                     else {
                                         add({
                                             ...product,
                                             count: 1,
                                         })
+                                        toast.success(`${product.title} added to basket`,
+                                            {
+                                                hideProgressBar: false,
+                                                closeOnClick: true,
+                                                pauseOnHover: false,
+                                                draggable: true,
+                                                progress: undefined,
+                                                theme: "colored",
+                                                transition: Bounce,
+                                            }
+                                        );
+
                                     }
+                                }}
+                                style={{
+                                    opacity: product.stock < 1 ? 0.3 : 1,
+                                    pointerEvents: product.stock < 1 ? "none" : "auto",
                                 }}/>
                         }
 
@@ -121,9 +153,9 @@ export const ProductCard = ({
                 <p>
                     {/*STANDARD PRICE*/}
                     <span
-                        className={`${product.salePrice ? styles.productPrice : styles.salePrice}`}>${product?.productPrice.toFixed(2)}</span>
+                        className={`${isOnSale ? styles.productPrice : styles.salePrice}`}>${product?.productPrice.toFixed(2)}</span>
                     {/*DISCOUNTED PRICE*/}
-                    {(product.salePrice) ?
+                    {isOnSale ?
                         <span className={styles.salePrice}>{`$${product?.salePrice?.toFixed(2)}`}</span>
                         : ""}
                 </p>

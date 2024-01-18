@@ -1,5 +1,5 @@
 import styles from "./Header.module.scss";
-import {CaretRight, MagnifyingGlass, ShoppingBag, X} from "@phosphor-icons/react";
+import {CaretRight, CircleDashed, MagnifyingGlass, ShoppingBag, X} from "@phosphor-icons/react";
 import React, {useCallback, useContext, useEffect, useState} from "react";
 import {LayoutContext} from "../../../../Context/LayoutContext/LayoutContext.jsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -38,6 +38,7 @@ export const Header = () => {
         cache: products,
         remove: removeItemInBasket,
         update: updateItemInBasket,
+        loading: basketLoading,
     } = useContext(UserDataContext);
 
 
@@ -330,17 +331,22 @@ export const Header = () => {
                     </div>
                 </div>
                 {/*HEADER RIGHT CONTAINER*/}
+
+                {/*ADMIN PANEL BUTTON*/}
                 <div className={styles.headerRight}>
                     {isAdmin && <div className={styles.adminPanel}>
                         <Link to="/admin/dashboard">
                             <FontAwesomeIcon icon={faScrewdriverWrench}/>
                         </Link>
                     </div>}
+
+                    {/*BASKET BUTTON*/}
                     <div className={styles.headerRightItem} style={{display: basketVisible ? "flex" : "none"}}>
                         <div className={styles.basketCount}>{basket?.length || 0}</div>
                         <div onClick={handleWidgetOpen(setBasketOpen)}>
                             <ShoppingBag/>
                         </div>
+
                         {/*BASKET */}
                         <div className={[styles.basketDropdown, basketOpen && styles.basketActive].join(' ')}
                              onClick={ev => ev.stopPropagation()}>
@@ -358,6 +364,7 @@ export const Header = () => {
                                     <div className={styles.basketContent}>
                                         <div className={styles.basketProducts}>
                                             {
+                                                !basketLoading?
                                                 basket.map((bItem, i) => {
                                                     const product = products.find(it => it._id === bItem.productId);
                                                     return <div
@@ -365,7 +372,12 @@ export const Header = () => {
                                                         className={styles.basketCard}
                                                     >
                                                         <div className={styles.basketClose}>
-                                                            <p onClick={() => removeItemInBasket(bItem._id)}>x</p>
+                                                            <p
+                                                                onClick={
+                                                                () => removeItemInBasket(bItem._id)
+                                                            }>
+                                                                x
+                                                            </p>
                                                         </div>
                                                         <a href="" className={styles.imageBlock}>
                                                             <img
@@ -380,6 +392,10 @@ export const Header = () => {
 
                                                     </div>;
                                                 })
+                                                    :
+                                                    <div className={styles.basketLoading}>
+                                                        <CircleDashed />
+                                                    </div>
                                             }
 
                                         </div>
@@ -391,8 +407,8 @@ export const Header = () => {
                                                 }).reduce((a, b) => a + b, 0).toFixed(2)}</p>
                                             </div>
                                             <div className={styles.basketButtons}>
-                                                <a href="/" className={styles.btn}>VIEW CART</a>
-                                                <a href="/" className={styles.btn}>CHECKOUT</a>
+                                                <Link to="/cart" className={styles.btn}>VIEW CART</Link>
+                                                <Link to="/auth/checkout" className={styles.btn}>CHECKOUT</Link>
                                             </div>
                                         </div>
                                     </div>

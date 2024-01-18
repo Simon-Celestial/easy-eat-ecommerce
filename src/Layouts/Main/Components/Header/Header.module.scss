@@ -432,6 +432,18 @@
                 background-color: $color-white
 
               }
+              .basketLoading {
+                display: flex;
+                height: 150px;
+                width: 100%;
+                align-items: center;
+                justify-content: center;
+                svg {
+                  font-size: 45px;
+                  color: $color-gray;
+                  animation: rotateAnimation 1s linear infinite;
+                }
+              }
 
               .basketCard {
                 width: 100%;
@@ -680,7 +692,7 @@
             left: 0;
             top: 0;
             position: fixed;
-            padding: 35px 28px;
+            padding: 35px 0;
             min-height: auto;
             align-items: center;
 
@@ -691,7 +703,7 @@
             .basketContent {
               padding: 0 20px;
               max-height: 90%;
-              width: 90%;
+              width: 100%;
 
               .basketProducts {
                 max-height: none;

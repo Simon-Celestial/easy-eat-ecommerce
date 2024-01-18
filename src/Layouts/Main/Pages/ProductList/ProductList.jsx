@@ -39,6 +39,9 @@ const tags = [
 ]
 
 const PER_PAGE = 6;
+const defaultFilters = {
+    isPublish: true,
+}
 export const ProductList = () => {
     // LAYOUT CONTEXT
     const {
@@ -69,7 +72,7 @@ export const ProductList = () => {
     const [productsResponse, setProductsResponse] = useState(null);
     const [priceBounds, setPriceBounds] = useState([0, 500]);
     const [brands, setBrands] = useState([]);
-    const [filters, setFilters] = useState({});
+    const [filters, setFilters] = useState(defaultFilters);
 
     // PAGE LOADING STATES
     const [brandsLoading, setBrandsLoading] = useState(true);

@@ -267,7 +267,7 @@ export const ProductSingle = () => {
                                                     </div>
                                                 </div>
                                                 {
-                                                    Math.round(salePercent) !== 100 ?
+                                                    (salePercent !== 100 && salePercent !== 0)  ?
                                                         <div className={`${styles.relatedWithSale} ${styles.hasSale}`}>
                                                             -{salePercent.toFixed(2)} %
                                                         </div> : ''
@@ -288,10 +288,11 @@ export const ProductSingle = () => {
                                                     {related.title}
                                                 </Link>
                                                 <span><p style={{
-                                                    textDecoration: related.salePrice? 'line-through': 'unset'
+                                                    textDecoration: (salePercent !== 100 && salePercent !== 0)? 'line-through': 'unset'
                                                 }}>${related.productPrice.toFixed(2)}</p> {
-                                                    related.salePrice && `$${related.salePrice.toFixed(2)}`
+                                                    (salePercent !== 100 && salePercent !== 0) && `$${related.salePrice.toFixed(2)}`
                                                 }</span>
+
                                                 {/*NO RATING IN API, SO I MADE IT STATIC*/}
                                                 <div className={styles.relatedProductRating}>
                                                     <Star size={14} weight="fill" color="#EC3D08"/>

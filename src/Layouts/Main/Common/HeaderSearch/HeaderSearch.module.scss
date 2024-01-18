@@ -76,7 +76,7 @@
       padding: 0 15px;
       margin-top: 120px;
 
-      > form {
+      > .searchField {
         display: flex;
         width: 100%;
         border-bottom: 1px solid $color-border;
@@ -114,15 +114,45 @@
           outline: 0;
           border: 0;
           background-color: transparent;
-
-          &:hover svg {
-            transform: rotate(360deg);
+        }
+        .searchResults {
+          background: white;
+          position: absolute;
+          top: 120px;
+          width: 100%;
+          padding: 10px;
+          left: 0;
+          min-height: 50px;
+          max-height: 300px;
+          overflow-y: auto;
+          transition: $transition-fast;
+          display: flex;
+          flex-direction: column;
+        }
+        .nothingFound {
+          position: absolute;
+          top: 0;
+          width: 100%;
+          display: flex;
+          left: 0;
+          font-size: 20px;
+          font-family: $font-main;
+          color: $color-white;
+        }
+        .smallProductCard {
+          height: 50px;
+          padding: 10px;
+          display: flex;
+          align-items: center;
+          color: $color-black;
+          transition: color $transition-fast;
+          &:hover {
+            color: $color-orange;
           }
-
-          svg {
-            color: $color-white;
-            transition: 0.5s ease;
-            font-size: 32px;
+          img {
+            height: 100%;
+            width: 40px;
+            object-fit: contain;
           }
         }
       }
@@ -199,6 +229,19 @@
   }
 }
 
+@media screen and (max-height: 700px) {
+  .headerSearchWrapper {
+    .headerSearchContent {
+      .headerFormWrapper {
+        > .searchField {
+          .searchResults {
+            max-height: 200px;
+          }
+        }
+      }
+    }
+  }
+}
 @media screen and (max-width: 800px) {
   .headerSearchWrapper {
     height: 320px;
@@ -207,11 +250,15 @@
       .searchTopBlock {
         padding: 10px 20px;
       }
-
       .headerFormWrapper {
         margin-top: 20px;
 
-        > form {
+        > .searchField {
+          .searchResults {
+            top: 90px;
+            max-height: 200px;
+          }
+
           .headerSearchInput {
             font-size: 24px;
           }
@@ -243,7 +290,7 @@
 
       .headerFormWrapper {
         margin-top: 20px;
-        > form {
+        > .searchField {
           .searchSubmit {
             bottom: 25px;
             svg {

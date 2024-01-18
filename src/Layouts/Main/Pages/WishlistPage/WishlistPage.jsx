@@ -5,12 +5,10 @@ import {Header} from "../../Components/Header/Header.jsx";
 import {PageNameSection} from "../../Common/PageNameSection/PageNameSection.jsx";
 import {ChangedFooter} from "../../Components/ChangedFooter/ChangedFooter.jsx";
 import {UiControl} from "../../Common/UiControl/UiControl.jsx";
-import {Car, ShoppingCart, X} from "@phosphor-icons/react";
+import {ShoppingCart, X} from "@phosphor-icons/react";
 import {UserDataContext} from "../../../../Context/UserDataContext/UserDataContext.jsx";
 import {Link} from "react-router-dom";
-import useApi from "../../../../Hooks/useApi.js";
-import toast from "react-hot-toast";
-import {resolveSequential} from "../../../Authentication/Pages/CheckoutPage/CheckoutPage.jsx";
+import {Bounce, toast} from 'react-toastify';
 
 export const WishlistPage = () => {
 
@@ -42,13 +40,17 @@ export const WishlistPage = () => {
             const foundItem = basket.find(it => it.productId === id);
             if (foundItem) {
                 await update(foundItem._id, foundItem.productCount + 1, i === ids.length - 1)
-                toast.success(`${product.title} added to basket`, {
-                    position: "top-center",
-                    style: {
-                        background: "green",
-                        color: "white",
-                    },
-                });
+                toast.success(`${product.title} added to basket`,
+                    {
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: false,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                        transition: Bounce,
+                    }
+                );
             }
             else {
                 await add({
@@ -66,7 +68,6 @@ export const WishlistPage = () => {
     useEffect(() => {
         setSelectedItems([]);
     }, [wishlist])
-    console.log(wishlist)
     return (
         <div className={styles.wishlistPageWrapper}>
             {/*PAGE HEADER*/}
@@ -135,6 +136,17 @@ export const WishlistPage = () => {
                                             onClick={() => setWishlist(prev => {
                                                 const newObj = {...prev};
                                                 delete newObj[product._id];
+                                                toast.error(`${product.title} removed from wishlist`,
+                                                    {
+                                                        hideProgressBar: false,
+                                                        closeOnClick: true,
+                                                        pauseOnHover: false,
+                                                        draggable: true,
+                                                        progress: undefined,
+                                                        theme: "colored",
+                                                        transition: Bounce,
+                                                    }
+                                                );
                                                 return newObj;
                                             })}
                                             weight="light"
@@ -154,8 +166,8 @@ export const WishlistPage = () => {
                                         </Link>
                                     </div>
                                     <div className={`${styles.productPrice} ${styles.productBox}`}>
-                                        {(product.salePrice === product.productPrice || product.salePrice) &&
-                                            <span>${product.productPrice?.toFixed(2)}</span>}
+                                        {(!!product.salePrice && (product.salePrice !== product.productPrice )) &&
+                                            <span title={'original'}>${product.productPrice?.toFixed(2)}</span>}
                                         ${(product.salePrice || product.productPrice)?.toFixed(2)}
                                     </div>
                                     <div className={`${styles.productStock} ${styles.productBox}`}>

@@ -2,7 +2,7 @@ import styles from "./StaffAdd.module.scss";
 import {Eye, EyeSlash, Power} from "@phosphor-icons/react";
 import {useCallback, useContext, useState} from "react";
 import useApi from "../../../../../Hooks/useApi.js";
-import toast from "react-hot-toast";
+import {Bounce, toast} from 'react-toastify';
 import {LoadingWrapper} from "../../../../Main/Common/LoadingWrapper/LoadingWrapper.jsx";
 import {LayoutContext} from "../../../../../Context/LayoutContext/LayoutContext.jsx";
 
@@ -35,22 +35,33 @@ export const StaffAdd = ({staffMenuOpen, setStaffMenuOpen, update}) => {
         try {
             const result = await createAdmin('', inputState);
             if (result.status === 200) {
-                toast(`${inputState.name} ${inputState.surname} added successfully`, {
-                    style: {
-                        background: "green",
-                        color: "white",
+                toast.success(`${inputState.name} ${inputState.surname} added successfully`,
+                    {
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: false,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                        transition: Bounce,
                     }
-                });
+                );
+
 
                 update();
                 setStaffMenuOpen(false);
             } else {
-                toast(JSON.parse(result.data).message, {
-                    style: {
-                        background: 'red',
-                        color: 'white'
+                toast.error(JSON.parse(result.data).message,
+                    {
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: false,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                        transition: Bounce,
                     }
-                })
+                );
             }
 
         } catch (e) {

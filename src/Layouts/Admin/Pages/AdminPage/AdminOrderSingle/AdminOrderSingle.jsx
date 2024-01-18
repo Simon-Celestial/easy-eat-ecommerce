@@ -30,7 +30,7 @@ export const AdminOrderSingle = () => {
     }, [orders, id])
 
     console.log(order);
-    console.log(cache);
+    // console.log(cache);
     return (
         <div className={styles.orderSinglePageWrapper}>
             <AdminHeader/>
@@ -42,30 +42,39 @@ export const AdminOrderSingle = () => {
                         <div className={styles.invoiceTopItem}>
                             <p>STATUS:</p>
                             <div className={styles.status}>
-                                Canceled
+                                {order ? order.status : 'Loading...'}
                             </div>
                         </div>
                         <div className={styles.invoiceTopItem}>
                             <p>DATE:</p>
-                            <h2>Dec 2, 2023</h2>
+                            <h2>
+                                {order ? order.createdAt : 'Loading...'}
+                            </h2>
                         </div>
                         <div className={styles.invoiceTopItem}>
                             <p>INVOICE NO:</p>
-                            <h2>#10630</h2>
+                            <h2>
+                                {order ? order._id : 'Loading...'}
+                            </h2>
                         </div>
                         <div className={styles.invoiceTopItem}>
                             <p>INVOICE TO:</p>
-                            <h2>Customer Name</h2>
+                            <h2>
+                                {order ? order.customer.name : 'Loading...'}
+                            </h2>
                         </div>
                     </div>
                     <div className={styles.invoiceTop}>
                         <div className={styles.invoiceTopItem}>
                             <p>PAYMENT METHOD:</p>
-                            <h2>Cash</h2>
+                            <h2>
+                                {order ? order.method : 'Loading...'}
+
+                            </h2>
                         </div>
                         <div className={styles.invoiceTopItem}>
                             <p>SHIPPING COST:</p>
-                            <h2>$60.00</h2>
+                            <h2>FREE</h2>
                         </div>
                         <div className={styles.invoiceTopItem}>
                             <p>DISCOUNT:</p>
@@ -107,7 +116,7 @@ export const AdminOrderSingle = () => {
                                             <span>{product.title}</span>
                                         </div>
                                         <div className={`${styles.quantity} ${styles.box}`}>
-                                            <span>{product.stock}</span>
+                                            <span>{pd.productCount}</span>
                                         </div>
                                         <div className={`${styles.price} ${styles.box}`}>
                                             <span>${product.salePrice || product.productPrice}</span>

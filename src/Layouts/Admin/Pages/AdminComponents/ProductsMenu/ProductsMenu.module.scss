@@ -31,6 +31,7 @@
     background-color: $color-secondary;
     justify-content: space-between;
     gap: 25px;
+
     .loadingOverlay {
       background-color: rgba(0, 0, 0, 0.5);
       display: flex;
@@ -42,9 +43,10 @@
       left: 0;
       top: 0;
       z-index: 10000;
-      div {
-        width: 50px;
-        height: 50px;
+      svg {
+        font-size: 45px;
+        color: $color-gray;
+        animation: rotateAnimation 1s linear infinite;
       }
     }
 
@@ -114,12 +116,14 @@
         justify-content: space-between;
         padding: 10px 0;
         gap: 10px;
+
         .publishCheck {
           max-width: unset;
           height: 20px;
           width: 20px;
           margin-right: 377px;
         }
+
         p {
           font-size: 20px;
           color: $color-white;
@@ -282,6 +286,7 @@
 
   }
 }
+
 @media screen and (max-width: 1440px) {
   .productsMenuOverlay {
     .productsMenuContent {
@@ -290,6 +295,7 @@
           .publishCheck {
             margin-right: 277px;
           }
+
           input {
             max-width: 300px;
           }
@@ -314,6 +320,7 @@
     }
   }
 }
+
 @media screen and (max-width: 1200px) {
   .productsMenuOverlay {
     .productsMenuContent {
@@ -327,11 +334,13 @@
       .menuMain {
         .elementsRow {
           flex-direction: column;
+
           &.publishElementRow {
             flex-direction: row;
             justify-content: start;
             align-items: center;
           }
+
           .publishCheck {
             margin-right: 0;
             margin-left: 5px;
@@ -348,10 +357,12 @@
     }
   }
 }
+
 @media screen and (max-width: 800px) {
   .productsMenuOverlay {
     .productsMenuContent {
       gap: 10px;
+
       .menuMain {
         .elementsRow {
           padding: 5px 0;
@@ -363,12 +374,15 @@
           input {
             height: 40px;
           }
+
           textarea {
             height: 40px;
           }
+
           .fileAddWrapper {
             height: 40px;
           }
+
           select {
             height: 40px;
           }
@@ -377,26 +391,32 @@
     }
   }
 }
+
 @media screen and (max-width: 550px) {
   .productsMenuOverlay {
     .productsMenuContent {
       width: 100%;
+
       .menuMain {
         .elementsRow {
           input {
             height: 40px;
             max-width: unset;
           }
+
           textarea {
             max-width: unset;
           }
+
           .fileAddWrapper {
             max-width: unset;
           }
+
           select {
             height: 40px;
             max-width: unset;
           }
+
           .priceBox {
             max-width: unset;
           }

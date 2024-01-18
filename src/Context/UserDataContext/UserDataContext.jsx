@@ -1,7 +1,7 @@
 import React, {useCallback, useContext, useEffect, useMemo, useState} from 'react'
 import useApi from "../../Hooks/useApi.js";
 import {AuthContext} from "../AuthContext/AuthContext.jsx";
-import toast from "react-hot-toast";
+import {Bounce, toast} from "react-toastify";
 
 
 export const UserDataContext = React.createContext({
@@ -60,6 +60,7 @@ export const UserDataContextProvider = ({
             const result = await getProducts(null, {
                 page: 1,
                 perPage: 99999,
+                isPublish: true,
             });
             if (result.status === 200) {
                 const data = JSON.parse(result.data);
@@ -155,6 +156,18 @@ export const UserDataContextProvider = ({
             })
                 .finally(() => {
                     setBasketOperationInProgress(false);
+                    toast.error(`Product removed from basket`,
+                        {
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: false,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "colored",
+                            transition: Bounce,
+                        }
+                    );
+
                 });
         }
         else {

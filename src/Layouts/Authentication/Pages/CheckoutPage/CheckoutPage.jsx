@@ -223,9 +223,14 @@ export const CheckoutPage = () => {
                                     <div className={styles.paymentTypeRow}>
                                         <div className={styles.paymentTypeItem}>
                                             <input type="checkbox"/>
-                                            Cash on Delivery
+                                            <p>Pay with CASH upon delivery.</p>
                                         </div>
-                                        <p>Pay with cash upon delivery.</p>
+                                        <div className={styles.paymentTypeItem}>
+                                            <input type="checkbox"/>
+                                            <p>Pay with CARD upon delivery.</p>
+                                        </div>
+
+
                                     </div>
                                     <div className={styles.paymentPrivacyPolicy}>
                                         <p>Your personal data will be used to process your order, support your

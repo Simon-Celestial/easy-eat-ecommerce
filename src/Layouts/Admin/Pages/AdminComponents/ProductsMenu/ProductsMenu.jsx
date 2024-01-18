@@ -1,8 +1,8 @@
 import React, {useCallback, useEffect, useState} from 'react'
 import styles from "./ProductsMenu.module.scss";
-import {Power} from "@phosphor-icons/react";
+import {CircleDashed, Power} from "@phosphor-icons/react";
 import useApi from "../../../../../Hooks/useApi.js";
-import toast, {LoaderIcon} from "react-hot-toast";
+import {Bounce, toast} from 'react-toastify';
 
 export const getBase64 = (file) => {
     return new Promise((resolve, reject) => {
@@ -75,47 +75,82 @@ export const ProductsMenu = ({
             if (id === null) {
                 const result = await saveProduct(null, reqData);
                 if (result.status === 200) {
-                    toast('Product Added', {
-                        style: {
-                            background: "green",
-                            color: "white",
+                    toast.success(`Product Added`,
+                        {
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: false,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "colored",
+                            transition: Bounce,
                         }
-                    });
+                    );
+
                     setProductsMenuOpen(false);
                     setState(initialState);
                     update();
                 } else {
-                    toast("Add full information", {
-                        style: {
-                            background: "red",
-                            color: "white",
+                    toast.error(`Add full information`,
+                        {
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: false,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "colored",
+                            transition: Bounce,
                         }
-                    })
+                    );
+
                 }
             } else {
                 const result = await updateProduct(id, reqData);
 
                 if (result.status === 200) {
-                    toast('Product Updated', {
-                        style: {
-                            background: "green",
-                            color: "white",
+                    toast.success(`Product Updated`,
+                        {
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: false,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "colored",
+                            transition: Bounce,
                         }
-                    });
+                    );
+
                     setProductsMenuOpen(false);
                     setState(initialState);
                     update();
                 } else {
-                    toast('Something is wrong')
+                    toast.error(`Something is wrong`,
+                        {
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: false,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "colored",
+                            transition: Bounce,
+                        }
+                    );
+
                 }
             }
         } catch (e) {
-            toast(e, {
-                style: {
-                    background: "red",
-                    color: "white",
+            toast.error(`${e}`,
+                {
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                    transition: Bounce,
                 }
-            })
+            );
+
 
         } finally {
             setLoading(false);
@@ -126,12 +161,12 @@ export const ProductsMenu = ({
     const handleAcceptImage = useCallback(async (e) => {
         const file = e.target.files[0];
         if (file.size > 1000 * 1000 * 150) {
-            toast('File is too big');
+            toast.error('File is too big');
             e.target.value = '';
             return;
         }
         if (file.size < 1000 * 5) {
-            toast('File is too small');
+            toast.error('File is too small');
             e.target.value = '';
             return;
         }
@@ -148,7 +183,7 @@ export const ProductsMenu = ({
             <div className={styles.productsMenuContent}>
                 {loading &&
                     <div className={styles.loadingOverlay}>
-                        <LoaderIcon/>
+                        <CircleDashed/>
                     </div>
                 }
                 <div className={styles.menuHead}>
