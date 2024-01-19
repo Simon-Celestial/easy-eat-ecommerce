@@ -11,6 +11,7 @@ import {ChangedFooter} from "../../Components/ChangedFooter/ChangedFooter.jsx";
 import {Link, useParams} from "react-router-dom";
 import useApi from "../../../../Hooks/useApi.js";
 import {UserDataContext} from "../../../../Context/UserDataContext/UserDataContext.jsx";
+import {Bounce, toast} from "react-toastify";
 
 export const ProductSingle = () => {
 
@@ -19,7 +20,14 @@ export const ProductSingle = () => {
         setHeaderColorChange,
     } = useContext(LayoutContext);
 
-    const {} = useContext(UserDataContext);
+    const {
+        basket,
+        loading: productLoading,
+        add,
+        update,
+        wishlist,
+        setWishlist,
+    } = useContext(UserDataContext);
     const [product, setProduct] = useState(null);
     const [brands, setBrands] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -41,7 +49,8 @@ export const ProductSingle = () => {
             if (result.status === 200) {
                 const obj = JSON.parse(result.data);
                 setProduct(obj.data);
-            } else {
+            }
+            else {
 
             }
             setLoading(false);
@@ -54,7 +63,8 @@ export const ProductSingle = () => {
             if (result.status === 200) {
                 const obj = JSON.parse(result.data);
                 setBrands(obj.data);
-            } else {
+            }
+            else {
 
             }
             setLoading(false);
@@ -72,7 +82,8 @@ export const ProductSingle = () => {
             if (result.status === 200) {
                 const obj = JSON.parse(result.data);
                 setRelatedProducts(obj.data.product.filter(it => it._id !== product._id).slice(-3));
-            } else {
+            }
+            else {
 
             }
             setLoading(false);
@@ -245,71 +256,162 @@ export const ProductSingle = () => {
                         relatedProducts ?
                             <div className={styles.relatedProductsCards}>
 
-                            {
-                                !loading?
-                                relatedProducts.map(related => {
-                                    const salePercent = (100 - (((related?.salePrice) / related?.productPrice) * 100));
+                                {
+                                    !loading ?
+                                        relatedProducts.map(product => {
+                                            const salePercent = (100 - (((product?.salePrice) / product?.productPrice) * 100));
 
-                                    return (
-                                        <div className={styles.relatedProductsCard}>
-                                            <div className={styles.relatedProductImg}>
-                                                <div className={styles.relatedProductsManipulation}>
-                                                    <div className={styles.relatedManipulationItems}>
-                                                        <Heart weight="thin"/>
+                                            return (
+                                                <div className={styles.relatedProductsCard}>
+                                                    <div className={styles.relatedProductImg}>
+                                                        <div className={styles.relatedProductsManipulation}>
+                                                            <div className={styles.relatedManipulationItems}>
+                                                                <Heart
+                                                                    style={{
+                                                                        color: wishlist[product._id] ? 'red' : 'unset'
+                                                                    }}
+                                                                    onClick={() => {
+                                                                        setWishlist(prev => {
+                                                                            const id = product._id;
+                                                                            if (prev[id]) {
+                                                                                const newVal = {
+                                                                                    ...prev,
+                                                                                }
+                                                                                delete newVal[id];
+                                                                                toast.error(`${product.title} removed from wishlist`,
+                                                                                    {
+                                                                                        hideProgressBar: false,
+                                                                                        closeOnClick: true,
+                                                                                        pauseOnHover: false,
+                                                                                        draggable: true,
+                                                                                        progress: undefined,
+                                                                                        theme: "colored",
+                                                                                        transition: Bounce,
+                                                                                    }
+                                                                                );
+                                                                                return newVal;
+                                                                            }
+                                                                            toast.success(`${product.title} added to wishlist`,
+                                                                                {
+                                                                                    hideProgressBar: false,
+                                                                                    closeOnClick: true,
+                                                                                    pauseOnHover: false,
+                                                                                    draggable: true,
+                                                                                    progress: undefined,
+                                                                                    theme: "colored",
+                                                                                    transition: Bounce,
+                                                                                }
+                                                                            );
+
+                                                                            return ({
+                                                                                ...prev,
+                                                                                [id]: product,
+                                                                            });
+                                                                        });
+                                                                    }}/>
+
+                                                            </div>
+                                                            <div className={styles.relatedManipulationItems}>
+                                                                {productLoading ?
+                                                                    <div className={styles.buttonLoader}>
+                                                                        <CircleDashed/>
+                                                                    </div>
+                                                                    : <ShoppingCart
+                                                                        color={basket.find(it => it.productId === product._id) ? 'red' : 'unset'}
+                                                                        onClick={() => {
+                                                                            const foundItem = basket.find(it => it.productId === product._id);
+                                                                            if (foundItem) {
+                                                                                toast.success(`${product.title} basket count updated`,
+                                                                                    {
+                                                                                        hideProgressBar: false,
+                                                                                        closeOnClick: true,
+                                                                                        pauseOnHover: false,
+                                                                                        draggable: true,
+                                                                                        progress: undefined,
+                                                                                        theme: "colored",
+                                                                                        transition: Bounce,
+                                                                                    }
+                                                                                );
+                                                                                update(foundItem._id, foundItem.productCount + 1)
+                                                                            }
+                                                                            else {
+                                                                                add({
+                                                                                    ...product,
+                                                                                    count: 1,
+                                                                                })
+                                                                                toast.success(`${product.title} added to basket`,
+                                                                                    {
+                                                                                        hideProgressBar: false,
+                                                                                        closeOnClick: true,
+                                                                                        pauseOnHover: false,
+                                                                                        draggable: true,
+                                                                                        progress: undefined,
+                                                                                        theme: "colored",
+                                                                                        transition: Bounce,
+                                                                                    }
+                                                                                );
+
+                                                                            }
+                                                                        }}
+                                                                        style={{
+                                                                            opacity: product.stock < 1 ? 0.3 : 1,
+                                                                            pointerEvents: product.stock < 1 ? "none" : "auto",
+                                                                        }}
+                                                                        weight="thin"
+
+                                                                    />}
+                                                            </div>
+                                                            <div className={styles.relatedManipulationItems}>
+                                                                <Link to={`/product/${product._id}`} target={'_blank'}>
+                                                                    <ArrowRight weight="thin"/>
+                                                                </Link>
+                                                            </div>
+                                                        </div>
+                                                        {
+                                                            (salePercent !== 100 && salePercent !== 0) ?
+                                                                <div
+                                                                    className={`${styles.relatedWithSale} ${styles.hasSale}`}>
+                                                                    -{salePercent.toFixed(2)} %
+                                                                </div> : ''
+                                                        }
+                                                        {
+                                                            product.stock < 1 ?
+                                                                <div className={styles.outOfStock}>
+                                                                    Out Of Stock
+                                                                </div> : null
+                                                        }
+                                                        <img
+                                                            src={product.images?.[0]?.url}
+                                                            alt="Product"/>
                                                     </div>
-                                                    <div className={styles.relatedManipulationItems}>
-                                                        <ShoppingCart weight="thin"/>
-                                                    </div>
-                                                    <div className={styles.relatedManipulationItems}>
-                                                        <Link to={`/product/${related._id}`} target={'_blank'}>
-                                                            <ArrowRight weight="thin"/>
+                                                    <div className={styles.relatedProductTittle}>
+                                                        <Link className={styles.relatedProductName}
+                                                              to={`/product/${product._id}`} target={'_blank'}>
+                                                            {product.title}
                                                         </Link>
+                                                        <span><p style={{
+                                                            textDecoration: (salePercent !== 100 && salePercent !== 0) ? 'line-through' : 'unset'
+                                                        }}>${product.productPrice.toFixed(2)}</p> {
+                                                            (salePercent !== 100 && salePercent !== 0) && `$${product.salePrice.toFixed(2)}`
+                                                        }</span>
+
+                                                        {/*NO RATING IN API, SO I MADE IT STATIC*/}
+                                                        <div className={styles.relatedProductRating}>
+                                                            <Star size={14} weight="fill" color="#EC3D08"/>
+                                                            <Star size={14} weight="fill" color="#EC3D08"/>
+                                                            <Star size={14} weight="fill" color="#EC3D08"/>
+                                                            <Star size={14} weight="fill" color="#EC3D08"/>
+                                                            <Star size={14} weight="fill" color="gray"/>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                {
-                                                    (salePercent !== 100 && salePercent !== 0)  ?
-                                                        <div className={`${styles.relatedWithSale} ${styles.hasSale}`}>
-                                                            -{salePercent.toFixed(2)} %
-                                                        </div> : ''
-                                                }
-                                                {
-                                                    related.stock < 1 ?
-                                                        <div className={styles.outOfStock}>
-                                                            Out Of Stock
-                                                        </div> : null
-                                                }
-                                                <img
-                                                    src={related.images?.[0]?.url}
-                                                    alt="Product"/>
-                                            </div>
-                                            <div className={styles.relatedProductTittle}>
-                                                <Link className={styles.relatedProductName}
-                                                      to={`/product/${related._id}`} target={'_blank'}>
-                                                    {related.title}
-                                                </Link>
-                                                <span><p style={{
-                                                    textDecoration: (salePercent !== 100 && salePercent !== 0)? 'line-through': 'unset'
-                                                }}>${related.productPrice.toFixed(2)}</p> {
-                                                    (salePercent !== 100 && salePercent !== 0) && `$${related.salePrice.toFixed(2)}`
-                                                }</span>
-
-                                                {/*NO RATING IN API, SO I MADE IT STATIC*/}
-                                                <div className={styles.relatedProductRating}>
-                                                    <Star size={14} weight="fill" color="#EC3D08"/>
-                                                    <Star size={14} weight="fill" color="#EC3D08"/>
-                                                    <Star size={14} weight="fill" color="#EC3D08"/>
-                                                    <Star size={14} weight="fill" color="#EC3D08"/>
-                                                    <Star size={14} weight="fill" color="gray"/>
-                                                </div>
-                                            </div>
+                                            );
+                                        })
+                                        : <div className={styles.relatedLoading}>
+                                            <CircleDashed/>
                                         </div>
-                                    );
-                                })
-                                    : <div className={styles.relatedLoading}>
-                                    <CircleDashed />
-                                    </div>
-                            }
-                        </div> : <p className={styles.noRelated}>There is no related products.</p>
+                                }
+                            </div> : <p className={styles.noRelated}>There is no related products.</p>
                     }
                 </div>
             </section>

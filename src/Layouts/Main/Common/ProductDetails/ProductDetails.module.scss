@@ -167,6 +167,7 @@
           justify-content: center;
           height: 100%;
           position: relative;
+
           .magnifyingImage {
             display: flex;
             align-items: center;
@@ -344,6 +345,10 @@
           gap: 8px;
           white-space: nowrap;
 
+          &:disabled {
+            opacity: 0.5;
+          }
+
           svg {
             color: $color-white;
             font-size: 20px;
@@ -442,12 +447,14 @@
 
         .productTabMenu {
           gap: 20px;
+
           .productTabMenuColumn {
             .columnItem {
-             width: 130px;
+              width: 130px;
               height: 130px;
             }
-          };
+          }
+        ;
 
           .productTabMenuImage {
             .tabMenuImage {
@@ -458,18 +465,22 @@
           }
         }
       }
+
       .productDetailsRight {
         padding: 0 10px 0 10px;
         width: 100%;
+
         .productName {
           h1 {
             font-size: 25px;
           }
         }
+
         .productManipulation {
           flex-wrap: wrap;
           margin-bottom: 20px;
         }
+
         .productMetaData {
           gap: 5px;
         }
@@ -477,6 +488,7 @@
     }
   }
 }
+
 @media screen and (max-width: 800px) {
   .productDetailsSection {
     .productDetailsContent {
@@ -487,7 +499,9 @@
               width: 80px;
               height: 80px;
             }
-          };
+          }
+        ;
+
           .productTabMenuImage {
             .magnifyingImage {
               padding: 5px;
@@ -495,34 +509,42 @@
           }
         }
       }
+
       .productDetailsRight {
         .productDescription {
           gap: 15px;
-            p {
-              font-size: 14px;
-            }
+
+          p {
+            font-size: 14px;
+          }
         }
       }
     }
   }
 }
+
 @media screen and (max-width: 500px) {
   .productDetailsSection {
     padding: 0 10px 50px 10px;
+
     .productDetailsContent {
       .productDetailsLeft {
         .productTabMenu {
           flex-direction: column;
           gap: 5px;
+
           .productTabMenuColumn {
             flex-direction: row;
             justify-content: center;
             order: 2;
+
             .columnItem {
               width: 60px;
               height: 60px;
             }
-          };
+          }
+        ;
+
           .productTabMenuImage {
             .magnifyingImage {
               padding: 5px;

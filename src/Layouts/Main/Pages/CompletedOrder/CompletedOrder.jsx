@@ -8,7 +8,9 @@ export const CompletedOrder = () => {
 
     return (
         <div className={styles.completedOrderWrapper}>
-            <StatusBar first="#EC3D08" second="#EC3D08" third="#EC3D08"/>
+            <StatusBar first="#EC3D08" second="#EC3D08" third="#EC3D08"
+            thirdArrowColor="transparent"
+            />
 
             <div className={styles.pageContent}>
                 <h2>Your order has been received</h2>

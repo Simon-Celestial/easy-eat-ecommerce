@@ -2,7 +2,7 @@ import React from 'react'
 import styles from "./StatusBar.module.scss";
 import {ArrowRight} from "@phosphor-icons/react";
 
-export const StatusBar = ({first, second, third}) => {
+export const StatusBar = ({first, second, third, thirdArrowColor}) => {
 
     const statusBarData = [
         {
@@ -16,12 +16,15 @@ export const StatusBar = ({first, second, third}) => {
             content: "Payment & Delivery Options",
             number: 2,
             colorCount: second,
+
         },
         {
             id: 3,
             number: 3,
             colorCount: third,
             content: "Order Received",
+            arrowColor: thirdArrowColor,
+
         }
     ];
 
@@ -31,7 +34,9 @@ export const StatusBar = ({first, second, third}) => {
                 <div key={item.id} className={styles.statusBarItem}>
                     <span style={{background: `${item.colorCount}`}}>{item.number}</span>
                     <p>{item.content}
-                        <ArrowRight/>
+                        <ArrowRight
+                            style={{color: item.arrowColor}}
+                        />
                     </p>
                 </div>
             ))}

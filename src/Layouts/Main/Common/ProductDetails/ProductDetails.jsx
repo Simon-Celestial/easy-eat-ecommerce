@@ -16,9 +16,14 @@ export const ProductDetails = ({product, brands}) => {
         setMagnifiedOpen,
     } = useContext(LayoutContext);
 
+
     const {
         wishlist,
         setWishlist,
+        basket,
+        loading: basketLoading,
+        add,
+        update,
     } = useContext(UserDataContext);
     const [productCount, setProductCount] = useState(1);
 
@@ -120,6 +125,9 @@ export const ProductDetails = ({product, brands}) => {
     const isOnSale = useMemo(() => !!product.salePrice && (product.salePrice !== product.productPrice),
         [product]);
 
+    const countInBasket = useMemo(() => basket
+        ?.find(bItem => bItem?.productId === product._id)
+        ?.productCount || 0, [basket, product])
     return (
         <>
             {/*MAGNIFIED IMAGE*/}
@@ -271,9 +279,51 @@ export const ProductDetails = ({product, brands}) => {
                                     </div>
                                 </div>
                             </div>
-                            <button className={styles.productBuyButton}>
-                                <ShoppingCart/>
-                                Buy Now
+                            <button
+                                disabled={(product.stock - countInBasket) < productCount  || (productCount.stock - countInBasket) < 0 || productCount === 0}
+                                className={styles.productBuyButton}
+                                onClick={() => {
+                                    const foundItem = basket.find(it => it.productId === product._id);
+                                    if (foundItem) {
+                                        toast.success(`${product.title} basket count updated`,
+                                            {
+                                                hideProgressBar: false,
+                                                closeOnClick: true,
+                                                pauseOnHover: false,
+                                                draggable: true,
+                                                progress: undefined,
+                                                theme: "colored",
+                                                transition: Bounce,
+                                            }
+                                        );
+                                        update(foundItem._id, foundItem.productCount + productCount);
+                                    }
+                                    else {
+                                        add({
+                                            ...product,
+                                            count: productCount,
+                                        })
+                                        toast.success(`${product.title} added to basket`,
+                                            {
+                                                hideProgressBar: false,
+                                                closeOnClick: true,
+                                                pauseOnHover: false,
+                                                draggable: true,
+                                                progress: undefined,
+                                                theme: "colored",
+                                                transition: Bounce,
+                                            }
+                                        );
+
+                                    }
+                                }}
+                            >
+                                {
+                                    basketLoading? <>...</>:<>
+                                        <ShoppingCart/>
+                                        Buy Now
+                                    </>
+                                }
                             </button>
                             <div className={styles.productWishList}>
                                 <Heart

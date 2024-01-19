@@ -6,6 +6,7 @@ import {BlockTitle} from "../../AdminComponents/BlockTitle/BlockTitle.jsx";
 import {useGetData} from "../AdminPageDashboard/useGetData.js";
 import {useParams} from "react-router-dom";
 import {UserDataContext} from "../../../../../Context/UserDataContext/UserDataContext.jsx";
+import moment from "moment";
 
 export const AdminOrderSingle = () => {
 
@@ -26,7 +27,7 @@ export const AdminOrderSingle = () => {
     } = useContext(UserDataContext);
     const order = useMemo(() => {
         if (!orders || orders.length === 0) return null;
-        return orders.find(({_id}) => _id = id);
+        return orders.find(({_id}) => _id === id);
     }, [orders, id])
 
     console.log(order);
@@ -42,13 +43,13 @@ export const AdminOrderSingle = () => {
                         <div className={styles.invoiceTopItem}>
                             <p>STATUS:</p>
                             <div className={styles.status}>
-                                {order ? order.status : 'Loading...'}
+                                {order ? order.status.toUpperCase() : 'Loading...'}
                             </div>
                         </div>
                         <div className={styles.invoiceTopItem}>
                             <p>DATE:</p>
                             <h2>
-                                {order ? order.createdAt : 'Loading...'}
+                                {order ? moment(order.createdAt).format('YYYY.MM.DD HH:mm') : 'Loading...'}
                             </h2>
                         </div>
                         <div className={styles.invoiceTopItem}>
@@ -68,7 +69,7 @@ export const AdminOrderSingle = () => {
                         <div className={styles.invoiceTopItem}>
                             <p>PAYMENT METHOD:</p>
                             <h2>
-                                {order ? order.method : 'Loading...'}
+                                {order ? order.method.toUpperCase() : 'Loading...'}
 
                             </h2>
                         </div>
@@ -78,11 +79,25 @@ export const AdminOrderSingle = () => {
                         </div>
                         <div className={styles.invoiceTopItem}>
                             <p>DISCOUNT:</p>
-                            <h2>$0.00</h2>
+                            <h2>${
+                                order?.products?.map((pd, i) => {
+                                    const product = cache.find(it => it._id === pd?.productId);
+                                    return pd.productCount * (product?.productPrice || 0)
+                                }).reduce((a, b) => a + b, 0) - order?.products?.map((pd, i) => {
+                                    const product = cache.find(it => it._id === pd?.productId);
+                                    return pd.productCount * (product?.salePrice || product?.productPrice || 0)
+                                }).reduce((a, b) => a + b, 0)
+
+                            }</h2>
                         </div>
                         <div className={styles.invoiceTopItem}>
                             <p>TOTAL AMOUNT:</p>
-                            <h2 style={{color: "#FFB936"}}>$960.00</h2>
+                            <h2 style={{color: "#FFB936"}}>${
+                                order?.products?.map((pd, i) => {
+                                    const product = cache.find(it => it._id === pd?.productId);
+                                    return pd.productCount * (product?.salePrice || product?.productPrice || 0)
+                                }).reduce((a, b) => a + b, 0)
+                            }</h2>
                         </div>
                     </div>
                     <div className={styles.overFlowX}>
@@ -108,21 +123,22 @@ export const AdminOrderSingle = () => {
 
                                 {order.products.map((pd, i) => {
                                     const product = cache.find(it => it._id === pd.productId);
+                                    if(!product) return <></>
                                     return <div className={styles.invoiceMiddleRow}>
                                         <div className={`${styles.sr} ${styles.box}`}>
                                             <span>{i + 1}</span>
                                         </div>
                                         <div className={`${styles.title} ${styles.box}`}>
-                                            <span>{product.title}</span>
+                                            <span>{product?.title}</span>
                                         </div>
                                         <div className={`${styles.quantity} ${styles.box}`}>
-                                            <span>{pd.productCount}</span>
+                                            <span>{pd?.productCount}</span>
                                         </div>
                                         <div className={`${styles.price} ${styles.box}`}>
-                                            <span>${product.salePrice || product.productPrice}</span>
+                                            <span>${product?.salePrice || product?.productPrice}</span>
                                         </div>
                                         <div className={`${styles.amount} ${styles.box}`}>
-                                            <span>${(product.salePrice || product.productPrice) * product.stock}</span>
+                                            <span>${(product?.salePrice || product?.productPrice) * pd.productCount}</span>
                                         </div>
                                     </div>;
                                 })}

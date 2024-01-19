@@ -4,12 +4,14 @@ import {UiControl} from "../../Common/UiControl/UiControl.jsx";
 import {Footer} from "../../Components/Footer/Footer.jsx";
 import {ArrowRight, CaretDoubleDown, Heart, TelegramLogo} from "@phosphor-icons/react";
 import {SubscribeModal} from "../../Common/SubscribeModal/SubscribeModal.jsx";
-import {useState, useCallback, useEffect, useContext} from "react";
+import React, {useState, useCallback, useEffect, useContext, useMemo} from "react";
 import {Link} from "react-router-dom";
 import {CollageProductItems} from "../../Common/CollageProductItems/CollageProductItems.jsx";
 import {FadeImageSlider} from "../../Common/FadeImageSlider/FadeImageSlider.jsx";
 import {LatestNewsSectionSlider} from "../../Common/LatestNewsSectionSlider/LatestNewsSectionSlider.jsx";
 import {LayoutContext} from "../../../../Context/LayoutContext/LayoutContext.jsx";
+import {UserDataContext} from "../../../../Context/UserDataContext/UserDataContext.jsx";
+import {Bounce, toast} from "react-toastify";
 
 
 export const Home = () => {
@@ -19,6 +21,12 @@ export const Home = () => {
 
     const [position, setPosition] = useState({x: 0, y: 0});
     const [parallaxEnabled, setParallaxEnabled] = useState(false);
+
+    const {
+        cache,
+        setWishlist,
+        wishlist,
+    } = useContext(UserDataContext);
 
     const handleMouseMove = useCallback((e) => {
         if (parallaxEnabled) {
@@ -232,133 +240,97 @@ export const Home = () => {
                         <div className={styles.ourBurgersProducts}>
                             {/*FOR SALE ON PRODUCT ADD .cardSale styles, in .ourBurgersCardWrapper*/}
                             {/*FOR LINE THROUGH ON SALE PRICE (WRITE PRICE IN SPAN <p>sale price<p/>)*/}
-                            <div className={styles.ourBurgersCardWrapper}>
-                                <div className={styles.burgerCardManipulation}>
-                                    <div className={styles.manipulationItem}>
-                                        <Heart weight="light"/>
-                                    </div>
-                                    <a href="#" className={styles.manipulationItem}>
-                                        <ArrowRight weight="light"/>
-                                    </a>
-                                </div>
-                                <div className={styles.burgerCard}>
-                                    <Link to="/home/:id">
-                                        <div className={styles.ourBurgersImg}>
-                                            <img
-                                                src="https://easyeat.ancorathemes.com/wp-content/uploads/2020/05/product-3-copyright-480x480.png"
-                                                alt="Burger"/>
-                                        </div>
-                                    </Link>
-                                    <Link to="/home/details">
-                                        <div className={styles.ourBurgerTitle}>
-                                            <span>CHICKEN BURGER</span>
-                                        </div>
-                                    </Link>
-                                    <div className={styles.ourBurgerPrice}>
-                                        <span>$165.00</span>
-                                    </div>
-                                    <div className={styles.addToCart}>
-                                        <a href="#">Buy Now</a>
-                                    </div>
+                            {
+                                cache?.filter(p => p.stock !== 0).slice(-4).map(product => {
+                                    const salePercent = (100 - ((product?.salePrice / product?.productPrice) * 100));
 
-                                </div>
-                            </div>
-                            <div className={styles.ourBurgersCardWrapper}>
-                                <div className={styles.cardSale}>
-                                    -10%
-                                </div>
-                                <div className={styles.burgerCardManipulation}>
-                                    <div className={styles.manipulationItem}>
-                                        <Heart weight="light"/>
-                                    </div>
-                                    <a href="#" className={styles.manipulationItem}>
-                                        <ArrowRight weight="light"/>
-                                    </a>
-                                </div>
-                                <div className={styles.burgerCard}>
-                                    <Link to="/home/:id">
-                                        <div className={styles.ourBurgersImg}>
-                                            <img
-                                                src="https://easyeat.ancorathemes.com/wp-content/uploads/2020/05/product-4-copyright-480x480.png"
-                                                alt="Burger"/>
-                                        </div>
-                                    </Link>
-                                    <Link to="/home/details">
-                                        <div className={styles.ourBurgerTitle}>
-                                            <span>BLACK BURGER</span>
-                                        </div>
-                                    </Link>
-                                    <div className={styles.ourBurgerPrice}>
-                                        <span><p>$99.00</p>$89.00</span>
-                                    </div>
-                                    <div className={styles.addToCart}>
-                                        <a href="#">Buy Now</a>
-                                    </div>
+                                    return <div className={styles.ourBurgersCardWrapper}>
+                                        {
+                                            salePercent !== 0 && salePercent !== 100 &&
+                                            <div className={styles.cardSale}>
+                                                -{salePercent.toFixed(2)}%
+                                            </div>
+                                        }
+                                        <div className={styles.burgerCardManipulation}>
+                                            <div className={styles.manipulationItem}>
+                                                <Heart
+                                                    style={{
+                                                        color: wishlist[product._id] ? 'red' : 'unset'
+                                                    }}
+                                                    onClick={() => {
+                                                        setWishlist(prev => {
+                                                            const id = product._id;
+                                                            if (prev[id]) {
+                                                                const newVal = {
+                                                                    ...prev,
+                                                                }
+                                                                delete newVal[id];
+                                                                toast.error(`${product.title} removed from wishlist`,
+                                                                    {
+                                                                        hideProgressBar: false,
+                                                                        closeOnClick: true,
+                                                                        pauseOnHover: false,
+                                                                        draggable: true,
+                                                                        progress: undefined,
+                                                                        theme: "colored",
+                                                                        transition: Bounce,
+                                                                    }
+                                                                );
+                                                                return newVal;
+                                                            }
+                                                            toast.success(`${product.title} added to wishlist`,
+                                                                {
+                                                                    hideProgressBar: false,
+                                                                    closeOnClick: true,
+                                                                    pauseOnHover: false,
+                                                                    draggable: true,
+                                                                    progress: undefined,
+                                                                    theme: "colored",
+                                                                    transition: Bounce,
+                                                                }
+                                                            );
 
-                                </div>
-                            </div>
-                            <div className={styles.ourBurgersCardWrapper}>
-                                <div className={styles.burgerCardManipulation}>
-                                    <div className={styles.manipulationItem}>
-                                        <Heart weight="light"/>
-                                    </div>
-                                    <a href="#" className={styles.manipulationItem}>
-                                        <ArrowRight weight="light"/>
-                                    </a>
-                                </div>
-                                <div className={styles.burgerCard}>
-                                    <Link to="/home/:id">
-                                        <div className={styles.ourBurgersImg}>
-                                            <img
-                                                src="https://easyeat.ancorathemes.com/wp-content/uploads/2020/05/product-1-copyright-1024x1024.png"
-                                                alt="Burger"/>
+                                                            return ({
+                                                                ...prev,
+                                                                [id]: product,
+                                                            });
+                                                        });
+                                                    }}/>
+                                            </div>
+                                            <Link
+                                                to={`/product/${product._id}`}
+                                                className={styles.manipulationItem}>
+                                                <ArrowRight weight="light"/>
+                                            </Link>
                                         </div>
-                                    </Link>
-                                    <Link to="/home/details">
-                                        <div className={styles.ourBurgerTitle}>
-                                            <span>FISH BURGER</span>
-                                        </div>
-                                    </Link>
-                                    <div className={styles.ourBurgerPrice}>
-                                        <span>$49.00</span>
-                                    </div>
-                                    <div className={styles.addToCart}>
-                                        <a href="#">Buy Now</a>
-                                    </div>
+                                        <div className={styles.burgerCard}>
+                                            <Link to={`/product/${product._id}`}>
+                                                <div className={styles.ourBurgersImg}>
+                                                    <img
+                                                        src={product?.images?.[0]?.url}
+                                                        alt={product?.images?.[0]?.public_id}/>
+                                                </div>
+                                            </Link>
+                                            <Link to={`/product/${product._id}`}>
+                                                <div className={styles.ourBurgerTitle}>
+                                                    <span>{product.title}</span>
+                                                </div>
+                                            </Link>
+                                            <div className={styles.ourBurgerPrice}>
+                                                <span>
+                                                    {product.salePrice && (product.salePrice !== product.productPrice)
+                                                        && <p>${product.productPrice.toFixed(2)}</p>}
+                                                    ${(product.salePrice || product.productPrice).toFixed(2)}
+                                                </span>
+                                            </div>
+                                            <div className={styles.addToCart}>
+                                                <Link to={`/product/${product._id}`}>Buy Now</Link>
+                                            </div>
 
-                                </div>
-                            </div>
-                            <div className={styles.ourBurgersCardWrapper}>
-                                <div className={styles.burgerCardManipulation}>
-                                    <div className={styles.manipulationItem}>
-                                        <Heart weight="light"/>
-                                    </div>
-                                    <a href="#" className={styles.manipulationItem}>
-                                        <ArrowRight weight="light"/>
-                                    </a>
-                                </div>
-                                <div className={styles.burgerCard}>
-                                    <Link to="/home/:id">
-                                        <div className={styles.ourBurgersImg}>
-                                            <img
-                                                src="https://easyeat.ancorathemes.com/wp-content/uploads/2020/05/product-2-copyright-480x480.png"
-                                                alt="Burger"/>
                                         </div>
-                                    </Link>
-                                    <Link to="/home/details">
-                                        <div className={styles.ourBurgerTitle}>
-                                            <span>DOUBLE BURGER</span>
-                                        </div>
-                                    </Link>
-                                    <div className={styles.ourBurgerPrice}>
-                                        <span>$125.00 - $165.00</span>
                                     </div>
-                                    <div className={styles.addToCart}>
-                                        <a href="#">Buy Now</a>
-                                    </div>
-
-                                </div>
-                            </div>
+                                })
+                            }
                         </div>
                         <div className={styles.ourBurgersViewMore}>
                             <Link to="/home">
@@ -490,148 +462,46 @@ export const Home = () => {
                         </div>
                         <div className={styles.ourMenuContainer}>
                             <div className={styles.ourMenuColumn}>
-                                <div className={styles.ourMenuColumnItem}>
-                                    <div className={styles.ourMenuRow}>
-                                        <a href="#" className={styles.ourMenuDetails}>
-                                            CLASSIC JUICY CHEESEBURGER
-                                        </a>
-                                        <div className={styles.ourMenuItemDots}></div>
-                                        <div className={styles.ourMenuDetails}>
-                                            $12.00
-                                        </div>
-                                    </div>
-                                    <div className={styles.ourMenuItemDescription}>
-                                        Duis aute irure dolor in reprehenderit in voluptate velit esse.
-                                    </div>
-                                </div>
-                                <div className={styles.ourMenuColumnItem}>
-                                    <div className={styles.ourMenuRow}>
-                                        <a href="#" className={styles.ourMenuDetails}>
-                                            MUSHROOM SWISS BURGER
-                                        </a>
-                                        <div className={styles.ourMenuItemDots}></div>
-                                        <div className={styles.ourMenuDetails}>
-                                            $10.00
-                                        </div>
-                                    </div>
-                                    <div className={styles.ourMenuItemDescription}>
-                                        Duis aute irure dolor in reprehenderit in voluptate velit esse.
-                                    </div>
-                                </div>
-                                <div className={styles.ourMenuColumnItem}>
-                                    <div className={styles.ourMenuRow}>
-                                        <a href="#" className={styles.ourMenuDetails}>
-                                            BUFFALO CHICKEN BURGER
-                                        </a>
-                                        <div className={styles.ourMenuItemDots}></div>
-                                        <div className={styles.ourMenuDetails}>
-                                            $14.00
-                                        </div>
-                                    </div>
-                                    <div className={styles.ourMenuItemDescription}>
-                                        Duis aute irure dolor in reprehenderit in voluptate velit esse.
-                                    </div>
-                                </div>
-                                <div className={styles.ourMenuColumnItem}>
-                                    <div className={styles.ourMenuRow}>
-                                        <a href="#" className={styles.ourMenuDetails}>
-                                            SOUTHWEST CHICKEN BURGER
-                                        </a>
-                                        <div className={styles.ourMenuItemDots}></div>
-                                        <div className={styles.ourMenuDetails}>
-                                            $10.00
-                                        </div>
-                                    </div>
-                                    <div className={styles.ourMenuItemDescription}>
-                                        Duis aute irure dolor in reprehenderit in voluptate velit esse.
-                                    </div>
-                                </div>
-                                <div className={styles.ourMenuColumnItem}>
-                                    <div className={styles.ourMenuRow}>
-                                        <a href="#" className={styles.ourMenuDetails}>
-                                            PHILLY CHEESESTEAK BURGER
-                                        </a>
-                                        <div className={styles.ourMenuItemDots}></div>
-                                        <div className={styles.ourMenuDetails}>
-                                            $12.00
-                                        </div>
-                                    </div>
-                                    <div className={styles.ourMenuItemDescription}>
-                                        Duis aute irure dolor in reprehenderit in voluptate velit esse.
-                                    </div>
-                                </div>
+                                {
+                                    cache.filter((p, i) => i % 2).slice(0, 5).map(product =>
+                                        <div className={styles.ourMenuColumnItem}>
+                                            <div className={styles.ourMenuRow}>
+                                                <Link
+                                                    to={`/product/${product._id}`}
+                                                    className={styles.ourMenuDetails}>
+                                                    {product.title}
+                                                </Link>
+                                                <div className={styles.ourMenuItemDots}></div>
+                                                <div className={styles.ourMenuDetails}>
+                                                    ${(product.salePrice || product.productPrice).toFixed(2)}
+                                                </div>
+                                            </div>
+                                            <div className={styles.ourMenuItemDescription}>
+                                                {`${product.description.slice(0, 50)}...`}
+                                            </div>
+                                        </div>)
+                                }
                             </div>
                             <div className={styles.ourMenuColumn}>
-                                <div className={styles.ourMenuColumnItem}>
-                                    <div className={styles.ourMenuRow}>
-                                        <a href="#" className={styles.ourMenuDetails}>
-                                            LOADED GUACAMOLE BURGER
-                                        </a>
-                                        <div className={styles.ourMenuItemDots}></div>
-                                        <div className={styles.ourMenuDetails}>
-                                            $16.00
-                                        </div>
-                                    </div>
-                                    <div className={styles.ourMenuItemDescription}>
-                                        Duis aute irure dolor in reprehenderit in voluptate velit esse.
-                                    </div>
-                                </div>
-                                <div className={styles.ourMenuColumnItem}>
-                                    <div className={styles.ourMenuRow}>
-                                        <a href="#" className={styles.ourMenuDetails}>
-                                            TERIYAKI PINEAPPLE BURGER
-                                        </a>
-                                        <div className={styles.ourMenuItemDots}></div>
-                                        <div className={styles.ourMenuDetails}>
-                                            $12.00
-                                        </div>
-                                    </div>
-                                    <div className={styles.ourMenuItemDescription}>
-                                        Duis aute irure dolor in reprehenderit in voluptate velit esse.
-                                    </div>
-                                </div>
-                                <div className={styles.ourMenuColumnItem}>
-                                    <div className={styles.ourMenuRow}>
-                                        <a href="#" className={styles.ourMenuDetails}>
-                                            DOUBLE BACON CHEESEBURGER
-                                        </a>
-                                        <div className={styles.ourMenuItemDots}></div>
-                                        <div className={styles.ourMenuDetails}>
-                                            $16.00
-                                        </div>
-                                    </div>
-                                    <div className={styles.ourMenuItemDescription}>
-                                        Duis aute irure dolor in reprehenderit in voluptate velit esse.
-                                    </div>
-                                </div>
-                                <div className={styles.ourMenuColumnItem}>
-                                    <div className={styles.ourMenuRow}>
-                                        <a href="#" className={styles.ourMenuDetails}>
-                                            DOUBLE CHEESEBURGER MELT
-                                        </a>
-                                        <div className={styles.ourMenuItemDots}></div>
-                                        <div className={styles.ourMenuDetails}>
-                                            $14.00
-                                        </div>
-                                    </div>
-                                    <div className={styles.ourMenuItemDescription}>
-                                        Duis aute irure dolor in reprehenderit in voluptate velit esse.
-                                    </div>
-                                </div>
-                                <div className={styles.ourMenuColumnItem}>
-                                    <div className={styles.ourMenuRow}>
-                                        <a href="#" className={styles.ourMenuDetails}>
-                                            BLACKENED CHICKEN BURGER
-                                        </a>
-                                        <div className={styles.ourMenuItemDots}></div>
-                                        <div className={styles.ourMenuDetails}>
-                                            $12.00
-                                        </div>
-                                    </div>
-                                    <div className={styles.ourMenuItemDescription}>
-                                        Duis aute irure dolor in reprehenderit in voluptate velit esse.
-                                    </div>
-                                </div>
+                                {
+                                    cache.filter((p, i) => !(i % 2)).slice(0, 5).map(product =>
+                                        <div className={styles.ourMenuColumnItem}>
+                                            <div className={styles.ourMenuRow}>
+                                                <Link
+                                                    to={`/product/${product._id}`}
+                                                    className={styles.ourMenuDetails}>
+                                                    {product.title}
+                                                </Link>
+                                                <div className={styles.ourMenuItemDots}></div>
+                                                <div className={styles.ourMenuDetails}>
+                                                    ${(product.salePrice || product.productPrice).toFixed(2)}
+                                                </div>
+                                            </div>
+                                            <div className={styles.ourMenuItemDescription}>
+                                                {`${product.description.slice(0, 50)}...`}
+                                            </div>
+                                        </div>)
+                                }
                             </div>
                         </div>
                     </div>

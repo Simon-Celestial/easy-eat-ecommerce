@@ -45,7 +45,10 @@ export const AdminPageOrders = () => {
                 });
             }
             else {
-                toast.error(`Failed to update order status!`,
+                const receivedMessage = JSON.parse(result.data || '{}')?.message || `Failed to update order status!`;
+                console.log();
+
+                toast.error(receivedMessage,
                     {
                         hideProgressBar: false,
                         closeOnClick: true,
@@ -57,12 +60,9 @@ export const AdminPageOrders = () => {
                     }
                 );
             }
-        }
-        catch (e) {
+        } catch (e) {
             console.log(e)
-        }
-
-        finally {
+        } finally {
             setLoading(false);
         }
     }, []);
@@ -150,7 +150,7 @@ export const AdminPageOrders = () => {
                         </label>
                         <label htmlFor="">
                             <select disabled={true}>
-                                <option value="Cash">Cash</option>
+                                <option value="card">Card</option>
                             </select>
                         </label>
                     </div>
@@ -184,7 +184,9 @@ export const AdminPageOrders = () => {
                         </label>
                     </div>
                 </div>
-                <OrdersTable orders={dataPaginated} loading={loading} updateOrder={handleUpdateOrder}
+                <OrdersTable orders={dataPaginated}
+                             loading={loading}
+                             updateOrder={handleUpdateOrder}
                              pagination={<AdminPagination
                                  currentPage={page}
                                  setCurrentPage={setPage}

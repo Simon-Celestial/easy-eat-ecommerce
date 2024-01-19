@@ -10,9 +10,22 @@
   .checkoutSection {
     display: flex;
     width: 100%;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     background-color: $color-yellow;
     padding: 30px 15px 120px 15px;
+    .pageLoader{
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      svg {
+        font-size: 45px;
+        color: $color-border;
+        animation: rotateAnimation 1s linear infinite;
+      }
+    }
 
     .checkoutContent {
       display: flex;
@@ -92,124 +105,6 @@
                 margin: 48px auto 0 auto;
                 height: auto;
 
-              }
-            }
-
-            .dropDownLogin {
-              display: flex;
-              width: 100%;
-              flex-direction: column;
-              height: 0;
-              overflow: hidden;
-              border: 0;
-              transition: $transition-medium;
-              &.loginDropdownActive {
-                margin: 48px auto 0 auto;
-                height: auto;
-
-              }
-
-              > p {
-                padding-bottom: 30px;
-                font-family: $font-alternative;
-                color: $color-black;
-                text-align: left;
-                font-size: 17px;
-                letter-spacing: 0.5px;
-                line-height: 30px;
-
-              }
-
-              .dropDownLoginRow {
-                width: 100%;
-                display: flex;
-                justify-content: space-between;
-
-                .dropDownLoginColumn {
-                  display: flex;
-                  max-width: 480px;
-                  flex-direction: column;
-                  width: 100%;
-                  &.dropDownLoginColumn:nth-child(2) {
-                    input {
-                      padding-right: 40px;
-                    }
-                    .passwordVisible {
-                      position: absolute;
-                      right: 10px;
-                      bottom: -45px;
-                      cursor: pointer;
-                      svg {
-                        font-size: 20px;
-                      }
-                    }
-                  }
-
-                  label {
-                    margin-bottom: 15px;
-                    display: inline-flex;
-                    align-items: center;
-                    font-size: 18px;
-                    font-family: $font-alternative;
-                    position: relative;
-                    span {
-                      color: $color-orange;
-                      font-size: 20px;
-                    }
-
-                  }
-
-                  > input {
-                    width: 100%;
-                    border: 0;
-                    outline: 0;
-                    background-color: transparent;
-                    border-bottom: 1px solid $color-border;
-                    padding: 8px 0;
-                  }
-
-                  .rememberBlock {
-                    margin-top: 25px;
-                    display: flex;
-                    width: 100%;
-                    align-items: center;
-                    gap: 8px;
-                    font-size: 14px;
-                    font-family: $font-alternative;
-
-                    input {
-                      cursor: pointer;
-                      display: inline-flex;
-                      margin-bottom: 2px;
-                    }
-                  }
-
-                  button {
-                    text-align: center;
-                    width: 145px;
-                    height: 55px;
-                    background-color: $color-orange;
-                    color: $color-white;
-                    font-family: $font-main;
-                    font-size: 18px;
-                    cursor: pointer;
-                    transition: $transition-fast;
-                    margin-top: 20px;
-                    outline: 0;
-                    border: 0;
-
-                    &:hover {
-                      background-color: #c22f00;
-                    }
-                  }
-
-                  a {
-                    font-family: $font-alternative;
-                    color: $color-orange;
-                    margin-top: 20px;
-                    font-size: 16px;
-                  }
-                }
               }
             }
           }
@@ -499,13 +394,6 @@
           .headingDropdown {
             max-width: 770px;
             .titleBlock {
-              .dropDownLogin {
-                .dropDownLoginRow {
-                  .dropDownLoginColumn {
-                    max-width: 375px;
-                  }
-                }
-              }
             }
           }
           .checkoutForm {
@@ -556,16 +444,6 @@
               .dropDownCoupon {
                 &.dropDownActive {
                   margin-top: 25px;
-                }
-              }
-              .dropDownLogin {
-                &.loginDropdownActive {
-                  margin-top: 25px;
-                }
-                .dropDownLoginRow {
-                  .dropDownLoginColumn {
-                    max-width: 290px;
-                  }
                 }
               }
             }
@@ -650,35 +528,6 @@
             max-width: unset;
             .titleBlock {
               margin-bottom: 25px;
-              .dropDownLogin {
-                p {
-                  padding-bottom: 15px;
-                }
-                .dropDownLoginRow {
-                  flex-direction: column;
-                  justify-content: unset;
-                  gap: 25px;
-                  .dropDownLoginColumn {
-                    max-width: unset;
-                    button {
-                      width: 100px;
-                      height: 40px;
-                      margin-top: 10px;
-                    }
-                    .passwordVisible {
-                      bottom: -40px!important;
-
-                    }
-                    label {
-                      margin-bottom: 8px;
-                      font-size: 16px;
-                    }
-                    &:nth-child(1) {
-                      order: 2;
-                    }
-                  }
-                }
-              }
             }
           }
           .checkoutForm {
@@ -746,16 +595,6 @@
         .checkoutMain {
           .headingDropdown {
             padding-bottom: 0;
-
-            .titleBlock {
-              .dropDownLogin {
-                p {
-                  font-size:  14px;
-                  line-height: 20px;
-
-                }
-              }
-            }
           }
           .checkoutForm {
             .checkoutRight {
