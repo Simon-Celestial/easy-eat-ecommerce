@@ -124,13 +124,13 @@
             padding: 25px 16px;
             font-size: 18px;
             color: $color-white;
+
             &.blackColorActive {
               color: $color-black;
               &:after {
                 background-color: $color-black;
               }
             }
-
             &:after {
               content: "";
               display: block;
@@ -351,7 +351,7 @@
           background-color: $color-black;
           top: 70px;
           right: 0;
-          transition: 0.5s ease;
+          transition: opacity 0.5s ease;
           opacity: 0;
           pointer-events: none;
           display: flex;
@@ -484,6 +484,7 @@
                   flex-direction: column;
                   color: $color-white;
                   font-family: $font-main;
+                  padding-right: 30px;
 
                   h2 {
                     font-size: 19px;
@@ -688,14 +689,12 @@
           }
           .basketDropdown {
             width: 100vw;
-            height: 100vh;
             left: 0;
             top: 0;
+            height: 100%;
             position: fixed;
             padding: 35px 0;
-            min-height: auto;
-            align-items: center;
-
+            justify-content: space-between;
             .closeBasketBtn {
               display: flex;
             }
@@ -704,15 +703,20 @@
               padding: 0 20px;
               max-height: 90%;
               width: 100%;
+              height: 100%;
 
               .basketProducts {
                 max-height: none;
                 height: auto;
                 gap: 0;
                 padding-bottom: 20px;
+                margin-bottom: auto;
 
                 .basketCard {
                   padding: 10px 0;
+                  .basketClose {
+                    top: 0;
+                  }
 
                   .basketCardTitle {
                     h2 {
@@ -727,6 +731,7 @@
               }
 
               .basketFooter {
+                margin-top: auto;
               }
             }
           }

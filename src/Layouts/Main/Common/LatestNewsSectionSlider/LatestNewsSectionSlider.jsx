@@ -5,6 +5,7 @@ import 'swiper/scss';
 import "./pagination.scss";
 import {Pagination} from "swiper/modules";
 import {CaretLeft, CaretRight, Dot} from "@phosphor-icons/react";
+import sliderData from "../../../../../public/HomePageData/sliderData.json";
 
 export const LatestNewsSectionSlider = () => {
     const [slidesPerView, setSlidesPerView] = useState(3);
@@ -82,134 +83,41 @@ export const LatestNewsSectionSlider = () => {
                         pagination={true}
                         modules={[Pagination]}
                     >
-                        <SwiperSlide className={styles.swiperCard}>
-                            <div className={styles.productCardWrapper}>
-                                <a href="https://easyeat.ancorathemes.com/what-is-the-difference-between-hamburgers-burgers/">
-                                    <div className={styles.productImageBox}>
-                                        <img
-                                            src="https://easyeat.ancorathemes.com/wp-content/uploads/2020/04/img-113-copyright-890x664.jpg"
-                                            alt="Product"/>
+                        {sliderData.map(data => (
+                            <SwiperSlide className={styles.swiperCard} key={data.id}>
+                                <div className={styles.productCardWrapper}>
+                                    <a href={data.link}>
+                                        <div className={styles.productImageBox}>
+                                            <img
+                                                src={data.imageSrc}
+                                                alt="Product"/>
+                                        </div>
+                                    </a>
+                                    <div className={styles.snacksPageTransfer}>
+                                        <a href={data.categoryLink}>Snacks</a>
                                     </div>
-                                </a>
-                                <div className={styles.snacksPageTransfer}>
-                                    <a href="https://easyeat.ancorathemes.com/category/food/snacks/">Snacks</a>
-                                </div>
-                                <div className={styles.factsPageTransfer}>
-                                    <a href="https://easyeat.ancorathemes.com/what-is-the-difference-between-hamburgers-burgers/">What
-                                        is the Difference Between Hamburgers &amp; Burgers?</a>
-                                </div>
-                                <div className={styles.dateAndCommentsBlock}>
-                                    <div className={styles.dateBlock}>
-                                        <a href="https://easyeat.ancorathemes.com/what-is-the-difference-between-hamburgers-burgers/">April
-                                            21, 2020</a>
+                                    <div className={styles.factsPageTransfer}>
+                                        <a href={data.link}>
+                                            {data.title}</a>
                                     </div>
-                                    <Dot/>
-                                    <div className={styles.commentBlock}>
-                                        <a href="https://easyeat.ancorathemes.com/what-is-the-difference-between-hamburgers-burgers/#respond">
-                                            <span>0</span>
-                                            <span>Comments</span>
-                                        </a>
+                                    <div className={styles.dateAndCommentsBlock}>
+                                        <div className={styles.dateBlock}>
+                                            <a href={data.link}>
+                                                {data.date}
+                                            </a>
+                                        </div>
+                                        <Dot/>
+                                        <div className={styles.commentBlock}>
+                                            <a href={data.commentsLink}>
+                                                <span>{data.commentsCount}</span>
+                                                <span>Comments</span>
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
 
-                            </div>
-                        </SwiperSlide>
-                        <SwiperSlide className={styles.swiperCard}>
-                            <div className={styles.productCardWrapper}>
-                                <a href="https://easyeat.ancorathemes.com/10-the-most-unusual-ways-to-serve-burgers-in-restaurants/">
-                                    <div className={styles.productImageBox}>
-                                        <img
-                                            src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/02/img-82-copyright-890x664.jpg"
-                                            alt="Product"/>
-                                    </div>
-                                </a>
-                                <div className={styles.snacksPageTransfer}>
-                                    <a href="https://easyeat.ancorathemes.com/category/food/snacks/">Snacks</a>
                                 </div>
-                                <div className={styles.factsPageTransfer}>
-                                    <a href="https://easyeat.ancorathemes.com/10-the-most-unusual-ways-to-serve-burgers-in-restaurants/">10
-                                        The Most Unusual Ways to Serve Burgers in Restaurants</a>
-                                </div>
-                                <div className={styles.dateAndCommentsBlock}>
-                                    <div className={styles.dateBlock}>
-                                        <a href="https://easyeat.ancorathemes.com/10-the-most-unusual-ways-to-serve-burgers-in-restaurants/">April
-                                            21, 2020</a>
-                                    </div>
-                                    <Dot/>
-                                    <div className={styles.commentBlock}>
-                                        <a href="https://easyeat.ancorathemes.com/10-the-most-unusual-ways-to-serve-burgers-in-restaurants/#respond">
-                                            <span>0</span>
-                                            <span>Comments</span>
-                                        </a>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </SwiperSlide>
-                        <SwiperSlide className={styles.swiperCard}>
-                            <div className={styles.productCardWrapper}>
-                                <a href="https://easyeat.ancorathemes.com/how-to-make-the-perfect-french-fries-with-sauce-at-home/">
-                                    <div className={styles.productImageBox}>
-                                        <img
-                                            src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/02/img-87-copyright-890x664.jpg"
-                                            alt="Product"/>
-                                    </div>
-                                </a>
-                                <div className={styles.snacksPageTransfer}>
-                                    <a href="https://easyeat.ancorathemes.com/category/food/snacks/">Snacks</a>
-                                </div>
-                                <div className={styles.factsPageTransfer}>
-                                    <a href="https://easyeat.ancorathemes.com/how-to-make-the-perfect-french-fries-with-sauce-at-home/">How
-                                        to Make the Perfect French Fries With Sauce at Home?</a>
-                                </div>
-                                <div className={styles.dateAndCommentsBlock}>
-                                    <div className={styles.dateBlock}>
-                                        <a href="https://easyeat.ancorathemes.com/how-to-make-the-perfect-french-fries-with-sauce-at-home/">April
-                                            21, 2020</a>
-                                    </div>
-                                    <Dot/>
-                                    <div className={styles.commentBlock}>
-                                        <a href="https://easyeat.ancorathemes.com/how-to-make-the-perfect-french-fries-with-sauce-at-home/#respond">
-                                            <span>0</span>
-                                            <span>Comments</span>
-                                        </a>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </SwiperSlide>
-                        <SwiperSlide className={styles.swiperCard}>
-                            <div className={styles.productCardWrapper}>
-                                <a href="https://easyeat.ancorathemes.com/secret-sauce-creating-the-ultimate-burger-sauce-at-home/">
-                                    <div className={styles.productImageBox}>
-                                        <img
-                                            src="https://easyeat.ancorathemes.com/wp-content/uploads/2023/02/img-64-copyright-890x664.jpg"
-                                            alt="Product"/>
-                                    </div>
-                                </a>
-                                <div className={styles.snacksPageTransfer}>
-                                    <a href="https://easyeat.ancorathemes.com/category/food/snacks/">Snacks</a>
-                                </div>
-                                <div className={styles.factsPageTransfer}>
-                                    <a href="https://easyeat.ancorathemes.com/secret-sauce-creating-the-ultimate-burger-sauce-at-home/">Secret
-                                        Sauce: Creating the Ultimate Burger Sauce at Home</a>
-                                </div>
-                                <div className={styles.dateAndCommentsBlock}>
-                                    <div className={styles.dateBlock}>
-                                        <a href="https://easyeat.ancorathemes.com/secret-sauce-creating-the-ultimate-burger-sauce-at-home/">April
-                                            16, 2020</a>
-                                    </div>
-                                    <Dot/>
-                                    <div className={styles.commentBlock}>
-                                        <a href="https://easyeat.ancorathemes.com/secret-sauce-creating-the-ultimate-burger-sauce-at-home/#respond">
-                                            <span>0</span>
-                                            <span>Comments</span>
-                                        </a>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </SwiperSlide>
+                            </SwiperSlide>
+                        ))}
                     </Swiper>
                 </div>
             </div>

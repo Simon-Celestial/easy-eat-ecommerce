@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "Item"
+  },
+  {
+    "id": 2,
+    "title": "Sale"
+  },
+  {
+    "id": 3,
+    "title": "Simple"
+  },
+  {
+    "id": 4,
+    "title": "Special"
+  },
+  {
+    "id": 5,
+    "title": "Stock"
+  },
+  {
+    "id": 6,
+    "title": "Food"
+  }
+]

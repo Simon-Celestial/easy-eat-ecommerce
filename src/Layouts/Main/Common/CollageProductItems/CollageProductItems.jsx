@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from '../../Pages/Home/Home.module.scss';
 
-export const CollageProductItems = ({ productName, category, imageUrl }) => {
+export const CollageProductItems = ({ productName, category, imageUrl ,productUrl}) => {
     const [isHovered, setIsHovered] = useState(false);
     const [position, setPosition] = useState({ x: 0, y: 0 });
 
@@ -28,7 +28,7 @@ export const CollageProductItems = ({ productName, category, imageUrl }) => {
                 <p>{productName}</p>
                 <span>{category}</span>
             </div>
-            <a href="#" className={styles.imageWrapper}>
+            <a href={productUrl} className={styles.imageWrapper}>
                 <img src={imageUrl} alt="Food" />
             </a>
         </div>

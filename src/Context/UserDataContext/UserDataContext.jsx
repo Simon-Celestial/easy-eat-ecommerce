@@ -152,6 +152,7 @@ export const UserDataContextProvider = ({
             DELETE(id).then(res => {
                 if (res.status === 200 && shouldUpdate) {
                     setShouldUpdate(Date.now());
+
                 }
             })
                 .finally(() => {

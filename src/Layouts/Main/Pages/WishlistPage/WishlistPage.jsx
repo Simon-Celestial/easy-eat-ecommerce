@@ -35,7 +35,6 @@ export const WishlistPage = () => {
     const handleAddSelectedToCart = useCallback(async (...ids) => {
         await Promise.all(ids.map(async (id, i) => {
             const product = cache.find(it => it._id === id);
-            console.log(product);
             if (product.stock === 0) return;
             const foundItem = basket.find(it => it.productId === id);
             if (foundItem) {
@@ -88,16 +87,15 @@ export const WishlistPage = () => {
                                 <input type="checkbox"
                                        defaultChecked={false}
                                        onChange={({target}) => {
-                                           console.log(target.checked)
                                            if (target.checked) {
-                                               setSelectedItems(Object.keys(wishlist))
+                                               setSelectedItems(Object.keys(wishlist).filter(pkey => {
+                                                   return cache.find(it => it._id === pkey).stock !== 0;
+                                               }))
                                            }
                                            else setSelectedItems([]);
                                        }}/>
                             </div>
-                            <div className={`${styles.productRemove} ${styles.productBox}`}>
-                            </div>
-
+                            <div className={`${styles.productRemove} ${styles.productBox}`}></div>
                             <div className={`${styles.productImage} ${styles.productBox}`}></div>
                             <div className={`${styles.productName} ${styles.productBox}`}>
                                 <p>Product Name</p>
@@ -122,6 +120,7 @@ export const WishlistPage = () => {
                                         <input
                                             type="checkbox"
                                             checked={selectedItems.includes(product._id)}
+                                            disabled={product.stock === 0}
                                             onChange={() => {
                                                 if (selectedItems.includes(product._id)) {
                                                     setSelectedItems(prev => prev.filter(it => it !== product._id));
@@ -166,7 +165,7 @@ export const WishlistPage = () => {
                                         </Link>
                                     </div>
                                     <div className={`${styles.productPrice} ${styles.productBox}`}>
-                                        {(!!product.salePrice && (product.salePrice !== product.productPrice )) &&
+                                        {(!!product.salePrice && (product.salePrice !== product.productPrice)) &&
                                             <span title={'original'}>${product.productPrice?.toFixed(2)}</span>}
                                         ${(product.salePrice || product.productPrice)?.toFixed(2)}
                                     </div>
@@ -200,6 +199,17 @@ export const WishlistPage = () => {
                                         const newObj = {...prev};
                                         selectedItems.forEach(id => {
                                             delete newObj[id];
+                                            toast.error("Selected product removed from wishlist.",
+                                                {
+                                                    hideProgressBar: false,
+                                                    closeOnClick: true,
+                                                    pauseOnHover: false,
+                                                    draggable: true,
+                                                    progress: undefined,
+                                                    theme: "colored",
+                                                    transition: Bounce,
+                                                }
+                                            );
                                         });
                                         return newObj;
                                     });

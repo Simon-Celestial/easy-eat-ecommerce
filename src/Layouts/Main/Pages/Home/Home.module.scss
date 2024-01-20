@@ -4,7 +4,7 @@
 // 3 CUSTOM ICONS ON HOME PAGE
 @font-face {
   font-family: "restaurant";
-  src: url("../../../../../public/fonts/restaurant.woff") format('woff');
+  src: url("../../../../../public/assets/fonts/restaurant.woff") format('woff');
 }
 
 a {
@@ -12,7 +12,15 @@ a {
   cursor: pointer;
   font-family: $font-main;
 }
-
+.homePageLoader {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $color-black;
+}
 .homeWrapper {
   display: flex;
   width: 100vw;
@@ -843,8 +851,14 @@ a {
                 display: flex;
                 width: 100%;
                 justify-content: space-between;
+                &:hover {
+                  .ourMenuDetails {
+                    color: $color-gray;
+                  }
+                }
 
                 .ourMenuDetails {
+                  transition: color $transition-fast;
                   font-size: 24px;
                   white-space: nowrap;
                   color: $color-white;

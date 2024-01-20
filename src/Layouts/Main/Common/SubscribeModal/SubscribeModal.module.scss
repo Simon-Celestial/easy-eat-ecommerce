@@ -161,6 +161,11 @@
     }
   }
 }
+@media screen and (max-height: 765px) {
+  .subscribeModalSection {
+    max-height: 450px;
+  }
+}
 
 @media screen and (max-width: 800px) {
   .subscribeModalSection {
@@ -187,6 +192,9 @@
     }
   }
 }
+
+
+
 @media screen and (max-width: 550px) {
   .subscribeModalSection {
     max-width: 300px;

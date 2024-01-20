@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from "./Footer.module.scss";
 import {SocialIcons} from "../../Common/SocialIcons/SocialIcons.jsx";
+import {Link} from "react-router-dom";
 
 export const Footer = () => {
     return (
@@ -42,18 +43,18 @@ export const Footer = () => {
                 <div className={styles.footerContentBottom}>
                     <div className={styles.footerNavBlock}>
                         <div className={styles.footerNavItem}>
-                            <a href="#">Our Blog</a>
+                            <Link to="https://easyeat.ancorathemes.com/blog-list/">Our Blog</Link>
                         </div>
                         <div className={styles.footerNavItem}>
-                            <a href="#">About us</a>
+                            <Link to="https://easyeat.ancorathemes.com/about-us/">About us</Link>
                         </div>
                         <div className={styles.footerNavItem}>
-                            <a href="#">Contacts</a>
+                            <Link to="https://easyeat.ancorathemes.com/contact-us/">Contacts</Link>
                         </div>
                     </div>
                     <div className={styles.footerCopyright}>
                         <div className={styles.footerCopyrightTitle}>
-                            <a href="#" target="_blank" rel="noopener">AncoraThemes</a>
+                            <Link to="https://ancorathemes.com/" target="_blank" rel="noopener">AncoraThemes</Link>
                             © 2023. All Rights Reserved.
                         </div>
                     </div>

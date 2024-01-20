@@ -313,9 +313,7 @@ export const ProductSingle = () => {
                                                             </div>
                                                             <div className={styles.relatedManipulationItems}>
                                                                 {productLoading ?
-                                                                    <div className={styles.buttonLoader}>
-                                                                        <CircleDashed/>
-                                                                    </div>
+                                                                        <CircleDashed className={styles.buttonLoader}/>
                                                                     : <ShoppingCart
                                                                         color={basket.find(it => it.productId === product._id) ? 'red' : 'unset'}
                                                                         onClick={() => {

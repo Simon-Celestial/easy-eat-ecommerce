@@ -367,6 +367,11 @@
                   width: 186px;
                   height: 56px;
                   transition: $transition-fast;
+                  svg {
+                    font-size: 20px;
+                    color: $color-white;
+                    animation: rotateAnimation 1s linear infinite;
+                  }
 
                   &:hover {
                     background-color: #c03202;

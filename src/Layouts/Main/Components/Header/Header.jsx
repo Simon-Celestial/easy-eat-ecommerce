@@ -100,10 +100,13 @@ export const Header = () => {
                     {/*HEADER NAVIGATION*/}
                     <div className={styles.headerNavigation}>
                         {/*HEADER NAVIGATION ITEMS*/}
-                        <div className={styles.navigationItems} onMouseEnter={openHandler(setDropDownHomeOpen)}
+                        <div className={styles.navigationItems}
+                             onMouseEnter={openHandler(setDropDownHomeOpen)}
                              onMouseLeave={openHandler(setDropDownHomeOpen)}>
                             <Link to="/home"
-                                  className={`${styles.pageLink} ${headerColorChange && styles.blackColorActive}`}>Home</Link>
+                                     className={`${styles.pageLink}
+                                   ${headerColorChange && styles.blackColorActive}`}
+                            >Home</Link>
                             <div
                                 className={`${styles.navDropdownWrapper} ${dropDownHomeOpen && styles.navDropdownActive}`}>
                                 <div className={styles.navDropdown}>
@@ -364,37 +367,41 @@ export const Header = () => {
                                     <div className={styles.basketContent}>
                                         <div className={styles.basketProducts}>
                                             {
-                                                !basketLoading?
-                                                basket.map((bItem, i) => {
-                                                    const product = products.find(it => it._id === bItem.productId);
-                                                    return <div
-                                                        key={`basket_item${product._id}${basket._id}${i}`}
-                                                        className={styles.basketCard}
-                                                    >
-                                                        <div className={styles.basketClose}>
-                                                            <p
-                                                                onClick={
-                                                                () => removeItemInBasket(bItem._id)
-                                                            }>
-                                                                x
-                                                            </p>
-                                                        </div>
-                                                        <a href="" className={styles.imageBlock}>
-                                                            <img
-                                                                src={product?.images?.[0]?.url}
-                                                                alt={product?.images?.[0]?.public_id}/>
-                                                        </a>
-                                                        <div className={styles.basketCardTitle}>
-                                                            <h2>{product.title}</h2>
-                                                            <p>{bItem.productCount} ×
-                                                                ${product.salePrice || product.productPrice}</p>
-                                                        </div>
+                                                !basketLoading ?
+                                                    basket.map((bItem, i) => {
+                                                        const product = products.find(it => it._id === bItem.productId);
+                                                        return <div
+                                                            key={`basket_item${product._id}${basket._id}${i}`}
+                                                            className={styles.basketCard}
+                                                        >
+                                                            <div className={styles.basketClose}
+                                                                 onClick={
+                                                                     () => removeItemInBasket(bItem._id)
+                                                                 }>
+                                                                <p>
+                                                                    x
+                                                                </p>
+                                                            </div>
+                                                            <a href="" className={styles.imageBlock}>
+                                                                <img
+                                                                    src={product?.images?.[0]?.url}
+                                                                    alt={product?.images?.[0]?.public_id}/>
+                                                            </a>
+                                                            <div className={styles.basketCardTitle}>
+                                                                <h2>
+                                                                    {product.title}
+                                                                </h2>
+                                                                <p>
+                                                                    {bItem.productCount} × ${product.salePrice
+                                                                    || product.productPrice}
+                                                                </p>
+                                                            </div>
 
-                                                    </div>;
-                                                })
+                                                        </div>;
+                                                    })
                                                     :
                                                     <div className={styles.basketLoading}>
-                                                        <CircleDashed />
+                                                        <CircleDashed/>
                                                     </div>
                                             }
 

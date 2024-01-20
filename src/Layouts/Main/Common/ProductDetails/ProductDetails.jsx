@@ -2,7 +2,7 @@ import React, {useCallback, useContext, useEffect, useMemo, useRef, useState} fr
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faExpand, faMagnifyingGlassPlus, faXmark} from "@fortawesome/free-solid-svg-icons";
 import {Splide, SplideSlide} from "@splidejs/react-splide";
-import {CaretDown, CaretUp, Heart, MagnifyingGlass, ShoppingCart, Star} from "@phosphor-icons/react";
+import {CaretDown, CaretUp, CircleDashed, Heart, MagnifyingGlass, ShoppingCart, Star} from "@phosphor-icons/react";
 import styles from "../../Common/ProductDetails/ProductDetails.module.scss";
 import {LayoutContext} from "../../../../Context/LayoutContext/LayoutContext.jsx";
 import {FullScreen, useFullScreenHandle} from "react-full-screen";
@@ -198,7 +198,6 @@ export const ProductDetails = ({product, brands}) => {
                                 <div className={styles.magnifyingImage} onClick={openHandler(setMagnifiedOpen)}>
                                     <MagnifyingGlass weight="light"/>
                                 </div>
-
                                 <div className={styles.tabMenuImage}>
                                     <div
                                         ref={magnificationContainerRef}
@@ -228,6 +227,16 @@ export const ProductDetails = ({product, brands}) => {
                     {/*PRODUCTS RIGHT CONTAINER*/}
                     <div className={styles.productDetailsRight}>
                         {
+                            (product.stock - countInBasket) < productCount || (productCount.stock - countInBasket) < 0 || productCount === 0?
+                                <div className={styles.outOfStock}>
+                                    Out of stock
+                                </div>
+                                :
+                                null
+
+
+                        }
+                        {
                             (salePercent !== 100 && salePercent !== 0) ? <div className={styles.productSale}>
                                 -{salePercent.toFixed(2)}%
                             </div> : ''
@@ -242,7 +251,6 @@ export const ProductDetails = ({product, brands}) => {
                                     isOnSale &&
                                     <p className={`${styles.normalPrice} ${styles.price}`}>$ {(product.productPrice)?.toFixed(2)}</p>
                                 }
-
                                 {
 
                                     <p
@@ -280,7 +288,7 @@ export const ProductDetails = ({product, brands}) => {
                                 </div>
                             </div>
                             <button
-                                disabled={(product.stock - countInBasket) < productCount  || (productCount.stock - countInBasket) < 0 || productCount === 0}
+                                disabled={(product.stock - countInBasket) < productCount || (productCount.stock - countInBasket) < 0 || productCount === 0}
                                 className={styles.productBuyButton}
                                 onClick={() => {
                                     const foundItem = basket.find(it => it.productId === product._id);
@@ -319,10 +327,12 @@ export const ProductDetails = ({product, brands}) => {
                                 }}
                             >
                                 {
-                                    basketLoading? <>...</>:<>
-                                        <ShoppingCart/>
-                                        Buy Now
-                                    </>
+                                    basketLoading ? <><CircleDashed className={styles.buttonLoader}/> </>
+                                        :
+                                        <>
+                                            <ShoppingCart/>
+                                            Buy Now
+                                        </>
                                 }
                             </button>
                             <div className={styles.productWishList}>
@@ -381,7 +391,8 @@ export const ProductDetails = ({product, brands}) => {
                             </div>
                             <div className={styles.metaDataRow}><b>Tags:</b> <a href="">Sale</a><b>,</b> <a
                                 href="">Special</a></div>
-                            <div className={styles.metaDataRow}><b>Product ID:</b> {product?._id}</div>
+                            <div className={styles.metaDataRow}><b>Product
+                                ID:</b> {product?._id?.substring(0, 5).toUpperCase()}</div>
                         </div>
                     </div>
                 </div>

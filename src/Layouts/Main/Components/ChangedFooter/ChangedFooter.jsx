@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from "./ChangedFooter.module.scss";
 import {SocialIcons} from "../../Common/SocialIcons/SocialIcons.jsx";
+import {Link} from "react-router-dom";
 
 export const ChangedFooter = () => {
     return (
@@ -23,7 +24,7 @@ export const ChangedFooter = () => {
                     </div>
                     <div className={styles.footerMainBlocks}>
                         <h2>LINKS</h2>
-                        <p><a href="#">Home</a></p>
+                        <p><Link to="/home">Home</Link></p>
                         <p><a href="#">Services</a></p>
                         <p><a href="#">About</a></p>
                         <p><a href="#">Menu</a></p>

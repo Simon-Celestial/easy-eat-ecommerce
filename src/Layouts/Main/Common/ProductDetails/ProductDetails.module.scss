@@ -199,7 +199,7 @@
 
 
             img {
-              max-width: 572px;
+              max-width: 480px;
               width: 100%;
 
             }
@@ -214,6 +214,21 @@
       width: 44%;
       flex-direction: column;
       padding: 0 15px 0 50px;
+      .outOfStock {
+        display: flex;
+        background-color: $color-black;
+        margin-bottom: 5px;
+        align-items: center;
+        max-width: 100px;
+        justify-content: center;
+        font-size: 14px;
+        color: $color-white;
+        font-family: $font-main;
+        line-height: 16px;
+        font-weight: 400;
+        padding: 5px 0;
+
+      }
 
       .productSale {
         display: flex;
@@ -228,7 +243,6 @@
         line-height: 16px;
         font-weight: 400;
         padding: 5px 0;
-
       }
 
       .productName {
@@ -344,6 +358,9 @@
           cursor: pointer;
           gap: 8px;
           white-space: nowrap;
+          max-width: 187px;
+          width: 100%;
+          justify-content: center;
 
           &:disabled {
             opacity: 0.5;
@@ -357,6 +374,11 @@
           &:hover {
             background-color: #b02f0a;
           }
+          .buttonLoader {
+            animation: rotateAnimation 1s linear infinite;
+            font-size: 25px!important;
+          }
+
         }
 
         .productWishList {

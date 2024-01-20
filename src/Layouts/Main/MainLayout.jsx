@@ -15,8 +15,6 @@ export const MainLayout = () => {
         });
         setMobileMenuOpen(false);
     }, [location]);
-    console.log(location);
-
     return (
         <Outlet/>
     );

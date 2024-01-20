@@ -15,9 +15,10 @@ export const AdminPagination = ({
     }, [pageSize, totalElements])
     return (
         <div className={`${styles.paginationBlock} ${theme === 'dark'? styles.paginationDark: styles.paginationLight}`}>
-            <div className={`${styles.paginationItem} ${styles.leftArrow}`}>
+            <div className={`${styles.paginationItem} ${styles.leftArrow}`}
+                 onClick={() => setCurrentPage(Math.max(currentPage - 1, 0))}
+            >
                 <CaretUp
-                    onClick={() => setCurrentPage(Math.max(currentPage - 1, 0))}
                     weight="regular"
                 />
             </div>
@@ -35,9 +36,10 @@ export const AdminPagination = ({
                     >{i + 1}</div>);
                 })
             }
-            <div className={`${styles.paginationItem} ${styles.rightArrow}`}>
+            <div className={`${styles.paginationItem} ${styles.rightArrow}`}
+                 onClick={() => setCurrentPage(Math.min(currentPage + 1, totalPages - 1))}
+            >
                 <CaretDown
-                    onClick={() => setCurrentPage(Math.min(currentPage + 1, totalPages - 1))}
                     weight="regular"
                 />
             </div>
