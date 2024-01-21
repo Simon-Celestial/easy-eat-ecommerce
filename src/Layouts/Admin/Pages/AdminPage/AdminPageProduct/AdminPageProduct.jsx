@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useMemo} from 'react'
 import styles from "./AdminPageProduct.module.scss";
 
 export const AdminPageProduct = ({
@@ -6,6 +6,10 @@ export const AdminPageProduct = ({
                                      onReturn,
                                      brands,
                                  }) => {
+
+    const isOnSale = useMemo(() => !!data?.salePrice && (data?.salePrice !== data?.productPrice),
+        [data]);
+
 
     return (
         <div className={styles.adminProductWrapper}>
@@ -26,8 +30,14 @@ export const AdminPageProduct = ({
                         </div>
                         <div className={styles.productInfo}>
                             <div className={styles.price}>
-                                <h2>${data.salePrice.toFixed(2) || 'N\A'}</h2>
-                                <h2>${data.productPrice.toFixed(2) || 'N\A'}</h2>
+                                <h2>
+                                    {`$ ${(data?.salePrice || data?.productPrice)?.toFixed(2)}`}
+                                </h2>
+
+                                {
+                                    isOnSale &&
+                                    <h2>$ {(data?.productPrice)?.toFixed(2)}</h2>
+                                }
                             </div>
 
 

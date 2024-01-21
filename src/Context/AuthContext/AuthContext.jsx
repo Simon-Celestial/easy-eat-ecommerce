@@ -14,6 +14,7 @@ export const AuthContext = React.createContext({
     userData: null,
     loading: false,
     isAdmin: false,
+    isSuperAdmin:false,
 })
 const AuthContextProvider = ({
                                  children
@@ -22,6 +23,8 @@ const AuthContextProvider = ({
     const [userData, setUserData] = useState(localStorage.userData? JSON.parse(localStorage.userData): undefined);
 
     const isAdmin = useMemo(() => userData?.roles?.includes('admin'), [userData])
+    const isSuperAdmin = useMemo(() => userData?.roles?.includes('superadmin'), [userData])
+
     // Login Loading State
     const [loading, setLoading] = useState(false);
 
@@ -111,6 +114,7 @@ const AuthContextProvider = ({
         userData,
         loading,
         isAdmin,
+        isSuperAdmin,
     }}>
         {children}
     </AuthContext.Provider>

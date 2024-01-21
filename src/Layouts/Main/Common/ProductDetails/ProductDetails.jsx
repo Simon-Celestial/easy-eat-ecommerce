@@ -8,6 +8,7 @@ import {LayoutContext} from "../../../../Context/LayoutContext/LayoutContext.jsx
 import {FullScreen, useFullScreenHandle} from "react-full-screen";
 import {Bounce, toast} from 'react-toastify';
 import {UserDataContext} from "../../../../Context/UserDataContext/UserDataContext.jsx";
+import {Navigate} from "react-router-dom";
 
 export const ProductDetails = ({product, brands}) => {
     const {
@@ -122,12 +123,13 @@ export const ProductDetails = ({product, brands}) => {
 
     const [expandImage, setExpandImage] = useState(false);
 
-    const isOnSale = useMemo(() => !!product.salePrice && (product.salePrice !== product.productPrice),
+    const isOnSale = useMemo(() => !!product?.salePrice && (product?.salePrice !== product?.productPrice),
         [product]);
 
     const countInBasket = useMemo(() => basket
-        ?.find(bItem => bItem?.productId === product._id)
+        ?.find(bItem => bItem?.productId === product?._id)
         ?.productCount || 0, [basket, product])
+    if(!product) return <Navigate to={'/*'}/>
     return (
         <>
             {/*MAGNIFIED IMAGE*/}
@@ -227,7 +229,7 @@ export const ProductDetails = ({product, brands}) => {
                     {/*PRODUCTS RIGHT CONTAINER*/}
                     <div className={styles.productDetailsRight}>
                         {
-                            (product.stock - countInBasket) < productCount || (productCount.stock - countInBasket) < 0 || productCount === 0?
+                            (product?.stock - countInBasket) < productCount || (productCount.stock - countInBasket) < 0?
                                 <div className={styles.outOfStock}>
                                     Out of stock
                                 </div>
@@ -238,7 +240,7 @@ export const ProductDetails = ({product, brands}) => {
                         }
                         {
                             (salePercent !== 100 && salePercent !== 0) ? <div className={styles.productSale}>
-                                -{salePercent.toFixed(2)}%
+                                -{salePercent?.toFixed(2)}%
                             </div> : ''
                         }
                         <div className={styles.productName}>
@@ -249,14 +251,14 @@ export const ProductDetails = ({product, brands}) => {
                             <div className={styles.productPriceWrapper}>
                                 {
                                     isOnSale &&
-                                    <p className={`${styles.normalPrice} ${styles.price}`}>$ {(product.productPrice)?.toFixed(2)}</p>
+                                    <p className={`${styles.normalPrice} ${styles.price}`}>$ {(product?.productPrice)?.toFixed(2)}</p>
                                 }
                                 {
 
                                     <p
                                         className={`${styles.discountedPrice} ${styles.price}`}
                                     >
-                                        {`$ ${(product.salePrice || product?.productPrice).toFixed(2)}`}
+                                        {`$ ${(product?.salePrice || product?.productPrice)?.toFixed(2)}`}
                                     </p>
                                 }
                                 {/*STANDARD PRICE*/}
@@ -288,12 +290,12 @@ export const ProductDetails = ({product, brands}) => {
                                 </div>
                             </div>
                             <button
-                                disabled={(product.stock - countInBasket) < productCount || (productCount.stock - countInBasket) < 0 || productCount === 0}
+                                disabled={(product?.stock - countInBasket) < productCount || (productCount.stock - countInBasket) < 0 || productCount === 0}
                                 className={styles.productBuyButton}
                                 onClick={() => {
-                                    const foundItem = basket.find(it => it.productId === product._id);
+                                    const foundItem = basket.find(it => it.productId === product?._id);
                                     if (foundItem) {
-                                        toast.success(`${product.title} basket count updated`,
+                                        toast.success(`${product?.title} basket count updated`,
                                             {
                                                 hideProgressBar: false,
                                                 closeOnClick: true,
@@ -311,7 +313,7 @@ export const ProductDetails = ({product, brands}) => {
                                             ...product,
                                             count: productCount,
                                         })
-                                        toast.success(`${product.title} added to basket`,
+                                        toast.success(`${product?.title} added to basket`,
                                             {
                                                 hideProgressBar: false,
                                                 closeOnClick: true,
@@ -339,17 +341,17 @@ export const ProductDetails = ({product, brands}) => {
                                 <Heart
                                     weight="regular"
                                     style={{
-                                        color: wishlist[product._id] ? 'red' : 'unset'
+                                        color: wishlist[product?._id] ? 'red' : 'unset'
                                     }}
                                     onClick={() => {
                                         setWishlist(prev => {
-                                            const id = product._id;
+                                            const id = product?._id;
                                             if (prev[id]) {
                                                 const newVal = {
                                                     ...prev,
                                                 }
                                                 delete newVal[id];
-                                                toast.error(`${product.title} removed from wishlist!`,
+                                                toast.error(`${product?.title} removed from wishlist!`,
                                                     {
                                                         hideProgressBar: false,
                                                         closeOnClick: true,
@@ -364,7 +366,7 @@ export const ProductDetails = ({product, brands}) => {
 
                                                 return newVal;
                                             }
-                                            toast.success(`${product.title} added to wishlist!`,
+                                            toast.success(`${product?.title} added to wishlist!`,
                                                 {
                                                     hideProgressBar: false,
                                                     closeOnClick: true,

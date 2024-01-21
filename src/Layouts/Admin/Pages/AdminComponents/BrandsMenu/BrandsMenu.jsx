@@ -78,7 +78,7 @@ export const BrandsMenu = ({
                 const result = await updateBrand(id, reqData);
 
                 if (result.status === 200) {
-                    toast.success(`Product Updated`,
+                    toast.success(`Brand Updated`,
                         {
                             hideProgressBar: false,
                             closeOnClick: true,

@@ -288,7 +288,6 @@ export const AdminProductsPage = () => {
                                 setCurrentPage={setCurrentPage}
                                 pageSize={PAGE_SIZE}
                                 totalElements={dataFiltered.length}
-
                             />
                         </div>
                     </div>

@@ -23,7 +23,7 @@ import {useContext, useEffect} from "react";
 import {AuthContext} from "./Context/AuthContext/AuthContext.jsx";
 import {CompletedOrder} from "./Layouts/Main/Pages/CompletedOrder/CompletedOrder.jsx";
 
-const router = (userData, isAdmin, token) => createBrowserRouter([
+const router = (userData, isAdmin, token,isSuperAdmin) => createBrowserRouter([
     {
         path: '/',
         element: <MainLayout/>,
@@ -68,7 +68,7 @@ const router = (userData, isAdmin, token) => createBrowserRouter([
             },
             {
                 path: '/order-completed',
-                element: <CompletedOrder />
+                element: <CompletedOrder/>
             }
         ],
     },
@@ -92,7 +92,7 @@ const router = (userData, isAdmin, token) => createBrowserRouter([
             {path: 'dashboard', element: <AdminPageDashboard/>},
             {path: 'orders', element: <AdminPageOrders/>},
             {path: 'order/:id', element: <AdminOrderSingle/>},
-            {path: 'staff', element: <AdminPageStaff/>},
+            {path: 'staff', element: isSuperAdmin?  <AdminPageStaff/> : <PageNotFound/>},
             {path: 'brands', element: <AdminPageBrands/>},
             {path: 'products', element: <AdminProductsPage/>},
             {path: 'product', element: <AdminPageProduct/>},
@@ -104,8 +104,9 @@ const MainRouter = () => {
         isAdmin,
         userData,
         token,
+        isSuperAdmin,
     } = useContext(AuthContext);
-    return <RouterProvider router={router(userData, isAdmin, token)}/>;
+    return <RouterProvider router={router(userData, isAdmin, token,isSuperAdmin)}/>;
 };
 
 export default MainRouter;

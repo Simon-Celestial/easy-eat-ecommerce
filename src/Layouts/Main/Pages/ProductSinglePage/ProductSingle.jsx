@@ -125,7 +125,7 @@ export const ProductSingle = () => {
             {(!product || !brands) ? (<div className={styles.pageLoader}>
                 <CircleDashed/>
             </div>) : <>
-                <ProductDetails product={product} brands={brands}/>
+                <ProductDetails product={product.isPublish? product: null} brands={brands}/>
                 <section className={styles.reviewSection}>
                     <div className={styles.reviewSectionContent}>
                         <div className={styles.reviewHeader}>
@@ -234,8 +234,6 @@ export const ProductSingle = () => {
                                                 </button>
                                             </div>
                                         </label>
-
-
                                     </form>
 
                                 </div>

@@ -110,7 +110,7 @@ export const AdminPageOrders = () => {
             }
 
             return passed;
-        });
+        }).sort((a,b) => moment(b.createdAt).valueOf() - moment(a.createdAt).valueOf());
     }, [filters, orders]);
     useEffect(() => {
         setPage(0);

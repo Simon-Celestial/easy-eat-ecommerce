@@ -1,5 +1,5 @@
 import React from 'react'
-import {CircleDashed} from "@phosphor-icons/react";
+import {ThreeCircles} from "react-loader-spinner";
 
 export const LoadingWrapper = ({
                                    children,
@@ -20,10 +20,15 @@ export const LoadingWrapper = ({
                     alignItems: 'center',
                     justifyContent: 'center',
                 }}>
-                    <LoaderIcon style={{
-                        height: 32,
-                        width: 32,
-                    }}/>
+                    render(<ThreeCircles
+                    visible={true}
+                    height="50"
+                    width="50"
+                    color="white"
+                    ariaLabel="three-circles-loading"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                />)
                 </div>
             }
 

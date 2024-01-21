@@ -55,7 +55,7 @@ export const AdminOrderSingle = () => {
                         <div className={styles.invoiceTopItem}>
                             <p>INVOICE NO:</p>
                             <h2>
-                                {order ? order._id : 'Loading...'}
+                                {order ? order._id.slice(0, 5).toUpperCase() : 'Loading...'}
                             </h2>
                         </div>
                         <div className={styles.invoiceTopItem}>
@@ -79,25 +79,36 @@ export const AdminOrderSingle = () => {
                         </div>
                         <div className={styles.invoiceTopItem}>
                             <p>DISCOUNT:</p>
-                            <h2>${
-                                order?.products?.map((pd, i) => {
-                                    const product = cache.find(it => it._id === pd?.productId);
-                                    return pd.productCount * (product?.productPrice || 0)
-                                }).reduce((a, b) => a + b, 0) - order?.products?.map((pd, i) => {
-                                    const product = cache.find(it => it._id === pd?.productId);
-                                    return pd.productCount * (product?.salePrice || product?.productPrice || 0)
-                                }).reduce((a, b) => a + b, 0)
-
-                            }</h2>
+                            {order ?
+                                <h2>$
+                                    {
+                                        (order?.products?.map((pd, i) => {
+                                            const product = cache.find(it => it._id === pd?.productId);
+                                            return (pd.productCount * (product?.productPrice || 0))
+                                        }).reduce((a, b) => a + b, 0) - order?.products?.map((pd, i) => {
+                                            const product = cache.find(it => it._id === pd?.productId);
+                                            return pd.productCount * (product?.salePrice || product?.productPrice || 0)
+                                        }).reduce((a, b) => a + b, 0)).toFixed(2)
+                                    }
+                                </h2>
+                                :
+                                <h2>Loading...</h2>
+                            }
                         </div>
                         <div className={styles.invoiceTopItem}>
                             <p>TOTAL AMOUNT:</p>
-                            <h2 style={{color: "#FFB936"}}>${
-                                order?.products?.map((pd, i) => {
-                                    const product = cache.find(it => it._id === pd?.productId);
-                                    return pd.productCount * (product?.salePrice || product?.productPrice || 0)
-                                }).reduce((a, b) => a + b, 0)
-                            }</h2>
+                            {order?
+                                <h2 style={{color: "#FFB936"}}>
+                                    ${
+                                    (order?.products?.map((pd, i) => {
+                                        const product = cache.find(it => it._id === pd?.productId);
+                                        return pd.productCount * (product?.salePrice || product?.productPrice || 0)
+                                    }).reduce((a, b) => a + b, 0))?.toFixed(2)
+                                }
+                                </h2>
+                             :
+                                <h2>Loading...</h2>
+                            }
                         </div>
                     </div>
                     <div className={styles.overFlowX}>
@@ -135,10 +146,10 @@ export const AdminOrderSingle = () => {
                                             <span>{pd?.productCount}</span>
                                         </div>
                                         <div className={`${styles.price} ${styles.box}`}>
-                                            <span>${product?.salePrice || product?.productPrice}</span>
+                                            <span>${(product?.salePrice || product?.productPrice).toFixed(2)}</span>
                                         </div>
                                         <div className={`${styles.amount} ${styles.box}`}>
-                                            <span>${(product?.salePrice || product?.productPrice) * pd.productCount}</span>
+                                            <span>${((product?.salePrice || product?.productPrice) * pd.productCount).toFixed(2)}</span>
                                         </div>
                                     </div>;
                                 })}

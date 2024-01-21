@@ -27,7 +27,7 @@ export const ProductRow = ({
         const result = await updateProduct(id, rest)
         if (result.status === 200) {
             update();
-            toast.success(rest.isPublish ? 'Element is now published' : 'Element publish stopped',
+            toast.success(rest.isPublish ? 'Product is now published' : 'Product publish stopped',
                 {
                     hideProgressBar: false,
                     closeOnClick: true,
