@@ -151,7 +151,7 @@ export const ProductSingle = () => {
                                     <div className={styles.reviewerCard}>
                                         <div className={styles.reviewerImg}>
                                             <img
-                                                src="https://media-sof1-2.cdn.whatsapp.net/v/t61.24694-24/369551572_2144320669238776_3474047027888388529_n.jpg?ccb=11-4&oh=01_AdQAAFnfEoJDdSRy0tKkQbf8-wInPI_lonNOTW00eJjMTw&oe=65AFA1F2&_nc_sid=e6ed6c&_nc_cat=106"
+                                                src="https://www.hindustantimes.com/ht-img/img/2023/04/28/1600x900/ezgif-5-d15ee2db41_1682652809198_1682652828297.jpg"
                                                 alt="Reviewer"/>
                                         </div>
                                         <div className={styles.reviewerTittle}>

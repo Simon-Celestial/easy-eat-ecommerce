@@ -387,7 +387,7 @@ export const ProductDetails = ({product, brands}) => {
 
                         </div>
                         <div className={styles.productMetaData}>
-                            <div className={styles.metaDataRow}><b>Category:</b> <a href="">{
+                            <div className={styles.metaDataRow}><b>Brand:</b> <a href="">{
                                 brands?.find(it => it?._id === product?.brandId)?.name
                             }</a>
                             </div>

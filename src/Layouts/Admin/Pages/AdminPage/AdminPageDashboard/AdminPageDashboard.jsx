@@ -17,6 +17,10 @@ export const AdminPageDashboard = () => {
         loading: ordersLoading,
         error: ordersError
     } = useGetData('dashboard/orders', {
+        query:{
+            perPage: 99999,
+            page: 1,
+        },
         postProcess: data => data?.data?.data,
         defaultValue: [],
     });
@@ -28,6 +32,7 @@ export const AdminPageDashboard = () => {
     const latestOrders = useMemo(() => {
         return (orders || [])?.slice(-10).sort((a,b) => moment(b.createdAt).valueOf() - moment(a.createdAt).valueOf())
     }, [orders])
+    console.log(orders.data)
 
     return (
         <div className={styles.pageWrapper}>

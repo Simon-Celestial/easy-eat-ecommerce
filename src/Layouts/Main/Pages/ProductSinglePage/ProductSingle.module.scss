@@ -116,6 +116,9 @@
               .reviewerImg {
                 img {
                   width: 60px;
+                  height: 60px;
+                  object-fit: cover;
+                  object-position: top;
                 }
               }
 

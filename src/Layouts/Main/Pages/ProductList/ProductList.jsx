@@ -274,7 +274,7 @@ export const ProductList = () => {
                             </div>
                             <div className={styles.rightBlockContainer}>
                                 <div className={styles.containerHeading}>
-                                    <p>Categories</p>
+                                    <p>Brands</p>
                                 </div>
                                 {
                                     brands ?

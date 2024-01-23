@@ -70,7 +70,10 @@ export const AdminPageOrders = () => {
         (async () => {
             try {
                 setLoading(true);
-                const result = await getOrders();
+                const result = await getOrders(null, {
+                    perPage: 99999,
+                    page: 1,
+                });
 
                 if (result.status === 200) {
                     const response = JSON.parse(result?.data || '{}');
