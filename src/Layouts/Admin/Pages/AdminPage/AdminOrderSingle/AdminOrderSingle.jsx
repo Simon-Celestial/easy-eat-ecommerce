@@ -18,6 +18,10 @@ export const AdminOrderSingle = () => {
         loading: ordersLoading,
         error: ordersError
     } = useGetData('dashboard/orders', {
+        query: {
+            perPage: 9999,
+            page: 1
+        },
         postProcess: data => data?.data?.data,
         defaultValue: [],
     });

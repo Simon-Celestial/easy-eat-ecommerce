@@ -23,7 +23,8 @@ export const AdminPageProduct = ({
                     <div className={styles.productTitle}>
                         <span className={styles.productStatus}>
                             Status:
-                            <p style={{ background: data.isPublish ? "green" : "red" }}>{data.isPublish ? 'Published' : 'Not Published'}</p>
+                            <p style={{ background: data.isPublish ? "green" : "red" }}>{data.isPublish ? 'Published' :
+                                'Not Published'}</p>
                         </span>
                         <div className={styles.productInfo}>
                             <h2>{data.title}</h2>
