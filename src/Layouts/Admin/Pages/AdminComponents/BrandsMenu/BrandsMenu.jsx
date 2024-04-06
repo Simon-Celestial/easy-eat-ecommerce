@@ -28,7 +28,8 @@ export const BrandsMenu = ({
     } = useApi('dashboard/brands');
 
     useEffect(() => {
-        if (selectedItem) setState(selectedItem); else {
+        if (selectedItem) setState(selectedItem);
+         else {
             setState(initialState);
         }
     }, [selectedItem, brandsMenuOpen]);

@@ -16,7 +16,6 @@ import partnershipData from '../../../../../public/HomePageData/partners.json';
 import iconsData from '../../../../../public/HomePageData/icons.json';
 import { ThreeCircles} from "react-loader-spinner";
 
-
 export const Home = () => {
     const {
         setBasketVisible,
